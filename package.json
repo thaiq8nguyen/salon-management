@@ -24,5 +24,9 @@
     "test": "tests"
   },
   "author": "Thai Nguyen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
 }
