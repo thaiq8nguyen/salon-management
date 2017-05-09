@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+/*
+ * @property $first_name
+ */
 class Technician extends Model
 {
     //

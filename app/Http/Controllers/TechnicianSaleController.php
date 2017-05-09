@@ -9,12 +9,19 @@ use Validator;
 use DateTime;
 
 
+/**
+ * Class TechnicianSaleController
+ * @package App\Http\Controllers
+ * @property $first_name
+ * @property $last_name
+ */
 
 class TechnicianSaleController extends Controller
 {
     //
 
     public function index(){
+
 
 
     }
@@ -26,11 +33,7 @@ class TechnicianSaleController extends Controller
         return view('technicians.sales', ['technicians' => $technicians]);
     }
 
-    /**
-     * @param Technician $technician
-     * @return $this
-     * @property $technician->first_name
-     */
+
     public function createSale(Technician $technician){
 
         $data = ['firstName' => $technician->first_name,
@@ -56,10 +59,10 @@ class TechnicianSaleController extends Controller
         }
 
         $sale = new TechnicianSale;
-        $date = new DateTime($request->input('sale-date'));
+        $date = new DateTime();
 
         $sale->technician_id = $request->input('technicianID');
-        $sale->sale_date = $date->format('Y-m-d');
+        $sale->sale_date = $request->input('sale-date')->toDateString();
         $sale->sales = $request->input('sale');
         $sale->additional_sales = $request->input('additional-sale');
 
