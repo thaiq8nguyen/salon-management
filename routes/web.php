@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/technician-sale/create', 'TechnicianSaleController@create');
+Route::get('/technician-sale/show', 'TechnicianSaleController@showAllTechnician');
+Route::get('/technician-sale/create/{technician}', 'TechnicianSaleController@createSale');
+Route::post('/technician-sale', 'TechnicianSaleController@storeSale');
