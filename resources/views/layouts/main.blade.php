@@ -4,14 +4,14 @@
         <title>@yield('pageTitle')</title>
         <!--Common Stylesheets-->
         <link rel = "stylesheet" href = "{{ asset('css/bootstrap.css') }}">
+        <link rel = "stylesheet" href = "{{ asset('css/custom.css') }}">
         <!--Specific Stylesheets-->
         @stack('styles')
     </head>
     <body>
-        @yield('nav-bar')
+        @include('partials.main-navbar')
         @yield('content')
     </body>
-
 <!--JavaScript-->
     <!--Common Scripts-->
     <script src = "{{ asset('js/jquery.js') }}"></script>

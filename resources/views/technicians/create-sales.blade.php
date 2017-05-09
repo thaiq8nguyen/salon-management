@@ -36,6 +36,7 @@
                         @if($errors->has('additional-sale')) <p class = "help-block">{{ $errors->first('additional-sale') }}</p> @endif
                     </div>
                     <button type = "submit" class = "btn btn-primary">Enter</button>
+                    <a href = "{{ url()->previous() }}" class = "btn btn-default">Cancel</a>
                 </form>
             </div>
         </div>

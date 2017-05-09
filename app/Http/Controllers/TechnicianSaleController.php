@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Technician;
 use App\TechnicianSale;
@@ -44,7 +45,7 @@ class TechnicianSaleController extends Controller
     }
     public function storeSale(Request $request){
 
-        $validator =  Validator::make($request->all(),[
+       $validator =  Validator::make($request->all(),[
             'sale-date' =>'required|date',
             'sale' => 'required|numeric',
             'additional-sale' => 'numeric'
@@ -59,10 +60,10 @@ class TechnicianSaleController extends Controller
         }
 
         $sale = new TechnicianSale;
-        $date = new DateTime();
 
+        $date = Carbon::create($request->input('sale_date'));
         $sale->technician_id = $request->input('technicianID');
-        $sale->sale_date = $request->input('sale-date')->toDateString();
+        $sale->sale_date = $date->toDateString();
         $sale->sales = $request->input('sale');
         $sale->additional_sales = $request->input('additional-sale');
 
@@ -70,6 +71,7 @@ class TechnicianSaleController extends Controller
 
         $request->session()->flash('confirm-sale', 'Sale has been added for ' . $name);
         return redirect('technician-sale/show');
+
 
 
 
