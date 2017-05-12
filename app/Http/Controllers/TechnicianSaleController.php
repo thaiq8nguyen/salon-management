@@ -7,25 +7,12 @@ use Illuminate\Http\Request;
 use App\Technician;
 use App\TechnicianSale;
 use Validator;
-use DateTime;
-
-
-
-
-/**
- * Class TechnicianSaleController
- * @package App\Http\Controllers
- * @property $first_name
- * @property $last_name
- */
 
 class TechnicianSaleController extends Controller
 {
     //
 
     public function index(){
-
-
 
     }
 
@@ -107,7 +94,7 @@ class TechnicianSaleController extends Controller
 
 
 
-        $technicians = Technician::all();
+        $technicians = Technician::orderBy('last_name', 'asc')->select('first_name','last_name')->get();
 
         return view('technicians.sales', ['technicians' => $technicians, 'paySchedule' => $paySchedule]);
     }
@@ -115,11 +102,13 @@ class TechnicianSaleController extends Controller
 
     public function createSale(Technician $technician){
 
-        $data = ['firstName' => $technician->first_name,
+        $identity = ['firstName' => $technician->first_name,
                     'lastName' => $technician->last_name,
                     'id' => $technician->id];
 
-        return view('technicians.create-sales')->with($data);
+        $sales = Technician::find($identity['id'])->sales;
+
+        return view('technicians.create-sales', ['technician' => $identity, 'sales' => $sales]);
     }
     public function storeSale(Request $request){
 
@@ -127,7 +116,6 @@ class TechnicianSaleController extends Controller
             'sale-date' =>'required|date',
             'sale' => 'required|numeric',
             'additional-sale' => 'numeric'
-
         ]);
 
         $technician = Technician::find($request->input('technicianID'));
@@ -139,9 +127,8 @@ class TechnicianSaleController extends Controller
 
         $sale = new TechnicianSale;
 
-        $date = Carbon::create($request->input('sale_date'));
         $sale->technician_id = $request->input('technicianID');
-        $sale->sale_date = $date->toDateString();
+        $sale->sale_date = Carbon::createFromFormat('m/d/Y',$request->input('sale-date'))->toDateString();
         $sale->sales = $request->input('sale');
         $sale->additional_sales = $request->input('additional-sale');
 
@@ -150,8 +137,37 @@ class TechnicianSaleController extends Controller
         $request->session()->flash('confirm-sale', 'Sale has been added for ' . $name);
         return redirect('technician-sale/show');
 
+    }
 
+    public function changeSale(Request $request){
 
+        $validator =  Validator::make($request->all(),[
+            'sale-id' =>'required',
+            'sale' => 'nullable|numeric|between:1,1000',
+            'additional-sale' => 'nullable|numeric|between:1,1000'
+        ]);
+
+        if($validator->fails()){
+            $errors = $validator->getMessageBag();
+            return response()->json(['success' => false, 'message' => $errors],422)
+                ->header('Content-type', 'application/json');
+        }
+
+        $sale = TechnicianSale::find($request->input('sale-id'));
+
+        if($request->has('sale')){
+            $sale->sales = $request->input('sale');
+        }
+        if($request->has('additional-sale')){
+            $sale->additional_sales = $request->input('additional-sale');
+        }
+        $saleDate = Carbon::createFromFormat('Y-m-d H:i:s',$sale->sale_date)->format('m/d/Y');
+
+        $sale->update();
+
+        return response()->json(['success' => true, 'message' => 'Sale has been updated for ' . $saleDate,
+            'sale' => $sale->sales, 'additionalSale' => $sale->additional_sales],200)
+            ->header('Content-type', 'application/json');
 
     }
 }
