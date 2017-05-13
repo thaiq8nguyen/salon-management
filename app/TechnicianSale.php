@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class TechnicianSale extends Model
@@ -12,4 +13,11 @@ class TechnicianSale extends Model
 
         return $this->belongsTo(Technician::class);
     }
+
+    /*public function getSaleDateAttribute($value){
+
+        $date = Carbon::createFromFormat('Y-m-d',$value);
+        return $date->month.'/'.$date->day.'/'.$date->year;
+
+    }*/
 }

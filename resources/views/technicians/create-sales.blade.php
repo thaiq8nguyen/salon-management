@@ -20,10 +20,13 @@
         <div class = "row">
             <div class = "col-md-4">
                 <div class = "panel panel-default">
+                    <div class = "panel-heading">
+                        <h3 class = "panel-title">Add New Sale</h3>
+                    </div>
                     <div class = "panel-body">
                         <form id = "sale-entry-form" method = "post" action = "/technician-sale">
-                            {{ csrf_field() }}
-                            <input type = "hidden" name = "technicianID" value = "{{ $technician['id'] }}">
+                            <input type = "hidden" name = "_token" id = "_token" value = "{{ csrf_token() }}">
+                            <input type = "hidden" name = "technicianID" id = "technicianID" value = "{{ $technician['id'] }}">
                             <div class = "form-group @if($errors->has('sale-date')) has-error @endif">
                                 <label for = "sale-date">Date:</label>
                                 <input type = "text" id = "sale-date" class = "form-control" name = "sale-date">
@@ -39,14 +42,18 @@
                                 <input type = "text" id = "additional-sale" class = "form-control" name = "additional-sale">
                                 @if($errors->has('additional-sale')) <p class = "help-block">{{ $errors->first('additional-sale') }}</p> @endif
                             </div>
-                            <button type = "submit" class = "btn btn-primary">Enter</button>
+                            <button type = "submit" class = "btn btn-primary btn-submit">Enter</button>
                             <a href = "/technician-sale/show" class = "btn btn-default">Cancel</a>
                         </form>
+                        <p class = "alert" id = "alert-new-sale"></p>
                     </div>
                 </div>
             </div>
             <div class = "col-md-5">
                 <div class = "panel panel-default">
+                    <div class = "panel-heading">
+                        <h3 class = "panel-title">Daily Sales</h3>
+                    </div>
                     <div class = "panel-body">
                         <table class = "table table-bordered">
                             <thead>

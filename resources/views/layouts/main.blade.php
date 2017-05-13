@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('pageTitle')</title>
         <!--Common Stylesheets-->
         <link rel = "stylesheet" href = "{{ asset('css/bootstrap.css') }}">

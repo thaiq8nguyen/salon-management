@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::put('/technician-sale/change', 'TechnicianSaleController@changeSale');
+Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');

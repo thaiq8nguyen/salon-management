@@ -3,31 +3,49 @@
  */
 var app = (function(){
     var $changeSaleLnk, $saleDateInput, $changeConfirmation, $changeSaleModal,
-        $modalSaleTxt, $modalAdditionalSaleTxt, $submitChangeForm;
+        $modalSaleTxt, $modalAdditionalSaleTxt, $submitChangeForm, $newSaleForm, $submitAddForm, $newSaleAlert;
+
     var init = function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         cachedVariables();
         bindEvents();
         var date = moment();
+        var aMonthAgo = date.clone().subtract(1,'month');
         $saleDateInput.val(date.format('MM/DD/YYYY'));
-        $saleDateInput.datepicker({
-            format:'mm/dd/yyyy',
+        var pickerOption = {
+            format: 'mm/dd/yyyy',
+            startDate: aMonthAgo.format('MM/DD/YYYY'),
+            endDate: date.format('MM/DD/YYYY'),
             todayBtn: true,
             todayHighlight: true,
-        });
+            autoclose:true
+        }
+        $saleDateInput.datepicker(pickerOption);
 
     }
     var cachedVariables = function(){
         $saleDateInput = $('#sale-date');
         $changeSaleLnk = $('.change-sale-link');
         $changeSaleModal = $('#change-sale-modal');
+        $newSaleForm = $('#sale-entry-form');
+        $submitAddForm = $newSaleForm.find('.btn-submit');
+        $newSaleAlert = $newSaleForm.next('#alert-new-sale');
         $changeConfirmation = $changeSaleModal.find('.change-confirmation');
         $modalSaleTxt = $changeSaleModal.find('.current-sale span');
         $modalAdditionalSaleTxt = $changeSaleModal.find('.current-additional-sale span');
         $submitChangeForm = $changeSaleModal.find('.btn-submit');
 
-
     }
     var bindEvents = function(){
+        $saleDateInput.on('change', function(){
+            searchSale($('#sale-entry-form').find('#technicianID').val(), $saleDateInput.val())
+        });
+
+
         $changeSaleModal.on('show.bs.modal', function(event){
             var link = $(event.relatedTarget);
             var modal = $(this);
@@ -67,6 +85,33 @@ var app = (function(){
             });
         });
     }
+
+    var searchSale = function(technicianID, saleDate){
+        var date = moment(new Date(saleDate)).format('YYYY-MM-DD');
+        $.ajax({
+            method:'get',
+            url:'/api/technician-sale/search',
+            data:{technicianID: technicianID, saleDate: date },
+            dataType:'json',
+            contentType: 'application/json; charset=UTF-8'
+        }).done(function(response){
+            console.log(response);
+            if(response.success){
+                var sale = response.message
+                if(sale.length === 0){
+                    $submitAddForm.prop('disabled',false);
+                    $newSaleAlert.text('').removeClass('alert-new-sale');
+                }
+                else{
+                    $submitAddForm.prop('disabled',true);
+                    $newSaleAlert.text('Sale is already entered').addClass('alert-new-sale');
+                }
+            }
+        }).fail(function(jqXHR){
+            console.log(jqXHR);
+        });
+    }
+
     return{
         init:init
     }

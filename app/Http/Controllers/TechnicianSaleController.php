@@ -170,4 +170,16 @@ class TechnicianSaleController extends Controller
             ->header('Content-type', 'application/json');
 
     }
+
+    public function searchByDate(Request $request){
+
+        $technicianID =  $request->input('technicianID');
+        $saleDate = $request->input('saleDate');
+
+        $sale = TechnicianSale::where([['technician_id','=',$technicianID],['sale_date','=', $saleDate]])->get();
+
+
+        return response()->json(['success' => true, 'message' => $sale],200)->header('Content-type', 'application/json');
+
+    }
 }
