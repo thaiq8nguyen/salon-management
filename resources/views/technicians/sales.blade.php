@@ -26,6 +26,9 @@
                         <input type = "text" class = "form-control" id = "pay-date" name = "pay-date" value = "{{ $paySchedule['payDate'] }}">
                     </div>
                 </div>
+                <div class = "col-md-4">
+                    <a href = "{{url('/wages/pay')}}" class = "btn btn-primary btn-nav-pay">Pay</a>
+                </div>
             </div>
             <div class = "row technician-list-container">
                 <div class = "col-md-6 col-md-offset-3">

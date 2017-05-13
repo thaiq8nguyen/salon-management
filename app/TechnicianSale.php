@@ -20,4 +20,5 @@ class TechnicianSale extends Model
         return $date->month.'/'.$date->day.'/'.$date->year;
 
     }*/
+
 }

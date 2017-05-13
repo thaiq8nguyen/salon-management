@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Route::get('/technician-sale/show', 'TechnicianSaleController@showAllTechnician');
 Route::get('/technician-sale/create/{technician}', 'TechnicianSaleController@createSale');
+Route::get('/wages/pay', 'WageController@payday');
+
 Route::post('/technician-sale', 'TechnicianSaleController@storeSale');
+
