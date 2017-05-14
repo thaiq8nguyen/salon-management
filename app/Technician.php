@@ -13,6 +13,10 @@ class Technician extends Model
         return $this->hasMany(TechnicianSale::class)->select(['id','sale_date','sales','additional_sales','technician_id'])->orderBy('sale_date','ASC');
     }
 
+    public function salary(){
+        return $this->hasOne(Salary::class);
+    }
+
     public function getFullNameAttribute(){
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
