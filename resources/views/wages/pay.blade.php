@@ -6,16 +6,15 @@
 @section('content')
     <div class = "main-content">
         <div class = "container-fluid">
-            <div class = "row pay-period-container">
-                <div class = "col-md-4 ">
+            <div class = "row pay-period-row">
+                <div class = "col-md-4">
                     <div class = "form-inline">
                         <label for = "pay-period">Pay Period:</label>
                         <input type = "text" class = "form-control" id = "pay-period" name = "pay-period" value = "" disabled>
                     </div>
                 </div>
             </div>
-            <div class = "row technician-sale-container">
-                <div class = "col-md-12 ">
+            <div class = "row sale-container-row">
                         @foreach($data as $datum)
                             @include('partials.wage-container')
                             {{--<div class = "list-group-item">
@@ -28,7 +27,7 @@
                             </div>--}}
                         @endforeach
 
-                </div>
+
             </div>
 
         </div>

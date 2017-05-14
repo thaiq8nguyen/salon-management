@@ -1,11 +1,22 @@
-.pay-period-container{
+.pay-period-row{
     margin-top: 40px;
 }
-.technician-sale-container{
+.sale-container-row{
     margin-top: 25px;
-
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
 }
-.wage-container{
-    display:inline-block;
-    width:18%;
+.sale-container-row > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+}
+.panel{
+    flex: 1 0 100%;
+}
+.sales-breakdown-table > tbody > tr > th{
+    width: 240px;
+
 }
