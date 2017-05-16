@@ -13,7 +13,7 @@
         @include('partials.main-navbar')
         @yield('content')
     </body>
-<!--JavaScript-->
+    <!--JavaScript-->
     <!--Common Scripts-->
     <script src = "{{ asset('js/jquery.js') }}"></script>
     <script src = "{{ asset('js/moment.min.js') }}"></script>

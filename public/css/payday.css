@@ -12,11 +12,19 @@
 .sale-container-row > [class*="col-"] {
     display: flex;
     flex-direction: column;
+    margin-top:10px;
 }
 .panel{
     flex: 1 0 100%;
+    margin-top: 5px;
+}
+.sales-listing-table > tbody > tr td{
+    width: 115px;
 }
 .sales-breakdown-table > tbody > tr > th{
-    width: 240px;
+    width: 115px;
 
+}
+.sales-breakdown-table > tbody > tr > td{
+    width: 115px;
 }

@@ -11,16 +11,26 @@ use DB;
 class WageController extends Controller
 {
     public function payday(){
-        $data = Technician::with(['sales' =>
-            function($query){
-                    $query->whereBetween('sale_date',['2017-04-29','2017-05-13']);
-            }])->get(['id','first_name','last_name']);
 
+        $payPeriod = ['2017-04-29','2017-05-13'];
 
+        $technicians = Technician::with(['dailySales' =>
+                function($query) use ($payPeriod){
+                    $query->whereBetween('sale_date',$payPeriod);
+                },
+                'totalSales' =>
+                    function($query) use($payPeriod){
+                        $query->whereBetween('sale_date',$payPeriod);
+                },
+                'totalTips' =>
+                    function($query) use($payPeriod) {
+                        $query->whereBetween('sale_date', $payPeriod);
+                    }
+            ]
+            )->whereHas('sales')->get(['id','first_name','last_name']);
 
-
-
-        return view('wages.pay',['data'=> $data ]);
+        return view('wages.payday',['technicians'=> $technicians]);
     }
+
 
 }

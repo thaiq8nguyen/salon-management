@@ -15,19 +15,9 @@
                 </div>
             </div>
             <div class = "row sale-container-row">
-                        @foreach($data as $datum)
-                            @include('partials.wage-container')
-                            {{--<div class = "list-group-item">
-                                {{ $datum->first_name }}
-                                <ul>
-                                    @foreach($datum->sales as $sale)
-                                        <li>{{  $sale->sales }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>--}}
-                        @endforeach
-
-
+                @foreach($technicians as $technician)
+                    @include('partials.wage-container')
+                @endforeach
             </div>
 
         </div>
