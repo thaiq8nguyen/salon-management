@@ -15,6 +15,16 @@ class CreateWagePaymentsTable extends Migration
     {
         Schema::create('wage_payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('technician_id')->unsigned();
+            $table->integer('pay_period_id')->unsigned();
+            $table->decimal('amount',5,2)->default(0.0)->unsigned();
+            $table->string('reference')->nullable();
+            $table->string('method')->nullable();
+            $table->date('pay_date');
+            $table->string('expense_account')->nullable();
+
+            $table->foreign('technician_id')->references('id')->on('technicians');
+            $table->foreign('pay_period_id')->references('id')->on('pay_periods');
             $table->timestamps();
         });
     }

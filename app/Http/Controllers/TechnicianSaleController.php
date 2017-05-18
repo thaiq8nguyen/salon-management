@@ -11,12 +11,7 @@ use Validator;
 class TechnicianSaleController extends Controller
 {
     //
-
     public function index(){
-
-    }
-
-    public function showAllTechnician(){
 
         $now = Carbon::now();
         if($now->day < 15){
@@ -102,13 +97,21 @@ class TechnicianSaleController extends Controller
 
     public function createSale(Technician $technician){
 
-        $identity = ['firstName' => $technician->first_name,
-                    'lastName' => $technician->last_name,
-                    'id' => $technician->id];
+        $payPeriod = ['2017-04-29','2017-05-13'];
+        $technicianID = $technician->id;
 
-        $sales = Technician::find($identity['id'])->sales;
+        $sales = Technician::with(['dailySales' =>
+            function($query) use ($payPeriod){
 
-        return view('technicians.create-sales', ['technician' => $identity, 'sales' => $sales]);
+                $query->whereBetween('sale_date',$payPeriod);
+
+            }])->where('id', '=', $technicianID)->get(['id','first_name', 'last_name']);
+
+        /*foreach($sales as $sale){
+            echo $sale;
+        }*/
+        return view('technicians.create-sales', ['technician' => $sales]);
+
     }
     public function storeSale(Request $request){
 
@@ -135,7 +138,7 @@ class TechnicianSaleController extends Controller
         $sale->save();
 
         $request->session()->flash('confirm-sale', 'Sale has been added for ' . $name);
-        return redirect('technician-sale/show');
+        return redirect('/technician-sale/create/'.$technician->first_name);
 
     }
 

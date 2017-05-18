@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/technician-sale/show', 'TechnicianSaleController@showAllTechnician');
+Route::get('/technician-sale', 'TechnicianSaleController@index');
 Route::get('/technician-sale/create/{technician}', 'TechnicianSaleController@createSale');
 Route::get('/wages/pay', 'WageController@payday');
-Route::get('/wages/pay/{technician}', 'WagePaymentController@pay');
+Route::get('/wages/pay/{technician}', 'WagePaymentController@create');
 
+Route::post('/wages/pay/{technician}', 'WagePaymentController@store');
 Route::post('/technician-sale', 'TechnicianSaleController@storeSale');
 

@@ -35,15 +35,19 @@
                 </tr>
                 <tr>
                     <th>Earned:</th>
-                    <td>$ {{ $technician->totalSales[0]['earnedTotal'] }}</td>
+                    @foreach($technician->totalSales as $totalSale)
+                        <td>$ {{ $totalSale->earnedTotal }}</td>
+                    @endforeach
                 </tr>
                 <tr>
                     <th>Tip Deduction:</th>
-                    <td>$ {{ $technician->totalTips[0]['earnedTip'] }}</td>
+                    @foreach($technician->totalTips as $totalTip)
+                        <td>$ {{ $totalSale->earnedTip }}</td>
+                    @endforeach
                 </tr>
                 <tr>
                     <th>Total:</th>
-                    <td>$ {{round($technician->totalSales[0]['earnedTotal'] - $technician->totalTips[0]['earnedTip']) }}</td></td>
+                    {{--<td>$ {{$technician->totalSales - $technician->totalTips }}</td></td>--}}
                 </tr>
             </table>
         </div>

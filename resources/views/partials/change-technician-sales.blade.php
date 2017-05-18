@@ -10,15 +10,13 @@
                 <form id = "change-sale-form">
                     {{ csrf_field() }}
                     <input type = "hidden" id = "sale-id" name = "sale-id">
-                    <div class = "form-group @if($errors->has('sale')) has-error @endif">
+                    <div class = "form-group ">
                         <label for = "sale">New Sale:</label>
                         <input type = "text" id = "sale" class = "form-control" name = "sale">
-                        @if($errors->has('sale')) <p class = "help-block">{{ $errors->first('sale') }}</p> @endif
                     </div>
-                    <div class = "form-group @if($errors->has('additional-sale')) has-error @endif">
+                    <div class = "form-group ">
                         <label for = "additional-sale">New Additional Sale:</label>
                         <input type = "text" id = "additional-sale" class = "form-control" name = "additional-sale">
-                        @if($errors->has('additional-sale')) <p class = "help-block">{{ $errors->first('additional-sale') }}</p> @endif
                     </div>
                 </form>
             </div>

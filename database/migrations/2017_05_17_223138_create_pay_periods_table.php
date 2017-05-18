@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTipsRateToSalariesTable extends Migration
+class CreatePayPeriodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddTipsRateToSalariesTable extends Migration
      */
     public function up()
     {
-        Schema::table('salaries', function (Blueprint $table) {
-            $table->decimal('tip_rate',2, 1)->unsigned()->default(0.0)->after('commission_rate');
+        Schema::create('pay_periods', function (Blueprint $table) {
+            $table->increments('id');
+            $table->date('begin_date');
+            $table->date('end_date');
+            $table->date('pay_date');
+
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ class AddTipsRateToSalariesTable extends Migration
      */
     public function down()
     {
-        Schema::table('salaries', function (Blueprint $table) {
-            $table->dropColumn('tip_rates');
-        });
+        Schema::dropIfExists('pay_periods');
     }
 }

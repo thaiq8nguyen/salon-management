@@ -95,7 +95,6 @@ var app = (function(){
             dataType:'json',
             contentType: 'application/json; charset=UTF-8'
         }).done(function(response){
-            console.log(response);
             if(response.success){
                 var sale = response.message
                 if(sale.length === 0){

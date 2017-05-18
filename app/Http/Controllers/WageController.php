@@ -28,6 +28,9 @@ class WageController extends Controller
                     }
             ]
             )->whereHas('sales')->get(['id','first_name','last_name']);
+        /*foreach($technicians as $technician){
+            echo $technician .'<br><br>';
+        }*/
 
         return view('wages.payday',['technicians'=> $technicians]);
     }

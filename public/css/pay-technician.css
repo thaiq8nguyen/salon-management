@@ -1,0 +1,6 @@
+.sales-breakdown{
+    display:table
+}
+.sales-breakdown > .subtotal{
+    display: table-cell;
+}
