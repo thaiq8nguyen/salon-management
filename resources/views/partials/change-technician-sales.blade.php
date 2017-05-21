@@ -5,8 +5,20 @@
                 <h2 class = "modal-title">Change Sale</h2>
             </div>
             <div class = "modal-body">
-                <p class = "current-sale">Current Sale: $ <span></span> </p>
-                <p class = "current-additional-sale"> Current Additional Sale: $ <span></span></p>
+                <div class = "panel panel-light-color">
+                    <div class = "panel-heading">
+                        <div class = "row">
+                            <div class = "col-md-6">
+                                <h3>Current Sale</h3>
+                                <p class = "current-sale"></p>
+                            </div>
+                            <div class = "col-md-6">
+                                <h3>Additional Sale</h3>
+                                <p class = "current-additional-sale"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <form id = "change-sale-form">
                     {{ csrf_field() }}
                     <input type = "hidden" id = "sale-id" name = "sale-id">
@@ -23,7 +35,8 @@
             <div class = "modal-footer">
                 <div class = "row">
                     <div class = "col-md-6">
-                        <p class = "text-left change-confirmation"></p>
+                        <div id = "sale-change-confirmation" role = "alert">
+                        </div>
                     </div>
                     <div class = "col-md-6">
                         <button type = "button" class = "btn btn-primary btn-submit" >Save</button>

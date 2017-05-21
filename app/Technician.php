@@ -15,9 +15,19 @@ class Technician extends Model
 
     }
 
+    public function payments(){
+        return $this->hasMany(WagePayment::class);
+    }
+
+    public function countPayments(){
+        return $this->payments()
+            ->selectRaw('technician_id, count(pay_period_id) as numberOfPayment')
+            ->groupBy('pay_period_id');
+    }
+
     function dailySales (){
         return $this->sales()
-            ->select('technician_id','sale_date','sales','additional_sales')->orderBy('sale_date', 'ASC');
+            ->select('technician_id','id','sale_date','sales','additional_sales')->orderBy('sale_date', 'ASC');
     }
 
 
@@ -32,6 +42,13 @@ class Technician extends Model
             ->selectRaw('technician_id, sum(additional_sales) as subTotalTip, ROUND(sum(additional_sales) * ' . $this->salary->tip_rate .',2) as earnedTip')
             ->groupBy('technician_id');
 
+    }
+    public function totalSalesAndTips(){
+        return $this->sales()
+            ->selectRaw('technician_id, sum(sales) as subTotal, ROUND(sum(sales) * ' . $this->salary->commission_rate .',2) as earnedTotal,
+                        sum(additional_sales) as subTotalTip, ROUND(sum(additional_sales) * ' . $this->salary->tip_rate .',2) as earnedTip,
+                        ROUND(sum(sales) * ' . $this->salary->commission_rate .' - sum(additional_sales) * ' . $this->salary->tip_rate .') as total')
+            ->groupBy('technician_id');
     }
 
     public function salary(){

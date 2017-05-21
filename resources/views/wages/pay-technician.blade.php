@@ -6,22 +6,9 @@
     <script src = "{{ asset('/js/pay-technician.js') }}"></script>
 @endpush
 @section('content')
-    @if(Session::has('success-payment'))
-        <header class = "page-heading">
-            <div class = "container-fluid">
-                <p>{{ Session::get('success-pay') }}</p>
-            </div>
-        </header>
-    @elseif(Session::has('failure-pay'))
-        <header class = "page-heading">
-            <div class = "container-fluid">
-                <p>{{ Session::get('failure-pay') }}</p>
-            </div>
-        </header>
-    @endif
     <section class = "tech-name">
         <div class = "container-fluid">
-            <h1>{{ $technician[0]->full_name }}</h1>
+            <h1>{{ $technician->full_name }}</h1>
             <hr>
         </div>
     </section>
@@ -41,7 +28,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($technician[0]->dailySales as $dailySale)
+                                    @foreach($technician->dailySales as $dailySale)
                                         <tr>
                                             <td>{{ $dailySale->date }}</td>
                                             <td>{{ $dailySale->sales_amount }}</td>
@@ -51,10 +38,10 @@
                                 </tbody>
                             </table>
                             <table class = "table table-condensed">
-                                <tr>
+                               <tr>
                                     <th>Sub Total:</th>
-                                    <td>$ {{ $technician[0]->totalSales[0]->subTotal}}</td>
-                                    <td>$ {{ $technician[0]->totalTips[0]->subTotalTip }}</td>
+                                    <td>$ {{ $technician->totalSales[0]->subTotal}}</td>
+                                    <td>$ {{ $technician->totalTips[0]->subTotalTip }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -67,15 +54,15 @@
                             <table class = "table table-condensed">
                                 <tr>
                                     <th>Earned Total: </th>
-                                    <td>$ {{ $technician[0]->totalSales[0]->earnedTotal}}</td>
+                                    <td>$ {{ $technician->totalSales[0]->earnedTotal}}</td>
                                 </tr>
                                 <tr>
                                     <th>Tip Reduction: </th>
-                                    <td>$ {{ $technician[0]->totalTips[0]->earnedTip }} </td>
+                                    <td>$ {{ $technician->totalTips[0]->earnedTip }} </td>
                                 </tr>
                                 <tr>
                                     <th>Pay: </th>
-                                    <td>$ {{ round($technician[0]->totalSales[0]->earnedTotal-$technician[0]->totalTips[0]->earnedTip) }} </td>
+                                    <td>$ {{ round($technician->totalSales[0]->earnedTotal-$technician->totalTips[0]->earnedTip) }} </td>
                                 </tr>
                             </table>
                         </div>
@@ -85,23 +72,23 @@
                     <div class = "well">
                         <h2>Make Payments</h2>
                         <hr>
-                        <form class = "form form-horizontal payment-form" method = "post" action = "/wages/pay/{{ $technician[0]->first_name }}">
+                        <form class = "form form-horizontal payment-form" method = "post" action = "/wages/pay/{{ $technician->first_name }}">
                             {{ csrf_field() }}
                             <div class = "form-group">
-                                <label for = "payment" class = "form-label col-md-1">Amount:</label>
+                                <label for = "payment" class = "form-label col-md-2">Amount:</label>
                                 <div class = "col-md-2">
                                     <div class = "input-group">
                                         <div class = "input-group-addon">$</div>
-                                        <input type = "text" class = "form-control payment-amount" name = "payment[1][amount]">
+                                        <input type = "text" class = "form-control payment-amount" name = "payments[1][amount]">
                                     </div>
                                 </div>
                                 <label for = "payment-reference" class = "form-label col-md-1">Ref:</label>
                                 <div class = "col-md-2">
-                                    <input type = "text" class = "form-control payment-reference" name = "payment[1][reference]">
+                                    <input type = "text" class = "form-control payment-reference" name = "payments[1][reference]">
                                 </div>
-                                <label for = "payment-method" class = "form-label col-md-2">Method:</label>
+                                <label for = "payment-method" class = "form-label col-md-1">Method:</label>
                                 <div class = "col-md-2">
-                                    <select class = "form-control payment-method" name = "payment[1][method]">
+                                    <select class = "form-control payment-method" name = "payments[1][method]">
                                         <option selected disabled>Select</option>
                                         <option value = "check">Check</option>
                                         <option value = "other">Other</option>
@@ -123,13 +110,11 @@
                                 </div>
                             @endif
                             @if(count($errors) > 0)
-                                <div class = "alert alert-danger" role = "alert">
-                                    <ul><strong>Errors</strong>
-                                        @foreach($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                @component('partials.alert-danger')
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                @endcomponent
                             @endif
                         </form>
                     </div>

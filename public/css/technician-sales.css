@@ -10,3 +10,6 @@
 .technician-list-container{
     margin-top: 25px;
 }
+.modal-body >.panel >.panel-heading > .row{
+    color:#ffffff !important;
+}

@@ -16,10 +16,12 @@ Route::get('/', function () {
 });
 
 Route::get('/technician-sale', 'TechnicianSaleController@index');
-Route::get('/technician-sale/create/{technician}', 'TechnicianSaleController@createSale');
+Route::get('/technician-sale/create/{technician}', 'TechnicianSaleController@create');
 Route::get('/wages/pay', 'WageController@payday');
 Route::get('/wages/pay/{technician}', 'WagePaymentController@create');
+Route::get('/report/{technician}/payment/{payPeriod}', 'PaymentReportController@show');
 
 Route::post('/wages/pay/{technician}', 'WagePaymentController@store');
 Route::post('/technician-sale', 'TechnicianSaleController@storeSale');
+
 

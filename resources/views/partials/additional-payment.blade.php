@@ -10,7 +10,7 @@
     <div class = "col-md-2">
         <input type = "text" class = "form-control payment-reference" name = "">
     </div>
-    <label for = "payment-method" class = "form-label col-md-1">Type:</label>
+    <label for = "payment-method" class = "form-label col-md-1">Method:</label>
     <div class = "col-md-2">
         <select class = "form-control payment-method" name = "">
             <option selected disabled>Select</option>

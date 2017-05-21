@@ -2,7 +2,7 @@
  * Created by Thai Nguyen on 5/8/2017.
  */
 var app = (function(){
-    var $changeSaleLnk, $saleDateInput, $changeConfirmation, $changeSaleModal,
+    var $changeSaleLnk, $saleDateInput, $saleChangeConfirmation, $changeSaleModal,
         $modalSaleTxt, $modalAdditionalSaleTxt, $submitChangeForm, $newSaleForm, $submitAddForm, $newSaleAlert;
 
     var init = function(){
@@ -13,19 +13,22 @@ var app = (function(){
         });
         cachedVariables();
         bindEvents();
+        $.get('/api/pay-period/current',initCalendar,'json');
+
         var date = moment();
-        var aMonthAgo = date.clone().subtract(1,'month');
         $saleDateInput.val(date.format('MM/DD/YYYY'));
+
+    }
+    var initCalendar = function(response){
         var pickerOption = {
             format: 'mm/dd/yyyy',
-            startDate: aMonthAgo.format('MM/DD/YYYY'),
-            endDate: date.format('MM/DD/YYYY'),
+            startDate: response.beginDate,
+            endDate: response.endDate,
             todayBtn: true,
             todayHighlight: true,
             autoclose:true
-        }
+        };
         $saleDateInput.datepicker(pickerOption);
-
     }
     var cachedVariables = function(){
         $saleDateInput = $('#sale-date');
@@ -34,9 +37,9 @@ var app = (function(){
         $newSaleForm = $('#sale-entry-form');
         $submitAddForm = $newSaleForm.find('.btn-submit');
         $newSaleAlert = $newSaleForm.next('#alert-new-sale');
-        $changeConfirmation = $changeSaleModal.find('.change-confirmation');
-        $modalSaleTxt = $changeSaleModal.find('.current-sale span');
-        $modalAdditionalSaleTxt = $changeSaleModal.find('.current-additional-sale span');
+        $saleChangeConfirmation = $changeSaleModal.find('#sale-change-confirmation');
+        $modalSaleTxt = $changeSaleModal.find('.current-sale');
+        $modalAdditionalSaleTxt = $changeSaleModal.find('.current-additional-sale');
         $submitChangeForm = $changeSaleModal.find('.btn-submit');
 
     }
@@ -57,7 +60,7 @@ var app = (function(){
         $changeSaleModal.on('hide.bs.modal', function(){
             $modalSaleTxt.removeClass();
             $modalAdditionalSaleTxt.removeClass();
-            $changeConfirmation.text('');
+            $saleChangeConfirmation.empty().removeClass();
         });
 
         $submitChangeForm.on('click', function(event){
@@ -69,10 +72,19 @@ var app = (function(){
                 dataType:'json'
             }).done(function(response){
                 if(response.success){
-                    $modalSaleTxt.text(response.sale).addClass('text-success');
-                    $modalAdditionalSaleTxt.text(response.additionalSale).addClass('text-success');
-                    $changeConfirmation.text(response.message)
+                    $modalSaleTxt.text(response.sale).addClass('text-danger');
+                    $modalAdditionalSaleTxt.text(response.additionalSale).addClass('text-danger');
+                    $saleChangeConfirmation.html(
+                        '<div class = "row">'+
+                            '<div class = "col-md-2">' +
+                                '<i class = "fa fa-info fa-2x"></i>' +
+                            '</div>' +
+                            '<div class = "col-md-10">'+
+                                '<p>' + response.message + '</p>' +
+                            '</div>' +
+                            '</div>').addClass('alert alert-success');
                     document.getElementById('change-sale-form').reset();
+                    location.reload();
                 }
             }).fail(function(jqXHR){
                 var errors = $.parseJSON(jqXHR.responseText);
@@ -80,7 +92,15 @@ var app = (function(){
                 $.each(errors.message,function(index, value){
                     list += '<li>' + value + '</li>';
                 });
-                $changeConfirmation.html('<ul>' + list + '</ul>');
+                $saleChangeConfirmation.html(
+                    '<div class = "row">'+
+                    '<div class = "col-md-2">' +
+                    '<i class = "fa fa-exclamation fa-2x"></i>' +
+                    '</div>' +
+                    '<div class = "col-md-10">'+
+                    '<ul>' + list + '</ul>' +
+                    '</div>' +
+                    '</div>').addClass('alert alert-danger');
                 document.getElementById('change-sale-form').reset();
             });
         });

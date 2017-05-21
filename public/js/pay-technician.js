@@ -4,7 +4,7 @@
 var app = (function(){
     var $paymentForm, $addButton, $removeButton, maxPayment;
 
-    maxPayment = 5;
+    maxPayment = 3;
 
     var init = function(){
 
@@ -24,9 +24,9 @@ var app = (function(){
                 paymentCount++;
                 var template = $('#additional-payment-template').html();
                 var additionalPayment = $(template);
-                additionalPayment.find('.payment-amount').attr('name','payment['+paymentCount+'][amount]');
-                additionalPayment.find('.payment-reference').attr('name','payment['+paymentCount+'][reference]');
-                additionalPayment.find('.payment-method').attr('name','payment['+paymentCount+'][method]');
+                additionalPayment.find('.payment-amount').attr('name','payments['+paymentCount+'][amount]');
+                additionalPayment.find('.payment-reference').attr('name','payments['+paymentCount+'][reference]');
+                additionalPayment.find('.payment-method').attr('name','payments['+paymentCount+'][method]');
 
                 $(additionalPayment).insertBefore('.btn-pay');
             }
@@ -34,7 +34,7 @@ var app = (function(){
         $paymentForm.on('click','.remove-button',function(event){
             event.preventDefault();
             $(this).parents('.form-group').remove();
-            payment--;
+            paymentCount--;
         })
     }
 

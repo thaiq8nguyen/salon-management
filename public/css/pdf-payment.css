@@ -1,0 +1,99 @@
+*{
+    margin-top: 1px;
+    margin-left: 3px;
+}
+
+.heading-wrapper{
+    padding: 5px;
+
+}
+.sale-table-container,.earning-table-container,
+.subtotal-table-container, .payments-table-container,
+.balance-container{
+    padding:3px;
+}
+.earning-table-container{
+    position: absolute;
+    top: 65px;
+    left: 330px;
+
+}
+.payments-table-container{
+    position: absolute;
+    top:187px;
+    left: 330px;
+
+}
+.balance-container{
+    position: absolute;
+    top: 315px;
+    left: 330px;
+}
+.heading-table td{
+    width: 200px;
+
+}
+.heading-table td:first-child{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.heading-table td:nth-child(3){
+    text-align: right;
+    width: 220px;
+}
+.heading-table td{
+    font-size: 14px;
+    padding: 5px;
+}
+.sale-table, .earning-table, .subtotal-table, .payments-table{
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+.sale-table th, .earning-table th,
+.subtotal-table th, .payments-table th,
+.sale-table td, .earning-table td,
+.subtotal-table td, .payments-table td
+{
+    border: 1px solid black;
+
+}
+.sale-table th, .earning-table th, .subtotal-table th, .payments-table th{
+    font-size: 14px;
+}
+.earning-table td, .payments-table td{
+    width: 70px;
+}
+td{
+    font-size: 12px;
+}
+th, td{
+    padding: 3px;
+
+}
+
+.sale-table th:first-child{
+    width: 120px;
+}
+.sale-table th:nth-child(2), th:nth-child(3){
+    width: 70px;
+}
+/*.sale-table th:nth-child(3) {
+    width: 80px;
+}*/
+.sale-table td:nth-child(2){
+    width: 70px;
+}
+
+.subtotal-table th:first-child{
+    width: 120px ;
+}
+.subtotal-table td{
+    width: 70px;
+}
+.earning-table th:nth-child(2),.earning-table th:nth-child(3) {
+    width: 120px;
+}
+.payments-table th:nth-child(2), .payments-table th:nth-child(3) {
+    width: 120px;
+}

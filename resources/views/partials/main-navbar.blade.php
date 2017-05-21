@@ -1,4 +1,4 @@
-<nav class = "navbar navbar-default navbar-custom">
+<nav class = "navbar navbar-default navbar-static-top navbar-custom" role = "navigation">
     <div class = "container-fluid">
         <div class = "navbar-header">
             <a href = "#" class = "navbar-brand navbar-brand-custom">Salon Management</a>
@@ -16,6 +16,9 @@
                         <li><a href = "/technician-sale">Sales</a></li>
                     </ul>
                 </li>
+            </ul>
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a href = "#"><i class = "fa fa-sign-out fa-lg"></i> Logout</a> </li>
             </ul>
         </div>
     </div>

@@ -7,32 +7,39 @@ use App\TechnicianSale;
 use App\Technician;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use DB;
+use App\PayPeriod;
 class WageController extends Controller
 {
+    /**Route: /wages/pay
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function payday(){
+        $periodID = session()->get('periodID');
+        $period = PayPeriod::find($periodID);
 
-        $payPeriod = ['2017-04-29','2017-05-13'];
+        $payPeriod = [$period->begin_date, $period->end_date];
 
-        $technicians = Technician::with(['dailySales' =>
-                function($query) use ($payPeriod){
-                    $query->whereBetween('sale_date',$payPeriod);
+
+        $technicians = Technician::whereHas('sales',function($query) use ($payPeriod){
+            $query->whereBetween('sale_date',$payPeriod);
+            })->with(['dailySales' =>
+                function($query) use ($payPeriod) {
+                    $query->whereBetween('sale_date', $payPeriod);
                 },
-                'totalSales' =>
-                    function($query) use($payPeriod){
-                        $query->whereBetween('sale_date',$payPeriod);
-                },
-                'totalTips' =>
-                    function($query) use($payPeriod) {
-                        $query->whereBetween('sale_date', $payPeriod);
-                    }
-            ]
-            )->whereHas('sales')->get(['id','first_name','last_name']);
-        /*foreach($technicians as $technician){
-            echo $technician .'<br><br>';
-        }*/
+            'totalSalesAndTips' =>
+                function($query) use($payPeriod){
+                    $query->whereBetween('sale_date', $payPeriod);
+                }
+            ])->with(['countPayments' =>
 
-        return view('wages.payday',['technicians'=> $technicians]);
+                function($query) use($periodID){
+                    $query->where('pay_period_id', '=', $periodID);
+            }])
+
+            ->get(['id','first_name','last_name']);
+
+
+        return view('wages.payday',['payPeriod'=> $period->pay_period_mdy, 'payDate'=> $period->pay_date_mdy,'technicians'=> $technicians]);
     }
 
 

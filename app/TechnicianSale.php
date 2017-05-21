@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TechnicianSale extends Model
 {
-    protected $dates = ['sale_date'];
+
 
 
     /**
@@ -23,9 +23,14 @@ class TechnicianSale extends Model
      * return a formatted string date as 'm/d/Y
      * @return string
      */
-    public function getDateAttribute(){
-        return Carbon::createFromFormat('Y-m-d H:i:s',$this->sale_date)->format('m/d/Y');
+    public function getSaleDateMDYAttribute(){
+        return Carbon::createFromFormat('Y-m-d',$this->sale_date)->format('m/d/Y');
     }
+
+    public function getSaleDateMDYDAttribute(){
+        return Carbon::createFromFormat('Y-m-d',$this->sale_date)->format('m/d/Y D');
+    }
+
     /**
      * Accessor method to return a sales amount decimal in a currency format
      * @return string
@@ -42,6 +47,8 @@ class TechnicianSale extends Model
         return '$ '. ($this->additional_sales);
     }
 
-
+    public function setSaleDateAttribute($value){
+        $this->attributes['sale_date'] = Carbon::createFromFormat('m/d/Y',$value)->toDateString();
+    }
 
 }

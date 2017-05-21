@@ -7,110 +7,47 @@ use Illuminate\Http\Request;
 use App\Technician;
 use App\TechnicianSale;
 use Validator;
+use App\PayPeriod;
 
 class TechnicianSaleController extends Controller
 {
     //
     public function index(){
+        //retrieve the current pay period from the PayPeriod model using a static method
+        $payPeriod = PayPeriod::create();
+        //insert pay schedule into the database if it's not already existed
+        session()->flush();
+        $period = PayPeriod::firstOrCreate($payPeriod); //collection
 
-        $now = Carbon::now();
-        if($now->day < 15){
-            if($now->month == 3 && $now->isLeapYear()){
-                $start = Carbon::createFromDate($now->year,$now->subMonth()->month,29);
-            }
-            else if($now->month == 3 && !$now->isLeapYear()){
-                $start = Carbon::createFromDate($now->year,$now->subMonth()->month,28);
-            }
-            else{
-                $start = Carbon::createFromDate($now->year,$now->subMonth()->month,30);
-            }
-            $end = Carbon::createFromDate($now->year, $now->addMonth()->month,15);
-        }
-        else{
-            $start = Carbon::createFromDate($now->year,$now->month, 15);
-            if($now->month == 2 && $now->isLeapYear()){
-                $end = Carbon::createFromDate($now->year, $now->month, 29);
-            }
-            else if($now->month == 2 && !$now->isLeapYear()){
-                $end = Carbon::createFromDate($now->year, $now->month, 28);
-            }
-            else{
-                $end = Carbon::createFromDate($now->year, $now->month, 30);
-            }
-
-        }
-
-        $payDates = [];
-        $paySchedule = [];
-        while($start < $end){
-
-            if($start->day == 15 && $start->month == 2 && $start->daysInMonth == 29){
-                $start = $start->addDay(14);
-            }
-            else if($start->day == 15 && $start->month == 2 && $start->daysInMonth == 28){
-                $start = $start->addDay(13);
-            }
-            else if($start->day == 15 && $start->month != 2){
-                $start = $start->addDay(15);
-            }
-            else if($start->day == 30 && $start->daysInMonth == 31){
-                $start = $start->addDay(16);
-            }
-            else if($start->day == 30 && $start->daysInMonth == 30){
-                $start = $start->addDay(15);
-            }
-            else if($start->day == 28 && $start->month == 2){
-                $start = $start->addDay(15);
-            }
-            else if($start->day == 29 && $start->month == 2){
-                $start = $start->addDay(15);
-            }
-            array_push($payDates, $start->toDateString());
-        }
-        foreach($payDates as $payDate){
-            $date = Carbon::createFromFormat('Y-m-d', $payDate);
-            $dateTwo = clone $date;
-            $endPeriod = $date->subDays(2);
-
-            if($dateTwo->day == 15 && $dateTwo->month <> 3){
-                $beginPeriod = Carbon::createFromDate($dateTwo->year, $dateTwo->subMonth()->month, 29);
-            }
-            elseif($dateTwo->day == 15 && $dateTwo->month == 3 && $dateTwo->isLeapYear()){
-                $beginPeriod = Carbon::createFromDate($dateTwo->year, $dateTwo->subMonth()->month, 28);
-            }
-            elseif($dateTwo->day == 15 && $dateTwo->month == 3 && !$dateTwo->isLeapYear()){
-                $beginPeriod = Carbon::createFromDate($dateTwo->year, $dateTwo->subMonth()->month, 27);
-            }
-            else if($dateTwo->day == 30 || $dateTwo->day == 28 || $dateTwo->day == 29){
-                $beginPeriod = Carbon::createFromDate($dateTwo->year, $dateTwo->month, 14);
-            }
-            $paySchedule = ['payDate'=> $payDate, 'payPeriod'=> $beginPeriod->toDateString(). " - ". $endPeriod->toDateString()];
-        }
-
-
+        session()->put('periodID', $period->id);
 
         $technicians = Technician::orderBy('last_name', 'asc')->select('first_name','last_name')->get();
+        //var_dump($period->pay_date_mdy);
 
-        return view('technicians.sales', ['technicians' => $technicians, 'paySchedule' => $paySchedule]);
+        return view('technicians.sales', ['technicians' => $technicians, 'payPeriod' => $period->pay_period_mdy, 'payDate' => $period->pay_date_mdy]);
+
     }
 
 
-    public function createSale(Technician $technician){
+    /**
+     * Route: /technician-sale/create/{technician}
+     * @param Technician $technician
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(Technician $technician){
 
-        $payPeriod = ['2017-04-29','2017-05-13'];
-        $technicianID = $technician->id;
+        $period = PayPeriod::find(session()->get('periodID')); //get period collection
 
-        $sales = Technician::with(['dailySales' =>
-            function($query) use ($payPeriod){
+        $technicianID = $technician->id; //get technician ID
 
-                $query->whereBetween('sale_date',$payPeriod);
+        $technician = Technician::with(['dailySales' =>
+            function($query) use ($period){
 
-            }])->where('id', '=', $technicianID)->get(['id','first_name', 'last_name']);
+                $query->whereBetween('sale_date',[$period->begin_date, $period->end_date]);
 
-        /*foreach($sales as $sale){
-            echo $sale;
-        }*/
-        return view('technicians.create-sales', ['technician' => $sales]);
+            }])->where('id', '=', $technicianID)->first(['id','first_name', 'last_name']);
+
+        return view('technicians.create-sales', ['technician' => $technician, 'payPeriod'=>$period->pay_period_mdy, 'payDate' =>$period->pay_date_mdy]);
 
     }
     public function storeSale(Request $request){
@@ -122,7 +59,7 @@ class TechnicianSaleController extends Controller
         ]);
 
         $technician = Technician::find($request->input('technicianID'));
-        $name = $technician->first_name . ' ' . $technician->last_name;
+        $saleDate = $request->input('sale-date');
 
         if($validator->fails()){
             return redirect('technician-sale/create/'.$technician->first_name)->withErrors($validator);
@@ -131,13 +68,13 @@ class TechnicianSaleController extends Controller
         $sale = new TechnicianSale;
 
         $sale->technician_id = $request->input('technicianID');
-        $sale->sale_date = Carbon::createFromFormat('m/d/Y',$request->input('sale-date'))->toDateString();
+        $sale->sale_date = $saleDate;
         $sale->sales = $request->input('sale');
         $sale->additional_sales = $request->input('additional-sale');
 
         $sale->save();
 
-        $request->session()->flash('confirm-sale', 'Sale has been added for ' . $name);
+        $request->session()->flash('confirm-sale', 'Sale has been added for ' . $saleDate);
         return redirect('/technician-sale/create/'.$technician->first_name);
 
     }
@@ -164,12 +101,12 @@ class TechnicianSaleController extends Controller
         if($request->has('additional-sale')){
             $sale->additional_sales = $request->input('additional-sale');
         }
-        $saleDate = Carbon::createFromFormat('Y-m-d H:i:s',$sale->sale_date)->format('m/d/Y');
+        $saleDate = $sale->sale_date_mdy;
 
         $sale->update();
 
         return response()->json(['success' => true, 'message' => 'Sale has been updated for ' . $saleDate,
-            'sale' => $sale->sales, 'additionalSale' => $sale->additional_sales],200)
+            'sale' => $sale->sales_amount, 'additionalSale' => $sale->additional_sales_amount],200)
             ->header('Content-type', 'application/json');
 
     }
@@ -185,4 +122,5 @@ class TechnicianSaleController extends Controller
         return response()->json(['success' => true, 'message' => $sale],200)->header('Content-type', 'application/json');
 
     }
+
 }
