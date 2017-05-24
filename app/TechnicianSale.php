@@ -47,8 +47,6 @@ class TechnicianSale extends Model
         return '$ '. ($this->additional_sales);
     }
 
-    public function setSaleDateAttribute($value){
-        $this->attributes['sale_date'] = Carbon::createFromFormat('m/d/Y',$value)->toDateString();
-    }
+
 
 }

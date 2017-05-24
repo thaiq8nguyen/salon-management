@@ -33,6 +33,11 @@ header{
 .panel-light-color{
     background-color: #BBDEFB;
 }
-.panel-orange-color{
+.panel-orange{
+    border-color: #E63E09;
+}
+.panel-orange > .panel-heading{
+    color: #ffffff;
+    border-color: #E63E09;
     background-color: #FF5722;
 }

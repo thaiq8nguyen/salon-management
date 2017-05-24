@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('pageTitle','Add Technician Sale')
 @push('styles')
     <link rel = "stylesheet" href = "{{ asset('css/bootstrap-datepicker3.css') }}">
     <link rel = "stylesheet" href = "{{ asset('css/create-sales.css') }}">
@@ -13,17 +14,10 @@
     @endcomponent
 @endif
 @section('content')
-    @component('partials.header')
-        <div class = "row">
-            <div class = "col-md-3">
-                <div class = "col-md-3">
-                    <i class = "fa fa-user fa-3x"></i>
-                </div>
-                <div class = "col-md-8 pull-right">
-                    <h1>{{ $technician->full_name }}</h1>
-                </div>
-            </div>
-        </div>
+    @component('header.technician')
+        @slot('fullName')
+            {{ $tech->full_name }}
+        @endslot
     @endcomponent
     <div class = 'main-content'>
         <div class = "container-fluid">
@@ -41,75 +35,70 @@
                 </div>
             </div>
             <div class = "row sale-entry-container">
-                <div class = "col-md-4">
-                    <div class = "panel panel-default">
-                        <div class = "panel-heading">
-                            <h3 class = "panel-title">Add New Sale</h3>
-                        </div>
-                        <div class = "panel-body">
-                            <form id = "sale-entry-form" method = "post" action = "/technician-sale">
-                                <input type = "hidden" name = "_token" id = "_token" value = "{{ csrf_token() }}">
-                                <input type = "hidden" name = "technicianID" id = "technicianID" value = "{{ $technician->id }}">
-                                <div class = "form-group @if($errors->has('sale-date')) has-error @endif">
-                                    <label for = "sale-date">Date:</label>
-                                    <input type = "text" id = "sale-date" class = "form-control" name = "sale-date">
-                                    @if($errors->has('sale-date')) <p class = "help-block">{{ $errors->first('sale-date') }}</p> @endif
+                <div class = "col-md-3">
+                    @component('panels.default')
+                        @slot('title')
+                            <form class = "form-inline" method = "post" action = "/technician-sale/create">
+                                <div class = "form-group">
+                                    <div class = "input-group">
+                                        <div class = "input-group-addon"><i class = "fa fa-calendar fa-lg"></i></div>
+                                        <input type = "text" class = "form-control col-md-3" id = "sale-date-input" name = "sale-date-input"
+                                               value = "{{ \Carbon\Carbon::createFromFormat('Y-m-d',$saleDate)->format('m/d/Y') }}">
+                                    </div>
                                 </div>
-                                <div class = "form-group @if($errors->has('sale')) has-error @endif">
-                                    <label for = "sale">Sale:</label>
-                                    <input type = "text" id = "sale" class = "form-control" name = "sale">
-                                    @if($errors->has('sale')) <p class = "help-block">{{ $errors->first('sale') }}</p> @endif
-                                </div>
-                                <div class = "form-group @if($errors->has('additional-sale')) has-error @endif">
-                                    <label for = "additional-sale">Additional Sale:</label>
-                                    <input type = "text" id = "additional-sale" class = "form-control" name = "additional-sale">
-                                    @if($errors->has('additional-sale')) <p class = "help-block">{{ $errors->first('additional-sale') }}</p> @endif
-                                </div>
-                                <button type = "submit" class = "btn btn-primary btn-submit">Enter</button>
-                                <a href = "/technician-sale" class = "btn btn-default">Cancel</a>
                             </form>
-                            <p class = "alert" id = "alert-new-sale"></p>
-                        </div>
-                    </div>
+                        @endslot
+                        @slot('body')
+                            <div class = "list-group technician-list-container"></div>
+                        @endslot
+                    @endcomponent
                 </div>
-                <div class = "col-md-5">
-                    <div class = "panel panel-default">
-                        <div class = "panel-heading">
-                            <h3 class = "panel-title">Daily Sales</h3>
-                        </div>
-                        <div class = "panel-body">
-                            <table class = "table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Sale Date</th>
-                                    <th>Sale</th>
-                                    <th>Tip</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($technician->dailySales as $dailySale)
-                                    <tr>
-                                        <td>{{ $dailySale->sale_date_mdy }}</td>
-                                        <td>{{ $dailySale->sales_amount }}</td>
-                                        <td>{{ $dailySale->additional_sales_amount }}</td>
-                                        <td><a href = ""
-                                               data-toggle="modal"
-                                               data-target = "#change-sale-modal"
-                                               data-sale-id = " {{ $dailySale->id }}"
-                                               data-sales = "{{ $dailySale->sales_amount }}"
-                                               data-additional-sales = "{{ $dailySale->additional_sales_amount }}"
-                                               class = "change-sale-link">Change</a></td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class = "col-md-4">
+                    @if($tech->sales_count == 0)
+                        @component('panels.default')
+                            @slot('title')
+                                Add New Sale
+                            @endslot
+                            @slot('body')
+                                @component('forms.add-sales')
+                                    @slot('technicianID')
+                                        {{ $tech->id }}
+                                    @endslot
+                                    @slot('saleDate')
+                                        {{ $saleDate }}
+                                    @endSlot
+                                @endcomponent
+                                <div class = "new-sale-alert-container"></div>
+                            @endslot
+                        @endcomponent
+                    @endif
+                </div>
+                <div class = "col-md-4">
+                    @if(count($tech->dailySales) > 0)
+                        @component('panels.success')
+                            @slot('title')
+                                Daily Sales
+                            @endslot
+                            @slot('body')
+                                @component('tables.daily-sales-with-change',['tech' => $tech])
+                                @endcomponent
+                            @endslot
+                        @endcomponent
+                    @else
+                        @component('panels.default')
+                            @slot('title')
+                                Daily Sales
+                            @endslot
+                            @slot('body')
+                                There are no recorded sales for the pay period
+                            @endslot
+                        @endcomponent
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
+    @include('partials.change-technician-sales')
 @endsection
-@include('partials.change-technician-sales')
+
+

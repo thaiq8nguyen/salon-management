@@ -1,17 +1,8 @@
-
+#new-sale-alert{
+    margin-top: 20px;
+}
 .successful-change{
     color: #FF5722;
-}
-.alert-new-sale{
-    background-color: #FF5722;
-    color: #ffffff;
-}
-.page-heading{
-    background-color: #FF5722;
-    padding:10px;
-    color: #FFFFFF;
-    font-size: 16px;
-
 }
 .pay-period-container{
     padding-top: 10px;

@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::put('/technician-sale/change', 'TechnicianSaleController@changeSale');
 Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 Route::get('/pay-period/current', 'PayPeriodController@current');
+Route::get('/technician-sale/all/', 'TechnicianSaleController@searchSaleByDate');

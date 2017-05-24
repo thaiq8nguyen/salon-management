@@ -25,11 +25,10 @@ class Technician extends Model
             ->groupBy('pay_period_id');
     }
 
-    function dailySales (){
+    public function dailySales (){
         return $this->sales()
             ->select('technician_id','id','sale_date','sales','additional_sales')->orderBy('sale_date', 'ASC');
     }
-
 
     public function totalSales(){
 

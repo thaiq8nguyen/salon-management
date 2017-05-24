@@ -3,7 +3,8 @@
  */
 var app = (function(){
     var $changeSaleLnk, $saleDateInput, $saleChangeConfirmation, $changeSaleModal,
-        $modalSaleTxt, $modalAdditionalSaleTxt, $submitChangeForm, $newSaleForm, $submitAddForm, $newSaleAlert;
+        $modalSaleTxt, $modalAdditionalSaleTxt, $submitChangeForm, $newSaleForm, $submitAddForm, $newSaleAlert,
+        $technicianList, saleDate, alertDangerTemplate, alertSuccessTemplate, options, $template;
 
     var init = function(){
         $.ajaxSetup({
@@ -13,17 +14,16 @@ var app = (function(){
         });
         cachedVariables();
         bindEvents();
-        $.get('/api/pay-period/current',initCalendar,'json');
 
-        var date = moment();
-        $saleDateInput.val(date.format('MM/DD/YYYY'));
+        $.get('/api/pay-period/current',initCalendar,'json');
 
     }
     var initCalendar = function(response){
+        var now = moment();
         var pickerOption = {
             format: 'mm/dd/yyyy',
             startDate: response.beginDate,
-            endDate: response.endDate,
+            endDate: now.format('MM/DD/YYYY'),
             todayBtn: true,
             todayHighlight: true,
             autoclose:true
@@ -31,24 +31,43 @@ var app = (function(){
         $saleDateInput.datepicker(pickerOption);
     }
     var cachedVariables = function(){
-        $saleDateInput = $('#sale-date');
+        $saleDateInput = $('#sale-date-input');
+        $technicianList = $('.technician-list-container');
         $changeSaleLnk = $('.change-sale-link');
         $changeSaleModal = $('#change-sale-modal');
         $newSaleForm = $('#sale-entry-form');
         $submitAddForm = $newSaleForm.find('.btn-submit');
-        $newSaleAlert = $newSaleForm.next('#alert-new-sale');
+        $newSaleAlert = $newSaleForm.next();
         $saleChangeConfirmation = $changeSaleModal.find('#sale-change-confirmation');
         $modalSaleTxt = $changeSaleModal.find('.current-sale');
         $modalAdditionalSaleTxt = $changeSaleModal.find('.current-additional-sale');
         $submitChangeForm = $changeSaleModal.find('.btn-submit');
-
+        alertDangerTemplate = $.get('/template/alert-danger.html');
+        alertSuccessTemplate = $.get('/template/alert-success.html');
     }
     var bindEvents = function(){
         $saleDateInput.on('change', function(){
-            searchSale($('#sale-entry-form').find('#technicianID').val(), $saleDateInput.val())
-        });
+            var date = new Date($(this).val());
 
-
+            if(!moment(date).isValid()){
+                displayTechnicianListError('Sale date does not have the correct format. Please try again');
+            }
+            else{
+                saleDate = moment(date).format('YYYY-MM-DD');
+                options = {method:'get', url:'/api/technician-sale/all', data: {saleDate: saleDate}, dataType:'json',
+                    contentType: 'application/json; charset=UTF-8'};
+                var technicians = $.ajax(options);
+                technicians.done(displayTechnicianList);
+                technicians.fail(function(jqXHR){
+                    var errorList = '';
+                    var errors = jqXHR.responseJSON;
+                    $.each(errors.message,function(index, value){
+                        errorList += '<li>' + value + '</li>';
+                    });
+                    displayTechnicianListError(errorList);
+                });
+            }
+        })
         $changeSaleModal.on('show.bs.modal', function(event){
             var link = $(event.relatedTarget);
             var modal = $(this);
@@ -65,26 +84,19 @@ var app = (function(){
 
         $submitChangeForm.on('click', function(event){
             event.preventDefault();
-            $.ajax({
-                method:'PUT',
-                url:'/api/technician-sale/change',
-                data:$('#change-sale-form').serializeArray(),
+            options = {method:'PUT', url:'/api/technician-sale/change', data:$('#change-sale-form').serializeArray(),
                 dataType:'json'
-            }).done(function(response){
+            }
+            $.ajax(options).done(function(response){
+                console.log(response);
                 if(response.success){
                     $modalSaleTxt.text(response.sale).addClass('text-danger');
                     $modalAdditionalSaleTxt.text(response.additionalSale).addClass('text-danger');
-                    $saleChangeConfirmation.html(
-                        '<div class = "row">'+
-                            '<div class = "col-md-2">' +
-                                '<i class = "fa fa-info fa-2x"></i>' +
-                            '</div>' +
-                            '<div class = "col-md-10">'+
-                                '<p>' + response.message + '</p>' +
-                            '</div>' +
-                            '</div>').addClass('alert alert-success');
-                    document.getElementById('change-sale-form').reset();
-                    location.reload();
+                    alertSuccessTemplate.done(function(template){
+                        $template = $(template);
+                        $template.find('.message').html(response.message);
+                        displayAlert($template,$saleChangeConfirmation);
+                    });
                 }
             }).fail(function(jqXHR){
                 var errors = $.parseJSON(jqXHR.responseText);
@@ -92,45 +104,41 @@ var app = (function(){
                 $.each(errors.message,function(index, value){
                     list += '<li>' + value + '</li>';
                 });
-                $saleChangeConfirmation.html(
-                    '<div class = "row">'+
-                    '<div class = "col-md-2">' +
-                    '<i class = "fa fa-exclamation fa-2x"></i>' +
-                    '</div>' +
-                    '<div class = "col-md-10">'+
-                    '<ul>' + list + '</ul>' +
-                    '</div>' +
-                    '</div>').addClass('alert alert-danger');
-                document.getElementById('change-sale-form').reset();
+                alertDangerTemplate.done(function(template){
+                    $template = template;
+                    $template.find('.message').html('<ul>'+ list + '</ul>');
+                    displayAlert($template, $saleChangeConfirmation);
+                })
             });
+            document.getElementById('change-sale-form').reset();
         });
     }
-
-    var searchSale = function(technicianID, saleDate){
-        var date = moment(new Date(saleDate)).format('YYYY-MM-DD');
-        $.ajax({
-            method:'get',
-            url:'/api/technician-sale/search',
-            data:{technicianID: technicianID, saleDate: date },
-            dataType:'json',
-            contentType: 'application/json; charset=UTF-8'
-        }).done(function(response){
-            if(response.success){
-                var sale = response.message
-                if(sale.length === 0){
-                    $submitAddForm.prop('disabled',false);
-                    $newSaleAlert.text('').removeClass('alert-new-sale');
-                }
-                else{
-                    $submitAddForm.prop('disabled',true);
-                    $newSaleAlert.text('Sale is already entered').addClass('alert-new-sale');
-                }
+    var displayTechnicianList = function(response){
+        var list = '';
+        $.each(response.technicians, function(index,technician){
+            if(technician.sales_count == 0){
+                list += '<a href = "/technician-sale/date/' + saleDate + '/technician/' + technician.first_name +
+                    '" class = "list-group-item"><i class = "fa fa-user-circle fa-lg"></i> ' + technician.first_name + ' ' + technician.last_name + '</a>';
             }
-        }).fail(function(jqXHR){
-            console.log(jqXHR);
+            else{
+                list += '<a href = "/technician-sale/date/' + saleDate + '/technician/' + technician.first_name +
+                    '" class = "list-group-item list-group-item-success"><i class = "fa fa-user-circle fa-lg"></i> '
+                    + technician.first_name + ' ' + technician.last_name + '<i class = "fa fa-dollar fa-lg pull-right"></i></a>';
+            }
+        });
+        $technicianList.html(list);
+    }
+    var displayTechnicianListError = function(errors){
+        alertDangerTemplate.done(function(template){
+            $template = $(template);
+            $template.find('.message').html(errors);
+            //$technicianList.html($template);
+            displayAlert($template,$technicianList);
         });
     }
-
+    var displayAlert = function(alert,container){
+        container.html(alert);
+    }
     return{
         init:init
     }

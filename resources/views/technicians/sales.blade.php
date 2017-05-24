@@ -11,35 +11,57 @@
     @endcomponent
     <div class = "main-content">
         <div class = "container-fluid">
-            <div class = "row pay-period-container">
+            <section class = "row pay-period-container">
                 <div class = "col-md-3">
                     <div class = "col-md-3">
                         <i class = "fa fa-calendar fa-3x"></i>
                     </div>
                     <div class = "col-md-6">
                         <h4>Pay Period</h4><p>{{ $payPeriod }}</p>
-                        <a href = "{{ url('/wages/pay')}}" class = "btn btn-primary btn-nav-pay">Making Payments</a>
                     </div>
                     <div class = "col-md-3">
                         <h4>Pay Date</h4><p>{{ $payDate }}<p>
                     </div>
                 </div>
-            </div>
-            <div class = "row technician-list-container">
-                <div class = "col-md-6 col-md-offset-3">
-                    <table class = "table table-bordered">
-                        <tr>
-                            <th>Technician</th>
-                            <th>Sales</th>
-                        </tr>
-                        @foreach($technicians as $technician)
-                            <tr>
-                                <td><i class = "fa fa-user-circle"></i> {{ $technician->full_name}}</td>
-                                <td><a href = "/technician-sale/create/{{ $technician->first_name }}">Add Sale</a></td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
+            </section>
+            <div class = "panels-container">
+                <section class = "row">
+                    <div class = "col-md-3">
+                        @component('panels.success')
+                            @slot('title')
+                                <div class = "row">
+                                    <div class = "col-md-4">
+                                        <i class = "fa fa-pencil fa-5x"></i>
+                                    </div>
+                                    <div class = "col-md-6">
+                                        <h1>Sales Entry</h1>
+                                    </div>
+                                </div>
+                            @endslot
+                            @slot('body')
+                                <a href = "/technician-sale/date/{{\Carbon\Carbon::now()->toDateString()}}/technician/{{ $technician->first_name }}">View</a>
+                            @endslot
+                        @endcomponent
+                        
+                    </div>
+                    <div class = "col-md-3">
+                        @component('panels.default')
+                            @slot('title')
+                                <div class = "row">
+                                    <div class = "col-md-4">
+                                        <i class = "fa fa-dollar fa-5x"></i>
+                                    </div>
+                                    <div class = "col-md-6">
+                                        <h1>Pay</h1>
+                                    </div>
+                                </div>
+                            @endslot
+                            @slot('body')
+                                <a href = "/wages/pay">View</a>
+                            @endslot
+                        @endcomponent
+                    </div>
+                </section>
             </div>
         </div>
     </div>

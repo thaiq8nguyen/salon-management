@@ -10,25 +10,34 @@
                         <div class = "row">
                             <div class = "col-md-6">
                                 <h3>Current Sale</h3>
-                                <p class = "current-sale"></p>
+                                <h4 class = "current-sale"></h4>
                             </div>
                             <div class = "col-md-6">
-                                <h3>Additional Sale</h3>
-                                <p class = "current-additional-sale"></p>
+                                <h3>Tip</h3>
+                                <h4 class = "current-additional-sale"></h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form id = "change-sale-form">
+                <form id = "change-sale-form" class = "form-horizontal">
                     {{ csrf_field() }}
                     <input type = "hidden" id = "sale-id" name = "sale-id">
                     <div class = "form-group ">
-                        <label for = "sale">New Sale:</label>
-                        <input type = "text" id = "sale" class = "form-control" name = "sale">
+                        <label for = "sale" class = "form-label col-md-3">New Sale:</label>
+                        <div class = "col-md-4">
+                            <div class = "input-group">
+                                <div class = "input-group-addon"><i class = "fa fa-dollar fa-lg"></i></div>
+                                <input type = "text" id = "sale" class = "form-control" name = "sale">
+                            </div>
+                        </div>
                     </div>
                     <div class = "form-group ">
-                        <label for = "additional-sale">New Additional Sale:</label>
-                        <input type = "text" id = "additional-sale" class = "form-control" name = "additional-sale">
+                        <label for = "additional-sale" class = "form-label col-md-3">Tip:</label>
+                        <div class = "col-md-4">
+                            <div class = "input-group">
+                                <div class = "input-group-addon"><i class = "fa fa-dollar fa-lg"></i></div>
+                                <input type = "text" id = "additional-sale" class = "form-control" name = "additional-sale">
+                        </div>
                     </div>
                 </form>
             </div>

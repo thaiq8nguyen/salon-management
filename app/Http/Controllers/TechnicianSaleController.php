@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TechnicianBook;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Technician;
@@ -12,6 +13,9 @@ use App\PayPeriod;
 class TechnicianSaleController extends Controller
 {
     //
+    /**Route: /technician-sale
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
         //retrieve the current pay period from the PayPeriod model using a static method
         $payPeriod = PayPeriod::create();
@@ -21,20 +25,20 @@ class TechnicianSaleController extends Controller
 
         session()->put('periodID', $period->id);
 
-        $technicians = Technician::orderBy('last_name', 'asc')->select('first_name','last_name')->get();
-        //var_dump($period->pay_date_mdy);
+        $technician = Technician::find(1);
 
-        return view('technicians.sales', ['technicians' => $technicians, 'payPeriod' => $period->pay_period_mdy, 'payDate' => $period->pay_date_mdy]);
+        return view('technicians.sales', ['technician' => $technician, 'payPeriod' => $period->pay_period_mdy, 'payDate' => $period->pay_date_mdy]);
 
     }
 
 
     /**
-     * Route: /technician-sale/create/{technician}
+     * Route: /technician-sale/create
+     * @param $saleDate
      * @param Technician $technician
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(Technician $technician){
+    public function create($saleDate, Technician $technician){
 
         $period = PayPeriod::find(session()->get('periodID')); //get period collection
 
@@ -45,9 +49,17 @@ class TechnicianSaleController extends Controller
 
                 $query->whereBetween('sale_date',[$period->begin_date, $period->end_date]);
 
-            }])->where('id', '=', $technicianID)->first(['id','first_name', 'last_name']);
+            }])->withCount(['sales'=>
+                function($query) use ($saleDate){
+                    $query->where('sale_date', $saleDate);
+                }])->
+            where('id', '=', $technicianID)->first(['id','first_name', 'last_name']);
 
-        return view('technicians.create-sales', ['technician' => $technician, 'payPeriod'=>$period->pay_period_mdy, 'payDate' =>$period->pay_date_mdy]);
+        return view('technicians.create-sales', ['tech'=>$technician,'payPeriod'=>$period->pay_period_mdy,
+            'payDate' =>$period->pay_date_mdy, 'saleDate' => $saleDate]);
+
+
+
 
     }
     public function storeSale(Request $request){
@@ -62,7 +74,7 @@ class TechnicianSaleController extends Controller
         $saleDate = $request->input('sale-date');
 
         if($validator->fails()){
-            return redirect('technician-sale/create/'.$technician->first_name)->withErrors($validator);
+            return redirect('/technician-sale/date/'.$saleDate .'/technician/'.$technician->first_name)->withErrors($validator);
         }
 
         $sale = new TechnicianSale;
@@ -75,7 +87,7 @@ class TechnicianSaleController extends Controller
         $sale->save();
 
         $request->session()->flash('confirm-sale', 'Sale has been added for ' . $saleDate);
-        return redirect('/technician-sale/create/'.$technician->first_name);
+        return redirect('/technician-sale/date/'.$saleDate .'/technician/'.$technician->first_name);
 
     }
 
@@ -121,6 +133,31 @@ class TechnicianSaleController extends Controller
 
         return response()->json(['success' => true, 'message' => $sale],200)->header('Content-type', 'application/json');
 
+    }
+
+    public function searchSaleByDate(Request $request){
+        $rules = [
+            'saleDate' => "required|date_format:Y-m-d"
+        ];
+        $message = [
+            'required' => 'Sale date is required',
+            'date_format' => 'Sale date does not have the correct format. Please try again'
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if($validator->fails()){
+            $errors = $validator->getMessageBag();
+            return response()->json(['success' => false, 'message' => $errors],422)
+                ->header('Content-type', 'application/json');
+        }
+
+        $saleDate = Carbon::createFromFormat('Y-m-d' ,$request->input('saleDate'))->toDateString();
+        $technicians = Technician::withCount(['sales' =>
+            function($query) use ($saleDate){
+                $query->where('sale_date', $saleDate);
+            }])->orderBy('last_name')->get();
+
+        return response()->json(['success' => true , 'technicians' => $technicians, 'saleDate'=>$saleDate],200)->header('Content-type', 'application/json');
     }
 
 }

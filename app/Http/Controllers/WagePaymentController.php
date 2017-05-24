@@ -93,6 +93,7 @@ class WagePaymentController extends Controller
         $this->insertPaymentToBook($technician->id,$periodID,Carbon::now()->toDateString(),'wages',$totalAmount);
         //redirect to the pay dashboard
         $request->session()->flash('success-pay',$technician->first_name .' had been paid!');
+
         return redirect('/wages/pay');
 
     }

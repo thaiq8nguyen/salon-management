@@ -4,3 +4,6 @@
 .sales-breakdown > .subtotal{
     display: table-cell;
 }
+.sales-container{
+    margin-top: 25px;
+}

@@ -14,7 +14,9 @@
                     <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" role = "button">Technician <span class = "caret"></span></a>
                     <ul class = "dropdown-menu">
                         <li><a href = "/technician-sale">Sales</a></li>
+                        <li><a href = "/technician-book">Book</a></li>
                     </ul>
+
                 </li>
             </ul>
             <ul class = "nav navbar-nav navbar-right">

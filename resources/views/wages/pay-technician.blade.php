@@ -6,12 +6,11 @@
     <script src = "{{ asset('/js/pay-technician.js') }}"></script>
 @endpush
 @section('content')
-    <section class = "tech-name">
-        <div class = "container-fluid">
-            <h1>{{ $technician->full_name }}</h1>
-            <hr>
-        </div>
-    </section>
+    @component('header.technician')
+        @slot('fullName')
+            {{ $technician->full_name }}
+        @endslot
+    @endcomponent
     <section class = "sales-container">
         <div class = "container-fluid">
             <div class = "row">
