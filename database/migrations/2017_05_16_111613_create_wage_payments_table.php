@@ -24,7 +24,6 @@ class CreateWagePaymentsTable extends Migration
             $table->string('expense_account')->nullable();
 
             $table->foreign('technician_id')->references('id')->on('technicians');
-            $table->foreign('pay_period_id')->references('id')->on('pay_periods');
             $table->timestamps();
         });
     }
