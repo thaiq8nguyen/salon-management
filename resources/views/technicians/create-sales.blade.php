@@ -9,9 +9,13 @@
     <script src = "{{ asset('js/technicians/create-sales.js')}}"></script>
 @endpush
 @if(Session::has('confirm-sale'))
-    @component('partials.alert-success')
-        <p>{{ Session::get('confirm-sale') }}</p>
-    @endcomponent
+    <div class = "top-alert">
+        @component('alert.alert-success')
+            @slot('message')
+                <strong>Complete</strong> {{ Session::get('confirm-sale') }}
+            @endslot
+        @endcomponent
+    </div>
 @endif
 @section('content')
     @component('header.technician')

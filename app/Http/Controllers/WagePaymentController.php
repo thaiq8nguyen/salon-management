@@ -12,6 +12,10 @@ use App\WagePayment;
 
 class WagePaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'checkPayPeriod']);
+    }
     /**
      * Route: wage/pay/{technician}
      * Function: feed technician and sale date to pay-technician.blade.php
@@ -19,29 +23,28 @@ class WagePaymentController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Technician $technician){
-        $periodID = session()->get('periodID'); //get the payPeriodID
-        $period = PayPeriod::find($periodID); //get the period collection
 
-        $payPeriod = [$period['begin_date'],$period['end_date']]; //construct the array containing the begin, and end dates
+        $payPeriod = session()->get('payPeriod');
+
         $technicianID = $technician->id; //get the technician ID from the $technician parameter
-
+        $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
         //store $technicianID to session for paying technician to pay that technician in the store method
         session()->put('payingTechnicianID', $technicianID);
 
         //get the technician along with her associated sale object using the $payPeriod above and the technician ID
-        $tech = Technician::with(['dailySales' =>
-                function($query) use ($payPeriod){
-                    $query->whereBetween('sale_date',$payPeriod);
+        $technician = Technician::with(['dailySales' =>
+                function($query) use ($payPeriodDates){
+                    $query->whereBetween('sale_date',$payPeriodDates);
                 },
                 'totalSalesAndTips' =>
-                    function($query) use($payPeriod) {
-                        $query->whereBetween('sale_date', $payPeriod);
+                    function($query) use($payPeriodDates) {
+                        $query->whereBetween('sale_date', $payPeriodDates);
                     }
             ]
         )->where('id','=',$technicianID)->first(['id','first_name','last_name']);
 
-
-        return view('wages.pay-technician',['technician' => $tech]);
+        return view('wages.pay-technician',['technician' => $technician, 'payPeriod' =>$payPeriod->pay_period_mdy,
+            'payDate' => $payPeriod->pay_date_mdy]);
     }
 
     /**
@@ -50,8 +53,14 @@ class WagePaymentController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request){
+
+        if(!session()->has('payingTechnicianID')){
+            return redirect()->route('payday');
+        }
+
         $technician = Technician::find(session()->get('payingTechnicianID')); //get technician collection
-        $periodID = session()->get('periodID'); //get the period id
+
+        $payPeriod = session()->get('payPeriod');
 
         //validation rules
         $rules = [
@@ -79,7 +88,7 @@ class WagePaymentController extends Controller
         $totalAmount = 0.0;
         foreach($paymentsInput['payments'] as $payment){
             $totalAmount += $payment['amount'];
-            $payment['pay_period_id'] = $periodID;
+            $payment['pay_period_id'] = $payPeriod->id;
             $payment['pay_date'] = Carbon::now()->toDateString();
             $payment['expense_account'] = 'wages';
             $payments[] = new WagePayment($payment);
@@ -87,29 +96,10 @@ class WagePaymentController extends Controller
         }
         //insert payments collection array into the wage_payments_table
         $technician->payments()->saveMany($payments);
-        session()->pull('payTechnicianID'); //remove the technicianID from a session variable
 
-        //call the method to insert the pay record into technician_books table
-        $this->insertPaymentToBook($technician->id,$periodID,Carbon::now()->toDateString(),'wages',$totalAmount);
-        //redirect to the pay dashboard
-        $request->session()->flash('success-pay',$technician->first_name .' had been paid!');
-
-        return redirect('/wages/pay');
+        session()->put('wageAmount', $totalAmount);
+        return redirect()->route('insert-wages-to-book');
 
     }
-    private function insertPaymentToBook($technicianID, $payPeriodID, $payDate, $description, $pay){
 
-        $data = DB::table('technician_books')->select('balance')->where('technician_id','=',$technicianID)
-            ->latest('date')->first();
-
-        $balance = $data->balance - $pay;
-        DB::table('technician_books')->insert(
-            ['technician_id' => $technicianID, 'pay_period_id' => $payPeriodID, 'date' => $payDate,
-                'description' => $description, 'pay' => $pay, 'balance' => $balance,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString()]
-        );
-
-
-    }
 }

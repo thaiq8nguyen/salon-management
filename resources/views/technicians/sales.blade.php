@@ -17,7 +17,7 @@
                         <i class = "fa fa-calendar fa-3x"></i>
                     </div>
                     <div class = "col-md-6">
-                        <h4>Pay Period</h4><p>{{ $payPeriod }}</p>
+                        <h4>Pay Period</h4><p>{{ $payPeriodDates }}</p>
                     </div>
                     <div class = "col-md-3">
                         <h4>Pay Date</h4><p>{{ $payDate }}<p>
@@ -42,7 +42,6 @@
                                 <a href = "/technician-sale/date/{{\Carbon\Carbon::now()->toDateString()}}/technician/{{ $technician->first_name }}">View</a>
                             @endslot
                         @endcomponent
-                        
                     </div>
                     <div class = "col-md-3">
                         @component('panels.default')
@@ -57,7 +56,7 @@
                                 </div>
                             @endslot
                             @slot('body')
-                                <a href = "/wages/pay">View</a>
+                                <a href = "{{ route('payday') }}">View</a>
                             @endslot
                         @endcomponent
                     </div>

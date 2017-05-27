@@ -1,6 +1,3 @@
-#new-sale-alert{
-    margin-top: 20px;
-}
 .successful-change{
     color: #FF5722;
 }
@@ -11,4 +8,7 @@
 }
 .sale-entry-container{
     margin-top: 25px;
+}
+.top-alert .alert{
+    margin-bottom: 0px;
 }

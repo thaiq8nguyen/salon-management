@@ -1,5 +1,10 @@
-.pay-period-row{
-    margin-top: 40px;
+.top-alert .alert{
+    margin-bottom: 0px;
+}
+.pay-period-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #BBDEFB;
 }
 .sale-container-row{
     margin-top: 25px;
@@ -27,4 +32,21 @@
 }
 .sales-breakdown-table > tbody > tr > td{
     width: 115px;
+}
+.panel-green{
+
+    border: 2px solid #067157 ;
+}
+.panel-green > .panel-heading{
+    color: #FFFFFF;
+    border-color: #067157;
+    background-color: #1F8A70;
+}
+.panel-charcoal{
+    border-color: #5C5C5C;
+}
+.panel-charcoal > .panel-heading{
+    color: #FFFFFF;
+    border-color: #5C5C5C;
+    background-color: #757575;
 }

@@ -14,9 +14,16 @@ var app = (function(){
         });
         cachedVariables();
         bindEvents();
-
-        $.get('/api/pay-period/current',initCalendar,'json');
-
+        var payPeriodRequest = $.ajax({
+            method:'get',
+            url:'/api/pay-period/current',
+            data:{},
+            dataType:'json'
+        });
+        payPeriodRequest.done(initCalendar);
+        payPeriodRequest.fail(function(jqXHR){
+            console.log(jqXHR.responseText);
+        });
     }
     var initCalendar = function(response){
         var now = moment();
@@ -117,11 +124,11 @@ var app = (function(){
         var list = '';
         $.each(response.technicians, function(index,technician){
             if(technician.sales_count == 0){
-                list += '<a href = "/technician-sale/date/' + saleDate + '/technician/' + technician.first_name +
+                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.first_name +
                     '" class = "list-group-item"><i class = "fa fa-user-circle fa-lg"></i> ' + technician.first_name + ' ' + technician.last_name + '</a>';
             }
             else{
-                list += '<a href = "/technician-sale/date/' + saleDate + '/technician/' + technician.first_name +
+                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.first_name +
                     '" class = "list-group-item list-group-item-success"><i class = "fa fa-user-circle fa-lg"></i> '
                     + technician.first_name + ' ' + technician.last_name + '<i class = "fa fa-dollar fa-lg pull-right"></i></a>';
             }

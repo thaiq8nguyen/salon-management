@@ -10,36 +10,39 @@ use Illuminate\Support\Facades\Validator;
 use App\PayPeriod;
 class WageController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth', 'checkPayPeriod']);
+    }
     /**Route: /wages/pay
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function payday(){
-        $periodID = session()->get('periodID');
-        $period = PayPeriod::find($periodID);
 
-        $payPeriod = [$period->begin_date, $period->end_date];
+        $payPeriod = session()->get('payPeriod');
 
+        $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
 
-        $technicians = Technician::whereHas('sales',function($query) use ($payPeriod){
-            $query->whereBetween('sale_date',$payPeriod);
+        $payPeriodID = $payPeriod->id;
+
+        $technicians = Technician::whereHas('sales',function($query) use ($payPeriodDates){
+            $query->whereBetween('sale_date',$payPeriodDates);
             })->with(['dailySales' =>
-                function($query) use ($payPeriod) {
-                    $query->whereBetween('sale_date', $payPeriod);
+                function($query) use ($payPeriodDates) {
+                    $query->whereBetween('sale_date', $payPeriodDates);
                 },
             'totalSalesAndTips' =>
-                function($query) use($payPeriod){
-                    $query->whereBetween('sale_date', $payPeriod);
+                function($query) use($payPeriodDates){
+                    $query->whereBetween('sale_date', $payPeriodDates);
                 }
             ])->with(['countPayments' =>
 
-                function($query) use($periodID){
-                    $query->where('pay_period_id', '=', $periodID);
-            }])
+                function($query) use($payPeriodID){
+                    $query->where('pay_period_id', '=', $payPeriodID);
 
-            ->get(['id','first_name','last_name']);
+            }])->orderBy('last_name')->get(['id','first_name','last_name']);
 
-
-        return view('wages.payday',['payPeriod'=> $period->pay_period_mdy, 'payDate'=> $period->pay_date_mdy,'technicians'=> $technicians]);
+        return view('wages.payday',['payPeriodID' => $payPeriodID,'payPeriod'=> $payPeriod->pay_period_mdy, 'payDate'=> $payPeriod->pay_date_mdy,
+            'technicians'=> $technicians]);
     }
 
 

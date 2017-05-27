@@ -1,12 +1,17 @@
 @extends('layouts.main')
+@section('pageTitle','Payday')
 @push('styles')
-    <link rel = "stylesheet" href = "/css/payday.css">
+    <link rel = "stylesheet" href = "{{ asset('/css/payday.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 @endpush
 @if(Session::has('success-pay'))
-    @component('partials.alert-success')
-        <p>{{ Session::get('success-pay') }}</p>
-    @endcomponent
+    <div class = "top-alert">
+        @component('alert.alert-success')
+            @slot('message')
+                <strong>Complete</strong> {{ Session::get('success-pay') }}
+            @endslot
+        @endcomponent
+    </div>
 @endif
 @section('content')
     @component('partials.header')
@@ -15,23 +20,19 @@
     @endcomponent
     <div class = "main-content">
         <div class = "container-fluid">
-            <div class = "row pay-period-row">
+            <div class = "row pay-period-container">
                 <div class = "col-md-3">
-                    <div class = "panel panel-primary">
-                        <div class = "panel-heading">
-                            <div class = "row">
-                                <div class = "col-md-6">
-                                    <h4>Pay Period</h4><p>{{ $payPeriod }}</p>
-                                </div>
-                                <div class = "col-md-6">
-                                    <h4>Pay Date</h4><p>{{ $payDate }}<p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class = "col-md-3">
+                        <i class = "fa fa-calendar fa-3x"></i>
+                    </div>
+                    <div class = "col-md-6">
+                        <h4>Pay Period</h4><p>{{ $payPeriod }}</p>
+                    </div>
+                    <div class = "col-md-3">
+                        <h4>Pay Date</h4><p>{{ $payDate }}</p>
                     </div>
                 </div>
             </div>
-            <hr>
             <div class = "row sale-container-row">
                 @foreach($technicians as $technician)
                     @include('partials.wage-container')

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::put('/technician-sale/change', 'TechnicianSaleController@changeSale');
+Route::put('/technician-sale/change', 'TechnicianSaleApiController@changeSale');
 Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
-Route::get('/pay-period/current', 'PayPeriodController@current');
-Route::get('/technician-sale/all/', 'TechnicianSaleController@searchSaleByDate');
+Route::get('/pay-period/current', 'PayPeriodApiController@current');
+Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\PayPeriod;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $date = Carbon::now()->toDateString();
+
+        $payPeriod = PayPeriod::where([['begin_date','<=',$date],['end_date','>=', $date]])->first();
+
+        session()->put('payPeriod', $payPeriod);
+
         return view('home');
     }
 }

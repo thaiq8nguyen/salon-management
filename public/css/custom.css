@@ -1,21 +1,6 @@
 
-/*Navigation Bar Style*/
-.navbar-custom{
-    margin-bottom: 0 !important;
-    background-color: #1976D2;
-    border-bottom: 0;
-}
-.navbar-brand-custom{
-    font-family: 'Roboto', sans-serif !important;
-    color: #FFFFFF !important;
-}
-
-.navbar-nav > li > a{
-    font-family: 'Roboto', sans-serif !important;
-    color: #FFFFFF !important;
-}
-.navbar-nav > .open > a:focus{
-    background-color: #2196F3 !important;
+.top-buffer{
+    margin-top: 25px;
 }
 header{
     font-family: 'Roboto', sans-serif !important;
@@ -40,4 +25,18 @@ header{
     color: #ffffff;
     border-color: #E63E09;
     background-color: #FF5722;
+}
+.panel-darkblue{
+    border-color: #005DB9;
+}
+.panel-darkblue .panel-heading{
+    color: #ffffff;
+    border-color: #005DB9;
+    background-color: #1976D2;
+}
+.panel-darkblue .panel-title{
+    font-family: 'Roboto', sans-serif;
+}
+.panel-darkblue .panel-body{
+    font-family: 'Montserrat', sans-serif;
 }

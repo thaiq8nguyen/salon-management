@@ -9,6 +9,7 @@ class TechnicianSale extends Model
 {
 
 
+    protected $fillable = ['technician_id','sales','sale_date','additional_sales'];
 
     /**
      * return a relationship definition between a Technician and a TechnicianSale models

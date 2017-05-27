@@ -1,0 +1,24 @@
+.shortcut a{
+    height: 100px;
+    display:block;
+    text-align: center;
+}
+.shortcut .row{
+    margin-bottom: 10px;
+}
+.shortcut li a{
+    color: #ffffff;
+    font-size: 18px;
+}
+.shortcut li:first-child{
+    background-color: #FD7400;
+}
+.shortcut li:first-child a:hover{
+    background-color: #E45B00;
+}
+.shortcut li:nth-child(2){
+    background-color: #1F8A70;
+}
+.shortcut li:nth-child(2) a:hover{
+    background-color: #067157;
+}

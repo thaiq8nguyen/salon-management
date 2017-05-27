@@ -22,7 +22,7 @@ class Technician extends Model
     public function countPayments(){
         return $this->payments()
             ->selectRaw('technician_id, count(pay_period_id) as numberOfPayment')
-            ->groupBy('pay_period_id');
+            ->groupBy('technician_id');
     }
 
     public function dailySales (){

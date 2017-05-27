@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class TechnicianBook extends Model
 {
     protected $guarded = [];
-    public function getBalanceAmountAttribute(){
-        return '$ ' . $this->balance;
+
+    public function scopeBalance($query){
+        return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as balance');
     }
+
+
 }

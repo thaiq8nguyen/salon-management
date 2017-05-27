@@ -1,0 +1,17 @@
+.navbar-custom{
+    margin-bottom: 0 !important;
+    background-color: #1976D2;
+    border-bottom: 0;
+}
+.navbar .navbar-brand{
+    font-family: 'Lora', serif;
+    color: #FFFFFF !important;
+}
+
+.navbar-nav > li > a{
+    font-family: 'Roboto', sans-serif !important;
+    color: #FFFFFF !important;
+}
+.navbar-nav > .open > a:focus{
+    background-color: #2196F3 !important;
+}
