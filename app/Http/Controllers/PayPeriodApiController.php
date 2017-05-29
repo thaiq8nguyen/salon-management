@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\PayPeriod;
 
@@ -12,8 +13,13 @@ class PayPeriodApiController extends Controller
     }*/
 
     public function current(){
-        $period = PayPeriod::select('begin_date','end_date')->latest()->first();
-        $payPeriod = ['beginDate' => $period->begin_date_mdy, 'endDate' => $period->end_date_mdy,];
-        return response()->json($payPeriod);
+
+        $date = Carbon::now()->toDateString();
+
+        $payPeriod = PayPeriod::where([['begin_date','<=',$date],['pay_date','>=', $date]])->first();
+
+        $currentPayPeriod = ['beginDate' => $payPeriod->begin_date_mdy, 'endDate' => $payPeriod->pay_date_mdy,];
+
+        return response()->json($currentPayPeriod);
     }
 }

@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $date = Carbon::now()->toDateString();
 
-        $payPeriod = PayPeriod::where([['begin_date','<=',$date],['end_date','>=', $date]])->first();
+        $payPeriod = PayPeriod::where([['begin_date','<=',$date],['pay_date','>=', $date]])->first();
 
         session()->put('payPeriod', $payPeriod);
 
