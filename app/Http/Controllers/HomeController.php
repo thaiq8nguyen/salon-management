@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\PayPeriod;
+use App\Technician;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,10 @@ class HomeController extends Controller
 
         session()->put('payPeriod', $payPeriod);
 
-        return view('home');
+        $technician = Technician::all()->first();
+
+        $today = Carbon::now()->toDateString();
+
+        return view('home',['saleDate' => $today,'technician' => $technician]);
     }
 }

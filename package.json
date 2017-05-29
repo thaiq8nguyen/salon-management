@@ -31,5 +31,13 @@
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "vue": "^2.3.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thaiq8nguyen/salon-management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thaiq8nguyen/salon-management/issues"
+  },
+  "homepage": "https://github.com/thaiq8nguyen/salon-management#readme"
 }

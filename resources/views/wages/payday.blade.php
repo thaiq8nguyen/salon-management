@@ -4,15 +4,6 @@
     <link rel = "stylesheet" href = "{{ asset('/css/payday.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 @endpush
-@if(Session::has('success-pay'))
-    <div class = "top-alert">
-        @component('alert.alert-success')
-            @slot('message')
-                <strong>Complete</strong> {{ Session::get('success-pay') }}
-            @endslot
-        @endcomponent
-    </div>
-@endif
 @section('content')
     @component('partials.header')
         <h1>Pay Day</h1>
@@ -32,6 +23,17 @@
                         <h4>Pay Date</h4><p>{{ $payDate }}</p>
                     </div>
                 </div>
+            </div>
+            <div class = "row">
+                @if(Session::has('success-pay'))
+                    <div class = "top-alert">
+                        @component('alert.alert-success')
+                            @slot('message')
+                                <strong>Complete</strong> {{ Session::get('success-pay') }}
+                            @endslot
+                        @endcomponent
+                    </div>
+                @endif
             </div>
             <div class = "row sale-container-row">
                 @foreach($technicians as $technician)

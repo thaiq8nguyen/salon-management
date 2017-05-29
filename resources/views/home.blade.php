@@ -14,7 +14,7 @@
             <div class="row top-buffer">
                 <div class = "col-md-1">
                     <ul class = "nav nab-pills nav-stacked shortcut">
-                        <li role = "presentation"><a href = "/technician-sale/date/{{ \Carbon\Carbon::now()->toDateString() }}/technician/Annie">
+                        <li role = "presentation"><a href = "/technician-sale/date/{{ $saleDate }}/technician/{{ $technician->first_name }}">
                                 <div class = "row">
                                     <div class = "col-md-12">
                                         <i class = "fa fa-plus fa-3x"></i>

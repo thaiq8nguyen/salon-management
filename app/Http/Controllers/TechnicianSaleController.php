@@ -23,7 +23,7 @@ class TechnicianSaleController extends Controller
 
         $payPeriod = session()->get('payPeriod');
 
-        $technician = Technician::find(1);
+        $technician = Technician::all()->first();
 
         return view('technicians.sales', ['technician' => $technician, 'payPeriodDates' => $payPeriod->pay_period_mdy,
             'payDate' => $payPeriod->pay_date_mdy]);
