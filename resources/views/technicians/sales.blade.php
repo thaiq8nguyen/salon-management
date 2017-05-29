@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('pageTitle','Technician Sales')
 @push('styles')
-    <link rel = "stylesheet" href = "/css/technician-sales.css">
+    <link rel = "stylesheet" href = "{{ asset('/css/technician-sales.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 @endpush
 @section('content')

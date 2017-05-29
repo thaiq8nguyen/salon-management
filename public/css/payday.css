@@ -1,5 +1,6 @@
 .top-alert .alert{
     margin-bottom: 0px;
+
 }
 .pay-period-container{
     padding-top: 10px;
@@ -16,8 +17,10 @@
 }
 .sale-container-row > [class*="col-"] {
     display: flex;
-    flex-direction: column;
-    margin-top:10px;
+    /*flex-direction: column;*/
+    margin-top:0px;
+    margin-bottom: 20px;
+
 }
 .panel{
     flex: 1 0 100%;
