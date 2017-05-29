@@ -29,7 +29,7 @@ var app = (function(){
         var now = moment();
         var pickerOption = {
             format: 'mm/dd/yyyy',
-            //startDate: response.beginDate, /*This needs to be corrected
+            //startDate: response.beginDate, /*This needs to be corrected later*/
             endDate: now.format('MM/DD/YYYY'),
             todayBtn: true,
             todayHighlight: true,
