@@ -121,20 +121,22 @@ var app = (function(){
         });
     }
     var displayTechnicianList = function(response){
+        console.log(response);
         var list = '';
         $.each(response.technicians, function(index,technician){
-            if(technician.sales_count == 0){
-                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.first_name +
-                    '" class = "list-group-item"><i class = "fa fa-user-circle fa-lg"></i> ' + technician.first_name + ' ' + technician.last_name + '</a>';
+            if(technician.countSales.length === 0){
+                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.firstName +
+                    '" class = "list-group-item"><i class = "fa fa-user-circle fa-lg"></i> '
+                    + technician.fullName + '</a>';
             }
             else{
-                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.first_name +
+                list += '<a href = "/technician-sale/date/' + response.saleDate + '/technician/' + technician.firstName +
                     '" class = "list-group-item list-group-item-success"><i class = "fa fa-user-circle fa-lg"></i> '
-                    + technician.first_name + ' ' + technician.last_name + '<i class = "fa fa-dollar fa-lg pull-right"></i></a>';
+                    + technician.fullName + '<i class = "fa fa-dollar fa-lg pull-right"></i></a>';
             }
         });
         $technicianList.html(list);
-    }
+    };
     var displayTechnicianListError = function(errors){
         alertDangerTemplate.done(function(template){
             $template = $(template);
@@ -142,13 +144,14 @@ var app = (function(){
             //$technicianList.html($template);
             displayAlert($template,$technicianList);
         });
-    }
+    };
     var displayAlert = function(alert,container){
         container.html(alert);
-    }
+    };
+
     return{
         init:init
-    }
+    };
 })();
 
 $(document).ready(app.init())

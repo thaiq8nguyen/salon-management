@@ -39,6 +39,8 @@ class TechnicianSaleApiController extends Controller
             ->header('Content-type', 'application/json');
 
     }
+
+
     public function searchSaleByDate(Request $request)
     {
         $rules = [
@@ -59,11 +61,19 @@ class TechnicianSaleApiController extends Controller
         }
 
         $saleDate = $request->input('saleDate');
-        $technicians = Technician::withCount(['sales' =>
-            function ($query) use ($saleDate) {
-                $query->where('sale_date', $saleDate);
-            }])->orderBy('last_name')->get();
 
-        return response()->json(['success' => true, 'technicians' => $technicians, 'saleDate' => $saleDate], 200)->header('Content-type', 'application/json');
+
+        $technicians = Technician::with(['countSales' => function($query) use ($saleDate){
+            $query->where('sale_date', $saleDate);
+        }])->orderBy('last_name', 'asc')->get();
+
+        $response = [];
+        foreach($technicians as $technician){
+            $response[] = ['fullName' => ucfirst($technician->fullName), 'firstName' => ucfirst($technician->first_name),
+                'countSales' => $technician->countSales];
+
+        }
+
+        return response()->json(['success' => true, 'technicians' => $response, 'saleDate' => $saleDate], 200)->header('Content-type', 'application/json');
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Technician extends Model
 {
+
     //
     public function sales(){
 
@@ -15,6 +16,11 @@ class Technician extends Model
 
     }
 
+    public function countSales(){
+        return $this->sales()
+            ->selectRaw('technician_id, count(*) as numberOfSale')
+            ->groupBy('technician_id');
+    }
     public function payments(){
         return $this->hasMany(WagePayment::class);
     }
