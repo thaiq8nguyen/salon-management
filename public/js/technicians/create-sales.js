@@ -53,6 +53,15 @@ var app = (function(){
         alertSuccessTemplate = $.get('/template/alert-success.html');
     }
     var bindEvents = function(){
+        $('.shop-sales-link').on('click',function(){
+            if($('.shop-sales-form').is(':hidden')){
+                $('.shop-sales-form').slideDown('slow');
+
+            }
+            else{
+                $('.shop-sales-form').slideUp('slow');
+            }
+        });
         $saleDateInput.on('change', function(){
             var date = new Date($(this).val());
 
