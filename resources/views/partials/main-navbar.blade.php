@@ -19,6 +19,12 @@
                             <li><a href = "{{ route('technician-book') }}">Book</a></li>
                         </ul>
                     </li>
+                    <li class = "dropdown">
+                        <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" role = "button"><i class = "fa fa-building"></i> Salon <span class = "caret"></span></a>
+                        <ul class = "dropdown-menu" role = "menu">
+                            <li><a href = "{{ route('salon-sale-create') }}">Sales</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class = "nav navbar-nav navbar-right">
                     <li class = "dropdown">

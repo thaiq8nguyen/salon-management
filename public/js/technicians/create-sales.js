@@ -24,7 +24,7 @@ var app = (function(){
         payPeriodRequest.fail(function(jqXHR){
             console.log(jqXHR.responseText);
         });
-    }
+    };
     var initCalendar = function(response){
         var now = moment();
         var pickerOption = {
@@ -36,7 +36,7 @@ var app = (function(){
             autoclose:true
         };
         $saleDateInput.datepicker(pickerOption);
-    }
+    };
     var cachedVariables = function(){
         $saleDateInput = $('#sale-date-input');
         $technicianList = $('.technician-list-container');
@@ -51,17 +51,18 @@ var app = (function(){
         $submitChangeForm = $changeSaleModal.find('.btn-submit');
         alertDangerTemplate = $.get('/template/alert-danger.html');
         alertSuccessTemplate = $.get('/template/alert-success.html');
-    }
+    };
     var bindEvents = function(){
         $('.shop-sales-link').on('click',function(){
             if($('.shop-sales-form').is(':hidden')){
                 $('.shop-sales-form').slideDown('slow');
-
             }
             else{
                 $('.shop-sales-form').slideUp('slow');
             }
         });
+
+
         $saleDateInput.on('change', function(){
             var date = new Date($(this).val());
 
@@ -83,7 +84,7 @@ var app = (function(){
                     displayTechnicianListError(errorList);
                 });
             }
-        })
+        });
         $changeSaleModal.on('show.bs.modal', function(event){
             var link = $(event.relatedTarget);
             var modal = $(this);
@@ -102,9 +103,8 @@ var app = (function(){
             event.preventDefault();
             options = {method:'PUT', url:'/api/technician-sale/change', data:$('#change-sale-form').serializeArray(),
                 dataType:'json'
-            }
+            };
             $.ajax(options).done(function(response){
-                console.log(response);
                 if(response.success){
                     $modalSaleTxt.text(response.sale).addClass('text-danger');
                     $modalAdditionalSaleTxt.text(response.additionalSale).addClass('text-danger');
@@ -128,9 +128,8 @@ var app = (function(){
             });
             document.getElementById('change-sale-form').reset();
         });
-    }
+    };
     var displayTechnicianList = function(response){
-        console.log(response);
         var list = '';
         $.each(response.technicians, function(index,technician){
             if(technician.countSales.length === 0){
@@ -163,4 +162,4 @@ var app = (function(){
     };
 })();
 
-$(document).ready(app.init())
+$(document).ready(app.init());

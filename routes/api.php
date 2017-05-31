@@ -20,3 +20,4 @@ Route::put('/technician-sale/change', 'TechnicianSaleApiController@changeSale');
 Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 Route::get('/pay-period/current', 'PayPeriodApiController@current');
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
+Route::post('/salon-sale/store/','SalonSaleApiController@createSale');

@@ -12,32 +12,6 @@
 .top-alert .alert{
     margin-bottom: 0px;
 }
-.shop-sales-form-container{
-    position: absolute;
-    top:50px;
-    left:900px;
-    float:right;
-    z-index: 1;
-    border: 1px solid black;
-    border-radius: 3px;
 
-}
-.shop-sales-form{
-    width: 250px;
-    height:450px;
-    padding: 20px 30px;
-    background-color: #ffffff;
-    display: none;
-}
-.shop-sales-link{
-    font-family: 'Raleway', sans-serif;
-    width: 250px;
-    height:50px;
-    display:block;
-    color: #FFFFFF;
-    background-color: #2b542c;
-    cursor: pointer;
-    padding: 15px;
-    font-size: 20px;
 
-}
+

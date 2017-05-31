@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('auth.login');
 });
-
+    Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
 
     Route::get('/technician-sale', 'TechnicianSaleController@index')->name('technician-sale');
 

@@ -25,9 +25,6 @@
     @endcomponent
     <div class = 'main-content'>
         <div class = "container-fluid">
-            @component('forms.shop-sales')
-
-            @endcomponent
             <div class = "row pay-period-container">
                 <div class = "col-md-3">
                     <div class = "col-md-3">
