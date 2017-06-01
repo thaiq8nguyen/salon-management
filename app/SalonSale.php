@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SalonSale extends Model
 {
-    public function saleDetails(){
+    protected $fillable = ['date','gross_sales','giftcard_sold','giftcard_redeemed','tips'];
+    public function salonSaleDetails(){
         return $this->hasMany(SalonSaleDetails::class);
     }
 }

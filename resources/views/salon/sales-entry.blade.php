@@ -5,10 +5,7 @@
     <link rel = "stylesheet" href = "{{ asset('css/salon-sales-entry.css') }}">
 @endpush
 @push('scripts')
-    <script src = "{{ asset('js/axios.js') }}"></script>
-    <script src = "{{ asset('js/vue.js') }}"></script>
-    <script src = "{{ asset('js/bootstrap-datepicker.js')}}"></script>
-    <script src = "{{ asset('js/salon/sales-entry.js') }}"></script>
+    <script src = "{{ asset('js/sales-entry.js') }}"></script>
 @endpush
 @section('content')
     @component('partials.header')
@@ -16,15 +13,28 @@
     @endcomponent
     <div class = "main-content">
         <div class = "container-fluid">
-            <div class = "row">
+            <div class = "row top-buffer">
                 <div class = "col-md-4">
                     @component('forms.salon-sales')
                     @endcomponent
-                    <div class = "alert alert-success">
-                        <p v-text = "confirmation"></p>
-                    </div>
+
+                </div>
+                <div class = "col-md-4">
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
+<template id = "confirmation-alert">
+    <div class = "alert alert-success" role = "alert">
+        <button type = "button" class = "close" v-on:click="$emit('close')">X</button>
+        @{{ message }}
+    </div>
+</template>
+<template id = "failure-alert">
+    <div class = "alert alert-danger" role = "alert">
+        <button type = "button" class = "close" v-on:click="$emit('close')">X</button>
+        @{{ message }}
+    </div>
+</template>
