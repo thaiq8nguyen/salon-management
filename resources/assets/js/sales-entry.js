@@ -9,10 +9,13 @@ Vue.component('confirmation-alert',{
 
     props:['message'],
     template: '#confirmation-alert'
+
 });
 Vue.component('failure-alert',{
-    prop:['message'],
+
+    props:['message'],
     template: '#failure-alert'
+
 });
 
 let app = new Vue({
@@ -25,9 +28,12 @@ let app = new Vue({
         giftCardRedeemeds:'',
         convenienceFees:'',
         tips:'',
-        message:'',
-        showEntryConfirmation:false,
-        showFailureAlert:false,
+        bootstrapStyling:true,
+        message: '',
+
+        showEntryConfirmation: false,
+        showEntryFailure: false,
+
         date: new Date(),
         dateFormat: 'MM/dd/yyyy'
 
@@ -42,12 +48,18 @@ let app = new Vue({
                 grossSales:self.grossSales, giftCardSolds:self.giftCardSolds, giftCardRedeemeds: self.giftCardRedeemeds,
                 convenienceFees:self.convenienceFees, tips:self.tips
             }).then(function(response){
-                console.log(response);
                 if(response.data.success){
                     self.showEntryConfirmation = true;
                     self.message = response.data.message;
+                    self.grossSales = '';
+                    self.giftCardSolds = '';
+                    self.giftCardRedeemeds = '';
+                    self.convenienceFees = '';
+                    self.tips = '';
+
                 }else{
-                    self.showFailureAlert = true;
+                    console.log('fail');
+                    self.showEntryFailure = true;
                     self.message = response.data.message;
                 }
 

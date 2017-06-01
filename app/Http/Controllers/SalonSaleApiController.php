@@ -9,6 +9,7 @@ use Validator;
 
 class SalonSaleApiController extends Controller
 {
+
     public function createSale(Request $request){
         $rules =[
             'date' => 'required',
@@ -19,14 +20,13 @@ class SalonSaleApiController extends Controller
             'convenienceFees' => 'nullable|numeric'
         ];
 
-        //return response()->json(['success'=>true,'input'=>$request->all(),'message'=>'testing']);
 
         $validator =  Validator::make($request->all(), $rules);
 
         if($validator->fails()){
-            //$errors = $validator->getMessageBag();
+            $errors = $validator->getMessageBag();
 
-            return response()->json(['success' =>false, 'message' => 'error'],422)->header('Content-type','application/json');
+            return response()->json(['success' => false, 'message' => $errors],422)->header('Content-type','application/json');
         }
 
         $date = $request->input('date');
@@ -36,9 +36,15 @@ class SalonSaleApiController extends Controller
         $tips = $request->input('tips');
         $convenienceFees = $request->input('convenienceFees');
 
+        $countSale = SalonSale::where('date',$date)->count();
+
+        if($countSale > 0){
+            return response()->json(['success' => false, 'message' => 'Sale is already existed'],200)
+                ->header('Content-type', 'application/json');
+        }
 
 
-        $sale = SalonSale::updateOrCreate(['date' => $date, 'gross_sales' => $grossSales,
+        $sale = SalonSale::create(['date' => $date, 'gross_sales' => $grossSales,
             'giftcard_sold' => $giftCardSolds, 'giftcard_redeemed' => $giftCardRedeemeds, 'tips' => $tips]);
 
         $salonSaleDetail = new SalonSaleDetails(['item' => 'convenience fee', 'gross_sales' => $convenienceFees,
@@ -48,6 +54,7 @@ class SalonSaleApiController extends Controller
 
 
 
-        return response()->json(['success' => true, 'message' => 'The sales have been added'],200);
+        return response()->json(['success' => true, 'message' => 'The sales have been added'],200)->
+        header('Content-type', 'application/json');
     }
 }

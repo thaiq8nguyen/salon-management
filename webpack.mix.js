@@ -11,6 +11,6 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/sales-entry.js', 'public/js').sourceMap();
+mix.js('resources/assets/js/sales-entry.js', 'public/js').sourceMaps();
 
    /*.sass('resources/assets/sass/app.scss', 'public/css');*/

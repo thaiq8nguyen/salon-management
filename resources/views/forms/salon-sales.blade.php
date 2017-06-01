@@ -2,15 +2,13 @@
     <div class = "panel-heading">
         <form>
             <div class = "form-group">
-
-                    {{--<div class = "input-group-addon"><i class = " fa fa-calendar"></i></div>
-                    <input type = "text" id = "date" class = "form-control" v-model="date">--}}
-
-                    <datepicker class = "form-control" v-model="date" :format="dateFormat"></datepicker>
+                <div class = "input-group">
+                    <div class = "input-group-addon"><i class = "fa fa-calendar"></i></div>
+                    <datepicker v-model="date" :format="dateFormat" :bootstrap-styling="bootstrapStyling"></datepicker>
+                </div>
 
             </div>
         </form>
-
     </div>
     <div class = "panel-body">
         <div class = "salon-sales-form-container">
@@ -54,8 +52,8 @@
                     <button @click="addSales" type = "button" class = "btn btn-primary">Submit</button>
                 </div>
                 <div class = "form-group">
-                    <confirmation-alert v-bind:message = "message" v-on:close="showEntryConfirmation = false" v-if="showEntryConfirmation"></confirmation-alert>
-                    <failure-alert v-bin:message = "message" v-on:close="showEntryFailure = false" v-if="showFailureAlert"></failure-alert>
+                    <confirmation-alert :message = "message" v-on:close="showEntryConfirmation = false" v-if="showEntryConfirmation"></confirmation-alert>
+                    <failure-alert :message = "message" v-on:close="showEntryFailure = false" v-if="showEntryFailure"></failure-alert>
                 </div>
             </form>
         </div>
