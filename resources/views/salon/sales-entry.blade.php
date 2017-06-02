@@ -15,26 +15,32 @@
         <div class = "container-fluid">
             <div class = "row top-buffer">
                 <div class = "col-md-4">
-                    @component('forms.salon-sales')
+                    @component('panels.charcoal')
+                        @slot('title')
+                            Sale Entry
+                        @endslot
+                        @slot('body')
+                            @component('forms.salon-sales')@endcomponent
+                        @endslot
                     @endcomponent
-
                 </div>
                 <div class = "col-md-4">
-
+                    @component('panels.charcoal')
+                        @slot('title')
+                            Sales Metric
+                        @endslot
+                    @endcomponent
                 </div>
+
+
             </div>
         </div>
     </div>
 @endsection
-<template id = "confirmation-alert">
-    <div class = "alert alert-success" role = "alert">
+<template id = "entry-alert">
+    <div class = "alert" role = "alert">
         <button type = "button" class = "close" v-on:click="$emit('close')">X</button>
         @{{ message }}
     </div>
 </template>
-<template id = "failure-alert">
-    <div class = "alert alert-danger" role = "alert">
-        <button type = "button" class = "close" v-on:click="$emit('close')">X</button>
-        @{{ message }}
-    </div>
-</template>
+

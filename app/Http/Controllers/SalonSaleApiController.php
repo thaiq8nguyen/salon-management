@@ -13,21 +13,15 @@ class SalonSaleApiController extends Controller
     public function createSale(Request $request){
         $rules =[
             'date' => 'required',
-            'grossSales' => 'nullable|numeric',
+            'grossSales' => 'required|numeric',
             'giftCardSolds' => 'nullable|numeric',
             'giftCardRedeemeds' => 'nullable|numeric',
             'tips' => 'nullable|numeric',
             'convenienceFees' => 'nullable|numeric'
         ];
 
+        $this->validate($request,$rules);
 
-        $validator =  Validator::make($request->all(), $rules);
-
-        if($validator->fails()){
-            $errors = $validator->getMessageBag();
-
-            return response()->json(['success' => false, 'message' => $errors],422)->header('Content-type','application/json');
-        }
 
         $date = $request->input('date');
         $grossSales = $request->input('grossSales');

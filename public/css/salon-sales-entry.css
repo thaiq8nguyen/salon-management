@@ -1,0 +1,8 @@
+.panel-charcoal{
+    border-color: #5C5C5C;
+}
+.panel-charcoal > .panel-heading{
+    color: #FFFFFF;
+    border-color: #5C5C5C;
+    background-color: #757575;
+}
