@@ -163,6 +163,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Salon\Square\SquareServiceProvider::class,
+        Salon\Sales\SalonSaleServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -227,6 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Square' => Salon\Square\Square::class,
+        'Salon' => Salon\Sales\Salon::class,
 
     ],
 

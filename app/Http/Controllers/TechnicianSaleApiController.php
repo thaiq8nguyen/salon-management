@@ -34,7 +34,7 @@ class TechnicianSaleApiController extends Controller
 
         $sale->update();
 
-        return response()->json(['success' => true, 'message' => 'Sale has been updated for ' . $saleDate,
+        return response()->json(['success' => true, 'message' => 'SalonSaleAPI has been updated for ' . $saleDate,
             'sale' => $sale->sales_amount, 'additionalSale' => $sale->additional_sales_amount],200)
             ->header('Content-type', 'application/json');
 
@@ -47,8 +47,8 @@ class TechnicianSaleApiController extends Controller
             'saleDate' => 'required|date_format:Y-m-d'
         ];
         $message = [
-            'required' => 'Sale date is required',
-            'date_format' => "Sale date does not have the correct format (Month/Day/Year)"
+            'required' => 'SalonSaleAPI date is required',
+            'date_format' => "SalonSaleAPI date does not have the correct format (Month/Day/Year)"
 
         ];
 

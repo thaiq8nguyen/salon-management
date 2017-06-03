@@ -33,7 +33,7 @@ class SalonSaleApiController extends Controller
         $countSale = SalonSale::where('date',$date)->count();
 
         if($countSale > 0){
-            return response()->json(['success' => false, 'message' => 'Sale is already existed'],200)
+            return response()->json(['success' => false, 'message' => 'SalonSaleAPI is already existed'],200)
                 ->header('Content-type', 'application/json');
         }
 

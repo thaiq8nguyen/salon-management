@@ -32,7 +32,6 @@
                     @endcomponent
                 </div>
 
-
             </div>
         </div>
     </div>

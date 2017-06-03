@@ -67,7 +67,7 @@ var app = (function(){
             var date = new Date($(this).val());
 
             if(!moment(date).isValid()){
-                displayTechnicianListError('Sale date does not have the correct format. Please try again');
+                displayTechnicianListError('SalonSaleAPI date does not have the correct format. Please try again');
             }
             else{
                 saleDate = moment(date).format('YYYY-MM-DD');

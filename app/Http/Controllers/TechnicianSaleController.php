@@ -77,7 +77,7 @@ class TechnicianSaleController extends Controller
         $sale = TechnicianSale::create(['technician_id' => $request->input('technicianID'),'sale_date' => $saleDate,
             'sales' => $request->input('sale') ,'additional_sales' => $request->input('additional-sale')]);
 
-        $request->session()->flash('confirm-sale', 'Sale has been added for ' . $sale->sale_date_mdy);
+        $request->session()->flash('confirm-sale', 'SalonSaleAPI has been added for ' . $sale->sale_date_mdy);
         return redirect('/technician-sale/date/'.$saleDate .'/technician/'.$technician->first_name);
 
     }

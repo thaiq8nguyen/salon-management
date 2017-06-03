@@ -11,9 +11,20 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
+
+    Route::get('/square/location', 'SquareController@getLocation');
+
+    Route::get('/square/sale-metrics/{date}', 'SquareController@getSaleMetrics');
+
+
+    Route::get('/square/raw-payments/{date}', 'SquareController@getRawPayments');
+
+
     Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
 
     Route::get('/technician-sale', 'TechnicianSaleController@index')->name('technician-sale');

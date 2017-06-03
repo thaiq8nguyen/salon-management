@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('pageTitle','Add Technician Sale')
+@section('pageTitle','SalonSaleAPI')
 @push('styles')
     <link rel = "stylesheet" href = "{{ asset('css/bootstrap-datepicker3.css') }}">
     <link rel = "stylesheet" href = "{{ asset('css/create-sales.css') }}">

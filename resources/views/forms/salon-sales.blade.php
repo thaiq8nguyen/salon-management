@@ -43,7 +43,8 @@
         <button type = "submit" class = "btn btn-primary" v-bind:disabled="errors.any()">Submit</button>
     </div>
     <div class = "form-group">
-        <entry-alert v-bind:message= "alertMessage" :class="[alertClass]" v-on:close="showEntryAlert = false" v-show="showEntryAlert"></entry-alert>
+        <entry-alert v-bind:message= "alertMessage" :class="[alertClass]"
+                     v-on:close="showEntryAlert = false" v-show="showEntryAlert"></entry-alert>
     </div>
 </form>
 
