@@ -17,13 +17,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-    Route::get('/square/location', 'SquareController@getLocation');
-
-    Route::get('/square/sale-metrics/{date}', 'SquareController@getSaleMetrics');
-
-
-    Route::get('/square/raw-payments/{date}', 'SquareController@getRawPayments');
-
+    Route::get('/api-dashboard','ApiDashboardController')->name('api-dashboard');
+    Route::get('/salon-sales','SalonSaleController@index')->name('salon-sale');
 
     Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
 
@@ -73,3 +68,7 @@ Route::get('/', function () {
 
 /*Authentication routes*/
 Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

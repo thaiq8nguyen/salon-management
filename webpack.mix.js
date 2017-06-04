@@ -11,6 +11,10 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/sales-entry.js', 'public/js').sourceMaps();
+
+    mix.js(['resources/assets/js/salon-sales.js'], 'public/js')
+        .js(['resources/assets/js/api-dashboard.js'], 'public/js');
+
+
 
    /*.sass('resources/assets/sass/app.scss', 'public/css');*/

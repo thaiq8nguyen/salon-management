@@ -24,14 +24,17 @@
                         @endslot
                     @endcomponent
                 </div>
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                     @component('panels.charcoal')
                         @slot('title')
                             Sales Metric
                         @endslot
+                        @slot('body')
+                            @component('forms.datepicker')@endcomponent
+                            @component('tables.salon-sales')@endcomponent
+                        @endslot
                     @endcomponent
                 </div>
-
             </div>
         </div>
     </div>

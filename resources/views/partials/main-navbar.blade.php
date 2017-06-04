@@ -22,7 +22,13 @@
                     <li class = "dropdown">
                         <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" role = "button"><i class = "fa fa-building"></i> Salon <span class = "caret"></span></a>
                         <ul class = "dropdown-menu" role = "menu">
-                            <li><a href = "{{ route('salon-sale-create') }}">Sales</a></li>
+                            <li><a href = "{{ route('salon-sale') }}">Sales</a></li>
+                        </ul>
+                    </li>
+                    <li class = "dropdown">
+                        <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" role = "button"><i class = "fa fa-server"></i> Settings <span class = "caret"></span></a>
+                        <ul class = "dropdown-menu" role = "menu">
+                            <li><a href = "{{ route('api-dashboard') }}">API</a></li>
                         </ul>
                     </li>
                 </ul>

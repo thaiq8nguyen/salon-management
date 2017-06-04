@@ -10,7 +10,11 @@ class SalonSaleController extends Controller
     {
         $this->middleware('auth');
     }
+    public function index(){
 
+        return view('salon.salon-sales');
+
+    }
     public function create(Request $request){
 
 
