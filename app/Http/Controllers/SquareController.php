@@ -17,7 +17,7 @@ class SquareController extends Controller
 
     public function getSaleMetrics(){
 
-        Salon::getDailySaleMetrics();
+        return Salon::getDailySaleMetrics();
 
     }
 

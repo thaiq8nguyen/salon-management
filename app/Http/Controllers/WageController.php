@@ -41,7 +41,7 @@ class WageController extends Controller
 
             }])->orderBy('last_name')->get(['id','first_name','last_name']);
 
-        return view('wages.payday',['payPeriodID' => $payPeriodID,'payPeriod'=> $payPeriod->pay_period_mdy, 'payDate'=> $payPeriod->pay_date_mdy,
+        return view('wages.payday',['pageTitle' => 'Payday','payPeriodID' => $payPeriodID,'payPeriod'=> $payPeriod->pay_period_mdy, 'payDate'=> $payPeriod->pay_date_mdy,
             'technicians'=> $technicians]);
     }
 

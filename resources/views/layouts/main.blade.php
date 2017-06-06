@@ -24,10 +24,10 @@
     </body>
     <!--JavaScript-->
     <!--Common Scripts-->
+
     <script src = "{{ asset('js/jquery.js') }}"></script>
     <script src = "{{ asset('js/bootstrap.js') }}"></script>
     <script src = "{{ asset('js/moment.min.js') }}"></script>
-    <script src = "{{ asset('js/axios.min.js') }}"></script>
-    <script src = "{{ asset('js/vue.js') }}"></script>
+
     @stack('scripts')
 </html>

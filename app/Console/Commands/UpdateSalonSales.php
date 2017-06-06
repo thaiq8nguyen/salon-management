@@ -37,6 +37,6 @@ class UpdateSalonSales extends Command
      */
     public function handle()
     {
-        Salon::getDailySaleMetrics();
+        Salon::getSquareDailySaleMetrics();
     }
 }

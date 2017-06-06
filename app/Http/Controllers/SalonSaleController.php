@@ -12,7 +12,7 @@ class SalonSaleController extends Controller
     }
     public function index(){
 
-        return view('salon.salon-sales');
+        return view('salon.salon-sales')->with('pageTitle','Salon Sales');
 
     }
     public function create(Request $request){

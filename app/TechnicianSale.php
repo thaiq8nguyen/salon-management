@@ -50,4 +50,5 @@ class TechnicianSale extends Model
 
 
 
+
 }

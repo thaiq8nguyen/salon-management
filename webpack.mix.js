@@ -11,9 +11,12 @@ const { mix } = require('laravel-mix');
  |
  */
 
+    mix.browserSync({
+        proxy:'http://shop-management.dev'
+    });
 
-    mix.js(['resources/assets/js/salon-sales.js'], 'public/js')
-        .js(['resources/assets/js/api-dashboard.js'], 'public/js');
+    mix.js(['resources/assets/js/salon-sales.js'], 'public/js').sourceMaps();
+        //.js(['resources/assets/js/api-dashboard.js'], 'public/js');
 
 
 

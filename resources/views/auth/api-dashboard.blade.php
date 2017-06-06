@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('pageTitle', 'API Dashboard')
+@section('pageTitle', $pageTitle)
 @push('scripts')
 <script src = "{{ asset('js/api-dashboard.js') }}"></script>
 @endpush

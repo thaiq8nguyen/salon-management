@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('pageTitle','Technician Sales')
+@section('pageTitle',$pageTitle)
 @push('styles')
     <link rel = "stylesheet" href = "{{ asset('/css/technician-sales.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">

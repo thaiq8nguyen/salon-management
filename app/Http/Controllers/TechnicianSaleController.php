@@ -25,7 +25,7 @@ class TechnicianSaleController extends Controller
 
         $technician = Technician::all()->first();
 
-        return view('technicians.sales', ['technician' => $technician, 'payPeriodDates' => $payPeriod->pay_period_mdy,
+        return view('technicians.sales', ['pageTitle' => 'Technician Sale','technician' => $technician, 'payPeriodDates' => $payPeriod->pay_period_mdy,
             'payDate' => $payPeriod->pay_date_mdy]);
 
     }

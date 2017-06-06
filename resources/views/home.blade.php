@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('pageTitle','Salon Management')
+@section('pageTitle',$pageTitle)
 @push('styles')
     <link rel = "stylesheet" href = "{{ asset('/css/home.css') }}">
     <link rel = "stylesheet"  href = "{{ asset('css/navbar-shortcut.css') }}">

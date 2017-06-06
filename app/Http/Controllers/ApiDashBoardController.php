@@ -10,6 +10,6 @@ class ApiDashBoardController extends Controller
     {
         // TODO: Implement __invoke() method.
 
-        return view('auth.api-dashboard');
+        return view('auth.api-dashboard',['pageTitle' => 'API Dashboard']);
     }
 }

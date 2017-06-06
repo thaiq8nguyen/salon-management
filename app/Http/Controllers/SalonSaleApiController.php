@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\SalonSale;
+use App\TechnicianSale;
 use App\SalonSaleDetails;
 use Illuminate\Http\Request;
-use Validator;
+
 
 
 class SalonSaleApiController extends Controller
@@ -51,4 +52,42 @@ class SalonSaleApiController extends Controller
         return response()->json(['success' => true, 'message' => 'The sales have been added'],200)->
         header('Content-type', 'application/json');
     }
+    public function getSquareSale(Request $request){
+
+        $date =  $request->input('date');
+
+
+
+        $sales = SalonSale::with(['salonSaleDetails' => function($query){
+            $query->orderBy('item','asc')->select('salon_sale_id','item','gross_sales');
+        }])->where('date',$date)->first(['id','date','gross_sales','tips','fees']);
+
+        if($sales !== null){
+
+
+            $result = ['success' => true, 'metrics' => $sales];
+        }
+        else{
+            $result = ['success' => false, 'message' => 'No Sale'];
+        }
+
+        return response()->json($result,200);
+
+    }
+
+    public function getTechSale(Request $request){
+
+        $date =  $request->input('date');
+
+
+        $grossSales = TechnicianSale::where('sale_date', $date)->sum('sales');
+        $tipsOnCard = TechnicianSale::where('sale_date', $date)->sum('additional_sales');
+
+
+        $sales = ['grossSales' => number_format($grossSales,2), 'tipsOnCard' => number_format($tipsOnCard,2)];
+
+
+        return response()->json($sales,200);
+    }
 }
+

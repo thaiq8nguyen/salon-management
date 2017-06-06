@@ -9,6 +9,8 @@ Class SquareAPI{
 
     protected $client;
     protected $requestHeaders;
+    protected $dates;
+
 
     public function __construct(Client $client)
     {
@@ -53,6 +55,7 @@ Class SquareAPI{
                 $moreResult = false;
             }
         }
+
         $seenPaymentID = [];
         $uniquePayments = [];
 
@@ -66,18 +69,18 @@ Class SquareAPI{
         }
 
         return $payments;
+
     }
 
     public function getDailySaleMetrics(){
 
-        $beginDate = Carbon::now()->startOfDay();
-        $newDate = clone $beginDate;
-        $endDate=  $newDate->addDay();
+        $date = Carbon::now()->startOfDay();
 
-        $dates = http_build_query(['begin_time' => $beginDate->toIso8601String(),
-            'end_time' => $endDate->toIso8601String()]);
+        $this->setDatesQuery($date);
 
-        $payments = $this->getRawPayments($dates);
+
+        $payments = $this->getRawPayments($this->dates);
+        $items = [];
         $totalCollected = 0;
         $tipOnCard = 0;
         $cashCollected = 0;
@@ -85,6 +88,7 @@ Class SquareAPI{
         $processingFee = 0;
 
         foreach($payments as $payment){
+
             $totalCollected += $payment->total_collected_money->amount;
             $tipOnCard += $payment->tip_money->amount;
             $processingFee += $payment->processing_fee_money->amount;
@@ -97,19 +101,55 @@ Class SquareAPI{
                     $cardCollected += $tender->total_money->amount;
                 }
             }
+            foreach($payment->itemizations as $item){
+                array_push($items,$item);
+            }
 
         }
+        $saleItem = $this->getDailySaleItems($items);
 
         $grossSales = $totalCollected - $tipOnCard;
-        $data = ['gross_sales' => $this->formatMoney($grossSales),
+        $data = ['metrics' => ['gross_sales' => $this->formatMoney($grossSales),
             'tips' => $this->formatMoney($tipOnCard), 'fees' => $this->formatMoney(abs($processingFee)),
             'cash_collected' => $this->formatMoney($cashCollected),
-            'cards_collected' => $this->formatMoney($cardCollected)];
+            'cards_collected' => $this->formatMoney($cardCollected)],'items' =>$saleItem];
 
         return $data;
 
     }
 
+    public function getDailySaleItems($soldItems){
+
+        $menus = ['Convenience Fee','Gift Certificate'];
+
+        $itemSoldList = [];
+
+        foreach($menus as $menu){
+            $itemSold = 0;
+            $grossSales = 0;
+            foreach($soldItems as $soldItem){
+                if($soldItem->name == $menu){
+                    $itemSold += 1;
+                    $grossSales += $soldItem->gross_sales_money->amount;
+                }
+            }
+            $itemSoldList[] = ['item' => $menu,'gross_sales' => $this->formatMoney($grossSales),'items_sold' => $itemSold];
+
+        }
+
+        return $itemSoldList;
+
+    }
+    private function setDatesQuery(Carbon $beginDate){
+
+        $newDate = clone $beginDate;
+
+        $endDate=  $newDate->addDay();
+
+        $this->dates = http_build_query(['begin_time' => $beginDate->toIso8601String(),
+            'end_time' => $endDate->toIso8601String()]);
+
+    }
     private function formatMoney($money){
         return money_format('%+.2n',$money/100);
     }

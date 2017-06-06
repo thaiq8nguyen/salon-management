@@ -2,7 +2,7 @@
  * Created by discoverylight on 6/3/17.
  */
 
-//require('./bootstrap');
+require('./bootstrap');
 
 Vue.component('passport-clients',require('./components/passport/Clients.vue'));
 

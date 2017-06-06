@@ -31,6 +31,6 @@ class HomeController extends Controller
         session()->put('payPeriod', $payPeriod);
         $technician = Technician::all()->first();
         $today = Carbon::now()->toDateString();
-        return view('home',['saleDate' => $today,'technician' => $technician]);
+        return view('home',['pageTitle' => 'Salon Management','saleDate' => $today,'technician' => $technician]);
     }
 }
