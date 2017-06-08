@@ -18,12 +18,12 @@
         <td v-show="isDiscrepancy" :tipsOnCardDelta="tipsOnCardDelta">@{{ tipsOnCardDelta }}</td>
     </tr>
     <tr>
-        <th>Gift Card Sold</th>
-        <td :giftCardSolds="giftCardSolds">$ @{{ giftCardSolds }}</td>
+        <th>Gift Certificate Sold</th>
+        <td :giftCertificateSolds="giftCertificateSolds">$ @{{ giftCertificateSolds }}</td>
     </tr>
     <tr>
-        <th>Gift Card Redeemed</th>
-        <td></td>
+        <th>Gift Certificate Redeemed</th>
+        <td :giftCertificateRedeemeds="giftCertificateRedeemeds">$ @{{ giftCertificateRedeemeds }}</td>
     </tr>
     <tr>
         <th>Convenience Fee</th>

@@ -23,14 +23,18 @@ Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 Route::get('/pay-period/current', 'PayPeriodApiController@current');
 
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
-Route::post('/salon-sale/store/','SalonSaleApiController@createSale');
 
-Route::get('/salon/square-sale','SalonSaleApiController@getSquareSale')->middleware('auth:api');
+
+Route::post('/salon-sale/redeem-gift-certificate','SalonSaleApiController@redeemGiftCertificate')
+    ->middleware('auth:api');
+
+Route::get('/salon/daily-sale','SalonSaleApiController@getDailySales')->middleware('auth:api');
 
 
 Route::get('/salon/tech-sale','SalonSaleApiController@getTechSale')->middleware('auth:api');
 
-/*Test API*/
+
+/*****Test API*****/
 Route::get('/salon/square-test/metric', function(){
     $dailySale = Square::getDailySaleMetrics();
 

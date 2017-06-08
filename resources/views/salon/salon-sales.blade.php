@@ -19,18 +19,34 @@
                             Sales Metric
                         @endslot
                         @slot('body')
-                            <div class = "form-group">
-                                <div class = "input-group">
-                                    <div class = "input-group-addon"><i class = "fa fa-calendar"></i></div>
-                                    <datepicker v-model="date" :format="dateFormat"
-                                                :bootstrap-styling="bootstrapStyling" :selected=" getSales()">
-                                    </datepicker>
+                            <div class = "row">
+                                <div class = "col-md-3">
+                                    <div class = "form-group">
+                                        <div class = "input-group">
+                                            <div class = "input-group-addon"><i class = "fa fa-calendar"></i></div>
+                                            <datepicker v-model="date" :format="dateFormat"
+                                                        :bootstrap-styling="bootstrapStyling" :selected.prevent=" getSales"
+                                                        :disabled="option.disabled">
+                                            </datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-md-9">
+                                    <gift-card-redeemed-form :date="date" :reset="resetGCRedeemed"
+                                                             v-on:redeemed="giftCardRedeemed">
+                                    </gift-card-redeemed-form>
                                 </div>
                             </div>
                             <div class = "top-buffer">
-                                @component('tables.salon-sales')@endcomponent
+                                <div class = "row">
+                                    <div class = "col-md-6">
+                                        <daily-sale-table class = "table table-bordered" :sales="sales" v-show="showTable"></daily-sale-table>
+                                    </div>
+                                    <div class = "col-md-6">
+                                        <daily-tip-table class = "table table-bordered" :tips="tips" v-show="showTable"></daily-tip-table>
+                                    </div>
+                                </div>
                             </div>
-                            <alert :class="{'alert-warning':noSale}" v-if="showAlert" :alert-message="alertMessage"></alert>
                         @endslot
                     @endcomponent
                 </div>
