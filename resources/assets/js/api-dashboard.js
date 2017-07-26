@@ -4,11 +4,15 @@
 
 require('./bootstrap');
 
-Vue.component('passport-clients',require('./components/passport/Clients.vue'));
+import Client from './components/passport/Clients.vue';
+import AuthorizedClients from './components/passport/AuthorizedClients.vue';
+import PersonalAccessTokens from './components/passport/PersonalAccessTokens.vue';
 
-Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
+Vue.component('passport-clients',Client);
 
-Vue.component('personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+Vue.component('passport-authorized-clients', AuthorizedClients);
+
+Vue.component('personal-access-tokens', PersonalAccessTokens);
 
 
 const app = new Vue({

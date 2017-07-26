@@ -11,11 +11,9 @@ const { mix } = require('laravel-mix');
  |
  */
 
-
-
     mix.js(['resources/assets/js/salon-sales.js'], 'public/js')
-        .js(['resources/assets/js/create-sales.js'], 'public/js/technicians');
-        //.js(['resources/assets/js/api-dashboard.js'], 'public/js');
+        .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
+        .js(['resources/assets/js/api-dashboard.js'], 'public/js');
 
     mix.browserSync('shop-management.dev');
 
