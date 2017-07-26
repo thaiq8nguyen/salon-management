@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
     //Route::get('/square/update', 'SquareController@getSaleMetrics');
-    Route::get('/api-dashboard','ApiDashboardController')->name('api-dashboard');
+    Route::get('/api-dashboard','ApiDashboardController@index')->name('api-dashboard');
     Route::get('/salon-sales','SalonSaleController@index')->name('salon-sale');
 
     Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
