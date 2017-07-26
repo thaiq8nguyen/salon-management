@@ -37,25 +37,9 @@ class TechnicianSaleController extends Controller
      * @param Technician $technician
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create($saleDate, Technician $technician){
+    public function create(){
 
-        $payPeriod = session()->get('payPeriod');
-
-        $technicianID = $technician->id; //get technician ID
-
-        $technician = Technician::with(['dailySales' =>
-            function($query) use ($payPeriod){
-
-                $query->whereBetween('sale_date',[$payPeriod->begin_date, $payPeriod->end_date]);
-
-            }])->withCount(['sales'=>
-                function($query) use ($saleDate){
-                    $query->where('sale_date', $saleDate);
-                }])->
-            where('id', '=', $technicianID)->first(['id','first_name', 'last_name']);
-
-        return view('technicians.create-sales', ['tech'=>$technician,'payPeriod'=>$payPeriod->pay_period_mdy,
-            'payDate' =>$payPeriod->pay_date_mdy, 'saleDate' => $saleDate]);
+        return view('technicians.create-sales');
 
     }
     public function storeSale(Request $request){
@@ -77,7 +61,7 @@ class TechnicianSaleController extends Controller
         $sale = TechnicianSale::create(['technician_id' => $request->input('technicianID'),'sale_date' => $saleDate,
             'sales' => $request->input('sale') ,'additional_sales' => $request->input('additional-sale')]);
 
-        $request->session()->flash('confirm-sale', 'SalonSaleAPI has been added for ' . $sale->sale_date_mdy);
+        $request->session()->flash('confirm-sale', $technician->first_name.'\' sales has been added for ' . $sale->sale_date_mdy);
         return redirect('/technician-sale/date/'.$saleDate .'/technician/'.$technician->first_name);
 
     }

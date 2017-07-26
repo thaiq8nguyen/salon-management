@@ -49,7 +49,7 @@ class SalonSaleAPI{
 
         $sale->save();
 
-        return ['success' => true, 'message' => 'Redeeming amount has been added' ];
+        return ['success' => true, 'message' => 'Redeeming amount has been added or updated' ];
 
     }
 

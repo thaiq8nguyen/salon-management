@@ -14,7 +14,7 @@
             <div class="row top-buffer">
                 <div class = "col-md-1">
                     <ul class = "nav nab-pills nav-stacked shortcut">
-                        <li role = "presentation"><a href = "/technician-sale/date/{{ $saleDate }}/technician/{{ $technician->first_name }}">
+                        <li role = "presentation"><a href = "/technician-sale/add">
                                 <div class = "row">
                                     <div class = "col-md-12">
                                         <i class = "fa fa-plus fa-3x"></i>
@@ -47,7 +47,7 @@
                         @endslot
                         @slot('body')
                             <ul>
-                                <h3>Available Features</h3>
+                                <li>Available Features</li>
                                 <li>Add, edit technician sales</li>
                                 <li>Pay technician and generate pay reports</li>
                                 <li> Create new technician book record</li>

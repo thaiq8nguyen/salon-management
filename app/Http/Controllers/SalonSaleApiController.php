@@ -17,7 +17,7 @@ class SalonSaleApiController extends Controller
         $date =  $request->input('date');
         $result = Salon::getDailySales($date);
 
-        return response()->json($result,200);
+        return response()->json($result,200)->header('Content-type', 'application/json');
     }
 
     public function redeemGiftCertificate(Request $request){
@@ -27,7 +27,7 @@ class SalonSaleApiController extends Controller
         $result = Salon::redeemGift($date, $amount);
 
 
-        return response()->json($result,200);
+        return response()->json($result,200)->header('Content-type','application/json');
     }
 }
 

@@ -27,8 +27,8 @@ Route::get('/', function () {
     Route::get('/wages/pay', 'WageController@payday')->name('payday');
 
     /*Technician create sale*/
-    Route::get('/technician-sale/date/{saleDate}/technician/{technician}', 'TechnicianSaleController@create')
-        ->name('technician-sale-create');
+    Route::get('/technician-sale/add', 'TechnicianSaleController@create')
+        ->name('technician-sale-add');
     /*Pay Technicians dashboard*/
 
 

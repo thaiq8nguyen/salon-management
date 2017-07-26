@@ -21,6 +21,7 @@ class Technician extends Model
             ->selectRaw('technician_id, count(*) as numberOfSale')
             ->groupBy('technician_id');
     }
+
     public function payments(){
         return $this->hasMany(WagePayment::class);
     }

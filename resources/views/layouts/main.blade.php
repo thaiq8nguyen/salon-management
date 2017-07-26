@@ -13,6 +13,7 @@
         <link rel = "stylesheet" href = "{{ asset('css/main-navbar.css')}}">
         <!--Common Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lora:700i" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
         <!--Specific Stylesheets-->
         @stack('styles')
 
@@ -28,6 +29,5 @@
     <script src = "{{ asset('js/jquery.js') }}"></script>
     <script src = "{{ asset('js/bootstrap.js') }}"></script>
     <script src = "{{ asset('js/moment.min.js') }}"></script>
-
     @stack('scripts')
 </html>

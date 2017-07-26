@@ -1,17 +1,4 @@
-.successful-change{
-    color: #FF5722;
+hr{
+    margin-top:0px !important;
+    margin-bottom:0px !important;
 }
-.pay-period-container{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #BBDEFB;
-}
-.sale-entry-container{
-    margin-top: 25px;
-}
-.top-alert .alert{
-    margin-bottom: 0px;
-}
-
-
-

@@ -17,10 +17,14 @@ use Salon\Square\Square;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::put('/technician-sale/change', 'TechnicianSaleApiController@changeSale');
+
+Route::post('/technician-sale/add', 'TechnicianSaleApiController@addSale')->middleware('auth:api');
+
+Route::put('/technician-sale/edit', 'TechnicianSaleApiController@editSale');
+
 Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 
-Route::get('/pay-period/current', 'PayPeriodApiController@current');
+Route::get('/pay-period/current', 'PayPeriodApiController@current')->middleware('auth:api');
 
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
 
@@ -32,6 +36,8 @@ Route::get('/salon/daily-sale','SalonSaleApiController@getDailySales')->middlewa
 
 
 Route::get('/salon/tech-sale','SalonSaleApiController@getTechSale')->middleware('auth:api');
+
+Route::get('/technician-sale/pay-period/{payPeriod}/technician/{technician}','TechnicianSaleApiController@searchSaleByPeriod')->middleware('auth:api');
 
 
 /*****Test API*****/

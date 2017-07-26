@@ -8,9 +8,7 @@ use App\PayPeriod;
 
 class PayPeriodApiController extends Controller
 {
-    /*public function __construct(){
-        $this->middleware('auth:api');
-    }*/
+
 
     public function current(){
 
@@ -18,8 +16,9 @@ class PayPeriodApiController extends Controller
 
         $payPeriod = PayPeriod::where([['begin_date','<=',$date],['pay_date','>=', $date]])->first();
 
-        $currentPayPeriod = ['beginDate' => $payPeriod->begin_date_mdy, 'endDate' => $payPeriod->pay_date_mdy,];
+        $currentPayPeriod = ['id' => $payPeriod->id,'beginDate' => $payPeriod->begin_date_mdy,
+            'endDate' => $payPeriod->end_date_mdy,'payDate' => $payPeriod->pay_date_mdy];
 
-        return response()->json($currentPayPeriod);
+        return response()->json($currentPayPeriod,200)->header('Content-type', 'application/json');
     }
 }
