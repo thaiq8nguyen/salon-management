@@ -37615,7 +37615,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CurrentPayPeriod_vue__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__ = __webpack_require__(182);
 /**
  * Created by Thai Nguyen on 5/8/2017.
@@ -37642,25 +37642,26 @@ __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
 };
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('technician-header', __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('current-pay-period', __WEBPACK_IMPORTED_MODULE_5__components_CurrentPayPeriod_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('new-technician-sale', __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__["a" /* default */]);
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#root',
     data: {
-        payPeriod: '',
+        periodID: '',
         technician: {
-            firstName: ''
+            firstName: '',
+            fullName: ''
         }
 
     },
 
     methods: {
-        getTechnician: function getTechnician(firstName) {
-            this.technician.firstName = firstName;
+        getTechnician: function getTechnician(name) {
+            this.technician.fullName = name;
         },
-        getCurrentPayPeriod: function getCurrentPayPeriod(period) {
-            this.payPeriod = period;
+        setPayPeriod: function setPayPeriod(id) {
+            this.periodID = id;
         }
     }
 });
@@ -37753,7 +37754,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -37763,7 +37764,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
 //
 //
 //
@@ -37805,14 +37805,15 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.technician.firstName !== '') ? _c('div', {
+  return (_vm.technician.fullName !== '') ? _c('div', {
     attrs: {
       "id": "technician-header"
     }
   }, [_c('v-layout', {
-    staticClass: "blue darken-2",
+    staticClass: "blue darken-1",
     attrs: {
-      "row": ""
+      "row": "",
+      "wrap": ""
     }
   }, [_c('v-flex', {
     attrs: {
@@ -37822,8 +37823,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "flat": ""
     }
-  }, [_c('v-card-text', [_c('i', {
-    staticClass: "fa fa-user fa-4x white--text"
+  }, [_c('v-card-title', [_c('i', {
+    staticClass: "fa fa-user fa-2x white--text"
   })])], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg11": ""
@@ -37832,9 +37833,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "flat": ""
     }
-  }, [_c('v-card-text', [_c('h3', {
-    staticClass: "white--text"
-  }, [_vm._v(_vm._s(_vm.technician.firstName))])])], 1)], 1)], 1)], 1) : _vm._e()
+  }, [_c('v-card-text', [_c('p', {
+    staticClass: "display-1 white--text text-lg-center"
+  }, [_vm._v(_vm._s(_vm.technician.fullName))])])], 1)], 1)], 1)], 1) : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37848,207 +37849,11 @@ if (false) {
 }
 
 /***/ }),
-/* 177 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CurrentPayPeriod_vue__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0578bbb7_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_CurrentPayPeriod_vue__ = __webpack_require__(181);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(178)
-}
-var normalizeComponent = __webpack_require__(5)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CurrentPayPeriod_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0578bbb7_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_CurrentPayPeriod_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/CurrentPayPeriod.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] CurrentPayPeriod.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0578bbb7", Component.options)
-  } else {
-    hotAPI.reload("data-v-0578bbb7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(179);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("2ca6ec55", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0578bbb7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CurrentPayPeriod.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0578bbb7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CurrentPayPeriod.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 179 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 180 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            payPeriod: ''
-        };
-    },
-    mounted: function mounted() {
-        this.getCurrentPayPeriod();
-    },
-
-
-    methods: {
-        getCurrentPayPeriod: function getCurrentPayPeriod() {
-            var _this = this;
-
-            this.$axios.get('/api/pay-period/current').then(function (response) {
-                _this.payPeriod = response.data;
-                _this.$emit('period', response.data);
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 181 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('v-layout', {
-    staticClass: "grey lighten-4",
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg1": ""
-    }
-  }, [_c('v-card', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-card-text', [_c('i', {
-    staticClass: "fa fa-calendar fa-4x white--tec"
-  })])], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_c('v-card', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-card-text', [_c('h4', [_vm._v("Pay Period")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.payPeriod.beginDate + ' - ' + _vm.payPeriod.endDate))])])], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_c('v-card', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-card-text', [_c('h4', [_vm._v("Pay Date")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.payPeriod.payDate))])])], 1)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0578bbb7", esExports)
-  }
-}
-
-/***/ }),
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
 /* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38136,7 +37941,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -38256,35 +38061,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
-				props: ['payPeriod'],
+				props: ['periodId'],
 
 				data: function data() {
 								return {
@@ -38328,7 +38108,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 				watch: {
 								saleDate: function saleDate() {
-												this.getAllTechnicians();
+												this.resetAddSale();
+								}
+				},
+				computed: {
+								onPeriodID: function onPeriodID() {
+												if (this.periodId !== null) {
+																return this.periodId;
+												}
 								}
 				},
 				methods: {
@@ -38342,13 +38129,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 								getTechnicianDetails: function getTechnicianDetails(firstName) {
 												var _this2 = this;
 
-												this.$axios.get('/api/technician-sale/pay-period/' + this.payPeriod.id + '/technician/' + firstName).then(function (response) {
+												this.$axios.get('/api/technician-sale/pay-period/' + this.onPeriodID + '/technician/' + firstName).then(function (response) {
 																_this2.newSale.technicianID = response.data.id;
 																_this2.newSale.saleDate = _this2.saleDate;
-
 																_this2.onTechnician.firstName = response.data.first_name;
 																_this2.onTechnician.sales = response.data.daily_sales;
-																_this2.$emit('name', response.data.first_name);
+																_this2.$emit('name', response.data.first_name + ' ' + response.data.last_name);
 												});
 								},
 								readableDate: function readableDate(date) {
@@ -38364,7 +38150,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																				_this3.alert.hasError = false;
 																				_this3.alert.message = response.data.message;
 																				_this3.resetAddSale();
-																				_this3.getTechnicianDetails(_this3.onTechnician.firstName);
+																				//this.getTechnicianDetails(this.onTechnician.firstName);
 																}
 												}).catch(function (error) {
 																if (error.response) {
@@ -38429,10 +38215,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', {
+  return _c('div', [_c('v-app', [_c('v-container', {
     attrs: {
-      "standalone": "",
-      "light": ""
+      "fluid": ""
     }
   }, [_c('v-layout', {
     attrs: {
@@ -38443,10 +38228,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg4": ""
     }
-  }, [_c('v-card', [_c('v-card-title', [_c('v-date-picker', {
-    attrs: {
-      "landscape": ""
-    },
+  }, [_c('v-date-picker', {
     model: {
       value: (_vm.saleDate),
       callback: function($$v) {
@@ -38454,7 +38236,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "saleDate"
     }
-  })], 1), _vm._v(" "), _c('v-card-text', [_c('v-list', [_vm._l((_vm.allTechnicians), function(technician) {
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_c('v-card', [_c('v-card-text', [_c('v-list', [_vm._l((_vm.allTechnicians), function(technician) {
     return [_c('v-list-tile', {
       nativeOn: {
         "click": function($event) {
@@ -38474,24 +38260,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg4": ""
     }
-  }, [(_vm.onTechnician.firstName) ? _c('div', [(_vm.doesSaleExist()) ? _c('div', [_c('v-card', [_c('v-card', [_c('v-card-title', {
-    attrs: {
-      "primary-title": ""
-    }
-  }, [_c('h2', {
+  }, [_c('v-card', [_c('v-card-title', [_c('p', {
     staticClass: "headline"
-  }, [_vm._v("Add Sale")])]), _vm._v(" "), _c('v-card-text', [_c('v-alert', {
+  }, [_vm._v("Add Sale")])]), _vm._v(" "), (_vm.onTechnician.firstName) ? [(_vm.doesSaleExist()) ? [_c('v-card-text', [_c('v-alert', {
     attrs: {
       "info": "",
-      "value": "true"
+      "value": "true",
+      "transition": "scale-transition"
     }
-  }, [_vm._v(_vm._s(_vm.onTechnician.firstName + '\'s sale is already recorded'))])], 1)], 1)], 1)], 1) : _c('div', [_c('v-card', [_c('v-card-title', {
-    attrs: {
-      "primary-title": ""
-    }
-  }, [_c('h2', {
-    staticClass: "headline"
-  }, [_vm._v("Add Sale")])]), _vm._v(" "), _c('v-card-text', [_c('form', [_c('v-text-field', {
+  }, [_vm._v(_vm._s(_vm.onTechnician.firstName + '\'s sale is already recorded'))])], 1)] : [_c('v-card-text', [_c('v-text-field', {
     attrs: {
       "label": "Sale",
       "name": "sale"
@@ -38515,7 +38292,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "newSale.tip"
     }
-  })], 1)]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+  })], 1), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
     attrs: {
       "primary": ""
     },
@@ -38524,49 +38301,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.addSale($event)
       }
     }
-  }, [_vm._v("Save")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (_vm.alert.hasError) ? _c('v-card-text', [_c('v-alert', {
+  }, [_vm._v("Save")])], 1)]] : [_c('v-card-text', [_c('v-alert', {
     attrs: {
-      "error": "",
+      "info": "",
+      "value": "true",
       "transition": "scale-transition"
-    },
-    model: {
-      value: (_vm.alert.show),
-      callback: function($$v) {
-        _vm.alert.show = $$v
-      },
-      expression: "alert.show"
     }
-  }, [_vm._v(_vm._s(_vm.alert.message))])], 1) : _vm._e()], 1)], 1)]) : _c('div', [_c('v-card', [_c('v-card-title', {
+  }, [_vm._v("Select a technician to add sale")])], 1)]], 2), _vm._v(" "), (_vm.onTechnician.firstName) ? _c('v-card', [_c('v-card-title', {
     attrs: {
       "primary-title": ""
     }
-  }, [_c('h3', {
+  }, [_c('p', {
     staticClass: "headline"
-  }, [_vm._v("Add Sale")])]), _vm._v(" "), _c('v-card-text', [_c('p', {
-    staticClass: "text-lg-center"
-  }, [_vm._v("Select a technician to begin add sale")])]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-card-text', [_c('v-alert', {
-    attrs: {
-      "success": "",
-      "transition": "scale-transition"
-    },
-    model: {
-      value: (_vm.alert.show),
-      callback: function($$v) {
-        _vm.alert.show = $$v
-      },
-      expression: "alert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.alert.message))])], 1)], 1)], 1)]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [(_vm.onTechnician.firstName) ? _c('v-card', [_c('v-card-title', {
-    attrs: {
-      "primary-title": ""
-    }
-  }, [_c('h2', {
-    staticClass: "headline"
-  }, [_vm._v("Sales")])]), _vm._v(" "), _c('v-card-text', [(_vm.onTechnician.sales.length == 0) ? _c('div', [_c('p', {
+  }, [_vm._v("Sale Records")])]), _vm._v(" "), _c('v-card-text', [(_vm.onTechnician.sales.length == 0) ? _c('div', [_c('p', {
     staticClass: "text-lg-center"
   }, [_vm._v("There are no recorded sales")])]) : _c('div', [_c('v-data-table', {
     attrs: {
@@ -38599,7 +38346,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }, [_vm._v("Change")])])]
       }
     }])
-  })], 1)])], 1) : _vm._e()], 1)], 1), _vm._v(" "), _c('v-dialog', {
+  })], 1)])], 1) : _vm._e()], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
     model: {
       value: (_vm.editSaleDialogConfig.show),
       callback: function($$v) {
@@ -38698,6 +38445,268 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-91654318", esExports)
+  }
+}
+
+/***/ }),
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(212);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(209)
+}
+var normalizeComponent = __webpack_require__(5)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/PayPeriodHeader.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PayPeriodHeader.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-58f9601f", Component.options)
+  } else {
+    hotAPI.reload("data-v-58f9601f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(210);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("0818f7a3", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            current: '',
+            selectID: null,
+            periods: []
+
+        };
+    },
+    mounted: function mounted() {
+        this.getPayPeriod();
+    },
+
+    methods: {
+        getPayPeriod: function getPayPeriod() {
+            var _this = this;
+
+            this.$axios.get('/api/pay-period/list').then(function (response) {
+                _this.periods = response.data;
+                _this.current = response.data[response.data.length - 1];
+                _this.selectID = _this.current.id;
+            });
+        },
+        setPayPeriodID: function setPayPeriodID() {
+            this.$emit('id', this.selectID);
+        }
+    }
+});
+
+/***/ }),
+/* 212 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-layout', {
+    staticClass: "grey lighten-4",
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-card', {
+    attrs: {
+      "flat": ""
+    }
+  }, [_c('v-card-text', [_c('i', {
+    staticClass: "fa fa-calendar fa-2x"
+  })])], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Pay Periods:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs2": ""
+    }
+  }, [_c('v-select', {
+    staticClass: "blue--text",
+    attrs: {
+      "items": _vm.periods,
+      "label": "Select",
+      "single-line": "",
+      "item-text": "periods",
+      "item-value": "id",
+      "bottom": ""
+    },
+    on: {
+      "input": _vm.setPayPeriodID
+    },
+    model: {
+      value: (_vm.selectID),
+      callback: function($$v) {
+        _vm.selectID = $$v
+      },
+      expression: "selectID"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Current:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs2": ""
+    }
+  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.periods))])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Pay Date:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.payDate))])], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-58f9601f", esExports)
   }
 }
 

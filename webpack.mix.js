@@ -15,6 +15,6 @@ const { mix } = require('laravel-mix');
         .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
         .js(['resources/assets/js/api-dashboard.js'], 'public/js');
 
-    mix.browserSync('shop-management.dev');
+    //mix.browserSync('shop-management.dev');
 
    /*.sass('resources/assets/sass/app.scss', 'public/css');*/
