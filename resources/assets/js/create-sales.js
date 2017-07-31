@@ -31,18 +31,15 @@ const app = new Vue({
         el: '#root',
         data: {
             periodID:'',
-            technician:{
-                firstName:'',
-                fullName:''
-            }
+            technicianName:''
 
         },
 
 
         methods: {
 
-            getTechnician(name){
-                this.technician.fullName = name;
+            getTechnician(fullName){
+                this.technicianName = fullName;
             },
             setPayPeriod(id){
                 this.periodID = id;

@@ -82,10 +82,11 @@ class TechnicianSaleApiController extends Controller
 
                 $query->whereBetween('sale_date',[$payPeriod->begin_date, $payPeriod->end_date]);
 
-            }])->where('id', '=', $technicianID)->first(['id','first_name', 'last_name']);
+            }])->where('id', '=', $technicianID)->first();
 
 
-        return response()->json($technician,200)->header('Content-type','application/json');
+        return response()->json(['daily_sales'=>$technician->dailySales,'full_name'=>$technician->full_name, 'id'=>$technician->id],
+            200)->header('Content-type','application/json');
 
     }
 

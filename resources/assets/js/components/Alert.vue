@@ -1,12 +1,14 @@
 <template>
-	<div class="alert" role = "alert">
-		{{ alertMessage }}
+	<div>
+		<v-alert info :value="true">{{ message }}</v-alert>
 	</div>
 </template>
 
 <script>
+
     export default {
-        props:['alertMessage'],
+        props: ['message'],
+
     }
 </script>
 
