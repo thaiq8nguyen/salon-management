@@ -5,7 +5,10 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 @endpush
 @section('content')
-    @component('partials.header')
+    <div class = "main-content" id = "root">
+
+    </div>
+    {{--@component('partials.header')
         <h1>Pay Day</h1>
         <p>Pay technicians at the end of each pay period</p>
     @endcomponent
@@ -42,6 +45,6 @@
             </div>
 
         </div>
-    </div>
+    </div>--}}
 
 @endsection
