@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 192);
+/******/ 	return __webpack_require__(__webpack_require__.s = 197);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -28242,26 +28242,31 @@ module.exports = function listToStyles (parentId, list) {
 /* 189 */,
 /* 190 */,
 /* 191 */,
-/* 192 */
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(193);
+module.exports = __webpack_require__(198);
 
 
 /***/ }),
-/* 193 */
+/* 198 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_passport_Clients_vue__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_passport_AuthorizedClients_vue__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_passport_PersonalAccessTokens_vue__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_passport_Clients_vue__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_passport_AuthorizedClients_vue__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_passport_PersonalAccessTokens_vue__ = __webpack_require__(213);
 /**
  * Created by discoverylight on 6/3/17.
  */
 
-__webpack_require__(194);
+__webpack_require__(199);
 
 
 
@@ -28278,11 +28283,11 @@ var app = new Vue({
 });
 
 /***/ }),
-/* 194 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(195);
+window._ = __webpack_require__(200);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -28290,9 +28295,9 @@ window._ = __webpack_require__(195);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(196);
+window.$ = window.jQuery = __webpack_require__(201);
 
-__webpack_require__(197);
+__webpack_require__(202);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -28334,7 +28339,7 @@ window.moment = __webpack_require__(149);
 // });
 
 /***/ }),
-/* 195 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -45426,7 +45431,7 @@ window.moment = __webpack_require__(149);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(126), __webpack_require__(127)(module)))
 
 /***/ }),
-/* 196 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -55686,7 +55691,7 @@ return jQuery;
 
 
 /***/ }),
-/* 197 */
+/* 202 */
 /***/ (function(module, exports) {
 
 /*!
@@ -58069,16 +58074,16 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 198 */
+/* 203 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Clients_vue__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e3e67f2_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_Clients_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Clients_vue__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e3e67f2_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_Clients_vue__ = __webpack_require__(207);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(199)
+  __webpack_require__(204)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
@@ -58122,13 +58127,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 199 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(200);
+var content = __webpack_require__(205);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58148,7 +58153,7 @@ if(false) {
 }
 
 /***/ }),
-/* 200 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -58162,7 +58167,7 @@ exports.push([module.i, "\n.action-link[data-v-7e3e67f2] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 201 */
+/* 206 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58529,7 +58534,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 202 */
+/* 207 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58845,16 +58850,16 @@ if (false) {
 }
 
 /***/ }),
-/* 203 */
+/* 208 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_AuthorizedClients_vue__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d106c652_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_AuthorizedClients_vue__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_AuthorizedClients_vue__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d106c652_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_AuthorizedClients_vue__ = __webpack_require__(212);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(204)
+  __webpack_require__(209)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
@@ -58898,13 +58903,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 204 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(205);
+var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58924,7 +58929,7 @@ if(false) {
 }
 
 /***/ }),
-/* 205 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -58938,7 +58943,7 @@ exports.push([module.i, "\n.action-link[data-v-d106c652] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 206 */
+/* 211 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59061,7 +59066,7 @@ exports.push([module.i, "\n.action-link[data-v-d106c652] {\n    cursor: pointer;
 });
 
 /***/ }),
-/* 207 */
+/* 212 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59111,16 +59116,16 @@ if (false) {
 }
 
 /***/ }),
-/* 208 */
+/* 213 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PersonalAccessTokens_vue__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0d5e27f8_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_PersonalAccessTokens_vue__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PersonalAccessTokens_vue__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0d5e27f8_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_PersonalAccessTokens_vue__ = __webpack_require__(217);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(209)
+  __webpack_require__(214)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
@@ -59164,13 +59169,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 209 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(210);
+var content = __webpack_require__(215);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -59190,7 +59195,7 @@ if(false) {
 }
 
 /***/ }),
-/* 210 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -59204,7 +59209,7 @@ exports.push([module.i, "\n.action-link[data-v-0d5e27f8] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 211 */
+/* 216 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59529,7 +59534,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 212 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
