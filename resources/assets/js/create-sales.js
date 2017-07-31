@@ -8,7 +8,7 @@ import moment from 'moment-es6';
 import Vuetify from 'vuetify';
 
 import TechnicianHeader from './components/TechnicianHeader.vue';
-import CurrentPayPeriod from './components/CurrentPayPeriod.vue';
+import PayPeriodHeader from './components/PayPeriodHeader.vue';
 import NewTechnicianSale from './components/NewTechnicianSale.vue';
 
 Object.defineProperty(Vue.prototype,'$axios',{value:axios});
@@ -24,27 +24,25 @@ axios.defaults.headers.common ={
 };
 
 Vue.component('technician-header', TechnicianHeader);
-Vue.component('current-pay-period', CurrentPayPeriod);
+Vue.component('pay-period-header', PayPeriodHeader);
 Vue.component('new-technician-sale', NewTechnicianSale);
 
 const app = new Vue({
         el: '#root',
         data: {
-            payPeriod:'',
-            technician:{
-                firstName:''
-            }
+            periodID:'',
+            technicianName:''
 
         },
 
 
         methods: {
 
-            getTechnician(firstName){
-                this.technician.firstName = firstName;
+            getTechnician(fullName){
+                this.technicianName = fullName;
             },
-            getCurrentPayPeriod(period){
-                this.payPeriod = period;
+            setPayPeriod(id){
+                this.periodID = id;
             }
         }
     });

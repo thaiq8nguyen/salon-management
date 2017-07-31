@@ -99,9 +99,6 @@
 
             updateSale(){
 
-                console.log(this.sale);
-
-
                 this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
                 this.sales.items[0].technician = this.sale.sales['Technician Gross Sales'];
 				this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];

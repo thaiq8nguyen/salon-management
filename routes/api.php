@@ -24,7 +24,7 @@ Route::put('/technician-sale/edit', 'TechnicianSaleApiController@editSale');
 
 Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 
-Route::get('/pay-period/current', 'PayPeriodApiController@current')->middleware('auth:api');
+Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('auth:api');
 
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
 

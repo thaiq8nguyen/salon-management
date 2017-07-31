@@ -10,9 +10,9 @@
 @endpush
 @section('content')
     <div class = 'main-content' id = "root">
-        <technician-header :technician="technician"></technician-header>
-        <current-pay-period v-on:period="getCurrentPayPeriod"></current-pay-period>
-        <new-technician-sale v-on:name="getTechnician" :pay-period="payPeriod"></new-technician-sale>
+        <technician-header :full-name="technicianName"></technician-header>
+        <pay-period-header v-on:id="setPayPeriod"></pay-period-header>
+        <new-technician-sale v-on:name="getTechnician" :period-id="periodID"></new-technician-sale>
     </div>
 
 @endsection
