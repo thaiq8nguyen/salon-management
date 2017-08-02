@@ -56,6 +56,7 @@
             },
 		    setPayPeriodID(){
                 this.$emit('id', this.selectID);
+                Event.$emit('id', this.selectID);
 		    }
         }
     }

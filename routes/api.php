@@ -26,6 +26,8 @@ Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 
 Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('auth:api');
 
+Route::get('/salon/payday','PayDayApiController@payday')->middleware('auth:api');
+
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
 
 
