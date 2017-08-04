@@ -88,7 +88,7 @@
     export default {
         components:
             {
-	            MakePayment
+	            MakePayment, VExpansionPanel
             },
 
 
@@ -128,7 +128,7 @@
         methods: {
             getWages(periodId){
                 this.$axios.get('/api/salon/payday?id=' + periodId).then(response =>{
-
+					console.log(response.data);
                     this.technicians = response.data;
                     this.periodId = periodId;
                 });

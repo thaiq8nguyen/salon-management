@@ -53,20 +53,20 @@ class TechnicianBookController extends Controller
         }
         return redirect('/technician-book/create')->with('message','You have created a book record for the technician');
     }
-    public function insertWages(){
+    public function insertWages(Request $request){
 
-        $payPeriodId = session()->get('periodId');
-        $technicianId = session()->get('payingTechnicianId');
+        $payPeriod = session()->get('payPeriod');
+        $technicianID = session()->get('payingTechnicianID');
+        $payPeriodID = $payPeriod->id;
         $pay = session()->pull('wageAmount');
         $date = Carbon::now()->toDateTimeString();
         $description = 'wages';
-        $technician = Technician::find($technicianId);
-
+        $technician = Technician::find($technicianID);
 
         $this->insertSales();
 
         DB::table('technician_books')->insert(
-            ['technician_id' => $technicianId, 'pay_period_id' => $payPeriodId, 'date' => $date,
+            ['technician_id' => $technicianID, 'pay_period_id' => $payPeriodID, 'date' => $date,
                 'description' => $description, 'payments' => $pay,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString()]
@@ -81,21 +81,23 @@ class TechnicianBookController extends Controller
 
         $date = Carbon::now()->toDateTimeString();
         $description = 'sales';
-        $technicianId = session()->get('payingTechnicianId');
+        $technicianID = session()->get('payingTechnicianID');
 
-        $payPeriodId =  session()->get('periodId');
-        $payPeriod = PayPeriod::find($payPeriodId);
+        $payPeriod =  session()->get('payPeriod');
+
+        $payPeriodID = $payPeriod->id;
+
         $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
 
         $technician = Technician::with(['totalSalesAndTips' =>
             function ($query) use ($payPeriodDates) {
                 $query->whereBetween('sale_date',$payPeriodDates);
-            }])->where('id', '=', $technicianId)->first(['id', 'first_name', 'last_name']);
+            }])->where('id', '=', $technicianID)->first(['id', 'first_name', 'last_name']);
 
         $sales = $technician->totalSalesAndTips[0]->total;
 
         DB::table('technician_books')->insert(
-        ['technician_id' => $technicianId, 'pay_period_id' => $payPeriodId, 'date' => $date,
+        ['technician_id' => $technicianID, 'pay_period_id' => $payPeriodID, 'date' => $date,
             'description' => $description, 'sales' => $sales,
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()]);

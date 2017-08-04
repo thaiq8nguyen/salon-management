@@ -26,16 +26,15 @@ Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
 
 Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('auth:api');
 
-Route::get('/salon/payday','PayDayApiController@payday')->middleware('auth:api');
-
-/*Paying technician wages by adding payment records*/
-Route::post('/technician-wage/pay','PayDayApiController@payTechnician')->middleware('auth:api');
-
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
 
 
 Route::post('/salon-sale/redeem-gift-certificate','SalonSaleApiController@redeemGiftCertificate')
     ->middleware('auth:api');
+
+Route::get('/salon/payday','PayDayApiController@payday')->middleware('auth:api');
+
+Route::post('/technician-wage/pay','PayDayApiController@payTechnician')->middleware('auth:api');
 
 Route::get('/salon/daily-sale','SalonSaleApiController@getDailySales')->middleware('auth:api');
 

@@ -90,8 +90,6 @@
 				window.location.href='/report/'+ this.technician.first_name + '/payment/' + this.periodId
             },
         }
-
-
     }
 </script>
 

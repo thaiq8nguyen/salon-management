@@ -9,9 +9,11 @@
     <script src = "{{ asset('js/salon/payday.js') }}"></script>
 @endpush
 @section('content')
+
     <div class = "main-content" id = "root">
         <pay-period-header v-on:id="setPayPeriod"></pay-period-header>
         <pay-day></pay-day>
+
     </div>
 
 @endsection
