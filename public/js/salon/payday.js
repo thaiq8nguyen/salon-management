@@ -26698,7 +26698,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -26710,6 +26710,17 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(109);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26820,7 +26831,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         Event.$on('id', this.getWages);
     },
 
-    computed: {},
+
     methods: {
         getWages: function getWages(periodId) {
             var _this = this;
@@ -27593,7 +27604,9 @@ if (false) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', [_c('main', [_c('v-container', {
+  return _c('div', [_c('v-app', {
+    staticClass: "blue lighten-4"
+  }, [_c('main', [_c('v-container', {
     attrs: {
       "fluid": ""
     }
@@ -27606,14 +27619,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg12": ""
     }
-  }, [_c('v-expansion-panel', _vm._l((_vm.technicians), function(technician, index) {
+  }, [(_vm.technicians.length > 0) ? [_c('v-expansion-panel', _vm._l((_vm.technicians), function(technician, index) {
     return _c('v-expansion-panel-content', {
       key: technician.id
     }, [_c('div', {
       slot: "header"
     }, [_c('p', {
       staticClass: "subheading"
-    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name) + "\n\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name) + "\n\t\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
       staticClass: "green--text",
       attrs: {
         "label": "",
@@ -27712,7 +27725,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }
       }
     }, [_vm._v("View Report")])], 1)], 1)]], 2)], 1)], 1)], 1)], 1)], 1)], 1)
-  }))], 1)], 1)], 1)], 1)])], 1)
+  }))] : [_c('v-card', [_c('v-card-text', [_c('h3', {
+    staticClass: "headline text-lg-center orange--text text-darken-1"
+  }, [_c('v-icon', {
+    staticClass: "orange--text text-darken-1"
+  }, [_vm._v("info")]), _vm._v("\n\t\t\t\t\t\t\t\t\t\tThere are no technician sale been recorded for this pay period")], 1), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "href": "/technician-sale/add",
+      "primary": ""
+    }
+  }, [_vm._v("Technician Sale")])], 1)], 1)]], 2)], 1)], 1)], 1)])], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
