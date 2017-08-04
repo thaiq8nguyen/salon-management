@@ -26698,7 +26698,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -26710,6 +26710,17 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(120);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26820,7 +26831,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         Event.$on('id', this.getWages);
     },
 
-    computed: {},
+
     methods: {
         getWages: function getWages(periodId) {
             var _this = this;
@@ -27665,6 +27676,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+<<<<<<< HEAD
   return _c('v-card', {
     staticClass: "elevation-1"
   }, [_c('v-card-title', {
@@ -27680,6 +27692,104 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     nativeOn: {
       "click": function($event) {
         _vm.viewPaymentReport($event)
+=======
+  return _c('div', [_c('v-app', {
+    staticClass: "blue lighten-4"
+  }, [_c('main', [_c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  }, [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg12": ""
+    }
+  }, [(_vm.technicians.length > 0) ? [_c('v-expansion-panel', _vm._l((_vm.technicians), function(technician, index) {
+    return _c('v-expansion-panel-content', {
+      key: technician.id
+    }, [_c('div', {
+      slot: "header"
+    }, [_c('p', {
+      staticClass: "subheading"
+    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name) + "\n\t\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+      staticClass: "green--text",
+      attrs: {
+        "label": "",
+        "small": "",
+        "outline": ""
+      }
+    }, [_c('v-icon', {
+      staticClass: "green--text"
+    }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _vm._e()])]), _vm._v(" "), _c('v-card', [_c('v-card-text', [_c('v-layout', [_c('v-flex', {
+      attrs: {
+        "lg3": ""
+      }
+    }, [_c('v-card', {
+      staticClass: "elevation-1"
+    }, [_c('v-card-text', [_c('v-data-table', {
+      attrs: {
+        "headers": _vm.dailySales.headers,
+        "items": technician.daily_sales,
+        "hide-actions": ""
+      },
+      scopedSlots: _vm._u([{
+        key: "items",
+        fn: function(props) {
+          return [_c('td', {
+            staticClass: "text-xs-center"
+          }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
+        }
+      }])
+    })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg6": ""
+      }
+    }, [_c('v-layout', {
+      attrs: {
+        "row": "",
+        "wrap": ""
+      }
+    }, [_c('v-flex', {
+      attrs: {
+        "lg12": ""
+      }
+    }, [_c('v-card', {
+      staticClass: "elevation-1"
+    }, [_c('v-card-text', [_c('v-data-table', {
+      attrs: {
+        "headers": _vm.totalSales.headers,
+        "items": technician.total_sales_and_tips,
+        "hide-actions": ""
+      },
+      scopedSlots: _vm._u([{
+        key: "items",
+        fn: function(props) {
+          return [_c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.subTotal))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right"
+          }, [_vm._v("$ " + _vm._s(props.item.earnedTip))]), _vm._v(" "), _c('td', {
+            staticClass: "text-xs-right red--text subheading"
+          }, [_vm._v("$ " + _vm._s(props.item.total))])]
+        }
+      }])
+    })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg12": "",
+        "mt-2": ""
+>>>>>>> dev
       }
     }
   }, [_vm._v("View Report")])], 1)] : [_c('v-card-text', [_vm._l((_vm.payments), function(payment, index) {
@@ -27692,6 +27802,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       on: {
         "delete": _vm.deletePayment
       }
+<<<<<<< HEAD
     })
   }), _vm._v(" "), (_vm.totalPayingAmount > 0) ? _c('v-chip', {
     class: ( _obj = {}, _obj['green darken-1 white--text subheading'] = _vm.totalPayingAmount == _vm.technician.total_sales_and_tips[0].total, _obj ),
@@ -27713,6 +27824,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("Make Payment")])], 1) : _vm._e()]], 2)
   var _obj;
+=======
+    }, [_vm._v("View Report")])], 1)], 1)]], 2)], 1)], 1)], 1)], 1)], 1)], 1)
+  }))] : [_c('v-card', [_c('v-card-text', [_c('h3', {
+    staticClass: "headline text-lg-center orange--text text-darken-1"
+  }, [_c('v-icon', {
+    staticClass: "orange--text text-darken-1"
+  }, [_vm._v("info")]), _vm._v("\n\t\t\t\t\t\t\t\t\t\tThere are no technician sale been recorded for this pay period")], 1), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "href": "/technician-sale/add",
+      "primary": ""
+    }
+  }, [_vm._v("Technician Sale")])], 1)], 1)]], 2)], 1)], 1)], 1)])], 1)
+>>>>>>> dev
 }
 var staticRenderFns = []
 render._withStripped = true
