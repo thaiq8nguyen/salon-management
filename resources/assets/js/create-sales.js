@@ -27,6 +27,8 @@ Vue.component('technician-header', TechnicianHeader);
 Vue.component('pay-period-header', PayPeriodHeader);
 Vue.component('new-technician-sale', NewTechnicianSale);
 
+window.Event = new Vue();
+
 const app = new Vue({
         el: '#root',
         data: {

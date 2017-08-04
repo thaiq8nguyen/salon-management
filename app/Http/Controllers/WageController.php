@@ -18,31 +18,9 @@ class WageController extends Controller
      */
     public function payday(){
 
-        $payPeriod = session()->get('payPeriod');
 
-        $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
 
-        $payPeriodID = $payPeriod->id;
-
-        $technicians = Technician::whereHas('sales',function($query) use ($payPeriodDates){
-            $query->whereBetween('sale_date',$payPeriodDates);
-            })->with(['dailySales' =>
-                function($query) use ($payPeriodDates) {
-                    $query->whereBetween('sale_date', $payPeriodDates);
-                },
-            'totalSalesAndTips' =>
-                function($query) use($payPeriodDates){
-                    $query->whereBetween('sale_date', $payPeriodDates);
-                }
-            ])->with(['countPayments' =>
-
-                function($query) use($payPeriodID){
-                    $query->where('pay_period_id', '=', $payPeriodID);
-
-            }])->orderBy('last_name')->get(['id','first_name','last_name']);
-
-        return view('wages.payday',['pageTitle' => 'Payday','payPeriodID' => $payPeriodID,'payPeriod'=> $payPeriod->pay_period_mdy, 'payDate'=> $payPeriod->pay_date_mdy,
-            'technicians'=> $technicians]);
+        return view('wages.payday',['pageTitle' => 'Payday']);
     }
 
 
