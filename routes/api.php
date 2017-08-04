@@ -32,6 +32,10 @@ Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDat
 Route::post('/salon-sale/redeem-gift-certificate','SalonSaleApiController@redeemGiftCertificate')
     ->middleware('auth:api');
 
+Route::get('/salon/payday','PayDayApiController@payday')->middleware('auth:api');
+
+Route::post('/technician-wage/pay','PayDayApiController@payTechnician')->middleware('auth:api');
+
 Route::get('/salon/daily-sale','SalonSaleApiController@getDailySales')->middleware('auth:api');
 
 

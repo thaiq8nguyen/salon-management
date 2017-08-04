@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 59);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26263,73 +26263,16 @@ function load(cb) {
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(43);
-
-
-/***/ }),
-/* 43 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_es6__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_es6___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment_es6__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_SalonSale_vue__ = __webpack_require__(44);
-
-
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
-
-Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$axios', { value: __WEBPACK_IMPORTED_MODULE_1_axios___default.a });
-Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$moment', { value: __WEBPACK_IMPORTED_MODULE_2_moment_es6___default.a });
-
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-  'X-Requested-With': 'XMLHttpRequest'
-};
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('salon-sale', __WEBPACK_IMPORTED_MODULE_4__components_SalonSale_vue__["a" /* default */]);
-
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  el: '#root',
-
-  data: {},
-
-  methods: {}
-
-});
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSale_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_085a198d_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSale_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(41);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(45)
+  __webpack_require__(38)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -26343,15 +26286,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSale_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_085a198d_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSale_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/SalonSale.vue"
+Component.options.__file = "resources/assets/js/components/PayPeriodHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SalonSale.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] PayPeriodHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -26360,9 +26303,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-085a198d", Component.options)
+    hotAPI.createRecord("data-v-58f9601f", Component.options)
   } else {
-    hotAPI.reload("data-v-085a198d", Component.options)
+    hotAPI.reload("data-v-58f9601f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -26373,23 +26316,23 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 45 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(46);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1f3a5050", content, false);
+var update = __webpack_require__(2)("0818f7a3", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-085a198d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSale.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-085a198d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSale.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -26399,7 +26342,7 @@ if(false) {
 }
 
 /***/ }),
-/* 46 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -26413,12 +26356,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 47 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RedeemCertificate_vue__ = __webpack_require__(53);
 //
 //
 //
@@ -26439,57 +26380,225 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    props: [],
-
     data: function data() {
         return {
-            saleDate: this.$moment().format('YYYY-MM-DD'),
-            saleData: null
+            current: '',
+            selectID: null,
+            periods: []
+
         };
     },
-
-    watch: {
-        saleDate: function saleDate() {
-            this.getSales();
-        }
-    },
-    components: {
-        'salon-sale-table': __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__["a" /* default */],
-        'redeem-certificate': __WEBPACK_IMPORTED_MODULE_1__RedeemCertificate_vue__["a" /* default */]
-
+    mounted: function mounted() {
+        this.getPayPeriod();
     },
 
     methods: {
-        getSales: function getSales() {
+        getPayPeriod: function getPayPeriod() {
             var _this = this;
 
-            this.$axios('/api/salon/daily-sale?date=' + this.saleDate).then(function (response) {
-                _this.saleData = response.data;
+            this.$axios.get('/api/pay-period/list').then(function (response) {
+                _this.periods = response.data;
+                _this.current = response.data[response.data.length - 1];
+                _this.selectID = _this.current.id;
             });
         },
-        refresh: function refresh() {
-            this.getSales();
+        setPayPeriodID: function setPayPeriodID() {
+            this.$emit('id', this.selectID);
+            Event.$emit('id', this.selectID);
         }
     }
 });
 
 /***/ }),
-/* 48 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSaleTable_vue__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5ada2171_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSaleTable_vue__ = __webpack_require__(52);
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-layout', {
+    staticClass: "grey lighten-4",
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-card', {
+    attrs: {
+      "flat": ""
+    }
+  }, [_c('v-card-text', [_c('v-icon', [_vm._v("schedule")])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Pay Periods:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs2": ""
+    }
+  }, [_c('v-select', {
+    staticClass: "blue--text",
+    attrs: {
+      "items": _vm.periods,
+      "label": "Select",
+      "single-line": "",
+      "item-text": "periods",
+      "item-value": "id",
+      "bottom": ""
+    },
+    on: {
+      "input": _vm.setPayPeriodID
+    },
+    model: {
+      value: (_vm.selectID),
+      callback: function($$v) {
+        _vm.selectID = $$v
+      },
+      expression: "selectID"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Current:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs2": ""
+    }
+  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.periods))])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v("Pay Date:")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs1": ""
+    }
+  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.payDate))])], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-58f9601f", esExports)
+  }
+}
+
+/***/ }),
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(60);
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_es6__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_es6___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment_es6__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__ = __webpack_require__(66);
+/**
+ * Created by Thai Nguyen on 5/8/2017.
+ */
+
+
+
+
+
+
+
+
+
+
+Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$axios', { value: __WEBPACK_IMPORTED_MODULE_1_axios___default.a });
+Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$moment', { value: __WEBPACK_IMPORTED_MODULE_2_moment_es6___default.a });
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
+
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    'X-Requested-With': 'XMLHttpRequest'
+
+};
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('technician-header', __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('new-technician-sale', __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__["a" /* default */]);
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: '#root',
+    data: {
+        periodID: '',
+        technicianName: ''
+
+    },
+
+    methods: {
+        getTechnician: function getTechnician(fullName) {
+            this.technicianName = fullName;
+        },
+        setPayPeriod: function setPayPeriod(id) {
+            this.periodID = id;
+        }
+    }
+});
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianHeader_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_526e6138_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianHeader_vue__ = __webpack_require__(65);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(62)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -26503,15 +26612,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSaleTable_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5ada2171_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_526e6138_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianHeader_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/SalonSaleTable.vue"
+Component.options.__file = "resources/assets/js/components/TechnicianHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SalonSaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -26520,9 +26629,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5ada2171", Component.options)
+    hotAPI.createRecord("data-v-526e6138", Component.options)
   } else {
-    hotAPI.reload("data-v-5ada2171", Component.options)
+    hotAPI.reload("data-v-526e6138", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -26533,23 +26642,23 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 49 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(63);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("26eb7c58", content, false);
+var update = __webpack_require__(2)("c73d563a", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ada2171\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSaleTable.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ada2171\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSaleTable.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-526e6138\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianHeader.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-526e6138\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianHeader.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -26559,7 +26668,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -26567,16 +26676,18 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 51 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
 //
 //
 //
@@ -26601,97 +26712,743 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-	props: ['saleData'],
+	props: ['fullName'],
 
 	data: function data() {
 		return {
-			sale: null,
-
-			sales: {
-				headers: [{ text: '', value: "name", sortable: false }, { text: 'Square', value: 'square', sortable: false }, { text: 'Technician', value: 'technician', sortable: false }, { text: 'Difference', value: 'difference', sortable: false }],
-				items: [{
-					value: false,
-					name: 'Gross Sales',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Tips on Card',
-					square: 0,
-					technician: 0,
-					difference: 0
-
-				}, {
-					value: false,
-					name: 'Certificates Sold',
-					square: 0,
-					technician: 0,
-					difference: 0
-
-				}, {
-					value: false,
-					name: 'Certificates Redeemed',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Convenience Fees',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Processing Fees',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}]
-			}
+			name: null
 		};
 	},
 
-	watch: {
-		saleData: function saleData() {
-			this.sale = this.saleData;
 
-			this.updateSale();
+	watch: {
+		fullName: function fullName() {
+			if (this.fullName !== null) {
+				this.name = this.fullName;
+			} else {
+				this.name = null;
+			}
 		}
 	},
-	methods: {
-		updateSale: function updateSale() {
-
-			this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
-			this.sales.items[0].technician = this.sale.sales['Technician Gross Sales'];
-			this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];
-
-			this.sales.items[1].square = this.sale.tips['Square Tips'];
-			this.sales.items[1].technician = this.sale.tips['Technician Tips'];
-			this.sales.items[1].difference = this.sale.tips['Tips Difference'];
-
-			this.sales.items[3].square = this.sale.sales['Gift Certificate Redeemed'];
-			this.sales.items[4].square = this.sale.sales['Convenience Fee'];
-		}
-	}
-
+	methods: {}
 });
 
 /***/ }),
-/* 52 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-card', [_c('v-card-title', {
-    staticClass: "blue darken-2"
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_vm._v("Salon Sale")])]), _vm._v(" "), _c('v-card-text', [_c('v-data-table', {
-    staticClass: "text-md-center",
+  return _c('div', [(_vm.name !== null) ? [_c('v-layout', {
+    staticClass: "blue darken-1"
+  }, [_c('v-flex', {
     attrs: {
-      "headers": _vm.sales.headers,
-      "items": _vm.sales.items,
+      "lg1": ""
+    }
+  }, [_c('v-card', {
+    attrs: {
+      "flat": ""
+    }
+  }, [_c('v-card-title', [_c('i', {
+    staticClass: "fa fa-user fa-2x white--text"
+  })])], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg11": ""
+    }
+  }, [_c('v-card', {
+    attrs: {
+      "flat": ""
+    }
+  }, [_c('v-card-text', [_c('p', {
+    staticClass: "display-1 white--text text-lg-center"
+  }, [_vm._v(_vm._s(_vm.name))])])], 1)], 1)], 1)] : _vm._e()], 2)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-526e6138", esExports)
+  }
+}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_NewTechnicianSale_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_91654318_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_NewTechnicianSale_vue__ = __webpack_require__(80);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(67)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_NewTechnicianSale_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_91654318_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_NewTechnicianSale_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NewTechnicianSale.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] NewTechnicianSale.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-91654318", Component.options)
+  } else {
+    hotAPI.reload("data-v-91654318", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(68);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("19868d26", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-91654318\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewTechnicianSale.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-91654318\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewTechnicianSale.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DailySaleCard_vue__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Alert_vue__ = __webpack_require__(75);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+				props: ['periodId'],
+
+				components: {
+								'daily-sale-card': __WEBPACK_IMPORTED_MODULE_0__DailySaleCard_vue__["a" /* default */]
+
+				},
+
+				data: function data() {
+								return {
+												allTechnicians: null,
+
+												saleDate: this.$moment().format('YYYY-MM-DD'),
+
+												newSale: {
+																technicianID: null,
+																saleDate: null,
+																sale: null,
+																tip: null
+
+												},
+												onTechnician: {
+																fullName: null,
+																sales: null
+												},
+												technicianSale: {
+																headers: [{ text: 'Sale Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }, { text: 'Change', value: '', sortable: false }],
+																items: []
+
+												},
+
+												selectedTechnician: null,
+
+												editSaleDialogConfig: {
+																show: false,
+																saleID: null,
+																sale: null,
+																tip: null
+												},
+
+												addSaleAlert: {
+																icon: null,
+																status: null,
+																message: null,
+																show: false,
+																hasError: false
+												},
+												alert: {
+																show: false,
+																message: null,
+																hasError: false
+												},
+
+												saleAdded: false
+
+								};
+				},
+				mounted: function mounted() {
+								this.getAllTechnicians();
+				},
+
+				watch: {
+								saleDate: function saleDate() {
+												this.resetAddSale();
+								}
+				},
+				computed: {
+								onPeriodID: function onPeriodID() {
+												if (this.periodId !== null) {
+																return this.periodId;
+												}
+								}
+				},
+				methods: {
+								getAllTechnicians: function getAllTechnicians() {
+												var _this = this;
+
+												this.$axios.get('/api/technician-sale/all?saleDate=' + this.saleDate).then(function (response) {
+																_this.allTechnicians = response.data.technicians;
+																if (_this.saleAdded === false) {
+																				_this.setSaleAlert('info', 'info', 'Select a technician to begin adding', true, false);
+																}
+												});
+								},
+								getTechnicianDetails: function getTechnicianDetails(firstName) {
+												var _this2 = this;
+
+												this.selectedTechnician = firstName;
+												this.$axios.get('/api/technician-sale/pay-period/' + this.onPeriodID + '/technician/' + firstName).then(function (response) {
+																_this2.newSale.technicianID = response.data.id;
+																_this2.newSale.saleDate = _this2.saleDate;
+																_this2.newSale.tip = 0;
+																_this2.onTechnician.fullName = response.data.full_name;
+																_this2.onTechnician.sales = response.data.daily_sales;
+																_this2.saleAdded = false;
+																_this2.$emit('name', _this2.onTechnician.fullName);
+												});
+								},
+								readableDate: function readableDate(date) {
+												return this.$moment(date).format('MM/DD/YY dd');
+								},
+								addSale: function addSale() {
+												var _this3 = this;
+
+												this.$axios.post('/api/technician-sale/add', this.newSale).then(function (response) {
+
+																if (response.data.success) {
+																				_this3.setSaleAlert('check', 'success', response.data.message, true);
+																				_this3.saleAdded = true;
+																				_this3.resetAddSale();
+																} else {
+																				_this3.setSaleAlert('error', 'error', response.data.message, true, false);
+																}
+												}).catch(function (error) {
+																if (error.response) {
+																				_this3.setSaleAlert('error', 'error', error.response.data.message, true, true);
+																}
+												});
+								},
+								showEditSaleDialog: function showEditSaleDialog(saleID, sale, tip) {
+
+												this.editSaleDialogConfig.show = true;
+												this.editSaleDialogConfig.saleID = saleID;
+												this.editSaleDialogConfig.sale = sale;
+												this.editSaleDialogConfig.tip = tip;
+												this.alert.show = false; //hide any alert from the previous edit
+								},
+								editSale: function editSale() {
+												var _this4 = this;
+
+												this.$axios.put('/api/technician-sale/edit', {
+																saleID: this.editSaleDialogConfig.saleID,
+																sale: this.editSaleDialogConfig.sale,
+																tip: this.editSaleDialogConfig.tip
+												}).then(function (response) {
+																if (response.data.success) {
+																				_this4.alert.show = true;
+																				_this4.alert.message = response.data.message;
+																}
+												}).catch(function (error) {
+																if (error.response) {
+																				_this4.alert.show = true;
+																				_this4.alert.hasError = true;
+																				_this4.alert.message = error.response.data.message;
+																}
+												});
+								},
+								resetAddSale: function resetAddSale() {
+
+												this.newSale.sale = null;
+												this.newSale.tip = null;
+												this.allTechnicians = '';
+												this.getAllTechnicians();
+												this.onTechnician.fullName = null;
+												this.selectedTechnician = null;
+												this.$emit('name', null);
+								},
+								setSaleAlert: function setSaleAlert(icon, status, message, show, hasError) {
+												this.addSaleAlert.icon = icon;
+												this.addSaleAlert.status = status;
+												this.addSaleAlert.message = message;
+												this.addSaleAlert.show = show;
+												this.addSaleAlert.hasError = hasError;
+								},
+								doesSaleExist: function doesSaleExist() {
+												var saleExists = false;
+												for (var i = 0; i < this.onTechnician.sales.length; i++) {
+																if (this.saleDate === this.onTechnician.sales[i].sale_date) {
+																				saleExists = true;
+																}
+												}
+												return saleExists;
+								}
+				}
+});
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DailySaleCard_vue__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a12bcfce_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_DailySaleCard_vue__ = __webpack_require__(74);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(71)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DailySaleCard_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a12bcfce_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_DailySaleCard_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DailySaleCard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] DailySaleCard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a12bcfce", Component.options)
+  } else {
+    hotAPI.reload("data-v-a12bcfce", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(72);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("0c395749", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a12bcfce\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DailySaleCard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a12bcfce\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DailySaleCard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+				props: ['date', 'refresh'],
+
+				data: function data() {
+
+								return {
+												saleExists: null,
+												saleDate: this.$moment().format('YYYY-MM-DD'),
+												headers: [{ text: '', value: 'name', sortable: false }, { text: 'Square', value: 'square', sortable: false }, { text: 'Technician', value: 'technician', sortable: false }, { text: 'Difference', value: 'difference', sortable: false }],
+												items: [{
+																value: false,
+																name: 'Gross Sales',
+																square: 0,
+																technician: 0,
+																difference: 0
+												}, {
+																value: false,
+																name: 'Raw Technician Sales',
+																square: 0,
+																technician: 0,
+																difference: 0
+												}, {
+																value: false,
+																name: 'Tips on Card',
+																square: 0,
+																technician: 0,
+																difference: 0
+
+												}, {
+																value: false,
+																name: 'Certificates Sold',
+																square: 0,
+																technician: 0,
+																difference: 0
+
+												}, {
+																value: false,
+																name: 'Certificates Redeemed',
+																square: 0,
+																technician: 0,
+																difference: 0
+												}, {
+																value: false,
+																name: 'Convenience Fees',
+																square: 0,
+																technician: 0,
+																difference: 0
+												}, {
+																value: false,
+																name: 'Processing Fees',
+																square: 0,
+																technician: 0,
+																difference: 0
+												}]
+								};
+				},
+				mounted: function mounted() {
+								this.getSales();
+				},
+
+
+				watch: {
+								date: function date() {
+												this.saleDate = this.date;
+												this.getSales();
+								},
+								refresh: function refresh() {
+												if (this.refresh === true) {
+																this.getSales();
+												}
+								}
+				},
+
+				computed: {
+								readableSaleDate: function readableSaleDate() {
+												if (this.saleDate !== null) {
+																return this.$moment(this.saleDate, 'YYYY-MM-DD').format('MM/DD/YYYY');
+												}
+								}
+				},
+				methods: {
+								getSales: function getSales() {
+												this.$axios('/api/salon/daily-sale?date=' + this.saleDate).then(this.updateSales);
+								},
+								updateSales: function updateSales(response) {
+												if (response.data.success) {
+																this.saleExists = true;
+																this.items[0].square = response.data.sales['Square Gross Sales'];
+																this.items[0].technician = response.data.sales['Technician Gross Sales'];
+																this.items[0].difference = response.data.sales['Gross Sales Difference'];
+
+																this.items[1].technician = response.data.sales['Technician Sales'];
+
+																this.items[2].square = response.data.tips['Square Tips'];
+																this.items[2].technician = response.data.tips['Technician Tips'];
+																this.items[2].difference = response.data.tips['Tips Difference'];
+
+																this.items[4].square = response.data.sales['Gift Certificate Redeemed'];
+																this.items[5].square = response.data.sales['Convenience Fee'];
+												} else {
+																this.saleExists = false;
+												}
+								}
+				}
+
+});
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "daily-sale-card"
+    }
+  }, [_c('v-card', [_c('v-card-text', {
+    staticClass: "mt-0"
+  }, [(_vm.saleExists) ? [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.items,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -26706,7 +27463,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }, [_vm._v("$ " + _vm._s(props.item.difference))])]
       }
     }])
-  })], 1)], 1)], 1)
+  })] : [_c('v-alert', {
+    attrs: {
+      "error": "",
+      "value": "true"
+    }
+  }, [_vm._v("\n\t\t\t\t\tThere is no sale recorded for " + _vm._s(_vm.readableSaleDate) + "\n\t\t\t\t\t"), _c('v-btn', {
+    attrs: {
+      "href": "/salon-sales"
+    }
+  }, [_vm._v("Salon Sale")])], 1)]], 2)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26715,21 +27481,21 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5ada2171", esExports)
+     require("vue-hot-reload-api").rerender("data-v-a12bcfce", esExports)
   }
 }
 
 /***/ }),
-/* 53 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_RedeemCertificate_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_31b3f978_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_RedeemCertificate_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Alert_vue__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_86f98176_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Alert_vue__ = __webpack_require__(79);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(54)
+  __webpack_require__(76)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -26743,15 +27509,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_RedeemCertificate_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_31b3f978_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_RedeemCertificate_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Alert_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_86f98176_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Alert_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/RedeemCertificate.vue"
+Component.options.__file = "resources/assets/js/components/Alert.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] RedeemCertificate.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Alert.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -26760,36 +27526,36 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-31b3f978", Component.options)
+    hotAPI.createRecord("data-v-86f98176", Component.options)
   } else {
-    hotAPI.reload("data-v-31b3f978", Component.options)
+    hotAPI.reload("data-v-86f98176", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
   })
 })()}
 
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+/* unused harmony default export */ var _unused_webpack_default_export = (Component.exports);
 
 
 /***/ }),
-/* 54 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(55);
+var content = __webpack_require__(77);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("d0972e88", content, false);
+var update = __webpack_require__(2)("c6d89d3e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31b3f978\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RedeemCertificate.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-31b3f978\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RedeemCertificate.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-86f98176\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Alert.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-86f98176\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Alert.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -26799,7 +27565,7 @@ if(false) {
 }
 
 /***/ }),
-/* 55 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -26807,35 +27573,16 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 56 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -26845,108 +27592,22 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-
-    props: ['date'],
-
-    data: function data() {
-        return {
-
-            alert: {
-
-                show: false,
-                status: '',
-                message: ''
-            },
-
-            certificate: {
-
-                amount: 0,
-                date: this.$moment().format('YYYY-MM-DD')
-
-            },
-
-            redeemed: false
-
-        };
-    },
-
-
-    watch: {
-        date: function date() {
-            this.certificate.date = this.date;
-            this.alert.show = false;
-        }
-    },
-    methods: {
-        redeem: function redeem() {
-            var _this = this;
-
-            this.$axios.post('/api/salon-sale/redeem-gift-certificate', this.certificate).then(function (response) {
-                if (response.data.success) {
-                    _this.alert.status = 'success';
-                    _this.alert.message = response.data.message;
-                    _this.alert.show = true;
-                    _this.reset();
-                    _this.$emit('redeemed');
-                } else {
-                    _this.alert.status = 'error';
-                    _this.alert.message = 'Input errors';
-                    _this.alert.show = true;
-                }
-            }).catch(function (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    _this.alert.status = 'error';
-                    _this.alert.message = 'Input errors';
-                    _this.alert.show = true;
-                }
-            });
-        },
-        reset: function reset() {
-            this.certificate.amount = 0;
-        }
-    }
+    props: ['message']
 
 });
 
 /***/ }),
-/* 57 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-card', [_c('v-card-title', {
-    staticClass: "blue darken-2"
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_vm._v("Redeem Certificate")])]), _vm._v(" "), _c('v-card-text', [_c('v-text-field', {
+  return _c('div', [_c('v-alert', {
     attrs: {
-      "label": "Amount",
-      "prefix": "$"
-    },
-    model: {
-      value: (_vm.certificate.amount),
-      callback: function($$v) {
-        _vm.certificate.amount = $$v
-      },
-      expression: "certificate.amount"
+      "info": "",
+      "value": true
     }
-  })], 1), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
-    nativeOn: {
-      "click": function($event) {
-        _vm.redeem($event)
-      }
-    }
-  }, [_vm._v("Redeem")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-card-text', [_c('v-alert', {
-    class: _vm.alert.status,
-    model: {
-      value: (_vm.alert.show),
-      callback: function($$v) {
-        _vm.alert.show = $$v
-      },
-      expression: "alert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.alert.message))])], 1)], 1)], 1)
+  }, [_vm._v(_vm._s(_vm.message))])], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26955,12 +27616,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-31b3f978", esExports)
+     require("vue-hot-reload-api").rerender("data-v-86f98176", esExports)
   }
 }
 
 /***/ }),
-/* 58 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26976,9 +27637,22 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-flex', {
     attrs: {
-      "lg3": ""
+      "lg5": ""
     }
-  }, [_c('v-date-picker', {
+  }, [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg12": ""
+    }
+  }, [_c('v-card', [_c('v-card-text', [_c('v-date-picker', {
+    staticClass: "elevation-0",
+    attrs: {
+      "landscape": ""
+    },
     model: {
       value: (_vm.saleDate),
       callback: function($$v) {
@@ -26986,26 +27660,270 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "saleDate"
     }
-  })], 1), _vm._v(" "), _c('v-flex', {
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg6": ""
+      "lg12": "",
+      "mt-2": ""
     }
-  }, [_c('salon-sale-table', {
+  }, [_c('daily-sale-card', {
     attrs: {
-      "saleData": _vm.saleData
+      "date": _vm.saleDate,
+      "refresh": _vm.saleAdded
     }
-  })], 1), _vm._v(" "), _c('v-flex', {
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg3": ""
     }
-  }, [_c('redeem-certificate', {
+  }, [_c('v-card', [_c('v-card-text', [_c('v-list', [_vm._l((_vm.allTechnicians), function(technician) {
+    return [_c('v-list-tile', {
+      class: {
+        orange: _vm.selectedTechnician == technician.firstName
+      },
+      nativeOn: {
+        "click": function($event) {
+          _vm.getTechnicianDetails(technician.firstName)
+        }
+      }
+    }, [_c('v-list-tile-avatar', [_c('i', {
+      staticClass: "fa fa-user-circle fa-lg"
+    })]), _vm._v(" "), _c('v-list-tile-content', [_c('v-list-tile-title', {
+      class: {
+        'white--text': _vm.selectedTechnician == technician.firstName
+      },
+      domProps: {
+        "innerHTML": _vm._s(technician.fullName)
+      }
+    })], 1), _vm._v(" "), (technician.countSales.length == 1) ? _c('v-icon', {
+      staticClass: "teal--text"
+    }, [_vm._v("done")]) : _vm._e()], 1), _vm._v(" "), _c('v-divider')]
+  })], 2)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "date": _vm.saleDate
-    },
-    on: {
-      "redeemed": _vm.refresh
+      "lg4": ""
     }
-  })], 1)], 1)], 1)], 1)], 1)
+  }, [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg12": ""
+    }
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "blue lighten-1",
+    attrs: {
+      "primary-title": ""
+    }
+  }, [_c('p', {
+    staticClass: "headline white--text"
+  }, [_vm._v("Add Sale")])]), _vm._v(" "), (_vm.onTechnician.fullName) ? [(_vm.doesSaleExist()) ? [_c('v-card-text', [_c('v-alert', {
+    attrs: {
+      "info": "",
+      "value": "true",
+      "transition": "scale-transition"
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t" + _vm._s(_vm.onTechnician.fullName + ' \'s sale is already recorded for ' + _vm.readableDate(_vm.saleDate)))])], 1)] : [_c('v-card-text', [_c('form', {
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.addSale($event)
+      }
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Sale",
+      "name": "sale",
+      "prefix": "$",
+      "autofocus": ""
+    },
+    model: {
+      value: (_vm.newSale.sale),
+      callback: function($$v) {
+        _vm.newSale.sale = $$v
+      },
+      expression: "newSale.sale"
+    }
+  }), _vm._v(" "), _c('v-text-field', {
+    attrs: {
+      "label": "Tip",
+      "name": "tip",
+      "prefix": "$"
+    },
+    model: {
+      value: (_vm.newSale.tip),
+      callback: function($$v) {
+        _vm.newSale.tip = $$v
+      },
+      expression: "newSale.tip"
+    }
+  })], 1)]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.addSale($event)
+      }
+    }
+  }, [_vm._v("Save")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (_vm.addSaleAlert.hasError) ? [_c('v-card-text', [_c('v-alert', {
+    class: _vm.addSaleAlert.status,
+    attrs: {
+      "icon": _vm.addSaleAlert.icon
+    },
+    model: {
+      value: (_vm.addSaleAlert.show),
+      callback: function($$v) {
+        _vm.addSaleAlert.show = $$v
+      },
+      expression: "addSaleAlert.show"
+    }
+  }, [_vm._v(_vm._s(_vm.addSaleAlert.message))])], 1)] : _vm._e()]] : [_c('v-card-text', [_c('v-alert', {
+    class: _vm.addSaleAlert.status,
+    attrs: {
+      "icon": _vm.addSaleAlert.icon
+    },
+    model: {
+      value: (_vm.addSaleAlert.show),
+      callback: function($$v) {
+        _vm.addSaleAlert.show = $$v
+      },
+      expression: "addSaleAlert.show"
+    }
+  }, [_vm._v(_vm._s(_vm.addSaleAlert.message))])], 1)]], 2)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg-12": "",
+      "mt-2": ""
+    }
+  }, [(_vm.onTechnician.fullName) ? _c('v-card', [_c('v-card-title', {
+    staticClass: "blue lighten-1",
+    attrs: {
+      "primary-title": ""
+    }
+  }, [_c('p', {
+    staticClass: "headline white--text"
+  }, [_vm._v("Sale Records")])]), _vm._v(" "), _c('v-card-text', [(_vm.onTechnician.sales.length == 0) ? _c('div', [_c('p', {
+    staticClass: "text-lg-center"
+  }, [_vm._v("There are no recorded sales")])]) : _c('div', [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.technicianSale.headers,
+      "items": _vm.onTechnician.sales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-right"
+        }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right"
+        }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right"
+        }, [_vm._v("$ " + _vm._s(props.item.additional_sales))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right"
+        }, [_c('a', {
+          attrs: {
+            "href": "#"
+          },
+          on: {
+            "click": function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
+              _vm.showEditSaleDialog(props.item.id, props.item.sales, props.item.additional_sales)
+            }
+          }
+        }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\tChange")])])]
+      }
+    }])
+  })], 1)])], 1) : _vm._e()], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
+    model: {
+      value: (_vm.editSaleDialogConfig.show),
+      callback: function($$v) {
+        _vm.editSaleDialogConfig.show = $$v
+      },
+      expression: "editSaleDialogConfig.show"
+    }
+  }, [_c('v-card', [_c('v-card-title', [_c('div', {
+    staticClass: "headline"
+  }, [_vm._v("Edit Sale")])]), _vm._v(" "), _c('v-card-text', [_c('form', [_c('v-text-field', {
+    attrs: {
+      "label": "SaleID",
+      "name": "sale-id",
+      "disabled": ""
+    },
+    model: {
+      value: (_vm.editSaleDialogConfig.saleID),
+      callback: function($$v) {
+        _vm.editSaleDialogConfig.saleID = $$v
+      },
+      expression: "editSaleDialogConfig.saleID"
+    }
+  }), _vm._v(" "), _c('v-text-field', {
+    attrs: {
+      "label": "Sale:",
+      "name": "sale"
+    },
+    model: {
+      value: (_vm.editSaleDialogConfig.sale),
+      callback: function($$v) {
+        _vm.editSaleDialogConfig.sale = $$v
+      },
+      expression: "editSaleDialogConfig.sale"
+    }
+  }), _vm._v(" "), _c('v-text-field', {
+    attrs: {
+      "label": "Tip:",
+      "name": "additonal-sale"
+    },
+    model: {
+      value: (_vm.editSaleDialogConfig.tip),
+      callback: function($$v) {
+        _vm.editSaleDialogConfig.tip = $$v
+      },
+      expression: "editSaleDialogConfig.tip"
+    }
+  })], 1)]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.editSale($event)
+      }
+    }
+  }, [_vm._v("Save")]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "light": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.editSaleDialogConfig.show = false
+      }
+    }
+  }, [_vm._v("Exit")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (!_vm.alert.hasError) ? _c('v-card-text', [_c('v-alert', {
+    attrs: {
+      "success": "",
+      "transition": "scale-transition"
+    },
+    model: {
+      value: (_vm.alert.show),
+      callback: function($$v) {
+        _vm.alert.show = $$v
+      },
+      expression: "alert.show"
+    }
+  }, [_vm._v(_vm._s(_vm.alert.message))])], 1) : _c('v-card-text', [_c('v-alert', {
+    attrs: {
+      "error": "",
+      "transition": "scale-transition"
+    },
+    model: {
+      value: (_vm.alert.show),
+      callback: function($$v) {
+        _vm.alert.show = $$v
+      },
+      expression: "alert.show"
+    }
+  }, [_vm._v(_vm._s(_vm.alert.message))])], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27014,7 +27932,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-085a198d", esExports)
+     require("vue-hot-reload-api").rerender("data-v-91654318", esExports)
   }
 }
 

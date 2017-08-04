@@ -1,5 +1,5 @@
 const { mix } = require('laravel-mix');
-
+const webpack = require('webpack');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,10 +10,16 @@ const { mix } = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+    mix.webpackConfig({
+        plugins: [
+        // reduce bundle size by ignoring moment js local files
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ]
+    });
     mix.js(['resources/assets/js/salon-sales.js'], 'public/js')
         .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
-        .js(['resources/assets/js/api-dashboard.js'], 'public/js');
+        .js(['resources/assets/js/api-dashboard.js'], 'public/js')
+        .js(['resources/assets/js/payday.js'], 'public/js/salon')
 
     //mix.browserSync('shop-management.dev');
 

@@ -4,7 +4,7 @@
 			<v-flex xs1>
 				<v-card flat>
 					<v-card-text>
-						<i class = "fa fa-calendar fa-2x"></i>
+						<v-icon>schedule</v-icon>
 					</v-card-text>
 				</v-card>
 			</v-flex>
@@ -14,7 +14,6 @@
 			<v-flex xs2>
 				<v-select :items="periods" label="Select" single-line class = "blue--text"
 				          v-model="selectID" item-text="periods" item-value="id" bottom @input="setPayPeriodID"></v-select>
-
 			</v-flex>
 			<v-flex xs1>
 				<v-subheader>Current:</v-subheader>
@@ -56,6 +55,7 @@
             },
 		    setPayPeriodID(){
                 this.$emit('id', this.selectID);
+                Event.$emit('id', this.selectID);
 		    }
         }
     }
