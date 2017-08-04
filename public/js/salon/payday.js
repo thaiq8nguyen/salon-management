@@ -26701,7 +26701,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -26712,23 +26712,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPaymentForm_vue__ = __webpack_require__(109);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(120);
 //
 //
 //
@@ -26818,10 +26802,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     components: {
-
-        VExpansionPanel: __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__["a" /* default */],
-        'payment-form': __WEBPACK_IMPORTED_MODULE_1__TechnicianPaymentForm_vue__["a" /* default */]
-
+        MakePayment: __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__["a" /* default */]
     },
 
     props: [],
@@ -26835,24 +26816,20 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             },
             totalSales: {
                 headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'Total Wages', value: 'total', sortable: false }]
-            },
-            payments: [],
-            maxPayment: 3,
-            totalPayingAmount: 0
-
+            }
         };
     },
     mounted: function mounted() {
         Event.$on('id', this.getWages);
     },
 
-
+    computed: {},
     methods: {
         getWages: function getWages(periodId) {
             var _this = this;
 
             this.$axios.get('/api/salon/payday?id=' + periodId).then(function (response) {
-                console.log(response.data);
+
                 _this.technicians = response.data;
                 _this.periodId = periodId;
             });
@@ -26860,32 +26837,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         readableDate: function readableDate(date) {
             return this.$moment(date).format('MM/DD/YY dd');
         },
-        addPayment: function addPayment(payment) {
-            if (this.payments.length < this.maxPayment) {
-                this.payments.push({
-                    amount: payment.amount,
-                    reference: payment.reference,
-                    method: payment.method
-                });
-            }
-            this.getTotalAmount();
-        },
-        deletePayment: function deletePayment(index) {
-            this.payments.splice(index, 1);
-            this.getTotalAmount();
-        },
-        getTotalAmount: function getTotalAmount() {
-            var sum = 0;
-            for (var i = 0; i < this.payments.length; i++) {
-                sum += parseInt(this.payments[i].amount);
-            }
-            this.totalPayingAmount = sum;
-        },
-        makePayment: function makePayment(technicianId) {
-            this.$axios();
+        viewPaymentReport: function viewPaymentReport(first_name) {
+            window.location.href = '/report/' + first_name + '/payment/' + this.periodId;
         }
     }
-
 });
 
 /***/ }),
@@ -26893,7 +26848,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* unused harmony default export */ var _unused_webpack_default_export = ({
   name: 'v-expansion-panel',
 
   props: {
@@ -27171,14 +27126,23 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg12": ""
     }
-  }, [_c('v-expansion-panel', _vm._l((_vm.technicians), function(technician) {
+  }, [_c('v-expansion-panel', _vm._l((_vm.technicians), function(technician, index) {
     return _c('v-expansion-panel-content', {
       key: technician.id
     }, [_c('div', {
       slot: "header"
     }, [_c('p', {
       staticClass: "subheading"
-    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name))])]), _vm._v(" "), _c('v-card', [_c('v-card-text', [_c('v-layout', [_c('v-flex', {
+    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name) + "\n\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+      staticClass: "green--text",
+      attrs: {
+        "label": "",
+        "small": "",
+        "outline": ""
+      }
+    }, [_c('v-icon', {
+      staticClass: "green--text"
+    }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _vm._e()])]), _vm._v(" "), _c('v-card', [_c('v-card-text', [_c('v-layout', [_c('v-flex', {
       attrs: {
         "lg3": ""
       }
@@ -27244,107 +27208,30 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "lg12": "",
         "mt-2": ""
       }
-    }, [_c('v-card', {
+    }, [(technician.count_payments.length == 0) ? [_c('make-payment', {
+      attrs: {
+        "technician": technician,
+        "period-id": _vm.periodId,
+        "index": index
+      }
+    })] : [_c('v-card', {
       staticClass: "elevation-1"
     }, [_c('v-card-title', {
       staticClass: "green darken-1"
     }, [_c('p', {
       staticClass: "headline white--text"
-    }, [_vm._v("Make Payments")])]), _vm._v(" "), _c('v-card-text', [_vm._l((_vm.payments), function(payment, index) {
-      return [_c('v-layout', {
-        attrs: {
-          "row": ""
-        }
-      }, [_c('v-flex', {
-        attrs: {
-          "lg2": ""
-        }
-      }, [_c('v-chip', {
-        attrs: {
-          "label": ""
-        }
-      }, [_vm._v("Payment " + _vm._s(index + 1))])], 1), _vm._v(" "), _c('v-flex', {
-        attrs: {
-          "lg2": ""
-        }
-      }, [_c('v-text-field', {
-        attrs: {
-          "label": "Amount",
-          "prefix": "$",
-          "disabled": ""
-        },
-        model: {
-          value: (payment.amount),
-          callback: function($$v) {
-            payment.amount = $$v
-          },
-          expression: "payment.amount"
-        }
-      })], 1), _vm._v(" "), _c('v-flex', {
-        attrs: {
-          "lg2": ""
-        }
-      }, [_c('v-text-field', {
-        attrs: {
-          "label": "Reference",
-          "disabled": ""
-        },
-        model: {
-          value: (payment.reference),
-          callback: function($$v) {
-            payment.reference = $$v
-          },
-          expression: "payment.reference"
-        }
-      })], 1), _vm._v(" "), _c('v-flex', {
-        attrs: {
-          "lg2": ""
-        }
-      }, [_c('v-text-field', {
-        attrs: {
-          "label": "Method",
-          "disabled": ""
-        },
-        model: {
-          value: (payment.method),
-          callback: function($$v) {
-            payment.method = $$v
-          },
-          expression: "payment.method"
-        }
-      })], 1), _vm._v(" "), _c('v-flex', {
-        attrs: {
-          "lg3": ""
-        }
-      }, [_c('v-btn', {
-        staticClass: "red",
-        nativeOn: {
-          "click": function($event) {
-            _vm.deletePayment(index)
-          }
-        }
-      }, [_c('v-icon', {
-        staticClass: "white--text"
-      }, [_vm._v("delete")])], 1)], 1)], 1)]
-    }), _vm._v(" "), (_vm.totalPayingAmount > 0) ? _c('v-chip', {
-      staticClass: "blue darken-1 white--text",
-      attrs: {
-        "label": ""
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTotal Paying: $ " + _vm._s(_vm.totalPayingAmount) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.payments.length > 0) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('payment-form', {
-      on: {
-        "add": _vm.addPayment
-      }
-    })], 2), _vm._v(" "), _c('v-divider'), _vm._v(" "), (_vm.payments.length > 0) ? _c('v-card-actions', [_c('v-btn', {
+    }, [_vm._v("Make Payments")])]), _vm._v(" "), _c('v-card-text', [_c('h3', {
+      staticClass: "headline"
+    }, [_vm._v(_vm._s(technician.first_name + ' \'s has been paid'))])]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
       attrs: {
         "primary": ""
       },
       nativeOn: {
         "click": function($event) {
-          _vm.makePayment(technician.total_sales_and_tips)
+          _vm.viewPaymentReport(technician.first_name)
         }
       }
-    }, [_vm._v("Make Payment")])], 1) : _vm._e()], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)
+    }, [_vm._v("View Report")])], 1)], 1)]], 2)], 1)], 1)], 1)], 1)], 1)], 1)
   }))], 1)], 1)], 1)], 1)])], 1)
 }
 var staticRenderFns = []
@@ -27355,6 +27242,491 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-450e7b3b", esExports)
+  }
+}
+
+/***/ }),
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b98e96b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__ = __webpack_require__(119);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(116)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b98e96b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianPayment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianPayment.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5b98e96b", Component.options)
+  } else {
+    hotAPI.reload("data-v-5b98e96b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(117);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("44796c9e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b98e96b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPayment.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b98e96b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPayment.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['payment', 'index'],
+
+    data: function data() {
+        return {};
+    },
+
+    methods: {
+        deletePayment: function deletePayment(index) {
+            this.$emit('delete', index);
+        }
+    }
+
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg2": ""
+    }
+  }, [_c('v-chip', {
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v("Payment " + _vm._s(_vm.index + 1))])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg2": ""
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Amount",
+      "prefix": "$",
+      "disabled": ""
+    },
+    model: {
+      value: (_vm.payment.amount),
+      callback: function($$v) {
+        _vm.payment.amount = $$v
+      },
+      expression: "payment.amount"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg2": ""
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Reference",
+      "disabled": ""
+    },
+    model: {
+      value: (_vm.payment.reference),
+      callback: function($$v) {
+        _vm.payment.reference = $$v
+      },
+      expression: "payment.reference"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg2": ""
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Method",
+      "disabled": ""
+    },
+    model: {
+      value: (_vm.payment.method),
+      callback: function($$v) {
+        _vm.payment.method = $$v
+      },
+      expression: "payment.method"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg3": ""
+    }
+  }, [_c('v-btn', {
+    staticClass: "red",
+    nativeOn: {
+      "click": function($event) {
+        _vm.deletePayment(_vm.index)
+      }
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("delete")])], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5b98e96b", esExports)
+  }
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e38cf8c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(124);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(121)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e38cf8c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/MakeTechnicianPayment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MakeTechnicianPayment.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e38cf8c6", Component.options)
+  } else {
+    hotAPI.reload("data-v-e38cf8c6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(122);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("7b7aa57e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e38cf8c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MakeTechnicianPayment.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e38cf8c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MakeTechnicianPayment.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 123 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(115);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['technician', 'periodId', 'index'],
+    components: {
+        TechnicianPaymentForm: __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__["a" /* default */], Payment: __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__["a" /* default */]
+    },
+    data: function data() {
+        return {
+            payments: [],
+            maxPayment: 3,
+            isPaid: false,
+            isPaidMessage: null
+        };
+    },
+
+    computed: {
+        totalPayingAmount: function totalPayingAmount() {
+            var sum = 0;
+            if (this.payments.length > 0) {
+                for (var i = 0; i < this.payments.length; i++) {
+                    sum += parseInt(this.payments[i].amount);
+                }
+            }
+            return sum;
+        }
+    },
+    methods: {
+        addPayment: function addPayment(payment) {
+            if (this.payments.length < this.maxPayment) {
+                this.payments.push({
+                    amount: payment.amount,
+                    reference: payment.reference,
+                    method: payment.method
+                });
+            }
+        },
+        deletePayment: function deletePayment(index) {
+            this.payments.splice(index, 1);
+        },
+        makePayment: function makePayment(technicianId) {
+            var _this = this;
+
+            this.$axios.post('/api/technician-wage/pay', { payingTechnicianId: technicianId,
+                periodId: this.periodId, payments: this.payments }).then(function (response) {
+                if (response.data.success) {
+                    _this.isPaid = true;
+                    _this.isPaidMessage = response.data.message;
+                }
+            });
+        },
+        viewPaymentReport: function viewPaymentReport() {
+            window.location.href = '/report/' + this.technician.first_name + '/payment/' + this.periodId;
+        }
+    }
+
+});
+
+/***/ }),
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-card', {
+    staticClass: "elevation-1"
+  }, [_c('v-card-title', {
+    staticClass: "green darken-1"
+  }, [_c('p', {
+    staticClass: "headline white--text"
+  }, [_vm._v("Make Payments")])]), _vm._v(" "), (_vm.isPaid) ? [_c('v-card-text', [_c('h3', {
+    staticClass: "headline"
+  }, [_vm._v(_vm._s(_vm.isPaidMessage))])]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.viewPaymentReport($event)
+      }
+    }
+  }, [_vm._v("View Report")])], 1)] : [_c('v-card-text', [_vm._l((_vm.payments), function(payment, index) {
+    return _c('payment', {
+      key: index,
+      attrs: {
+        "payment": payment,
+        "index": index
+      },
+      on: {
+        "delete": _vm.deletePayment
+      }
+    })
+  }), _vm._v(" "), (_vm.totalPayingAmount > 0) ? _c('v-chip', {
+    class: ( _obj = {}, _obj['green darken-1 white--text subheading'] = _vm.totalPayingAmount == _vm.technician.total_sales_and_tips[0].total, _obj ),
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v("\n\t\t\t\tTotal Paying: $ " + _vm._s(_vm.totalPayingAmount) + "\n\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.payments.length > 0) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('technician-payment-form', {
+    on: {
+      "add": _vm.addPayment
+    }
+  })], 2), _vm._v(" "), _c('v-divider'), _vm._v(" "), (_vm.payments.length > 0) ? _c('v-card-actions', [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.makePayment(_vm.technician.id)
+      }
+    }
+  }, [_vm._v("Make Payment")])], 1) : _vm._e()]], 2)
+  var _obj;
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e38cf8c6", esExports)
   }
 }
 

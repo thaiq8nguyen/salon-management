@@ -98,6 +98,8 @@ class WagePaymentController extends Controller
         $technician->payments()->saveMany($payments);
 
         session()->put('wageAmount', $totalAmount);
+
+
         return redirect()->route('insert-wages-to-book');
 
     }

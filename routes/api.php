@@ -28,6 +28,9 @@ Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('au
 
 Route::get('/salon/payday','PayDayApiController@payday')->middleware('auth:api');
 
+/*Paying technician wages by adding payment records*/
+Route::post('/technician-wage/pay','PayDayApiController@payTechnician')->middleware('auth:api');
+
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
 
 
