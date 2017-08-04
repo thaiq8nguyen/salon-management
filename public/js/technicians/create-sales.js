@@ -26570,6 +26570,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('technician-header', __WEB
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('new-technician-sale', __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__["a" /* default */]);
 
+window.Event = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#root',
     data: {
