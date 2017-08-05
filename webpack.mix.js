@@ -16,7 +16,8 @@ const webpack = require('webpack');
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
     });
-    mix.js(['resources/assets/js/salon-sales.js'], 'public/js')
+    mix.js(['resources/assets/js/home.js'], 'public/js')
+        .js(['resources/assets/js/salon-sales.js'], 'public/js')
         .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
         .js(['resources/assets/js/api-dashboard.js'], 'public/js')
         .js(['resources/assets/js/payday.js'], 'public/js/salon')
