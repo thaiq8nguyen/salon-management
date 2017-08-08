@@ -66,4 +66,8 @@ class TechnicianSaleController extends Controller
 
     }
 
+    public function quickSaleEntry(){
+        return view('technicians.quick-sale-entry',['pageTitle' => 'Quick Sale Entry']);
+    }
+
 }

@@ -23,7 +23,6 @@
 
             }
 
-
         },
 		computed:{
             endDate(){
@@ -32,7 +31,6 @@
                     subtract(2,'days').format('dddd, MM/DD/YYYY ');
                 }
                 return 'Error';
-
             }
 		},
 	    mounted(){

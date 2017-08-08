@@ -18,11 +18,14 @@ Route::get('/', function () {
 });
 
     Route::get('/api-dashboard','ApiDashBoardController@index')->name('api-dashboard');
+
     Route::get('/salon-sales','SalonSaleController@index')->name('salon-sale');
 
     Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
 
     Route::get('/technician-sale', 'TechnicianSaleController@index')->name('technician-sale');
+
+    Route::get('/technician-sale/quick-sale-entry','TechnicianSaleController@quickSaleEntry')->name('quick-sale-entry');
 
     Route::get('/wages/pay', 'WageController@payday')->name('payday');
 

@@ -20,13 +20,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/technician-sale/add', 'TechnicianSaleApiController@addSale')->middleware('auth:api');
 
+Route::post('/technician-sale/handle-quick-sale','TechnicianSaleApiController@handleQuickSale')->middleware('auth:api');
+
 Route::put('/technician-sale/edit', 'TechnicianSaleApiController@editSale');
 
-Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
+//Route::get('/technician-sale/search', 'TechnicianSaleController@searchByDate');
+
+Route::get('/technician-sale/get','TechnicianSaleApiController@getSaleByDate')->middleware('auth:api');
 
 Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('auth:api');
 
-Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate');
+Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate')->middleware('auth:api');
 
 
 Route::post('/salon-sale/redeem-gift-certificate','SalonSaleApiController@redeemGiftCertificate')

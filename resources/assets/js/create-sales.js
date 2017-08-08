@@ -4,7 +4,7 @@
 
 import Vue from 'vue';
 import axios from 'axios';
-import moment from 'moment-es6';
+import moment from 'moment';
 import Vuetify from 'vuetify';
 
 import TechnicianHeader from './components/TechnicianHeader.vue';

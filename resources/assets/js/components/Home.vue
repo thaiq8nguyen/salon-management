@@ -13,7 +13,7 @@
 										</h3>
 									</v-flex>
 									<v-flex lg2 offset-lg4>
-										<v-icon medium class = "white--text">event_note</v-icon>
+										<v-icon class = "white--text">event_note</v-icon>
 									</v-flex>
 								</v-card-title>
 								<v-card-text>
@@ -97,7 +97,9 @@
                 shortcuts:[
 	                {name:'Add Technician Sale', href:'/technician-sale/add'},
 	                {name:'Pay Technicians', href:'/wages/pay'},
-	                {name:'Salon Sale', href:'/salon-sales'}
+	                {name:'Salon Sale', href:'/salon-sales'},
+	                {name:'Quick Daily Sales', href:'/technician-sale/quick-sale-entry'}
+
                 ]
             }
 
