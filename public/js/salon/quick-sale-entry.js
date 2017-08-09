@@ -28107,7 +28107,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28265,156 +28265,250 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    components: {},
-    props: [],
+				components: {},
+				props: [],
 
-    data: function data() {
-        return {
-            date: this.$moment().format('YYYY-MM-DD'),
-            square: {
-                success: false,
-                grossSale: null,
-                cardTip: null,
-                convenienceFee: null,
-                giftSale: null
-            },
+				data: function data() {
+								return {
+												date: this.$moment().format('YYYY-MM-DD'),
+												square: {
+																grossSale: null,
+																cardTip: null,
+																convenienceFee: null,
+																giftSale: null,
+																giftRedeem: null,
+																cardCollected: null,
+																cashCollected: null,
+																refunded: null
+												},
+												technician: {
+																grossSale: null,
+																cardTip: null
+												},
 
-            technicians: [],
-            sale: null,
-            sales: [],
-            isAdded: false,
-            active: null,
-            openDialog: false
+												technicians: [],
+												sale: null,
+												sales: [],
+												isAdded: false,
+												active: null,
+												openDialog: false,
+												loadingData: false,
+												noSquareData: false,
+												redeemGiftAmount: null,
+												giftRedeemed: false,
 
-        };
-    },
+												images: [{ name: 'Square Logo', src: '/images/square-logo.png' }]
+
+								};
+				},
 
 
-    computed: {
-        saleStatus: function saleStatus(index) {},
-        saleDate: function saleDate() {
-            return this.$moment(this.date).format('dddd MM/DD/YYYY');
-        },
-        technicianGrossSale: function technicianGrossSale() {
-            var grossSale = 0;
-            for (var i = 0; i < this.sales.length; i++) {
-                grossSale += parseInt(this.sales[i].sales);
-            }
-            if (isNaN(grossSale)) {
-                grossSale = 'Pending...';
-            }
+				computed: {
+								saleDate: function saleDate() {
+												return this.$moment(this.date).format('dddd MM/DD/YYYY');
+								},
+								technicianSale: function technicianSale() {
+												var grossSale = parseFloat(this.technician.grossSale);
+												for (var i = 0; i < this.sales.length; i++) {
+																grossSale += parseFloat(this.sales[i].sales);
+												}
+												if (isNaN(grossSale)) {
+																grossSale = 0;
+												}
 
-            return grossSale;
-        },
-        technicianCardTip: function technicianCardTip() {
-            var cardTip = 0;
-            for (var i = 0; i < this.sales.length; i++) {
-                cardTip += parseInt(this.sales[i].additional_sales);
-            }
-            if (isNaN(cardTip)) {
-                cardTip = 'Pending...';
-            }
+												return grossSale;
+								},
+								technicianCardTip: function technicianCardTip() {
+												var cardTip = parseFloat(this.technician.cardTip);
+												for (var i = 0; i < this.sales.length; i++) {
+																cardTip += parseFloat(this.sales[i].additional_sales);
+												}
+												if (isNaN(cardTip)) {
+																cardTip = 0;
+												}
 
-            return cardTip;
-        }
-    },
-    mounted: function mounted() {
-        this.getSquareData();
-        this.getAllTechnicians();
-    },
+												return cardTip;
+								},
+								technicianGrossSale: function technicianGrossSale() {
+												return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
+								}
+				},
+				mounted: function mounted() {
+								this.getSquareData();
+								this.getAllTechnicians();
+				},
 
-    watch: {
-        date: function date() {
-            this.getSquareData();
-            this.getAllTechnicians();
-        }
-    },
-    methods: {
-        getSquareData: function getSquareData() {
-            var _this = this;
+				watch: {
+								date: function date() {
+												this.getSquareData();
+												this.getAllTechnicians();
+								}
+				},
+				methods: {
+								getSquareData: function getSquareData() {
+												var _this = this;
 
-            this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
-                _this.square.success = response.data.success;
-                if (_this.square.success) {
-                    _this.square.grossSale = response.data.sales['Square Gross Sales'];
-                    _this.square.cardTip = response.data.tips['Square Tips'];
-                    _this.square.convenienceFee = response.data.sales['Convenience Fee'];
-                    _this.square.giftSale = response.data.sales['Gift Certificate'];
-                }
-            });
-        },
-        getAllTechnicians: function getAllTechnicians() {
-            var _this2 = this;
+												this.loadingData = true;
+												this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
 
-            this.$axios.get('/api/technician-sale/get?saleDate=' + this.date).then(function (response) {
+																_this.loadingData = false;
+																if (response.data.success) {
+																				_this.square.grossSale = response.data.sales['Square Gross Sales'];
+																				_this.square.cardTip = response.data.tips['Square Tips'];
+																				_this.square.convenienceFee = parseFloat(response.data.sales['Convenience Fee']);
+																				_this.square.giftSale = parseFloat(response.data.sales['Gift Certificate']);
+																				_this.square.giftRedeem = parseFloat(response.data.sales['Gift Certificate Redeemed']);
+																				_this.square.cardCollected = response.data.sales['Card Collected'];
+																				_this.square.cashCollected = response.data.sales['Cash Collected'];
+																				_this.square.refunded = response.data.sales['Refunded'];
+																				_this.technician.grossSale = response.data.sales['Technician Sales'];
+																				_this.technician.cardTip = response.data.tips['Technician Tips'];
+																				_this.noSquareData = false;
+																} else {
+																				_this.noSquareData = true;
+																}
+												});
+								},
+								getAllTechnicians: function getAllTechnicians() {
+												var _this2 = this;
 
-                _this2.technicians = response.data.technicians;
-                _this2.sales = [];
+												this.$axios.get('/api/technician-sale/get?saleDate=' + this.date).then(function (response) {
 
-                for (var i = 0; i < _this2.technicians.length; i++) {
-                    if (_this2.technicians[i].dailySales.length > 0) {
-                        _this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
-                            additional_sales: 0, sale_date: _this2.date,
-                            existing_sale_id: _this2.technicians[i].dailySales[0].id, toBeDeleted: false };
-                    } else {
-                        _this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
-                            additional_sales: 0, sale_date: _this2.date, existing_sale_id: null, toBeDeleted: false };
-                    }
+																_this2.technicians = response.data.technicians;
+																_this2.sales = [];
 
-                    _this2.sales.push(_this2.sale);
-                }
-                _this2.sale = null;
-            });
-        },
-        addSale: function addSale() {
-            var _this3 = this;
+																for (var i = 0; i < _this2.technicians.length; i++) {
+																				if (_this2.technicians[i].dailySales.length > 0) {
+																								_this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
+																												additional_sales: 0, sale_date: _this2.date,
+																												existing_sale_id: _this2.technicians[i].dailySales[0].id, toBeDeleted: false };
+																				} else {
+																								_this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
+																												additional_sales: 0, sale_date: _this2.date, existing_sale_id: null, toBeDeleted: false };
+																				}
 
-            var newSales = [];
-            for (var i = 0; i < this.sales.length; i++) {
-                if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
-                    newSales.push(this.sales[i]);
-                }
-            }
-            this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: newSales }).then(function (response) {
-                if (response.data.success) {
-                    _this3.openDialog = false;
-                    _this3.isAdded = true;
-                    _this3.reset();
-                }
-            });
-        },
-        reset: function reset() {
-            this.getAllTechnicians();
-        },
-        clearInput: function clearInput(index, input) {
-            this.active = true;
-            if (input === 'sale') {
-                this.sales[index].sales = '';
-            } else if (input === 'tip') {
-                this.sales[index].additional_sales = '';
-            }
-        },
-        checkInput: function checkInput(index, input) {
-            if (input === 'sale') {
-                if (this.sales[index].sales === '') {
-                    this.sales[index].sales = 0;
-                }
-            } else if (input === 'tip') {
-                if (this.sales[index].additional_sales === '') {
-                    this.sales[index].additional_sales = 0;
-                }
-            }
-        },
-        hover: function hover(index) {
-            this.active = index;
-        },
-        select: function select(index) {
-            return this.active === index;
-        }
-    }
+																				_this2.sales.push(_this2.sale);
+																}
+																_this2.sale = null;
+												});
+								},
+								addSale: function addSale() {
+												var _this3 = this;
+
+												var newSales = [];
+												for (var i = 0; i < this.sales.length; i++) {
+																if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
+																				newSales.push(this.sales[i]);
+																}
+												}
+												this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: newSales }).then(function (response) {
+																if (response.data.success) {
+																				_this3.openDialog = false;
+																				_this3.isAdded = true;
+																				_this3.reset();
+																}
+												});
+								},
+								redeemGift: function redeemGift() {
+												var _this4 = this;
+
+												this.$axios.post('/api/salon-sale/redeem-gift-certificate', { date: this.date, amount: this.redeemGiftAmount }).then(function (response) {
+																console.log(response.data);
+																if (response.data.success) {
+																				_this4.giftRedeemed = true;
+																				_this4.redeemGiftAmount = null;
+																}
+												});
+								},
+								reset: function reset() {
+												this.getAllTechnicians();
+								},
+								clearInput: function clearInput(index, input) {
+												this.active = true;
+												if (input === 'sale') {
+																this.sales[index].sales = '';
+												} else if (input === 'tip') {
+																this.sales[index].additional_sales = '';
+												}
+								},
+								checkInput: function checkInput(index, input) {
+												if (input === 'sale') {
+																if (this.sales[index].sales === '') {
+																				this.sales[index].sales = 0;
+																}
+												} else if (input === 'tip') {
+																if (this.sales[index].additional_sales === '') {
+																				this.sales[index].additional_sales = 0;
+																}
+												}
+								},
+								hover: function hover(index) {
+												this.active = index;
+								},
+								select: function select(index) {
+												return this.active === index;
+								}
+				}
 
 });
 
@@ -28430,7 +28524,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "fluid": ""
     }
-  }, [_c('v-layout', [_c('v-flex', [_c('v-alert', {
+  }, [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg12": ""
+    }
+  }, [_c('v-alert', {
     staticClass: "text-lg-center",
     attrs: {
       "success": "",
@@ -28446,15 +28549,32 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('p', {
     staticClass: "headline "
-  }, [_vm._v("Technician Sale has been added")])]), _vm._v(" "), _c('v-card', [_c('v-card-text', [_c('v-layout', {
+  }, [_vm._v("Technician Sale has been added")])])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "row": ""
+      "lg12": ""
+    }
+  }, [_c('v-card', [_c('v-card-text', [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
     }
   }, [_c('v-flex', {
     attrs: {
-      "lg3": ""
+      "lg6": ""
+    }
+  }, [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg11": ""
     }
   }, [_c('v-date-picker', {
+    attrs: {
+      "landscape": ""
+    },
     model: {
       value: (_vm.date),
       callback: function($$v) {
@@ -28464,21 +28584,115 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg4": ""
+      "lg6": "",
+      "mt-2": ""
     }
-  }, [(_vm.square.success) ? _c('v-list', [_c('p', {
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "grey lighten-4"
+  }, [_c('img', {
+    attrs: {
+      "src": _vm.images[0].src,
+      "height": 74
+    }
+  })]), _vm._v(" "), _c('v-card-text', [(_vm.loadingData) ? _c('div', {
+    staticClass: "text-lg-center"
+  }, [_c('v-progress-circular', {
+    staticClass: "red--text",
+    attrs: {
+      "indeterminate": ""
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "headline"
+  }, [_vm._v("Loading...")])], 1) : _vm._e(), _vm._v(" "), (_vm.noSquareData) ? _c('div', {
+    staticClass: "text-lg-center"
+  }, [_c('v-icon', {
+    staticClass: "red--text",
+    attrs: {
+      "large": ""
+    }
+  }, [_vm._v("warning")]), _vm._v(" "), _c('p', {
+    staticClass: "headline"
+  }, [_vm._v("No Square data available, please choose another date")])], 1) : _c('div', [_c('p', {
     staticClass: "headline"
   }, [_vm._v("Gross Sales: $ " + _vm._s(_vm.square.grossSale))]), _vm._v(" "), _c('p', {
     staticClass: "headline"
+  }, [_vm._v("Card: $ " + _vm._s(_vm.square.cardCollected))]), _vm._v(" "), _c('p', {
+    staticClass: "headline"
+  }, [_vm._v("Cash: $ " + _vm._s(_vm.square.cashCollected))]), _vm._v(" "), _c('p', {
+    staticClass: "headline"
   }, [_vm._v("Card Tip: $ " + _vm._s(_vm.square.cardTip))]), _vm._v(" "), _c('p', {
     staticClass: "headline"
-  }, [_vm._v("Convenience Fee: $ " + _vm._s(_vm.square.convenienceFee))]), _vm._v(" "), _c('p', {
+  }, [_vm._v("Convenience Fee: $ " + _vm._s(_vm.square.convenienceFee))]), _vm._v(" "), (_vm.square.giftSale > 0) ? _c('p', {
     staticClass: "headline"
-  }, [_vm._v("Gift Sales $ " + _vm._s(_vm.square.giftSale))])]) : _vm._e(), _vm._v(" "), _c('v-list', [_c('p', {
+  }, [_vm._v("Gift Sales: $ " + _vm._s(_vm.square.giftSale))]) : _vm._e(), _vm._v(" "), (_vm.square.giftRedeem < 0) ? _c('p', {
     staticClass: "headline"
-  }, [_vm._v("Gross Sales : $ " + _vm._s(_vm.technicianGrossSale))]), _vm._v(" "), _c('p', {
+  }, [_vm._v("Gift Redeemed $ " + _vm._s(_vm.square.giftRedeem))]) : _vm._e(), _vm._v(" "), (_vm.square.refunded > 0) ? _c('p', {
     staticClass: "headline"
-  }, [_vm._v("Card Tip :$ " + _vm._s(_vm.technicianCardTip))])])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Refunded: $ " + _vm._s(_vm.square.refunded))]) : _vm._e()])])], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": "",
+      "mt-2": ""
+    }
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "amber darken-1"
+  }, [_c('h3', {
+    staticClass: "display-1 white--text"
+  }, [_vm._v("Technician Sale")])]), _vm._v(" "), _c('v-card-text', [_c('v-list', [_c('p', {
+    staticClass: "headline",
+    class: {
+      'green--text darken-1': _vm.square.grossSale == _vm.technicianGrossSale
+    }
+  }, [_c('strong', [_vm._v("Gross Sales:")]), _vm._v(" $ " + _vm._s(_vm.technicianGrossSale))]), _vm._v(" "), _c('p', {
+    staticClass: "headline"
+  }, [_c('strong', [_vm._v("Tech Sales :")]), _vm._v(" $ " + _vm._s(_vm.technicianSale))]), _vm._v(" "), _c('p', {
+    staticClass: "headline"
+  }, [_c('strong', [_vm._v("Card Tip :")]), _vm._v("$ " + _vm._s(_vm.technicianCardTip))])])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": "",
+      "mt-2": ""
+    }
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "indigo darken-1"
+  }, [_c('h3', {
+    staticClass: "display-1 white--text"
+  }, [_vm._v("Redeem Gift")])]), _vm._v(" "), _c('v-card-text', [_c('form', [_c('v-text-field', {
+    attrs: {
+      "type": "number",
+      "max": "3",
+      "label": "Amount",
+      "prefix": "$"
+    },
+    model: {
+      value: (_vm.redeemGiftAmount),
+      callback: function($$v) {
+        _vm.redeemGiftAmount = $$v
+      },
+      expression: "redeemGiftAmount"
+    }
+  }), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    on: {
+      "click": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "submit")) { return null; }
+        $event.preventDefault();
+        _vm.redeemGift($event)
+      }
+    }
+  }, [_vm._v("Redeem")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-alert', {
+    attrs: {
+      "success": "",
+      "dismissible": ""
+    },
+    model: {
+      value: (_vm.giftRedeemed),
+      callback: function($$v) {
+        _vm.giftRedeemed = $$v
+      },
+      expression: "giftRedeemed"
+    }
+  }, [_vm._v("The gift is redeemed")])], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg6": ""
     }
@@ -28512,7 +28726,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "label": ""
       }
-    }, [_vm._v(_vm._s(index + 1))]), _vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t" + _vm._s(technician.fullName))], 1), _vm._v(" "), _c('v-list-tile-sub-title', [_c('v-layout', [_c('v-flex', {
+    }, [_vm._v(_vm._s(index + 1))]), _vm._v("\n\t\t\t\t\t\t\t\t\t\t\t" + _vm._s(technician.fullName))], 1), _vm._v(" "), _c('v-list-tile-sub-title', [_c('v-layout', [_c('v-flex', {
       attrs: {
         "lg3": ""
       }
@@ -28546,7 +28760,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [(technician.dailySales.length > 0) ? _c('p', {
       staticClass: "blue--text heading"
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$ " + _vm._s(technician.dailySales[0].sales) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t")]) : _vm._e()]), _vm._v(" "), _c('v-flex', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t$ " + _vm._s(technician.dailySales[0].sales) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t")]) : _vm._e()]), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg3": ""
       }
@@ -28580,7 +28794,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [(technician.dailySales.length > 0) ? _c('p', {
       staticClass: "blue--text heading"
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$ " + _vm._s(technician.dailySales[0].additional_sales) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t")]) : _vm._e()]), _vm._v(" "), _c('v-flex', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t$ " + _vm._s(technician.dailySales[0].additional_sales) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t")]) : _vm._e()]), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg2": ""
       }

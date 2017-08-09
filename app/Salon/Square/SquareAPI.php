@@ -86,12 +86,14 @@ Class SquareAPI{
         $cashCollected = 0;
         $cardCollected = 0;
         $processingFee = 0;
+        $refunded = 0;
 
         foreach($payments as $payment){
 
             $totalCollected += $payment->total_collected_money->amount;
             $tipOnCard += $payment->tip_money->amount;
             $processingFee += $payment->processing_fee_money->amount;
+            $refunded += $payment->refunded_money->amount;
 
             foreach($payment->tender as $tender){
                 if($tender->type == 'CASH'){
@@ -112,7 +114,7 @@ Class SquareAPI{
         $data = ['metrics' => ['gross_sales' => $this->formatMoney($grossSales),
             'tips' => $this->formatMoney($tipOnCard), 'fees' => $this->formatMoney(abs($processingFee)),
             'cash_collected' => $this->formatMoney($cashCollected),
-            'cards_collected' => $this->formatMoney($cardCollected)],'items' =>$saleItem];
+            'cards_collected' => $this->formatMoney($cardCollected), 'refunded' => $this->formatMoney($refunded)],'items' =>$saleItem];
 
         return $data;
 

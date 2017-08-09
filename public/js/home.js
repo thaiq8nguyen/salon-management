@@ -28120,7 +28120,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     data: function data() {
         return {
-            shortcuts: [{ name: 'Add Technician Sale', href: '/technician-sale/add' }, { name: 'Pay Technicians', href: '/wages/pay' }, { name: 'Salon Sale', href: '/salon-sales' }, { name: 'Quick Daily Sales', href: '/technician-sale/quick-sale-entry' }]
+            shortcuts: [{ name: 'Add Technician Sale', href: '/technician-sale/add', color: 'blue darken-4' }, { name: 'Pay Technicians', href: '/wages/pay', color: 'blue darken-4' }, { name: 'Salon Sale', href: '/salon-sales', color: 'blue darken-4' }, { name: 'Quick Sale Entry', href: '/technician-sale/quick-sale-entry', color: 'red darken-4' }]
         };
     },
 
@@ -28389,6 +28389,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("bookmark")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_vm._l((_vm.shortcuts), function(shortcut) {
     return [_c('v-btn', {
+      class: shortcut.color,
       attrs: {
         "href": shortcut.href,
         "primary": "",
