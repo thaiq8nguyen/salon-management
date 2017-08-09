@@ -17,48 +17,18 @@
 										<v-flex lg11>
 											<v-date-picker v-model="date" landscape></v-date-picker>
 										</v-flex>
-										<v-flex lg6 mt-2><!--Square Data-->
-											<v-card>
-												<v-card-title class = "grey lighten-4">
-													<img :src="images[0].src" :height="74">
-												</v-card-title>
-												<v-card-text>
-													<div v-if="loadingData" class = "text-lg-center">
-														<v-progress-circular indeterminate class="red--text"></v-progress-circular>
-														<p class = "headline">Loading...</p>
-													</div>
-													<div v-if="noSquareData" class = "text-lg-center">
-														<v-icon large class = "red--text">warning</v-icon>
-														<p class = "headline">No Square data available, please choose another date</p>
-													</div>
-													<div v-else>
-														<p class = "headline">Gross Sales: $ {{square.grossSale}}</p>
-														<p class = "headline">Card: $ {{square.cardCollected}}</p>
-														<p class = "headline">Cash: $ {{square.cashCollected}}</p>
-														<p class = "headline">Card Tip: $ {{square.cardTip}}</p>
-														<p class = "headline">Convenience Fee: $ {{square.convenienceFee}}</p>
-														<p class = "headline" v-if="square.giftSale > 0">Gift Sales: $ {{ square.giftSale}}</p>
-														<p class = "headline" v-if="square.giftRedeem < 0">Gift Redeemed $ {{ square.giftRedeem }}</p>
-														<p class = "headline" v-if="square.refunded > 0">Refunded: $ {{ square.refunded}}</p>
-													</div>
-												</v-card-text>
-											</v-card>
-										</v-flex>
-										<v-flex lg6 mt-2>
-											<v-card>
-												<v-card-title class = "amber darken-1">
-													<h3 class = "display-1 white--text">Technician Sale</h3>
-												</v-card-title>
-												<v-card-text>
-													<v-list>
-														<p class = "headline"
-														   :class="{'green--text darken-1': square.grossSale == technicianGrossSale}">
-															<strong>Gross Sales:</strong> $ {{ technicianGrossSale}}</p>
-														<p class = "headline"><strong>Tech Sales :</strong> $ {{ technicianSale }}</p>
-														<p class = "headline"><strong>Card Tip :</strong>$ {{ technicianCardTip }}</p>
-													</v-list>
-												</v-card-text>
-											</v-card>
+										<v-flex lg11 mt-2><!--Square Data-->
+											<template v-if="isSquareData">
+												<salon-sale-table :saleData="squareData"></salon-sale-table>
+											</template>
+											<template v-else>
+												<v-card>
+													<v-card-text class = "text-lg-center">
+														<v-icon large class = "red--text">info</v-icon>
+														<p class = "subheading">There is no data recorded for this date</p>
+													</v-card-text>
+												</v-card>
+											</template>
 										</v-flex>
 										<v-flex lg6 mt-2>
 											<v-card>
@@ -143,29 +113,24 @@
 						</v-card-text>
 					</v-card>
 				</v-flex>
-
-
 			</v-layout>
 		</v-container>
-		<v-dialog v-model="openDialog" width="480">
+		<v-dialog v-model="openDialog" width="540">
 			<v-card>
 				<v-card-title class = "text-lg-center blue darken-1">
 					<p class = "headline white--text">Confirm Sale for {{ saleDate }} </p>
 				</v-card-title>
 				<v-card-text>
 					<v-list>
-						<v-layout>
-							<v-flex lg6>
-							</v-flex>
-							<v-flex lg3>
+						<v-layout row>
+							<v-flex lg6></v-flex>
+							<v-flex lg2>
 								<p class = "title">Sale</p>
 							</v-flex>
-							<v-flex lg3>
+							<v-flex lg2>
 								<p class = "title">Tip</p>
 							</v-flex>
-							<v-flex lg3>
-
-							</v-flex>
+							<v-flex lg2></v-flex>
 						</v-layout>
 						<template v-for="(technician,index) in technicians">
 							<v-list-tile-content>
@@ -174,13 +139,13 @@
 										<v-flex lg6>
 											<p class = "title">{{ technician.fullName }}</p>
 										</v-flex>
-										<v-flex lg3>
+										<v-flex lg2 ml-1>
 											<p class = "title">$ {{ sales[index].sales }}</p>
 										</v-flex>
-										<v-flex lg3>
+										<v-flex lg2 ml-1>
 											<p class = "title">$ {{ sales[index].additional_sales }}</p>
 										</v-flex>
-										<v-flex lg3>
+										<v-flex lg2>
 											<p class = "text-xs-center":class="['title blue white--text']"
 											   v-if="sales[index].existing_sale_id !== null && sales[index].sales > 0 ">Update</p>
 											<p class = "text-xs-center":class="['title green white--text']"
@@ -193,11 +158,13 @@
 							</v-list-tile-content>
 						</template>
 					</v-list>
-				</v-card-text>
-				<v-card-actions>
-					<v-btn @click.native="addSale" primary><v-icon class = "white--text">add</v-icon>Add</v-btn>
+					<v-spacer></v-spacer>
+					<v-btn @click.native="addSale" primary v-show="newSales.length > 0"><v-icon class = "white--text">add</v-icon>Add</v-btn>
 					<v-btn @click.native="openDialog = false">Close</v-btn>
-				</v-card-actions>
+				</v-card-text>
+				<v-card-text>
+
+				</v-card-text>
 			</v-card>
 		</v-dialog>
 	</v-app>
@@ -205,24 +172,17 @@
 </template>
 <script>
 
-
+	import SalonSaleTable from './SalonSaleTable.vue';
     export default {
-        components: {},
+        components: {SalonSaleTable},
         props: [],
 
         data() {
             return {
                 date: this.$moment().format('YYYY-MM-DD'),
-	            square:{
-		            grossSale:null,
-		            cardTip:null,
-		            convenienceFee:null,
-		            giftSale:null,
-		            giftRedeem:null,
-		            cardCollected:null,
-		            cashCollected:null,
-		            refunded:null,
-	            },
+	            squareData:[],
+	            isSquareData: false,
+
 				technician:{
                     grossSale:null,
 					cardTip:null,
@@ -231,17 +191,13 @@
 	            technicians:[],
 	            sale:null,
 	            sales:[],
+	            newSales:[],
 	            isAdded: false,
 	            active: null,
 	            openDialog: false,
 	            loadingData:false,
-	            noSquareData:false,
 	            redeemGiftAmount:null,
 	            giftRedeemed:false,
-
-	            images:[
-		            {name:'Square Logo', src:'/images/square-logo.png'}
-	            ]
 
             }
         },
@@ -274,8 +230,9 @@
 			},
 
 			technicianGrossSale(){
-			    return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
-			}
+			    //return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
+			},
+
 		},
 	    mounted(){
             this.getSquareData();
@@ -291,32 +248,12 @@
 	        getSquareData(){
 	            this.loadingData = true;
                 this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
-
+                    console.log(response.data);
                     this.loadingData = false;
-                    if(response.data.success){
-                        this.square.grossSale = response.data.sales['Square Gross Sales'];
-                        this.square.cardTip =  response.data.tips['Square Tips'];
-                        this.square.convenienceFee = parseFloat(response.data.sales['Convenience Fee']);
-                        this.square.giftSale = parseFloat(response.data.sales['Gift Certificate']);
-                        this.square.giftRedeem = parseFloat(response.data.sales['Gift Certificate Redeemed']);
-                        this.square.cardCollected = response.data.sales['Card Collected'];
-                        this.square.cashCollected = response.data.sales['Cash Collected'];
-                        this.square.refunded =  response.data.sales['Refunded'];
-                        this.technician.grossSale = response.data.sales['Technician Sales'];
-                        this.technician.cardTip = response.data.tips['Technician Tips'];
-                        this.noSquareData =  false;
-                    }
-                    else{
-                        this.square.grossSale = 0;
-                        this.square.cardTip =  0;
-                        this.square.convenienceFee = 0;
-                        this.square.giftRedeem = 0;
-                        this.square.cardCollected = 0;
-                        this.square.cashCollected = 0;
-                        this.square.refunded =  0;
-                        this.technician.grossSale = 0;
-                        this.technician.cardTip = 0;
-                        this.noSquareData = true;
+                    this.isSquareData = response.data.success;
+                    if(this.isSquareData){
+                        this.squareData = response.data;
+
                     }
                 });
 	        },
@@ -347,10 +284,10 @@
 
 			},
 	        addSale(){
-			    let newSales = [];
+
 				for(let i = 0; i < this.sales.length; i++){
 				    if(this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true){
-				        newSales.push(this.sales[i]);
+				        this.newSales.push(this.sales[i]);
 				    }
 				}
 				this.$axios.post('/api/technician-sale/handle-quick-sale',{sales:newSales}).then(response =>{
@@ -362,14 +299,13 @@
 
 				});
 	        },
-
 	        redeemGift(){
 				this.$axios.post('/api/salon-sale/redeem-gift-certificate',{date:this.date, amount:this.redeemGiftAmount})
 					.then(response =>{
-                        console.log(response.data);
 						if(response.data.success){
 						    this.giftRedeemed = true;
 						    this.redeemGiftAmount = null;
+						    this.getSquareData();
 						}
 
 					});
@@ -408,8 +344,6 @@
 	        }
 
         }
-
-
     }
 </script>
 

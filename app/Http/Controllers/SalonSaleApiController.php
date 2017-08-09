@@ -29,5 +29,11 @@ class SalonSaleApiController extends Controller
 
         return response()->json($result,200)->header('Content-type','application/json');
     }
+
+    public function sync(){
+
+        $sales = Salon::getSquareDailySaleMetrics();
+
+    }
 }
 

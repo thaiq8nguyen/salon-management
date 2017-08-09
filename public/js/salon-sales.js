@@ -28189,7 +28189,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28221,81 +28221,133 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-	props: ['saleData'],
+				props: ['saleData'],
 
-	data: function data() {
-		return {
-			sale: null,
+				data: function data() {
+								return {
+												sale: null,
 
-			sales: {
-				headers: [{ text: '', value: "name", sortable: false }, { text: 'Square', value: 'square', sortable: false }, { text: 'Technician', value: 'technician', sortable: false }, { text: 'Difference', value: 'difference', sortable: false }],
-				items: [{
-					value: false,
-					name: 'Gross Sales',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Tips on Card',
-					square: 0,
-					technician: 0,
-					difference: 0
+												squareLogo: '/images/square-logo.png',
 
-				}, {
-					value: false,
-					name: 'Certificates Sold',
-					square: 0,
-					technician: 0,
-					difference: 0
+												sales: {
+																headers: [{ name: '', sortable: false }, { name: 'Square', sortable: false, align: 'right' }, { name: 'Technician', sortable: false }, { name: 'Difference', sortable: false }],
+																items: [{ //Index 0
+																				value: false,
+																				name: 'Gross Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 1
+																				value: false,
+																				name: 'Refund',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
 
-				}, {
-					value: false,
-					name: 'Certificates Redeemed',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Convenience Fees',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}, {
-					value: false,
-					name: 'Processing Fees',
-					square: 0,
-					technician: 0,
-					difference: 0
-				}]
-			}
-		};
-	},
+																}, { //Index 2
+																				value: false,
+																				name: 'Net Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
 
-	watch: {
-		saleData: function saleData() {
-			this.sale = this.saleData;
+																}, { //Index 3
+																				value: false,
+																				name: 'Tips on Card',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
 
-			this.updateSale();
-		}
-	},
-	methods: {
-		updateSale: function updateSale() {
+																}, { //Index 4
+																				value: false,
+																				name: 'Gift Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
 
-			this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
-			this.sales.items[0].technician = this.sale.sales['Technician Gross Sales'];
-			this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];
+																}, { //Index 5
+																				value: false,
+																				name: 'Total Collected',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
 
-			this.sales.items[1].square = this.sale.tips['Square Tips'];
-			this.sales.items[1].technician = this.sale.tips['Technician Tips'];
-			this.sales.items[1].difference = this.sale.tips['Tips Difference'];
+																}, { //Index 6
+																				value: false,
+																				name: 'Gift Redeems',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 7
+																				value: false,
+																				name: 'Convenience Fees',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 8
+																				value: false,
+																				name: 'Processing Fees',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}]
+												}
+								};
+				},
 
-			this.sales.items[3].square = this.sale.sales['Gift Certificate Redeemed'];
-			this.sales.items[4].square = this.sale.sales['Convenience Fee'];
-		}
-	}
+				watch: {
+								saleData: function saleData() {
+												this.sale = this.saleData;
+												this.updateSale();
+								}
+				},
+				methods: {
+								updateSale: function updateSale() {
+
+												this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
+												this.sales.items[0].technician = this.sale.sales['Technician Sales'];
+												this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];
+
+												this.sales.items[1].square = this.sale.sales['Refunded'];
+												this.sales.items[1].technician = this.sale.sales['Refunded'];
+
+												this.sales.items[2].square = this.sale.sales['Square Net Sales'];
+												this.sales.items[2].technician = this.sale.sales['Technician Net Sales'];
+												this.sales.items[2].difference = this.sale.sales['Net Sales Difference'];
+
+												this.sales.items[3].square = this.sale.tips['Square Tips'];
+												this.sales.items[3].technician = this.sale.tips['Technician Tips'];
+												this.sales.items[3].difference = this.sale.tips['Tips Difference'];
+
+												this.sales.items[4].square = this.sale.sales['Gift Certificate'];
+												this.sales.items[4].technician = this.sale.sales['Gift Certificate'];
+
+												this.sales.items[5].square = this.sale.sales['Square Total Collected'];
+												this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
+												this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
+
+												this.sales.items[6].square = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[6].technician = this.sale.sales['Gift Certificate Redeemed'];
+
+												this.sales.items[7].square = this.sale.sales['Convenience Fee'];
+												this.sales.items[7].technician = this.sale.sales['Convenience Fee'];
+
+												this.sales.items[8].square = this.sale.sales['CC Fees'];
+												this.sales.items[8].technician = this.sale.sales['CC Fees'];
+								},
+								syncData: function syncData() {}
+				}
 
 });
 
@@ -28306,10 +28358,25 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('v-card', [_c('v-card-title', {
-    staticClass: "blue darken-2"
+    staticClass: "grey lighten-4"
   }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_vm._v("Salon Sale")])]), _vm._v(" "), _c('v-card-text', [_c('v-data-table', {
+    staticClass: "headline"
+  }, [_vm._v("Salon Sale with "), _c('img', {
+    attrs: {
+      "src": _vm.squareLogo,
+      "height": "60"
+    }
+  })]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "flat": "",
+      "outline": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.syncData($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("cached")]), _vm._v("Sync")], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-data-table', {
     staticClass: "text-md-center",
     attrs: {
       "headers": _vm.sales.headers,
@@ -28317,14 +28384,28 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.name,
+            staticClass: "text-lg-center"
+          }, [_c('p', {
+            staticClass: "subheading blue--text"
+          }, [_vm._v(_vm._s(header.name))])])
+        })
+      }
+    }, {
       key: "items",
       fn: function(props) {
-        return [_c('td', [_vm._v(_vm._s(props.item.name))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
+        return [_c('td', {
+          staticClass: "subheading"
+        }, [_c('strong', [_vm._v(_vm._s(props.item.name))])]), _vm._v(" "), _c('td', {
+          staticClass: "text-md-center subheading"
         }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
+          staticClass: "text-md-center subheading"
         }, [_vm._v("$ " + _vm._s(props.item.technician))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
+          staticClass: "text-md-center subheading"
         }, [_vm._v("$ " + _vm._s(props.item.difference))])]
       }
     }])
