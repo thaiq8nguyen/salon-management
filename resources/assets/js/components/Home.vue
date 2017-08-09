@@ -13,7 +13,7 @@
 										</h3>
 									</v-flex>
 									<v-flex lg2 offset-lg4>
-										<v-icon medium class = "white--text">event_note</v-icon>
+										<v-icon class = "white--text">event_note</v-icon>
 									</v-flex>
 								</v-card-title>
 								<v-card-text>
@@ -53,7 +53,7 @@
 								</v-card-title>
 								<v-card-text>
 									<template v-for="shortcut in shortcuts">
-										<v-btn :href="shortcut.href" primary block>{{shortcut.name}}</v-btn>
+										<v-btn :class="shortcut.color":href="shortcut.href" primary block>{{shortcut.name}}</v-btn>
 									</template>
 								</v-card-text>
 							</v-card>
@@ -95,9 +95,11 @@
         data() {
             return {
                 shortcuts:[
-	                {name:'Add Technician Sale', href:'/technician-sale/add'},
-	                {name:'Pay Technicians', href:'/wages/pay'},
-	                {name:'Salon Sale', href:'/salon-sales'}
+	                {name:'Add Technician Sale', href:'/technician-sale/add', color:'blue darken-4'},
+	                {name:'Pay Technicians', href:'/wages/pay',color:'blue darken-4'},
+	                {name:'Salon Sale', href:'/salon-sales',color:'blue darken-4'},
+	                {name:'Quick Sale Entry', href:'/technician-sale/quick-sale-entry',color:'red darken-4'}
+
                 ]
             }
 

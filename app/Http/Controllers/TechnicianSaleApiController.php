@@ -34,7 +34,41 @@ class TechnicianSaleApiController extends Controller
         return response()->json(['success'=> true, 'message'=> $technician->first_name . '\'s sales has been added for ' . $sale->sale_date_mdy],200)
             ->header('Content-type','application/json');
     }
+    public function handleQuickSale(Request $request){
 
+        $technicianSales = $request->input('sales');
+
+
+        foreach($technicianSales as $technicianSale){
+            $existingSaleID = $technicianSale['existing_sale_id'];
+            $toBeDeleted = $technicianSale['toBeDeleted'];
+            unset($technicianSale['existing_sale_id']);
+
+            if($existingSaleID){
+                $sale = TechnicianSale::find($existingSaleID);
+                if(!$toBeDeleted){
+
+                    $sale->update($technicianSale);
+
+                }else{
+
+                    $sale->destroy($existingSaleID);
+
+                }
+            }
+            else{
+                $sale = new TechnicianSale($technicianSale);
+                $technician = Technician::find($technicianSale['technician_id']);
+                $technician->sales()->save($sale);
+            }
+
+
+        }
+
+
+        return response()->json(['success'=>true]);
+
+    }
     public function editSale(Request $request){
 
         $validator =  Validator::make($request->all(),[
@@ -93,11 +127,10 @@ class TechnicianSaleApiController extends Controller
     public function searchSaleByDate(Request $request)
     {
         $rules = [
-            'saleDate' => 'required|date_format:Y-m-d'
+            'saleDate' => 'required'
         ];
         $message = [
             'required' => 'Sale date is required',
-            'date_format' => "Sale date does not have the correct format (Month/Day/Year)"
 
         ];
 
@@ -125,6 +158,26 @@ class TechnicianSaleApiController extends Controller
 
         return response()->json(['success' => true, 'technicians' => $response, 'saleDate' => $saleDate], 200)
             ->header('Content-type', 'application/json');
+    }
+
+    public function getSaleByDate(Request $request){
+
+        $saleDate = $request->input('saleDate');
+
+        $technicians = Technician::with(['dailySales' => function($query) use ($saleDate){
+            $query->where('sale_date', $saleDate);
+        }])->orderBy('last_name', 'asc')->get();
+
+        $response = [];
+
+        foreach($technicians as $technician){
+            $response[] = ['technicianID'=>$technician->id,'fullName' => ucfirst($technician->fullName), 'dailySales' => $technician->dailySales];
+
+        }
+
+        return response()->json(['success'=>true,'technicians'=>$response],200)
+            ->header('Content-type','application/json');
+
     }
 
 

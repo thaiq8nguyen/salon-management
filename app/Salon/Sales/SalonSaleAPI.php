@@ -57,7 +57,8 @@ class SalonSaleAPI{
         $metrics = [];
         $sales = SalonSale::with(['salonSaleDetails' => function($query){
             $query->orderBy('item','desc')->select('salon_sale_id','item','gross_sales');
-        }])->where('date',$date)->first(['id','date','gross_sales','tips','fees','gift_certificate_redeemed']);
+        }])->where('date',$date)->first(['id','date','gross_sales','tips','fees','gift_certificate_redeemed',
+            'cards_collected','cash_collected','refunded']);
 
         $techSales = TechnicianSale::where('sale_date', $date)->sum('sales');
 
@@ -77,7 +78,10 @@ class SalonSaleAPI{
             foreach($metrics as $item => $value){
                 $sum += $value;
             }
-
+            $metrics['Card Collected'] = $sales->cards_collected;
+            $metrics['Cash Collected'] = $sales->cash_collected;
+            $metrics['CC Fees'] = $sales->fees;
+            $metrics['Refunded'] = $sales->refunded;
             $metrics['Technician Gross Sales'] = number_format($sum,2);
             $metrics['Square Gross Sales'] = $sales->gross_sales;
             $metrics['Gross Sales Difference'] = number_format($metrics['Technician Gross Sales'] - $metrics['Square Gross Sales'],2);

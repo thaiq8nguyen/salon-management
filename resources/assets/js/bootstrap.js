@@ -34,7 +34,7 @@ window.axios.defaults.headers.common = {
 };
 
 
-window.moment = require('moment-es6');
+window.moment = require('moment');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

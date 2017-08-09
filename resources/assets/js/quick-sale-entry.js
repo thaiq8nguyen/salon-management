@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import axios from 'axios';
-import moment from 'moment';
 import Vuetify from 'vuetify';
+import moment from 'moment';
+
 
 Vue.use(Vuetify);
 
@@ -13,11 +14,11 @@ axios.defaults.headers.common ={
     'X-Requested-With': 'XMLHttpRequest'
 };
 
-import Home from './components/Home.vue';
-
-Vue.component('home',Home);
+import QuickSaleEntry from './components/QuickSaleEntry.vue';
+Vue.component('quick-sale-entry', QuickSaleEntry);
 
 const app = new Vue({
-    el:'#root',
 
+
+    el: '#root'
 });
