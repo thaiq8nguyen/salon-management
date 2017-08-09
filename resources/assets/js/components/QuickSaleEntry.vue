@@ -307,6 +307,15 @@
                         this.noSquareData =  false;
                     }
                     else{
+                        this.square.grossSale = 0;
+                        this.square.cardTip =  0;
+                        this.square.convenienceFee = 0;
+                        this.square.giftRedeem = 0;
+                        this.square.cardCollected = 0;
+                        this.square.cashCollected = 0;
+                        this.square.refunded =  0;
+                        this.technician.grossSale = 0;
+                        this.technician.cardTip = 0;
                         this.noSquareData = true;
                     }
                 });
