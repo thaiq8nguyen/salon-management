@@ -27898,11 +27898,327 @@ process.umask = function() { return 0; };
 /* 56 */,
 /* 57 */,
 /* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSaleTable_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5ada2171_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSaleTable_vue__ = __webpack_require__(63);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(60)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_SalonSaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5ada2171_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_SalonSaleTable_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/SalonSaleTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SalonSaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5ada2171", Component.options)
+  } else {
+    hotAPI.reload("data-v-5ada2171", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(61);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("26eb7c58", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ada2171\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSaleTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5ada2171\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SalonSaleTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+				props: ['saleData'],
+
+				data: function data() {
+								return {
+												sale: null,
+
+												squareLogo: '/images/square-logo.png',
+
+												sales: {
+																headers: [{ name: '', sortable: false }, { name: 'Square', sortable: false, align: 'right' }, { name: 'Technician', sortable: false }, { name: 'Difference', sortable: false }],
+																items: [{ //Index 0
+																				value: false,
+																				name: 'Gross Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 1
+																				value: false,
+																				name: 'Refund',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+
+																}, { //Index 2
+																				value: false,
+																				name: 'Net Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+
+																}, { //Index 3
+																				value: false,
+																				name: 'Tips on Card',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+
+																}, { //Index 4
+																				value: false,
+																				name: 'Gift Sales',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+
+																}, { //Index 5
+																				value: false,
+																				name: 'Total Collected',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+
+																}, { //Index 6
+																				value: false,
+																				name: 'Gift Redeems',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 7
+																				value: false,
+																				name: 'Convenience Fees',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}, { //Index 8
+																				value: false,
+																				name: 'Processing Fees',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00'
+																}]
+												}
+								};
+				},
+
+				watch: {
+								saleData: function saleData() {
+												this.sale = this.saleData;
+												this.updateSale();
+								}
+				},
+				methods: {
+								updateSale: function updateSale() {
+
+												this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
+												this.sales.items[0].technician = this.sale.sales['Technician Sales'];
+												this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];
+
+												this.sales.items[1].square = this.sale.sales['Refunded'];
+												this.sales.items[1].technician = this.sale.sales['Refunded'];
+
+												this.sales.items[2].square = this.sale.sales['Square Net Sales'];
+												this.sales.items[2].technician = this.sale.sales['Technician Net Sales'];
+												this.sales.items[2].difference = this.sale.sales['Net Sales Difference'];
+
+												this.sales.items[3].square = this.sale.tips['Square Tips'];
+												this.sales.items[3].technician = this.sale.tips['Technician Tips'];
+												this.sales.items[3].difference = this.sale.tips['Tips Difference'];
+
+												this.sales.items[4].square = this.sale.sales['Gift Certificate'];
+												this.sales.items[4].technician = this.sale.sales['Gift Certificate'];
+
+												this.sales.items[5].square = this.sale.sales['Square Total Collected'];
+												this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
+												this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
+
+												this.sales.items[6].square = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[6].technician = this.sale.sales['Gift Certificate Redeemed'];
+
+												this.sales.items[7].square = this.sale.sales['Convenience Fee'];
+												this.sales.items[7].technician = this.sale.sales['Convenience Fee'];
+
+												this.sales.items[8].square = this.sale.sales['CC Fees'];
+												this.sales.items[8].technician = this.sale.sales['CC Fees'];
+								},
+								syncData: function syncData() {}
+				}
+
+});
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-card', [_c('v-card-title', {
+    staticClass: "grey lighten-4"
+  }, [_c('h3', {
+    staticClass: "headline"
+  }, [_vm._v("Salon Sale with "), _c('img', {
+    attrs: {
+      "src": _vm.squareLogo,
+      "height": "60"
+    }
+  })]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "flat": "",
+      "outline": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.syncData($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("cached")]), _vm._v("Sync")], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-data-table', {
+    staticClass: "text-md-center",
+    attrs: {
+      "headers": _vm.sales.headers,
+      "items": _vm.sales.items,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.name,
+            staticClass: "text-lg-center"
+          }, [_c('p', {
+            staticClass: "subheading blue--text"
+          }, [_vm._v(_vm._s(header.name))])])
+        })
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "subheading"
+        }, [_c('strong', [_vm._v(_vm._s(props.item.name))])]), _vm._v(" "), _c('td', {
+          staticClass: "text-md-center subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
+          staticClass: "text-md-center subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.technician))]), _vm._v(" "), _c('td', {
+          staticClass: "text-md-center subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.difference))])]
+      }
+    }])
+  })], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5ada2171", esExports)
+  }
+}
+
+/***/ }),
 /* 64 */,
 /* 65 */,
 /* 66 */,
@@ -28107,7 +28423,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28117,6 +28433,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__ = __webpack_require__(59);
 //
 //
 //
@@ -28289,58 +28606,19 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-				components: {},
+				components: { SalonSaleTable: __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__["a" /* default */] },
 				props: [],
 
 				data: function data() {
 								return {
 												date: this.$moment().format('YYYY-MM-DD'),
-												square: {
-																grossSale: null,
-																cardTip: null,
-																convenienceFee: null,
-																giftSale: null,
-																giftRedeem: null,
-																cardCollected: null,
-																cashCollected: null,
-																refunded: null
-												},
+												squareData: [],
+												isSquareData: false,
+
 												technician: {
 																grossSale: null,
 																cardTip: null
@@ -28349,15 +28627,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												technicians: [],
 												sale: null,
 												sales: [],
+												newSales: [],
 												isAdded: false,
 												active: null,
 												openDialog: false,
 												loadingData: false,
-												noSquareData: false,
 												redeemGiftAmount: null,
-												giftRedeemed: false,
-
-												images: [{ name: 'Square Logo', src: '/images/square-logo.png' }]
+												giftRedeemed: false
 
 								};
 				},
@@ -28390,7 +28666,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												return cardTip;
 								},
 								technicianGrossSale: function technicianGrossSale() {
-												return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
+												//return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
 								}
 				},
 				mounted: function mounted() {
@@ -28410,31 +28686,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 												this.loadingData = true;
 												this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
-
+																console.log(response.data);
 																_this.loadingData = false;
-																if (response.data.success) {
-																				_this.square.grossSale = response.data.sales['Square Gross Sales'];
-																				_this.square.cardTip = response.data.tips['Square Tips'];
-																				_this.square.convenienceFee = parseFloat(response.data.sales['Convenience Fee']);
-																				_this.square.giftSale = parseFloat(response.data.sales['Gift Certificate']);
-																				_this.square.giftRedeem = parseFloat(response.data.sales['Gift Certificate Redeemed']);
-																				_this.square.cardCollected = response.data.sales['Card Collected'];
-																				_this.square.cashCollected = response.data.sales['Cash Collected'];
-																				_this.square.refunded = response.data.sales['Refunded'];
-																				_this.technician.grossSale = response.data.sales['Technician Sales'];
-																				_this.technician.cardTip = response.data.tips['Technician Tips'];
-																				_this.noSquareData = false;
-																} else {
-																				_this.square.grossSale = 0;
-																				_this.square.cardTip = 0;
-																				_this.square.convenienceFee = 0;
-																				_this.square.giftRedeem = 0;
-																				_this.square.cardCollected = 0;
-																				_this.square.cashCollected = 0;
-																				_this.square.refunded = 0;
-																				_this.technician.grossSale = 0;
-																				_this.technician.cardTip = 0;
-																				_this.noSquareData = true;
+																_this.isSquareData = response.data.success;
+																if (_this.isSquareData) {
+																				_this.squareData = response.data;
 																}
 												});
 								},
@@ -28464,10 +28720,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 								addSale: function addSale() {
 												var _this3 = this;
 
-												var newSales = [];
 												for (var i = 0; i < this.sales.length; i++) {
 																if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
-																				newSales.push(this.sales[i]);
+																				this.newSales.push(this.sales[i]);
 																}
 												}
 												this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: newSales }).then(function (response) {
@@ -28482,10 +28737,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												var _this4 = this;
 
 												this.$axios.post('/api/salon-sale/redeem-gift-certificate', { date: this.date, amount: this.redeemGiftAmount }).then(function (response) {
-																console.log(response.data);
 																if (response.data.success) {
 																				_this4.giftRedeemed = true;
 																				_this4.redeemGiftAmount = null;
+																				_this4.getSquareData();
 																}
 												});
 								},
@@ -28518,7 +28773,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												return this.active === index;
 								}
 				}
-
 });
 
 /***/ }),
@@ -28593,69 +28847,23 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg6": "",
+      "lg11": "",
       "mt-2": ""
     }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "grey lighten-4"
-  }, [_c('img', {
+  }, [(_vm.isSquareData) ? [_c('salon-sale-table', {
     attrs: {
-      "src": _vm.images[0].src,
-      "height": 74
+      "saleData": _vm.squareData
     }
-  })]), _vm._v(" "), _c('v-card-text', [(_vm.loadingData) ? _c('div', {
-    staticClass: "text-lg-center"
-  }, [_c('v-progress-circular', {
-    staticClass: "red--text",
-    attrs: {
-      "indeterminate": ""
-    }
-  }), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Loading...")])], 1) : _vm._e(), _vm._v(" "), (_vm.noSquareData) ? _c('div', {
+  })] : [_c('v-card', [_c('v-card-text', {
     staticClass: "text-lg-center"
   }, [_c('v-icon', {
     staticClass: "red--text",
     attrs: {
       "large": ""
     }
-  }, [_vm._v("warning")]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("No Square data available, please choose another date")])], 1) : _c('div', [_c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Gross Sales: $ " + _vm._s(_vm.square.grossSale))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Card: $ " + _vm._s(_vm.square.cardCollected))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Cash: $ " + _vm._s(_vm.square.cashCollected))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Card Tip: $ " + _vm._s(_vm.square.cardTip))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Convenience Fee: $ " + _vm._s(_vm.square.convenienceFee))]), _vm._v(" "), (_vm.square.giftSale > 0) ? _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Gift Sales: $ " + _vm._s(_vm.square.giftSale))]) : _vm._e(), _vm._v(" "), (_vm.square.giftRedeem < 0) ? _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Gift Redeemed $ " + _vm._s(_vm.square.giftRedeem))]) : _vm._e(), _vm._v(" "), (_vm.square.refunded > 0) ? _c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Refunded: $ " + _vm._s(_vm.square.refunded))]) : _vm._e()])])], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg6": "",
-      "mt-2": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "amber darken-1"
-  }, [_c('h3', {
-    staticClass: "display-1 white--text"
-  }, [_vm._v("Technician Sale")])]), _vm._v(" "), _c('v-card-text', [_c('v-list', [_c('p', {
-    staticClass: "headline",
-    class: {
-      'green--text darken-1': _vm.square.grossSale == _vm.technicianGrossSale
-    }
-  }, [_c('strong', [_vm._v("Gross Sales:")]), _vm._v(" $ " + _vm._s(_vm.technicianGrossSale))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_c('strong', [_vm._v("Tech Sales :")]), _vm._v(" $ " + _vm._s(_vm.technicianSale))]), _vm._v(" "), _c('p', {
-    staticClass: "headline"
-  }, [_c('strong', [_vm._v("Card Tip :")]), _vm._v("$ " + _vm._s(_vm.technicianCardTip))])])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("info")]), _vm._v(" "), _c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("There is no data recorded for this date")])], 1)], 1)]], 2), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg6": "",
       "mt-2": ""
@@ -28838,7 +29046,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("Verify")])], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
     attrs: {
-      "width": "480"
+      "width": "540"
     },
     model: {
       value: (_vm.openDialog),
@@ -28851,25 +29059,29 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "text-lg-center blue darken-1"
   }, [_c('p', {
     staticClass: "headline white--text"
-  }, [_vm._v("Confirm Sale for " + _vm._s(_vm.saleDate) + " ")])]), _vm._v(" "), _c('v-card-text', [_c('v-list', [_c('v-layout', [_c('v-flex', {
+  }, [_vm._v("Confirm Sale for " + _vm._s(_vm.saleDate) + " ")])]), _vm._v(" "), _c('v-card-text', [_c('v-list', [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
     attrs: {
       "lg6": ""
     }
   }), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": ""
+      "lg2": ""
     }
   }, [_c('p', {
     staticClass: "title"
   }, [_vm._v("Sale")])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": ""
+      "lg2": ""
     }
   }, [_c('p', {
     staticClass: "title"
   }, [_vm._v("Tip")])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": ""
+      "lg2": ""
     }
   })], 1), _vm._v(" "), _vm._l((_vm.technicians), function(technician, index) {
     return [_c('v-list-tile-content', [_c('v-list-tile-sub-title', [_c('v-layout', [_c('v-flex', {
@@ -28880,19 +29092,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "title"
     }, [_vm._v(_vm._s(technician.fullName))])]), _vm._v(" "), _c('v-flex', {
       attrs: {
-        "lg3": ""
+        "lg2": "",
+        "ml-1": ""
       }
     }, [_c('p', {
       staticClass: "title"
     }, [_vm._v("$ " + _vm._s(_vm.sales[index].sales))])]), _vm._v(" "), _c('v-flex', {
       attrs: {
-        "lg3": ""
+        "lg2": "",
+        "ml-1": ""
       }
     }, [_c('p', {
       staticClass: "title"
     }, [_vm._v("$ " + _vm._s(_vm.sales[index].additional_sales))])]), _vm._v(" "), _c('v-flex', {
       attrs: {
-        "lg3": ""
+        "lg2": ""
       }
     }, [(_vm.sales[index].existing_sale_id !== null && _vm.sales[index].sales > 0) ? _c('p', {
       staticClass: "text-xs-center",
@@ -28904,7 +29118,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "text-xs-center",
       class: ['title red white--text']
     }, [_vm._v("Delete")]) : _vm._e()])], 1)], 1)], 1)]
-  })], 2)], 1), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+  })], 2), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.newSales.length > 0),
+      expression: "newSales.length > 0"
+    }],
     attrs: {
       "primary": ""
     },
@@ -28921,7 +29141,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.openDialog = false
       }
     }
-  }, [_vm._v("Close")])], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("Close")])], 1), _vm._v(" "), _c('v-card-text')], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
