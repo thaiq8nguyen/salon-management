@@ -2,27 +2,45 @@
 	<div>
 		<v-card>
 			<v-card-title class = "grey lighten-4">
-				<h3 class = "headline">Salon Sale with <img :src="squareLogo" height="60">
-				</h3>
-				<v-btn flat @click.native="syncData" outline><v-icon>cached</v-icon>Sync</v-btn>
+				<v-layout>
+					<v-flex lg11>
+						<p class = "headline">Salon Sale with <img :src="squareLogo" height="60"></p>
+					</v-flex>
+					<v-flex lg1 ml-4>
+						<v-btn flat @click.native="syncData" outline><v-icon>cached</v-icon></v-btn>
+					</v-flex>
+				</v-layout>
+
+
 			</v-card-title>
 			<v-card-text>
-				<v-data-table :headers="sales.headers" :items="sales.items" hide-actions class="text-md-center">
+				<template v-if="isSquareData">
+					<v-data-table :headers="sales.headers" :items="sales.items" hide-actions class="text-md-center">
 
-					<template slot="headers" scope="props">
+						<template slot="headers" scope="props">
 
-						<th v-for="header in props.headers" :key="header.name" class="text-lg-center">
-							<p class = "subheading blue--text">{{ header.name }}</p>
-						</th>
-					</template>
+							<th v-for="header in props.headers" :key="header.name" class="text-lg-center">
+								<p class = "subheading blue--text">{{ header.name }}</p>
+							</th>
+						</template>
 
-					<template slot="items" scope="props">
-						<td class = "subheading"><strong>{{ props.item.name}}</strong></td>
-						<td class = "text-md-center subheading">$ {{ props.item.square}}</td>
-						<td class = "text-md-center subheading">$ {{ props.item.technician }}</td>
-						<td class = "text-md-center subheading">$ {{ props.item.difference }}</td>
-					</template>
-				</v-data-table>
+						<template slot="items" scope="props">
+							<td class = "subheading"><strong>{{ props.item.name}}</strong></td>
+							<td class = "text-md-center subheading">$ {{ props.item.square}}</td>
+							<td class = "text-md-center subheading">$ {{ props.item.technician }}</td>
+							<td class = "text-md-center subheading">$ {{ props.item.difference }}</td>
+						</template>
+					</v-data-table>
+				</template>
+				<template v-else>
+					<v-card>
+						<v-card-text class = "text-lg-center">
+							<v-icon large class = "red--text">info</v-icon>
+							<p class = "subheading">There is no data recorded for this date</p>
+						</v-card-text>
+					</v-card>
+				</template>
+
 			</v-card-text>
 		</v-card>
 	</div>
@@ -36,7 +54,8 @@
         data(){
             return {
                 sale:null,
-
+				isSquareData: true,
+	            date: this.$moment().format('YYYY-MM-DD'),
 	            squareLogo:'/images/square-logo.png',
 
                 sales:{
@@ -121,14 +140,31 @@
                 }
             }
         },
+
+	    mounted(){
+            this.getSquareData();
+
+	    },
 	    watch:{
             saleData:function(){
                 this.sale = this.saleData;
                 this.updateSale();
             }
 	    },
-        methods: {
 
+        methods: {
+			getSquareData(){
+                this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
+                    if(response.data.success){
+                        this.sale = response.data;
+                        this.updateSale();
+						this.squareData = true;
+                    }else{
+                        this.squareData = false;
+                    }
+
+                });
+			},
             updateSale(){
 
                 this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
@@ -166,6 +202,7 @@
 
             },
 	        syncData(){
+
 
 	        }
         }

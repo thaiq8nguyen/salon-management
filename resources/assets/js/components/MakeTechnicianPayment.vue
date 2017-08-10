@@ -82,7 +82,8 @@
 					periodId: this.periodId, payments: this.payments}).then(response => {
 					if(response.data.success){
 						this.isPaid = true;
-						this.isPaidMessage =  response.data.message
+						this.isPaidMessage =  response.data.message;
+						this.$emit('paid');
 					}
 				});
             },

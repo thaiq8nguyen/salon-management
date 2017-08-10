@@ -9,43 +9,53 @@
 								<v-card>
 									<v-card-text>
 										<v-expansion-panel>
-											<v-expansion-panel-content v-for="(technician,index) in technicians" :key="technician.id">
+											<v-expansion-panel-content v-for="(technician,index) in technicians" :key="technician.id" >
 												<div slot="header">
-													<p class = "subheading">{{technician.first_name + ' ' + technician.last_name}}
+													<p class = "headline">{{technician.full_name}}
 														<span v-if="technician.count_payments.length > 0">
 												<v-chip label small outline class = "green--text"><v-icon class = "green--text">done</v-icon>Paid</v-chip>
 											</span>
 													</p>
 												</div>
 												<v-card>
-													<v-card-text>
+													<v-card-text class = "blue lighten-3">
 														<v-layout>
-															<v-flex lg3>
-																<v-card class = "elevation-1">
+															<v-flex lg4>
+																<v-card class = "elevation-1 grey lighten-4">
 																	<v-card-text>
-																		<v-data-table :headers="dailySales.headers" :items="technician.daily_sales" hide-actions>
+																		<v-data-table :headers="dailySales.headers" :items="technician.daily_sales" hide-actions >
+																			<template slot="headers" scope="props">
+																				<th v-for="header in props.headers" :key="header.text">
+																					<p class = "subheading text-lg-center">{{ header.text }}</p>
+																				</th>
+																			</template>
 																			<template slot="items" scope="props">
-																				<td class = "text-xs-center">{{ readableDate(props.item.sale_date) }}</td>
-																				<td class = "text-xs-right">$ {{ props.item.sales }}</td>
-																				<td class = "text-xs-right">$ {{ props.item.additional_sales }}</td>
+																				<td class = "text-xs-center subheading">{{ readableDate(props.item.sale_date) }}</td>
+																				<td class = "text-xs-right subheading">$ {{ props.item.sales }}</td>
+																				<td class = "text-xs-right subheading">$ {{ props.item.additional_sales }}</td>
 																			</template>
 																		</v-data-table>
 																	</v-card-text>
 																</v-card>
 															</v-flex>
-															<v-flex lg6>
+															<v-flex lg7>
 																<v-layout row wrap>
 																	<v-flex lg12>
-																		<v-card class = "elevation-1">
+																		<v-card class = "elevation-1 grey lighten-4">
 																			<v-card-text>
 																				<v-data-table :headers="totalSales.headers" :items="technician.total_sales_and_tips"
 																				              hide-actions>
+																					<template slot="headers" scope="props">
+																						<th v-for="header in props.headers" :key="header.text">
+																							<p class = "subheading text-lg-center">{{ header.text }}</p>
+																						</th>
+																					</template>
 																					<template slot="items" scope="props">
-																						<td class = "text-xs-right">$ {{ props.item.subTotal }}</td>
-																						<td class = "text-xs-right">$ {{ props.item.subTotalTip }}</td>
-																						<td class = "text-xs-right">$ {{ props.item.earnedTotal }}</td>
-																						<td class = "text-xs-right">$ {{ props.item.earnedTip }}</td>
-																						<td class = "text-xs-right red--text subheading">$ {{ props.item.total }}</td>
+																						<td class = "text-xs-right subheading">$ {{ props.item.subTotal }}</td>
+																						<td class = "text-xs-right subheading">$ {{ props.item.subTotalTip }}</td>
+																						<td class = "text-xs-right subheading">$ {{ props.item.earnedTotal }}</td>
+																						<td class = "text-xs-right subheading">$ {{ props.item.earnedTip }}</td>
+																						<td class = "text-lg-center red--text headline">$ {{ props.item.total }}</td>
 																					</template>
 																				</v-data-table>
 																			</v-card-text>
@@ -53,7 +63,7 @@
 																	</v-flex>
 																	<v-flex lg12 mt-2>
 																		<template v-if="technician.count_payments.length == 0">
-																			<make-payment :technician="technician" :period-id="periodId" :index="index"></make-payment>
+																			<make-payment :technician="technician" :period-id="periodId" :index="index" v-on:paid="paid"></make-payment>
 																		</template>
 																		<template v-else>
 																			<v-card  class = "elevation-1">
@@ -61,7 +71,7 @@
 																					<p class = "headline white--text">Make Payments</p>
 																				</v-card-title>
 																				<v-card-text>
-																					<h3 class = "headline">{{ technician.first_name + ' \'s has been paid' }}</h3>
+																					<h3 class = "headline">{{ technician.full_name + ' \'s has been paid' }}</h3>
 																				</v-card-text>
 																				<v-card-actions>
 																					<v-btn @click.native="viewPaymentReport(technician.first_name)" primary>View Report</v-btn>
@@ -104,7 +114,7 @@
     export default {
         components:
             {
-	            MakePayment, VExpansionPanel
+	            MakePayment
             },
 
 
@@ -147,11 +157,14 @@
                 });
             },
             readableDate(date){
-                return this.$moment(date).format('MM/DD/YY dd');
+                return this.$moment(date).format('MM/DD/YY dddd');
             },
             viewPaymentReport(first_name){
                 window.location.href='/report/'+ first_name + '/payment/' + this.periodId
             },
+	        paid(){
+                this.getWages(this.periodId);
+	        }
         }
     }
 </script>
