@@ -27875,16 +27875,21 @@ process.umask = function() { return 0; };
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 36 */
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(45);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(37)
+  __webpack_require__(42)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -27928,13 +27933,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 37 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -27954,7 +27959,7 @@ if(false) {
 }
 
 /***/ }),
-/* 38 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -27968,7 +27973,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 39 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28038,7 +28043,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 40 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28114,11 +28119,6 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
 /* 46 */,
 /* 47 */,
 /* 48 */,
@@ -28206,7 +28206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PayPeriodHeader_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PayPeriodHeader_vue__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PayDay_vue__ = __webpack_require__(115);
 
 
@@ -28332,7 +28332,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28442,6 +28442,16 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -28449,7 +28459,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     components: {
-        MakePayment: __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__["a" /* default */], VExpansionPanel: __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__["a" /* default */]
+        MakePayment: __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__["a" /* default */]
     },
 
     props: [],
@@ -28481,10 +28491,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             });
         },
         readableDate: function readableDate(date) {
-            return this.$moment(date).format('MM/DD/YY dd');
+            return this.$moment(date).format('MM/DD/YY dddd');
         },
         viewPaymentReport: function viewPaymentReport(first_name) {
             window.location.href = '/report/' + first_name + '/payment/' + this.periodId;
+        },
+        paid: function paid() {
+            this.getWages(this.periodId);
         }
     }
 });
@@ -28494,7 +28507,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* unused harmony default export */ var _unused_webpack_default_export = ({
   name: 'v-expansion-panel',
 
   props: {
@@ -28605,7 +28618,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28700,6 +28713,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
                 if (response.data.success) {
                     _this.isPaid = true;
                     _this.isPaidMessage = response.data.message;
+                    _this.$emit('paid');
                 }
             });
         },
@@ -28838,7 +28852,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												amount: null,
 												ref: null,
 												method: null,
-												methods: ['cash', 'check']
+												methods: ['cash', 'check', 'direct']
 								};
 				},
 
@@ -29264,8 +29278,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }, [_c('div', {
       slot: "header"
     }, [_c('p', {
-      staticClass: "subheading"
-    }, [_vm._v(_vm._s(technician.first_name + ' ' + technician.last_name) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+      staticClass: "headline"
+    }, [_vm._v(_vm._s(technician.full_name) + "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"), (technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
       staticClass: "green--text",
       attrs: {
         "label": "",
@@ -29274,12 +29288,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-icon', {
       staticClass: "green--text"
-    }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _vm._e()])]), _vm._v(" "), _c('v-card', [_c('v-card-text', [_c('v-layout', [_c('v-flex', {
+    }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _vm._e()])]), _vm._v(" "), _c('v-card', [_c('v-card-text', {
+      staticClass: "blue lighten-3"
+    }, [_c('v-layout', [_c('v-flex', {
       attrs: {
-        "lg3": ""
+        "lg4": ""
       }
     }, [_c('v-card', {
-      staticClass: "elevation-1"
+      staticClass: "elevation-1 grey lighten-4"
     }, [_c('v-card-text', [_c('v-data-table', {
       attrs: {
         "headers": _vm.dailySales.headers,
@@ -29287,20 +29303,31 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "hide-actions": ""
       },
       scopedSlots: _vm._u([{
+        key: "headers",
+        fn: function(props) {
+          return _vm._l((props.headers), function(header) {
+            return _c('th', {
+              key: header.text
+            }, [_c('p', {
+              staticClass: "subheading text-lg-center"
+            }, [_vm._v(_vm._s(header.text))])])
+          })
+        }
+      }, {
         key: "items",
         fn: function(props) {
           return [_c('td', {
-            staticClass: "text-xs-center"
+            staticClass: "text-xs-center subheading"
           }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
         }
       }])
     })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
       attrs: {
-        "lg6": ""
+        "lg7": ""
       }
     }, [_c('v-layout', {
       attrs: {
@@ -29312,7 +29339,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "lg12": ""
       }
     }, [_c('v-card', {
-      staticClass: "elevation-1"
+      staticClass: "elevation-1 grey lighten-4"
     }, [_c('v-card-text', [_c('v-data-table', {
       attrs: {
         "headers": _vm.totalSales.headers,
@@ -29320,18 +29347,29 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "hide-actions": ""
       },
       scopedSlots: _vm._u([{
+        key: "headers",
+        fn: function(props) {
+          return _vm._l((props.headers), function(header) {
+            return _c('th', {
+              key: header.text
+            }, [_c('p', {
+              staticClass: "subheading text-lg-center"
+            }, [_vm._v(_vm._s(header.text))])])
+          })
+        }
+      }, {
         key: "items",
         fn: function(props) {
           return [_c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.subTotal))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right"
+            staticClass: "text-xs-right subheading"
           }, [_vm._v("$ " + _vm._s(props.item.earnedTip))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right red--text subheading"
+            staticClass: "text-lg-center red--text headline"
           }, [_vm._v("$ " + _vm._s(props.item.total))])]
         }
       }])
@@ -29345,6 +29383,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "technician": technician,
         "period-id": _vm.periodId,
         "index": index
+      },
+      on: {
+        "paid": _vm.paid
       }
     })] : [_c('v-card', {
       staticClass: "elevation-1"
@@ -29354,7 +29395,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "headline white--text"
     }, [_vm._v("Make Payments")])]), _vm._v(" "), _c('v-card-text', [_c('h3', {
       staticClass: "headline"
-    }, [_vm._v(_vm._s(technician.first_name + ' \'s has been paid'))])]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+    }, [_vm._v(_vm._s(technician.full_name + ' \'s has been paid'))])]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
       attrs: {
         "primary": ""
       },

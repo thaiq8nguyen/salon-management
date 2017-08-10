@@ -30,7 +30,7 @@
 	            ref:null,
 	            method:null,
 	            methods:[
-	                'cash','check'
+	                'cash','check','direct'
 	            ]
             }
 

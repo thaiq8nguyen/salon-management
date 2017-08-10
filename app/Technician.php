@@ -50,15 +50,17 @@ class Technician extends Model
 
     }
     public function totalSalesAndTips(){
+
         return $this->sales()
-            ->selectRaw('technician_id, sum(sales) as subTotal, ROUND(sum(sales) * ' . $this->salary->commission_rate .',2) as earnedTotal,
-                        sum(additional_sales) as subTotalTip, ROUND(sum(additional_sales) * ' . $this->salary->tip_rate .',2) as earnedTip,
-                        ROUND(sum(sales) * ' . $this->salary->commission_rate .' - sum(additional_sales) * ' . $this->salary->tip_rate .') as total')
+            ->selectRaw('technician_sales.technician_id, sum(sales) as subTotal, ROUND(sum(sales) * salaries.commission_rate,2) as earnedTotal,
+                        sum(additional_sales) as subTotalTip, ROUND(sum(additional_sales) * salaries.tip_rate,2) as earnedTip,
+                        ROUND(sum(sales) * salaries.commission_rate - sum(additional_sales) * salaries.tip_rate) as total')
+            ->join('salaries','technician_sales.technician_id','=','salaries.technician_id')
             ->groupBy('technician_id');
     }
 
     public function salary(){
-        return $this->hasOne(Salary::class);
+        return $this->hasOne(Salary::class)->select(['technician_id','commission_rate','tip_rate']);
     }
 
     public function getFullNameAttribute(){

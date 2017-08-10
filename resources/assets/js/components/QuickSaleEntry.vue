@@ -2,6 +2,7 @@
 	<div>
 		<v-app class = "blue lighten-4">
 		<v-container fluid>
+
 			<v-layout row wrap>
 				<v-flex lg12>
 					<v-alert success v-model="isAdded" transition="fade" class = "text-lg-center" dismissible>
@@ -15,7 +16,27 @@
 								<v-flex lg6>
 									<v-layout row wrap>
 										<v-flex lg11>
-											<v-date-picker v-model="date" landscape></v-date-picker>
+											<!--<v-date-picker v-model="date" landscape></v-date-picker>-->
+											<v-menu
+													lazy
+													:close-on-content-click="true"
+													v-model="dateMenu"
+													transition="scale-transition"
+													offset-y
+													full-width
+													:nudge-left="40"
+													max-width="290px"
+											>
+												<v-text-field
+														slot="activator"
+														label="Select a sale date"
+														v-model="date"
+														prepend-icon="event"
+														readonly
+												></v-text-field>
+												<v-date-picker v-model="date"
+												               no-title scrollable actions></v-date-picker>
+											</v-menu>
 										</v-flex>
 										<v-flex lg11 mt-2><!--Square Data-->
 											<template v-if="isSquareData">
@@ -180,6 +201,7 @@
         data() {
             return {
                 date: this.$moment().format('YYYY-MM-DD'),
+	            dateMenu:false,
 	            squareData:[],
 	            isSquareData: false,
 
@@ -248,7 +270,6 @@
 	        getSquareData(){
 	            this.loadingData = true;
                 this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
-                    console.log(response.data);
                     this.loadingData = false;
                     this.isSquareData = response.data.success;
                     if(this.isSquareData){

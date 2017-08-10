@@ -18,25 +18,38 @@ class PayDayApiController extends Controller
 
         $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
 
-        $technicians = Technician::whereHas('sales',function($query) use ($payPeriodDates){
-            $query->whereBetween('sale_date',$payPeriodDates);
-        })->with(['dailySales' =>
+        $technicians = Technician::with([
+            'dailySales' =>
             function($query) use ($payPeriodDates) {
                 $query->whereBetween('sale_date', $payPeriodDates);
             },
             'totalSalesAndTips' =>
-                function($query) use($payPeriodDates){
-                    $query->whereBetween('sale_date', $payPeriodDates);
-                }
-        ])->with(['countPayments' =>
-
+            function($query) use($payPeriodDates){
+                $query->whereBetween('sale_date', $payPeriodDates);
+            },'countPayments' =>
             function($query) use($payPeriodId){
                 $query->where('pay_period_id', '=', $payPeriodId);
 
-            }])->orderBy('last_name')->get(['id','first_name','last_name']);
+            },'salary']
 
+            )->orderBy('last_name')->get(['id','first_name','last_name']);
 
-        return response()->json($technicians,200)->header('Content-type','application/json');
+        $results = [];
+        foreach($technicians as $technician){
+
+            $result['count_payments'] = $technician->countPayments;
+            $result['daily_sales'] = $technician->dailySales;
+            $result['id'] = $technician->id;
+            $result['salary_rate'] = $technician->salary;
+            $result['total_sales_and_tips'] = $technician->totalSalesAndTips;
+            $result['full_name'] = $technician->fullName;
+            $result['first_name'] = $technician->first_name;
+
+            array_push($results, $result);
+
+        }
+
+        return response()->json($results,200)->header('Content-type','application/json');
     }
 
     public function payTechnician(Request $request){
