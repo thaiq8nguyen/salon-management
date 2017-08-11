@@ -6,7 +6,7 @@
 			<v-layout row wrap>
 				<v-flex lg12>
 					<v-alert success v-model="isAdded" transition="fade" class = "text-lg-center" dismissible>
-						<p class = "headline ">Technician Sale has been added</p>
+						<p class = "headline ">Technician Sale has been updated</p>
 					</v-alert>
 				</v-flex>
 				<v-flex lg12>
@@ -16,7 +16,6 @@
 								<v-flex lg6>
 									<v-layout row wrap>
 										<v-flex lg11>
-											<!--<v-date-picker v-model="date" landscape></v-date-picker>-->
 											<v-menu
 													lazy
 													:close-on-content-click="true"
@@ -52,19 +51,7 @@
 											</template>
 										</v-flex>
 										<v-flex lg6 mt-2>
-											<v-card>
-												<v-card-title class = "indigo darken-1">
-													<h3 class = "display-1 white--text">Redeem Gift</h3>
-												</v-card-title>
-												<v-card-text>
-													<form>
-														<v-text-field type="number" max="3" label = "Amount" v-model="redeemGiftAmount" prefix="$"></v-text-field>
-														<v-btn @click.submit.prevent="redeemGift" primary >Redeem</v-btn>
-													</form>
-													<v-spacer></v-spacer>
-													<v-alert success v-model="giftRedeemed" dismissible>The gift is redeemed</v-alert>
-												</v-card-text>
-											</v-card>
+											<v-btn class = "ma-3" primary @click.native.stop="openDialog">Verify</v-btn>
 										</v-flex>
 
 									</v-layout>
@@ -117,9 +104,6 @@
 														<v-checkbox :label="`Delete`" v-model="sales[index].toBeDeleted"
 														            v-if="sales[index].existing_sale_id && sales[index].sales == 0"></v-checkbox>
 													</v-flex>
-													<v-flex lg2>
-
-													</v-flex>
 												</v-layout>
 											</v-list-tile-sub-title>
 										</v-list-tile-content>
@@ -128,15 +112,11 @@
 							</v-flex>
 						</v-layout>
 						</v-card-text>
-						<v-divider></v-divider>
-						<v-card-text class = "text-xs-right">
-							<v-btn class = "ma-3" primary @click.native.stop="openDialog = true">Verify</v-btn>
-						</v-card-text>
 					</v-card>
 				</v-flex>
 			</v-layout>
 		</v-container>
-		<v-dialog v-model="openDialog" width="540">
+		<v-dialog v-model="dialog" width="540">
 			<v-card>
 				<v-card-title class = "text-lg-center blue darken-1">
 					<p class = "headline white--text">Confirm Sale for {{ saleDate }} </p>
@@ -181,7 +161,7 @@
 					</v-list>
 					<v-spacer></v-spacer>
 					<v-btn @click.native="addSale" primary v-show="newSales.length > 0"><v-icon class = "white--text">add</v-icon>Add</v-btn>
-					<v-btn @click.native="openDialog = false">Close</v-btn>
+					<v-btn @click.native="closeDialog">Close</v-btn>
 				</v-card-text>
 				<v-card-text>
 
@@ -216,10 +196,9 @@
 	            newSales:[],
 	            isAdded: false,
 	            active: null,
-	            openDialog: false,
+	            dialog: false,
 	            loadingData:false,
-	            redeemGiftAmount:null,
-	            giftRedeemed:false,
+
 
             }
         },
@@ -302,36 +281,36 @@
                     this.sale = null;
                 });
 
-
 			},
 	        addSale(){
 
-				for(let i = 0; i < this.sales.length; i++){
-				    if(this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true){
-				        this.newSales.push(this.sales[i]);
-				    }
-				}
-				this.$axios.post('/api/technician-sale/handle-quick-sale',{sales:newSales}).then(response =>{
+				this.$axios.post('/api/technician-sale/handle-quick-sale',{sales:this.newSales}).then(response =>{
 				    if(response.data.success){
-				        this.openDialog = false;
+				        this.dialog = false;
 				        this.isAdded = true;
 				        this.reset();
 				    }
 
 				});
 	        },
-	        redeemGift(){
-				this.$axios.post('/api/salon-sale/redeem-gift-certificate',{date:this.date, amount:this.redeemGiftAmount})
-					.then(response =>{
-						if(response.data.success){
-						    this.giftRedeemed = true;
-						    this.redeemGiftAmount = null;
-						    this.getSquareData();
-						}
 
-					});
+	        openDialog(){
+                for(let i = 0; i < this.sales.length; i++){
+                    if(this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true){
+                        this.newSales.push(this.sales[i]);
+                    }
+                }
+                this.dialog = true;
+
 	        },
+
+	        closeDialog(){
+	            this.newSales = [];
+	            this.dialog = false;
+	        },
+
 			reset(){
+	            this.getSquareData();
 	            this.getAllTechnicians();
 
 			},

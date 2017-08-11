@@ -12,7 +12,7 @@ class PaymentReportController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','checkPayPeriod']);
+        //$this->middleware(['auth','checkPayPeriod']);
     }
 
     public function show(Technician $technician, PayPeriod $payPeriod){

@@ -27962,7 +27962,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27972,8 +27972,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
 //
 //
 //
@@ -28477,7 +28475,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28488,26 +28486,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__ = __webpack_require__(36);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -28706,10 +28684,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												newSales: [],
 												isAdded: false,
 												active: null,
-												openDialog: false,
-												loadingData: false,
-												redeemGiftAmount: null,
-												giftRedeemed: false
+												dialog: false,
+												loadingData: false
 
 								};
 				},
@@ -28795,31 +28771,28 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 								addSale: function addSale() {
 												var _this3 = this;
 
-												for (var i = 0; i < this.sales.length; i++) {
-																if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
-																				this.newSales.push(this.sales[i]);
-																}
-												}
-												this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: newSales }).then(function (response) {
+												this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: this.newSales }).then(function (response) {
 																if (response.data.success) {
-																				_this3.openDialog = false;
+																				_this3.dialog = false;
 																				_this3.isAdded = true;
 																				_this3.reset();
 																}
 												});
 								},
-								redeemGift: function redeemGift() {
-												var _this4 = this;
-
-												this.$axios.post('/api/salon-sale/redeem-gift-certificate', { date: this.date, amount: this.redeemGiftAmount }).then(function (response) {
-																if (response.data.success) {
-																				_this4.giftRedeemed = true;
-																				_this4.redeemGiftAmount = null;
-																				_this4.getSquareData();
+								openDialog: function openDialog() {
+												for (var i = 0; i < this.sales.length; i++) {
+																if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
+																				this.newSales.push(this.sales[i]);
 																}
-												});
+												}
+												this.dialog = true;
+								},
+								closeDialog: function closeDialog() {
+												this.newSales = [];
+												this.dialog = false;
 								},
 								reset: function reset() {
+												this.getSquareData();
 												this.getAllTechnicians();
 								},
 								clearInput: function clearInput(index, input) {
@@ -28887,7 +28860,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('p', {
     staticClass: "headline "
-  }, [_vm._v("Technician Sale has been added")])])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Technician Sale has been updated")])])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg12": ""
     }
@@ -28976,48 +28949,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "lg6": "",
       "mt-2": ""
     }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "indigo darken-1"
-  }, [_c('h3', {
-    staticClass: "display-1 white--text"
-  }, [_vm._v("Redeem Gift")])]), _vm._v(" "), _c('v-card-text', [_c('form', [_c('v-text-field', {
-    attrs: {
-      "type": "number",
-      "max": "3",
-      "label": "Amount",
-      "prefix": "$"
-    },
-    model: {
-      value: (_vm.redeemGiftAmount),
-      callback: function($$v) {
-        _vm.redeemGiftAmount = $$v
-      },
-      expression: "redeemGiftAmount"
-    }
-  }), _vm._v(" "), _c('v-btn', {
+  }, [_c('v-btn', {
+    staticClass: "ma-3",
     attrs: {
       "primary": ""
     },
-    on: {
+    nativeOn: {
       "click": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "submit")) { return null; }
-        $event.preventDefault();
-        _vm.redeemGift($event)
+        $event.stopPropagation();
+        _vm.openDialog($event)
       }
     }
-  }, [_vm._v("Redeem")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-alert', {
-    attrs: {
-      "success": "",
-      "dismissible": ""
-    },
-    model: {
-      value: (_vm.giftRedeemed),
-      callback: function($$v) {
-        _vm.giftRedeemed = $$v
-      },
-      expression: "giftRedeemed"
-    }
-  }, [_vm._v("The gift is redeemed")])], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Verify")])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg6": ""
     }
@@ -29134,34 +29077,17 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         },
         expression: "sales[index].toBeDeleted"
       }
-    }) : _vm._e()], 1), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg2": ""
-      }
-    })], 1)], 1)], 1)]
-  })], 2)], 1)], 1)], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-text', {
-    staticClass: "text-xs-right"
-  }, [_c('v-btn', {
-    staticClass: "ma-3",
-    attrs: {
-      "primary": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.openDialog = true
-      }
-    }
-  }, [_vm._v("Verify")])], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
+    }) : _vm._e()], 1)], 1)], 1)], 1)]
+  })], 2)], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
     attrs: {
       "width": "540"
     },
     model: {
-      value: (_vm.openDialog),
+      value: (_vm.dialog),
       callback: function($$v) {
-        _vm.openDialog = $$v
+        _vm.dialog = $$v
       },
-      expression: "openDialog"
+      expression: "dialog"
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "text-lg-center blue darken-1"
@@ -29246,7 +29172,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_vm._v("add")]), _vm._v("Add")], 1), _vm._v(" "), _c('v-btn', {
     nativeOn: {
       "click": function($event) {
-        _vm.openDialog = false
+        _vm.closeDialog($event)
       }
     }
   }, [_vm._v("Close")])], 1), _vm._v(" "), _c('v-card-text')], 1)], 1)], 1)], 1)
