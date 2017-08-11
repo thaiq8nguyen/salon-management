@@ -38,10 +38,15 @@ class PaymentReportController extends Controller
 
             ->first(['id','first_name','last_name']);
 
-        $book = TechnicianBook::balance()->groupBy('technician_id')->having('technician_id','=',$technicianID)->first();
+        //session()->put('periodId', $payPeriodID);
+
+        $totalBalance = TechnicianBook::totalBalance()->groupBy('technician_id')->having('technician_id','=',$technicianID)->first();
+        $periodBalance = TechnicianBook::periodBalance()->where('technician_id','=',$technicianID)->groupBy('pay_period_id')->
+        having('pay_period_id','=',$payPeriodID)->first();
 
         $pdf = PDF::loadView('pdf.payment', ['technician' => $technician,
-            'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy, 'book' => $book])
+            'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
+            'totalBalance' => $totalBalance, 'periodBalance' => $periodBalance])
         ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
         return $pdf->stream('payment.pdf');
     }
