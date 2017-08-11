@@ -1,5 +1,5 @@
 @extends('layouts.pdf-main')
-@section('title',$technician->first_name .'\'s Wage Report')
+@section('title',$technician->full_name .'\'s Wage Report')
 @section('content')
      <div class = "container">
          <div class = "row">
@@ -76,7 +76,7 @@
          </div>
          <div class = "row">
              <div class = "balance-container">
-                 <p><strong>Balance: </strong><span>$ {{ $book->balance }}</span></p>
+                 <h4>Balance: $ {{ $book->balance }}</h4>
              </div>
          </div>
      </div>

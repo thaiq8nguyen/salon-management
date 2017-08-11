@@ -17,9 +17,6 @@ class PaymentReportController extends Controller
 
     public function show(Technician $technician, PayPeriod $payPeriod){
 
-        if(empty($payPeriod->id)){
-            $payPeriod = session()->get('payPeriod');
-        }
 
         $payPeriodID = $payPeriod->id;
         $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
