@@ -11,7 +11,7 @@ use App\PayPeriod;
 class WageController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'checkPayPeriod']);
+        //$this->middleware(['auth', 'checkPayPeriod']);
     }
     /**Route: /wages/pay
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
