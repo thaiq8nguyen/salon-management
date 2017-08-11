@@ -18,8 +18,6 @@ class WageController extends Controller
      */
     public function payday(){
 
-
-
         return view('wages.payday',['pageTitle' => 'Payday']);
     }
 

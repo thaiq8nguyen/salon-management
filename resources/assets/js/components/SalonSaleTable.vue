@@ -10,8 +10,6 @@
 						<v-btn flat @click.native="syncData" outline><v-icon>cached</v-icon></v-btn>
 					</v-flex>
 				</v-layout>
-
-
 			</v-card-title>
 			<v-card-text>
 				<template v-if="isSquareData">

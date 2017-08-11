@@ -6,10 +6,9 @@
 		<template v-if="isPaid">
 			<v-card-text>
 				<h3 class = "headline">{{ isPaidMessage }}</h3>
+				<v-btn @click.native="viewPaymentReport" primary>View Reports</v-btn>
 			</v-card-text>
-			<v-card-actions>
-				<v-btn @click.native="viewPaymentReport" primary>View Report</v-btn>
-			</v-card-actions>
+
 		</template>
 		<template v-else>
 			<v-card-text>
@@ -47,7 +46,6 @@
 	            isPaid:false,
 	            isPaidMessage: null,
             }
-
 
         },
 	    computed:{
@@ -88,7 +86,7 @@
 				});
             },
             viewPaymentReport(){
-				window.location.href='/report/'+ this.technician.first_name + '/payment/' + this.periodId
+	            window.location.href='/report/'+ this.technician.first_name + '/payment/' + this.periodId
             },
         }
     }
