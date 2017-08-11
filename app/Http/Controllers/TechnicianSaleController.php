@@ -13,7 +13,7 @@ use App\PayPeriod;
 class TechnicianSaleController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth','checkPayPeriod']);//checkPayPeriod middleware check for existing payPeriod collection in the session
+        //$this->middleware(['auth','checkPayPeriod']);checkPayPeriod middleware check for existing payPeriod collection in the session
     }
     //
     /**Route: /technician-sale
