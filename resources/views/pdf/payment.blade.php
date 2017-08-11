@@ -76,7 +76,8 @@
          </div>
          <div class = "row">
              <div class = "balance-container">
-                 <h4>Balance: $ {{ $book->balance }}</h4>
+                 <h4>Pay Period Balance: $ {{ $totalBalance->total_balance }}</h4>
+                 <h4>Total Balance: $ {{ $periodBalance->period_balance }}</h4>
              </div>
          </div>
      </div>
