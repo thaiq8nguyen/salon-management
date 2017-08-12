@@ -57,6 +57,9 @@
                  </table>
              </div>
              <div class = "payments-table-container">
+                 @php
+                    $totalPayment = 0;
+                 @endphp
                  <h4>Payments</h4>
                  <table class = "payments-table">
                      <tr>
@@ -65,6 +68,9 @@
                          <th>Reference</th>
                      </tr>
                      @foreach($technician->payments as $payment)
+                        @php
+                            $totalPayment += $payment->amount;
+                        @endphp
                          <tr>
                              <td>$ {{ $payment->amount }}</td>
                              <td>{{ $payment->method }}</td>
@@ -72,12 +78,14 @@
                          </tr>
                      @endforeach
                  </table>
+
              </div>
          </div>
          <div class = "row">
              <div class = "balance-container">
-                 <h4>Pay Period Balance: $ {{ $periodBalance->period_balance }}</h4>
-                 <h4>Total Balance: $ {{ $totalBalance->total_balance }}</h4>
+                 <p>Total Payment Amount: $ {{ $totalPayment }}</p>
+                 <p>Pay Period Balance: $ {{ $periodBalance->period_balance }}</p>
+                 <p>Total Balance: $ {{ $totalBalance->total_balance }}</p>
              </div>
          </div>
      </div>

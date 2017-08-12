@@ -27967,7 +27967,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28010,12 +28010,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            current: '',
+            currentPeriod: '',
             selectID: null,
             periods: []
 
@@ -28025,14 +28024,35 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         this.getPayPeriod();
     },
 
+
+    computed: {
+        countDown: function countDown() {
+            var today = this.$moment();
+            return this.$moment(this.currentPeriod.payDate, 'MM/DD/YYYY').diff(today, 'days');
+        }
+    },
+
+    watch: {
+        selectID: function selectID() {
+            //store the last selected period id in a session variable
+            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectID);
+        }
+    },
     methods: {
         getPayPeriod: function getPayPeriod() {
             var _this = this;
 
             this.$axios.get('/api/pay-period/list').then(function (response) {
                 _this.periods = response.data;
-                _this.current = response.data[response.data.length - 1];
-                _this.selectID = _this.current.id;
+                _this.currentPeriod = response.data[response.data.length - 1];
+
+                //retrieve the last selected period id in a session variable
+                var lastSelectedPeriodId = sessionStorage.getItem('lastSelectedPeriodIdPayDay');
+                if (lastSelectedPeriodId === null) {
+                    _this.selectID = _this.currentPeriod.id;
+                } else {
+                    _this.selectID = parseInt(lastSelectedPeriodId);
+                }
             });
         },
         setPayPeriodID: function setPayPeriodID() {
@@ -28048,26 +28068,29 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-layout', {
-    staticClass: "grey lighten-4",
+  return _c('div', [_c('v-card', [_c('v-card-text', {
+    staticClass: "grey lighten-4"
+  }, [_c('v-layout', {
     attrs: {
       "row": ""
     }
   }, [_c('v-flex', {
     attrs: {
-      "xs1": ""
+      "lg5": ""
     }
-  }, [_c('v-card', {
+  }, [_c('v-layout', {
     attrs: {
-      "flat": ""
+      "row": ""
     }
-  }, [_c('v-card-text', [_c('v-icon', [_vm._v("schedule")])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('v-flex', {
     attrs: {
-      "xs1": ""
+      "lg3": ""
     }
-  }, [_c('v-subheader', [_vm._v("Pay Periods:")])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Pay Periods:")])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "xs2": ""
+      "lg6": ""
     }
   }, [_c('v-select', {
     staticClass: "blue--text",
@@ -28089,23 +28112,31 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "selectID"
     }
-  })], 1), _vm._v(" "), _c('v-flex', {
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "xs1": ""
+      "lg3": ""
     }
-  }, [_c('v-subheader', [_vm._v("Current:")])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('v-chip', {
+    staticClass: "blue darken-1 subheading white--text",
     attrs: {
-      "xs2": ""
+      "label": ""
     }
-  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.periods))])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('strong', [_vm._v("Current Period: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.periods))])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "xs1": ""
+      "lg4": "",
+      "ml-2": ""
     }
-  }, [_c('v-subheader', [_vm._v("Pay Date:")])], 1), _vm._v(" "), _c('v-flex', {
+  }, [(_vm.countDown > 0) ? _c('v-chip', {
+    staticClass: "blue darken-1 subheading white--text",
     attrs: {
-      "xs1": ""
+      "label": ""
     }
-  }, [_c('v-subheader', [_vm._v(_vm._s(_vm.current.payDate))])], 1)], 1)], 1)
+  }, [_c('strong', [_vm._v("Upcoming Pay Date: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.payDate) + " in " + _vm._s(_vm.countDown) + " days ")]) : (_vm.countDown == 0) ? _c('v-chip', {
+    staticClass: "amber darken-1 subheading white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v("Today")]) : _vm._e()], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
