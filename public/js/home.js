@@ -28018,7 +28018,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n@media only screen\nand (min-device-width: 414px)\nand (max-device-width: 736px)\nand (-webkit-min-device-pixel-ratio: 3)\nand (orientation: portrait) {\n.margin-top{\n\n\t\tmargin-top: 10px;\n}\n}\n", ""]);
 
 // exports
 
@@ -28324,46 +28324,60 @@ if (false) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', [_c('main', [_c('v-container', [_c('v-layout', {
+  return _c('div', [_c('v-app', [_c('main', [_c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  }, [_c('v-layout', {
     attrs: {
       "row": "",
       "wrap": ""
     }
   }, [_c('v-flex', {
     attrs: {
-      "lg4": ""
+      "lg4": "",
+      "xs12": ""
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "amber darken-1"
   }, [_c('v-flex', {
     attrs: {
-      "lg6": ""
+      "lg6": "",
+      "xs6": ""
     }
   }, [_c('h3', {
     staticClass: "headline white--text"
   }, [_c('strong', [_vm._v("Reminders")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",
-      "offset-lg4": ""
+      "xs2": "",
+      "offset-lg4": "",
+      "offset-xs4": ""
     }
   }, [_c('v-icon', {
     staticClass: "white--text"
   }, [_vm._v("event_note")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('pay-day-reminder'), _vm._v(" "), _c('v-divider')], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    staticClass: "margin-top",
     attrs: {
-      "lg4": ""
+      "lg4": "",
+      "xs12": "",
+      "hidden-xs-only": ""
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "green darken-1"
   }, [_c('v-flex', {
     attrs: {
-      "lg6": ""
+      "lg6": "",
+      "xs6": ""
     }
   }, [_c('h3', {
     staticClass: "headline white--text"
   }, [_c('strong', [_vm._v("New Features")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",
-      "offset-lg4": ""
+      "xs2": "",
+      "offset-lg4": "",
+      "offset-xs4": ""
     }
   }, [_c('v-icon', {
     staticClass: "white--text",
@@ -28371,21 +28385,26 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "medium": ""
     }
   }, [_vm._v("view_headline")])], 1)], 1), _vm._v(" "), _c('v-card-text')], 1)], 1), _vm._v(" "), _c('v-flex', {
+    staticClass: "margin-top",
     attrs: {
-      "lg4": ""
+      "lg4": "",
+      "xs12": ""
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "deep-purple darken-1"
   }, [_c('v-flex', {
     attrs: {
-      "lg6": ""
+      "lg6": "",
+      "xs6": ""
     }
   }, [_c('h3', {
     staticClass: "headline white--text"
   }, [_c('strong', [_vm._v("Shortcuts")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",
-      "offset-lg4": ""
+      "xs2": "",
+      "offset-lg4": "",
+      "offset-xs4": ""
     }
   }, [_c('v-icon', {
     staticClass: "white--text",
@@ -28402,22 +28421,27 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_vm._v(_vm._s(shortcut.name))])]
   })], 2)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    staticClass: "margin-top",
     attrs: {
       "lg4": "",
-      "mt-2": ""
+      "xs12": "",
+      "hidden-xs-only": ""
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "indigo darken-1"
   }, [_c('v-flex', {
     attrs: {
-      "lg6": ""
+      "lg6": "",
+      "xs6": ""
     }
   }, [_c('h3', {
-    staticClass: "headline white--text"
+    staticClass: "headline white&#45;&#45;text"
   }, [_c('strong', [_vm._v("Trends")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",
-      "offset-lg4": ""
+      "xs2": "",
+      "offset-lg4": "",
+      "offset-xs4": ""
     }
   }, [_c('v-icon', {
     staticClass: "white--text",

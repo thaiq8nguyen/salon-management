@@ -12,7 +12,6 @@
         <link rel = "stylesheet" href = "{{ asset('css/custom.css') }}">
         <link rel = "stylesheet" href = "{{ asset('css/main-navbar.css')}}">
         <!--Common Fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:700i" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
         <!--Specific Stylesheets-->
         @stack('styles')
