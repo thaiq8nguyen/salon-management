@@ -24,7 +24,7 @@ Route::post('/technician-sale/handle-quick-sale','TechnicianSaleApiController@ha
 
 Route::put('/technician-sale/edit', 'TechnicianSaleApiController@editSale');
 
-
+Route::get('/technician-salary/show','TechnicianDetailApiController@getSalarySetup')->middleware('auth:api');
 
 Route::get('/technician-sale/get','TechnicianSaleApiController@getSaleByDate')->middleware('auth:api');
 

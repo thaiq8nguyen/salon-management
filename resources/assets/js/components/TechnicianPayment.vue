@@ -5,10 +5,17 @@
 			<v-text-field label = "Amount" prefix="$" disabled v-model="payment.amount"></v-text-field>
 		</v-flex>
 		<v-flex lg2>
-			<v-text-field label = "Reference" disabled v-model="payment.reference"></v-text-field>
+			<v-text-field label = "Reference"  v-model="payment.reference"></v-text-field>
 		</v-flex>
 		<v-flex lg2>
-			<v-text-field label = "Method" disabled v-model="payment.method"></v-text-field>
+			<v-select
+					:items="methods"
+					v-model="payment.method"
+					label="Method"
+					single-line
+					bottom
+			></v-select>
+			<!--<v-text-field label = "Method" v-model="payment.method"></v-text-field>-->
 		</v-flex>
 		<v-flex lg3>
 			<v-btn @click.native="deletePayment(index)" class = "red">
@@ -23,7 +30,7 @@
 
         data() {
             return {
-
+				methods:['cash','check','direct deposit']
             }
         },
         methods: {

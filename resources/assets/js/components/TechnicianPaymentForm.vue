@@ -1,7 +1,7 @@
 <template>
 	<v-layout row>
 		<v-flex lg3>
-			<v-text-field label="Amount" prefix="$" v-model="amount"></v-text-field>
+			<v-text-field type = "number" max = "4" label="Amount" prefix="$" v-model="amount"></v-text-field>
 		</v-flex>
 		<v-flex lg3 ml-3>
 			<v-text-field label="Reference" v-model="ref"></v-text-field>
@@ -30,7 +30,7 @@
 	            ref:null,
 	            method:null,
 	            methods:[
-	                'cash','check','direct'
+	                'cash','check','direct deposit'
 	            ]
             }
 

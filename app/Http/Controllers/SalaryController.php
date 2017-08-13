@@ -11,4 +11,6 @@ class SalaryController extends Controller
         $this->middleware('auth');
     }
     //
+
+
 }

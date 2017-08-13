@@ -28281,7 +28281,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayDay_vue__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_450e7b3b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayDay_vue__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_450e7b3b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayDay_vue__ = __webpack_require__(149);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -28363,7 +28363,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28373,8 +28373,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_src_components_expansion_panel_VExpansionPanel__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentPanelHeader_vue__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianDailySaleTable_vue__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TechnicianTotalSaleTable_vue__ = __webpack_require__(144);
 //
 //
 //
@@ -28477,41 +28479,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 
 
@@ -28519,6 +28488,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     components: {
+
+        'panel-header': __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentPanelHeader_vue__["a" /* default */],
+        'daily-sale-table': __WEBPACK_IMPORTED_MODULE_2__TechnicianDailySaleTable_vue__["a" /* default */],
+        'total-sale-table': __WEBPACK_IMPORTED_MODULE_3__TechnicianTotalSaleTable_vue__["a" /* default */],
         MakePayment: __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__["a" /* default */]
     },
 
@@ -28528,13 +28501,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         return {
             periodId: '',
             technicians: [],
-            dailySales: {
-                headers: [{ text: 'Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }]
-            },
-            totalSales: {
-                headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }]
-            },
             activeIndex: null
+
         };
     },
     mounted: function mounted() {
@@ -28547,7 +28515,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             var _this = this;
 
             this.$axios.get('/api/salon/payday?id=' + periodId).then(function (response) {
-
+                console.log(response.data);
                 _this.technicians = response.data;
                 _this.periodId = periodId;
             });
@@ -28557,9 +28525,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         },
         activePanel: function activePanel(index) {
             return this.activeIndex === index;
-        },
-        readableDate: function readableDate(date) {
-            return this.$moment(date).format('MM/DD/YY dddd');
         },
         viewPaymentReport: function viewPaymentReport(first_name) {
             window.location.href = '/report/' + first_name + '/payment/' + this.periodId;
@@ -28575,40 +28540,229 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = ({
-  name: 'v-expansion-panel',
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba3c6f6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(123);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(120)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
 
-  props: {
-    expand: Boolean
-  },
+/* template */
 
-  computed: {
-    params () {
-      return {
-        expand: this.expand
-      }
-    }
-  },
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentPanelHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba3c6f6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentPanelHeader_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianPaymentPanelHeader.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentPanelHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
-  render (h) {
-    return h('ul', {
-      'class': 'expansion-panel'
-    }, this.$slots.default)
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7ba3c6f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-7ba3c6f6", Component.options)
   }
-});
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
 
 /***/ }),
 /* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(121);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("2c9c6e5e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7ba3c6f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentPanelHeader.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7ba3c6f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentPanelHeader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e38cf8c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(134);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['technician', 'index'],
+
+    data: function data() {
+        return {
+            activePanelIndex: null
+        };
+    },
+
+    methods: {
+        selectedPanel: function selectedPanel(index) {
+            this.activePanelIndex = index;
+        },
+        activePanel: function activePanel(index) {
+            return this.activePanelIndex === index;
+        }
+    }
+
+});
+
+/***/ }),
+/* 123 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    on: {
+      "!click": function($event) {
+        _vm.selectedPanel(_vm.index)
+      }
+    },
+    slot: "header"
+  }, [_c('v-container', [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_c('p', {
+    staticClass: "headline",
+    class: {
+      'amber--text text--darken-1': _vm.activePanel(_vm.index)
+    }
+  }, [_vm._v(_vm._s(_vm.technician.full_name))])]), _vm._v(" "), (_vm.technician.daily_sales.length > 0) ? _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [(_vm.technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+    staticClass: "green darken-1 white--text subheading elevation-4",
+    attrs: {
+      "label": "",
+      "small": ""
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _c('span', [_c('v-chip', {
+    staticClass: "amber darken-1 white--text subheading",
+    attrs: {
+      "label": "",
+      "small": ""
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("monetization_on")]), _vm._v(_vm._s(_vm.technician.total_sales_and_tips[0].total))], 1)], 1)]) : _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_c('v-chip', {
+    staticClass: "grey darken-1 white--text subheading",
+    attrs: {
+      "label": "",
+      "small": ""
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("money_off")]), _vm._v("No Sales")], 1)], 1)], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7ba3c6f6", esExports)
+  }
+}
+
+/***/ }),
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e38cf8c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(138);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(121)
+  __webpack_require__(125)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -28652,13 +28806,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 121 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(122);
+var content = __webpack_require__(126);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -28678,7 +28832,7 @@ if(false) {
 }
 
 /***/ }),
-/* 122 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -28686,18 +28840,19 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 123 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(133);
+//
 //
 //
 //
@@ -28736,6 +28891,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: ['technician', 'periodId', 'index'],
+
     components: {
         TechnicianPaymentForm: __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__["a" /* default */], Payment: __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__["a" /* default */]
     },
@@ -28745,18 +28901,42 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             maxPayment: 3,
             isPaid: false,
             isPaidMessage: null
+
         };
     },
+    mounted: function mounted() {
 
+        this.updateSuggestedPayment();
+    },
+
+
+    watch: {
+        technician: function technician() {
+            this.payments = [];
+            this.updateSuggestedPayment();
+        }
+    },
     computed: {
         totalPayingAmount: function totalPayingAmount() {
-            var sum = 0;
+            var sum = 0.0;
             if (this.payments.length > 0) {
                 for (var i = 0; i < this.payments.length; i++) {
-                    sum += parseInt(this.payments[i].amount);
+                    sum += parseFloat(this.payments[i].amount);
                 }
             }
-            return sum;
+            return parseFloat(sum).toFixed(2);
+        },
+        paymentGauge: function paymentGauge() {
+
+            if (this.totalPayingAmount === 0) {
+                return { style: '', text: '' };
+            } else if (this.totalPayingAmount > 0 && parseFloat(this.totalPayingAmount < this.technician.total_sales_and_tips[0].total)) {
+                return { style: 'amber darken-1 white--text', text: 'Underpaying' };
+            } else if (this.totalPayingAmount === parseFloat(this.technician.total_sales_and_tips[0].total).toFixed(2)) {
+                return { style: 'green darken-1 white--text', text: 'Right Amount!' };
+            } else {
+                return { style: 'purple darken-1 white--text', text: 'Overpaying by $ ' + parseFloat(this.totalPayingAmount - parseFloat(this.technician.total_sales_and_tips[0].total)).toFixed(2) };
+            }
         }
     },
     methods: {
@@ -28767,6 +28947,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
                     reference: payment.reference,
                     method: payment.method
                 });
+            }
+        },
+        updateSuggestedPayment: function updateSuggestedPayment() {
+            if (this.technician.suggested_payments.length > 0) {
+                for (var i = 0; i < this.technician.suggested_payments.length; i++) {
+                    this.payments.push(this.technician.suggested_payments[i]);
+                }
             }
         },
         deletePayment: function deletePayment(index) {
@@ -28791,16 +28978,16 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 124 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_21cc9262_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_21cc9262_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(132);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(125)
+  __webpack_require__(129)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -28844,13 +29031,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 125 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(126);
+var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -28870,7 +29057,7 @@ if(false) {
 }
 
 /***/ }),
-/* 126 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -28884,7 +29071,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 127 */
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28919,7 +29106,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												amount: null,
 												ref: null,
 												method: null,
-												methods: ['cash', 'check', 'direct']
+												methods: ['cash', 'check', 'direct deposit']
 								};
 				},
 
@@ -28941,7 +29128,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 128 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28956,6 +29143,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-text-field', {
     attrs: {
+      "type": "number",
+      "max": "4",
       "label": "Amount",
       "prefix": "$"
     },
@@ -29027,16 +29216,16 @@ if (false) {
 }
 
 /***/ }),
-/* 129 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b98e96b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b98e96b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__ = __webpack_require__(137);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(130)
+  __webpack_require__(134)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -29080,13 +29269,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 130 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(131);
+var content = __webpack_require__(135);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -29106,7 +29295,7 @@ if(false) {
 }
 
 /***/ }),
-/* 131 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -29114,16 +29303,23 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 132 */
+/* 136 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29148,7 +29344,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
     props: ['payment', 'index'],
 
     data: function data() {
-        return {};
+        return {
+            methods: ['cash', 'check', 'direct deposit']
+        };
     },
 
     methods: {
@@ -29160,7 +29358,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 133 */
+/* 137 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29200,8 +29398,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-text-field', {
     attrs: {
-      "label": "Reference",
-      "disabled": ""
+      "label": "Reference"
     },
     model: {
       value: (_vm.payment.reference),
@@ -29214,10 +29411,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg2": ""
     }
-  }, [_c('v-text-field', {
+  }, [_c('v-select', {
     attrs: {
+      "items": _vm.methods,
       "label": "Method",
-      "disabled": ""
+      "single-line": "",
+      "bottom": ""
     },
     model: {
       value: (_vm.payment.method),
@@ -29253,7 +29452,7 @@ if (false) {
 }
 
 /***/ }),
-/* 134 */
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29286,12 +29485,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "delete": _vm.deletePayment
       }
     })
-  }), _vm._v(" "), (_vm.totalPayingAmount > 0) ? _c('v-chip', {
-    class: ( _obj = {}, _obj['green darken-1 white--text subheading'] = _vm.totalPayingAmount == _vm.technician.total_sales_and_tips[0].total, _obj ),
+  }), _vm._v(" "), (_vm.totalPayingAmount > 0) ? [(_vm.totalPayingAmount > 0) ? _c('v-chip', {
+    staticClass: "black--text subheading",
+    attrs: {
+      "label": "",
+      "outline": ""
+    }
+  }, [_vm._v("Total Paying: $ " + _vm._s(_vm.totalPayingAmount))]) : _vm._e(), _vm._v(" "), _c('v-chip', {
+    staticClass: "subheading",
+    class: _vm.paymentGauge.style,
     attrs: {
       "label": ""
     }
-  }, [_vm._v("\n\t\t\t\tTotal Paying: $ " + _vm._s(_vm.totalPayingAmount) + "\n\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.payments.length > 0) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('technician-payment-form', {
+  }, [_vm._v(_vm._s(_vm.paymentGauge.text))]), _vm._v(" "), _c('v-divider')] : _vm._e(), _vm._v(" "), _c('technician-payment-form', {
     on: {
       "add": _vm.addPayment
     }
@@ -29305,7 +29511,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }
   }, [_vm._v("Make Payment")])], 1) : _vm._e()]], 2)
-  var _obj;
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -29319,7 +29524,381 @@ if (false) {
 }
 
 /***/ }),
-/* 135 */
+/* 139 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(143);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(140)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianDailySaleTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianDailySaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bfc11e4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-bfc11e4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(141);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("6e06f512", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 142 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['dailySales'],
+
+    data: function data() {
+        return {
+
+            headers: [{ text: 'Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }]
+        };
+    },
+
+    methods: {
+        readableDate: function readableDate(date) {
+            return this.$moment(date).format('MM/DD/YY dddd');
+        }
+    }
+
+});
+
+/***/ }),
+/* 143 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-card', {
+    staticClass: "elevation-1 grey lighten-4"
+  }, [_c('v-card-text', [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.dailySales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.text
+          }, [_c('p', {
+            staticClass: "subheading text-lg-center"
+          }, [_vm._v(_vm._s(header.text))])])
+        })
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-center subheading"
+        }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
+      }
+    }])
+  })], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-bfc11e4e", esExports)
+  }
+}
+
+/***/ }),
+/* 144 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(148);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(145)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianTotalSaleTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianTotalSaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a1c91ce4", Component.options)
+  } else {
+    hotAPI.reload("data-v-a1c91ce4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(146);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("03b64872", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 147 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['totalSales'],
+
+    data: function data() {
+        return {
+            headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }]
+        };
+    },
+
+    methods: {}
+
+});
+
+/***/ }),
+/* 148 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-card', {
+    staticClass: "elevation-1 grey lighten-4"
+  }, [_c('v-card-text', [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.totalSales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.text
+          }, [_c('p', {
+            staticClass: "subheading text-lg-center"
+          }, [_vm._v(_vm._s(header.text))])])
+        })
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotal))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTip))]), _vm._v(" "), _c('td', {
+          staticClass: "text-lg-center red--text headline"
+        }, [_vm._v("$ " + _vm._s(props.item.total))])]
+      }
+    }])
+  })], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-a1c91ce4", esExports)
+  }
+}
+
+/***/ }),
+/* 149 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29367,7 +29946,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "lg4": ""
       }
-    }, [(technician.count_payments.length > 0) ? _c('span', [_c('v-chip', {
+    }, [(technician.count_payments.length > 0) ? [_c('v-chip', {
       staticClass: "green darken-1 white--text subheading elevation-4",
       attrs: {
         "label": "",
@@ -29375,7 +29954,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-icon', {
       staticClass: "white--text"
-    }, [_vm._v("done")]), _vm._v("Paid")], 1)], 1) : _c('span', [_c('v-chip', {
+    }, [_vm._v("done")]), _vm._v("Paid")], 1)] : [_c('v-chip', {
       staticClass: "amber darken-1 white--text subheading",
       attrs: {
         "label": "",
@@ -29383,7 +29962,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-icon', {
       staticClass: "white--text"
-    }, [_vm._v("monetization_on")]), _vm._v(_vm._s(technician.total_sales_and_tips[0].total))], 1)], 1)]) : _c('v-flex', {
+    }, [_vm._v("monetization_on")]), _vm._v(_vm._s(technician.total_sales_and_tips[0].total))], 1)]], 2) : _c('v-flex', {
       attrs: {
         "lg4": ""
       }
@@ -29401,38 +29980,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "lg4": ""
       }
-    }, [_c('v-card', {
-      staticClass: "elevation-1 grey lighten-4"
-    }, [_c('v-card-text', [_c('v-data-table', {
+    }, [_c('daily-sale-table', {
       attrs: {
-        "headers": _vm.dailySales.headers,
-        "items": technician.daily_sales,
-        "hide-actions": ""
-      },
-      scopedSlots: _vm._u([{
-        key: "headers",
-        fn: function(props) {
-          return _vm._l((props.headers), function(header) {
-            return _c('th', {
-              key: header.text
-            }, [_c('p', {
-              staticClass: "subheading text-lg-center"
-            }, [_vm._v(_vm._s(header.text))])])
-          })
-        }
-      }, {
-        key: "items",
-        fn: function(props) {
-          return [_c('td', {
-            staticClass: "text-xs-center subheading"
-          }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
-        }
-      }])
-    })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+        "daily-sales": technician.daily_sales
+      }
+    })], 1), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg7": ""
       }
@@ -29445,42 +29997,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "lg12": ""
       }
-    }, [_c('v-card', {
-      staticClass: "elevation-1 grey lighten-4"
-    }, [_c('v-card-text', [_c('v-data-table', {
+    }, [_c('total-sale-table', {
       attrs: {
-        "headers": _vm.totalSales.headers,
-        "items": technician.total_sales_and_tips,
-        "hide-actions": ""
-      },
-      scopedSlots: _vm._u([{
-        key: "headers",
-        fn: function(props) {
-          return _vm._l((props.headers), function(header) {
-            return _c('th', {
-              key: header.text
-            }, [_c('p', {
-              staticClass: "subheading text-lg-center"
-            }, [_vm._v(_vm._s(header.text))])])
-          })
-        }
-      }, {
-        key: "items",
-        fn: function(props) {
-          return [_c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.subTotal))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))]), _vm._v(" "), _c('td', {
-            staticClass: "text-xs-right subheading"
-          }, [_vm._v("$ " + _vm._s(props.item.earnedTip))]), _vm._v(" "), _c('td', {
-            staticClass: "text-lg-center red--text headline"
-          }, [_vm._v("$ " + _vm._s(props.item.total))])]
-        }
-      }])
-    })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+        "total-sales": technician.total_sales_and_tips
+      }
+    })], 1), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg12": "",
         "mt-2": ""
