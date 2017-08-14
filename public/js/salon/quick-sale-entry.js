@@ -27962,7 +27962,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27972,6 +27972,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
 //
 //
 //
@@ -28037,60 +28039,96 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																				name: 'Gross Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 																}, { //Index 1
 																				value: false,
 																				name: 'Refund',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 2
 																				value: false,
 																				name: 'Net Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 3
 																				value: false,
 																				name: 'Tips on Card',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 4
 																				value: false,
 																				name: 'Gift Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 5
 																				value: false,
 																				name: 'Total Collected',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
-																}, { //Index 6
+																}, {
+																				//Index 6
+																				value: false,
+																				name: 'Cash',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00',
+																				icon: 'attach_money',
+																				style: 'green--text'
+																}, {
+																				//Index 7
+																				value: false,
+																				name: 'Card',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00',
+																				icon: 'credit_card',
+																				style: 'blue--text'
+																}, { //Index 8
 																				value: false,
 																				name: 'Gift Redeems',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
-																}, { //Index 7
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
+																}, { //Index 9
 																				value: false,
 																				name: 'Convenience Fees',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
-																}, { //Index 8
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
+																}, { //Index 10
 																				value: false,
 																				name: 'Processing Fees',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 																}]
 												}
 								};
@@ -28144,14 +28182,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
 												this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
 
-												this.sales.items[6].square = this.sale.sales['Gift Certificate Redeemed'];
-												this.sales.items[6].technician = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[6].square = this.sale.sales['Cash Collected'];
 
-												this.sales.items[7].square = this.sale.sales['Convenience Fee'];
-												this.sales.items[7].technician = this.sale.sales['Convenience Fee'];
+												this.sales.items[7].square = this.sale.sales['Card Collected'];
 
-												this.sales.items[8].square = this.sale.sales['CC Fees'];
-												this.sales.items[8].technician = this.sale.sales['CC Fees'];
+												this.sales.items[8].square = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[8].technician = this.sale.sales['Gift Certificate Redeemed'];
+
+												this.sales.items[9].square = this.sale.sales['Convenience Fee'];
+												this.sales.items[9].technician = this.sale.sales['Convenience Fee'];
+
+												this.sales.items[10].square = this.sale.sales['CC Fees'];
+												this.sales.items[10].technician = this.sale.sales['CC Fees'];
 								},
 								syncData: function syncData() {}
 				}
@@ -28216,7 +28258,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       fn: function(props) {
         return [_c('td', {
           staticClass: "subheading"
-        }, [_c('strong', [_vm._v(_vm._s(props.item.name))])]), _vm._v(" "), _c('td', {
+        }, [(props.item.icon) ? _c('v-icon', {
+          class: props.item.style
+        }, [_vm._v(_vm._s(props.item.icon))]) : _vm._e(), _vm._v(" "), _c('strong', [_vm._v(_vm._s(props.item.name))])], 1), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
         }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
@@ -28489,7 +28533,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth: 95px;\n\tbackground-color: #2e7d32;\n\ttop:23%;\n\tright:0;\n\tz-index:10000;\n\tborder-radius: 3px;\n\tpadding: 2px;\n\tcolor:white;\n\ttext-align: center;\n\topacity:0.8;\n}\n#sale-sticker{\n\n\tbackground-color: #2e7d32;\n\ttop:23%;\n}\n#tip-sticker{\n\tbackground-color: orange;\n\ttop:40%;\n}\n", ""]);
 
 // exports
 
@@ -28673,168 +28717,174 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-				components: { SalonSaleTable: __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__["a" /* default */] },
-				props: [],
+    components: { SalonSaleTable: __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__["a" /* default */] },
+    props: [],
 
-				data: function data() {
-								return {
-												date: this.$moment().format('YYYY-MM-DD'),
-												dateMenu: false,
-												squareData: [],
-												isSquareData: false,
+    data: function data() {
+        return {
+            date: this.$moment().format('YYYY-MM-DD'),
+            dateMenu: false,
+            squareData: [],
+            isSquareData: false,
 
-												technician: {
-																grossSale: null,
-																cardTip: null
-												},
+            technician: {
+                grossSale: null,
+                cardTip: null
+            },
 
-												technicians: [],
-												sale: null,
-												sales: [],
-												newSales: [],
-												isAdded: false,
-												active: null,
-												dialog: false,
-												loadingData: false
+            technicians: [],
+            sale: null,
+            sales: [],
+            newSales: [],
+            isAdded: false,
+            active: null,
+            dialog: false,
+            loadingData: false
 
-								};
-				},
+        };
+    },
 
 
-				computed: {
-								saleDate: function saleDate() {
-												return this.$moment(this.date).format('dddd MM/DD/YYYY');
-								},
-								technicianSale: function technicianSale() {
-												var grossSale = parseFloat(this.technician.grossSale);
-												for (var i = 0; i < this.sales.length; i++) {
-																grossSale += parseFloat(this.sales[i].sales);
-												}
-												if (isNaN(grossSale)) {
-																grossSale = 0;
-												}
+    computed: {
+        saleDate: function saleDate() {
+            return this.$moment(this.date).format('dddd MM/DD/YYYY');
+        },
+        technicianSale: function technicianSale() {
+            var grossSale = parseFloat(this.technician.grossSale);
+            for (var i = 0; i < this.sales.length; i++) {
+                grossSale += parseFloat(this.sales[i].sales);
+            }
+            if (isNaN(grossSale)) {
+                grossSale = 0;
+            }
 
-												return grossSale;
-								},
-								technicianCardTip: function technicianCardTip() {
-												var cardTip = parseFloat(this.technician.cardTip);
-												for (var i = 0; i < this.sales.length; i++) {
-																cardTip += parseFloat(this.sales[i].additional_sales);
-												}
-												if (isNaN(cardTip)) {
-																cardTip = 0;
-												}
+            return grossSale;
+        },
+        technicianCardTip: function technicianCardTip() {
+            var cardTip = parseFloat(this.technician.cardTip);
+            for (var i = 0; i < this.sales.length; i++) {
+                cardTip += parseFloat(this.sales[i].additional_sales);
+            }
+            if (isNaN(cardTip)) {
+                cardTip = 0;
+            }
 
-												return cardTip;
-								},
-								technicianGrossSale: function technicianGrossSale() {
-												//return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
-								}
-				},
-				mounted: function mounted() {
-								this.getSquareData();
-								this.getAllTechnicians();
-				},
+            return cardTip;
+        }
+    },
+    mounted: function mounted() {
+        this.getSquareData();
+        this.getAllTechnicians();
+    },
 
-				watch: {
-								date: function date() {
-												this.getSquareData();
-												this.getAllTechnicians();
-								}
-				},
-				methods: {
-								getSquareData: function getSquareData() {
-												var _this = this;
+    watch: {
+        date: function date() {
+            this.getSquareData();
+            this.getAllTechnicians();
+        }
+    },
+    methods: {
+        getSquareData: function getSquareData() {
+            var _this = this;
 
-												this.loadingData = true;
-												this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
-																_this.loadingData = false;
-																_this.isSquareData = response.data.success;
-																if (_this.isSquareData) {
-																				_this.squareData = response.data;
-																}
-												});
-								},
-								getAllTechnicians: function getAllTechnicians() {
-												var _this2 = this;
+            this.loadingData = true;
+            this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
+                _this.loadingData = false;
+                _this.isSquareData = response.data.success;
+                if (_this.isSquareData) {
+                    _this.squareData = response.data;
+                    _this.technician.grossSale = response.data.sales['Technician Sales'];
+                    _this.technician.cardTip = response.data.tips['Technician Tips'];
+                }
+            });
+        },
+        getAllTechnicians: function getAllTechnicians() {
+            var _this2 = this;
 
-												this.$axios.get('/api/technician-sale/get?saleDate=' + this.date).then(function (response) {
+            this.$axios.get('/api/technician-sale/get?saleDate=' + this.date).then(function (response) {
 
-																_this2.technicians = response.data.technicians;
-																_this2.sales = [];
+                _this2.technicians = response.data.technicians;
+                _this2.sales = [];
 
-																for (var i = 0; i < _this2.technicians.length; i++) {
-																				if (_this2.technicians[i].dailySales.length > 0) {
-																								_this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
-																												additional_sales: 0, sale_date: _this2.date,
-																												existing_sale_id: _this2.technicians[i].dailySales[0].id, toBeDeleted: false };
-																				} else {
-																								_this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
-																												additional_sales: 0, sale_date: _this2.date, existing_sale_id: null, toBeDeleted: false };
-																				}
+                for (var i = 0; i < _this2.technicians.length; i++) {
+                    if (_this2.technicians[i].dailySales.length > 0) {
+                        _this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
+                            additional_sales: 0, sale_date: _this2.date,
+                            existing_sale_id: _this2.technicians[i].dailySales[0].id, toBeDeleted: false };
+                    } else {
+                        _this2.sale = { technician_id: _this2.technicians[i].technicianID, sales: 0,
+                            additional_sales: 0, sale_date: _this2.date, existing_sale_id: null, toBeDeleted: false };
+                    }
 
-																				_this2.sales.push(_this2.sale);
-																}
-																_this2.sale = null;
-												});
-								},
-								addSale: function addSale() {
-												var _this3 = this;
+                    _this2.sales.push(_this2.sale);
+                }
+                _this2.sale = null;
+            });
+        },
+        addSale: function addSale() {
+            var _this3 = this;
 
-												this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: this.newSales }).then(function (response) {
-																if (response.data.success) {
-																				_this3.dialog = false;
-																				_this3.isAdded = true;
-																				_this3.reset();
-																}
-												});
-								},
-								openDialog: function openDialog() {
-												for (var i = 0; i < this.sales.length; i++) {
-																if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
-																				this.newSales.push(this.sales[i]);
-																}
-												}
-												this.dialog = true;
-								},
-								closeDialog: function closeDialog() {
-												this.newSales = [];
-												this.dialog = false;
-								},
-								reset: function reset() {
-												this.getSquareData();
-												this.getAllTechnicians();
-								},
-								clearInput: function clearInput(index, input) {
-												this.active = true;
-												if (input === 'sale') {
-																this.sales[index].sales = '';
-												} else if (input === 'tip') {
-																this.sales[index].additional_sales = '';
-												}
-								},
-								checkInput: function checkInput(index, input) {
-												if (input === 'sale') {
-																if (this.sales[index].sales === '') {
-																				this.sales[index].sales = 0;
-																}
-												} else if (input === 'tip') {
-																if (this.sales[index].additional_sales === '') {
-																				this.sales[index].additional_sales = 0;
-																}
-												}
-								},
-								hover: function hover(index) {
-												this.active = index;
-								},
-								select: function select(index) {
-												return this.active === index;
-								}
-				}
+            this.$axios.post('/api/technician-sale/handle-quick-sale', { sales: this.newSales }).then(function (response) {
+                if (response.data.success) {
+                    _this3.dialog = false;
+                    _this3.isAdded = true;
+                    _this3.reset();
+                }
+            });
+        },
+        openDialog: function openDialog() {
+            for (var i = 0; i < this.sales.length; i++) {
+                if (this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true) {
+                    this.newSales.push(this.sales[i]);
+                }
+            }
+            this.dialog = true;
+        },
+        closeDialog: function closeDialog() {
+            this.newSales = [];
+            this.dialog = false;
+        },
+        reset: function reset() {
+            this.getSquareData();
+            this.getAllTechnicians();
+        },
+        clearInput: function clearInput(index, input) {
+            this.active = true;
+            if (input === 'sale') {
+                this.sales[index].sales = '';
+            } else if (input === 'tip') {
+                this.sales[index].additional_sales = '';
+            }
+        },
+        checkInput: function checkInput(index, input) {
+            if (input === 'sale') {
+                if (this.sales[index].sales === '') {
+                    this.sales[index].sales = 0;
+                }
+            } else if (input === 'tip') {
+                if (this.sales[index].additional_sales === '') {
+                    this.sales[index].additional_sales = 0;
+                }
+            }
+        },
+        hover: function hover(index) {
+            this.active = index;
+        },
+        select: function select(index) {
+            return this.active === index;
+        }
+    }
 });
 
 /***/ }),
@@ -28849,7 +28899,27 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "fluid": ""
     }
-  }, [_c('v-layout', {
+  }, [_c('div', {
+    staticClass: "sticker",
+    attrs: {
+      "label": "",
+      "id": "sale-sticker"
+    }
+  }, [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Gross Sale")]), _vm._v(" "), _c('p', {
+    staticClass: "body-2"
+  }, [_vm._v("$ " + _vm._s(_vm.technicianSale))])]), _vm._v(" "), _c('div', {
+    staticClass: "sticker",
+    attrs: {
+      "label": "",
+      "id": "tip-sticker"
+    }
+  }, [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Gross Tip")]), _vm._v(" "), _c('p', {
+    staticClass: "body-2"
+  }, [_vm._v("$ " + _vm._s(_vm.technicianCardTip))])]), _vm._v(" "), _c('v-layout', {
     attrs: {
       "row": "",
       "wrap": ""

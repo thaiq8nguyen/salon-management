@@ -23,7 +23,9 @@
 						</template>
 
 						<template slot="items" scope="props">
-							<td class = "subheading"><strong>{{ props.item.name}}</strong></td>
+							<td class = "subheading">
+								<v-icon v-if="props.item.icon" :class = "props.item.style">{{props.item.icon}}</v-icon>
+								<strong>{{ props.item.name}}</strong></td>
 							<td class = "text-md-center subheading">$ {{ props.item.square}}</td>
 							<td class = "text-md-center subheading">$ {{ props.item.technician }}</td>
 							<td class = "text-md-center subheading">$ {{ props.item.difference }}</td>
@@ -71,14 +73,18 @@
 		                    name:'Gross Sales',
 			                square: '0.00',
 			                technician: '0.00',
-			                difference: '0.00'
+			                difference: '0.00',
+			                icon:'',
+			                style:'',
 		                },
 		                { //Index 1
 		                    value:false,
 			                name: 'Refund',
                             square: '0.00',
                             technician: '0.00',
-                            difference: '0.00'
+                            difference: '0.00',
+                            icon:'',
+                            style:'',
 
 		                },
                         { //Index 2
@@ -86,7 +92,9 @@
                             name: 'Net Sales',
                             square: '0.00',
                             technician: '0.00',
-                            difference: '0.00'
+                            difference: '0.00',
+                            icon:'',
+                            style:'',
 
                         },
 		                { //Index 3
@@ -94,7 +102,9 @@
 			                name:'Tips on Card',
 			                square: '0.00',
 			                technician:'0.00',
-			                difference:'0.00'
+			                difference:'0.00',
+                            icon:'',
+                            style:'',
 
 		                },
 		                { //Index 4
@@ -102,7 +112,9 @@
 			                name:'Gift Sales',
 			                square:'0.00',
 			                technician: '0.00',
-			                difference: '0.00'
+			                difference: '0.00',
+                            icon:'',
+                            style:'',
 
 		                },
                         { //Index 5
@@ -110,29 +122,57 @@
                             name:'Total Collected',
                             square:'0.00',
                             technician:'0.00',
-                            difference:'0.00'
+                            difference:'0.00',
+                            icon:'',
+                            style:'',
 
                         },
-		                { //Index 6
+		                {
+		                    //Index 6
+			                value:false,
+			                name:'Cash',
+			                square:'0.00',
+			                technician: '0.00',
+			                difference: '0.00',
+                            icon:'attach_money',
+                            style:'green--text',
+		                },
+                        {
+                            //Index 7
+                            value:false,
+                            name:'Card',
+                            square:'0.00',
+                            technician: '0.00',
+                            difference: '0.00',
+                            icon:'credit_card',
+                            style:'blue--text',
+                        },
+		                { //Index 8
 		                    value:false,
 			                name:'Gift Redeems',
 			                square: '0.00',
 			                technician:'0.00',
-			                difference:'0.00'
+			                difference:'0.00',
+                            icon:'',
+                            style:'',
 		                },
-		                { //Index 7
+		                { //Index 9
 		                    value:false,
 			                name:'Convenience Fees',
 			                square:'0.00',
 			                technician: '0.00',
-			                difference: '0.00'
+			                difference: '0.00',
+                            icon:'',
+                            style:'',
 		                },
-		                { //Index 8
+		                { //Index 10
 		                    value:false,
 			                name:'Processing Fees',
 			                square:'0.00',
 			                technician: '0.00',
-			                difference:'0.00'
+			                difference:'0.00',
+                            icon:'',
+                            style:'',
 		                }
 	                ]
                 }
@@ -188,14 +228,18 @@
                 this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
                 this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
 
-                this.sales.items[6].square = this.sale.sales['Gift Certificate Redeemed'];
-				this.sales.items[6].technician = this.sale.sales['Gift Certificate Redeemed'];
+                this.sales.items[6].square = this.sale.sales['Cash Collected'];
 
-				this.sales.items[7].square = this.sale.sales['Convenience Fee'];
-				this.sales.items[7].technician = this.sale.sales['Convenience Fee'];
+                this.sales.items[7].square = this.sale.sales['Card Collected'];
 
-				this.sales.items[8].square = this.sale.sales['CC Fees'];
-				this.sales.items[8].technician =  this.sale.sales['CC Fees'];
+                this.sales.items[8].square = this.sale.sales['Gift Certificate Redeemed'];
+				this.sales.items[8].technician = this.sale.sales['Gift Certificate Redeemed'];
+
+				this.sales.items[9].square = this.sale.sales['Convenience Fee'];
+				this.sales.items[9].technician = this.sale.sales['Convenience Fee'];
+
+				this.sales.items[10].square = this.sale.sales['CC Fees'];
+				this.sales.items[10].technician =  this.sale.sales['CC Fees'];
 
 
             },

@@ -2,7 +2,14 @@
 	<div>
 		<v-app class = "blue lighten-4">
 		<v-container fluid>
-
+			<div label id = "sale-sticker" class ="sticker">
+				<p class = "subheading">Gross Sale</p>
+				<p class = "body-2">$ {{technicianSale}}</p>
+			</div>
+			<div label id = "tip-sticker" class ="sticker">
+				<p class = "subheading">Gross Tip</p>
+				<p class = "body-2">$ {{technicianCardTip}}</p>
+			</div>
 			<v-layout row wrap>
 				<v-flex lg12>
 					<v-alert success v-model="isAdded" transition="fade" class = "text-lg-center" dismissible>
@@ -230,9 +237,7 @@
                 return cardTip;
 			},
 
-			technicianGrossSale(){
-			    //return this.technicianSale + this.square.giftSale + this.square.giftRedeem + this.square.convenienceFee;
-			},
+
 
 		},
 	    mounted(){
@@ -253,6 +258,8 @@
                     this.isSquareData = response.data.success;
                     if(this.isSquareData){
                         this.squareData = response.data;
+                        this.technician.grossSale = response.data.sales['Technician Sales'];
+                        this.technician.cardTip = response.data.tips['Technician Tips'];
 
                     }
                 });
@@ -348,5 +355,30 @@
 </script>
 
 <style>
+	.sticker{
+		position:fixed;
+		height:75px;
+		width: 95px;
+		background-color: #2e7d32;
+		top:23%;
+		right:0;
+		z-index:10000;
+		border-radius: 3px;
+		padding: 2px;
+		color:white;
+		text-align: center;
+		opacity:0.8;
+	}
+	#sale-sticker{
 
+		background-color: #2e7d32;
+		top:23%;
+
+
+	}
+	#tip-sticker{
+		background-color: orange;
+		top:40%;
+
+	}
 </style>
