@@ -28840,7 +28840,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28852,6 +28852,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(133);
+//
+//
+//
 //
 //
 //
@@ -29497,7 +29500,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "label": ""
     }
-  }, [_vm._v(_vm._s(_vm.paymentGauge.text))]), _vm._v(" "), _c('v-divider')] : _vm._e(), _vm._v(" "), _c('technician-payment-form', {
+  }, [_vm._v(_vm._s(_vm.paymentGauge.text))]), _vm._v(" "), _c('v-chip', {
+    staticClass: "subheading brown white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\tCommission Rate: " + _vm._s(_vm.technician.salary_setup.commission_rate) + " Tip Rate: " + _vm._s(_vm.technician.salary_setup.tip_rate) + "\n\t\t\t\t\t")]), _vm._v(" "), _c('v-divider')] : _vm._e(), _vm._v(" "), _c('technician-payment-form', {
     on: {
       "add": _vm.addPayment
     }

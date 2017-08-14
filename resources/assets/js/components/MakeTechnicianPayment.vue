@@ -17,6 +17,9 @@
 				<template v-if="totalPayingAmount > 0">
 					<v-chip label v-if="totalPayingAmount > 0" outline class="black--text subheading">Total Paying: $ {{ totalPayingAmount }}</v-chip>
 					<v-chip label class ="subheading":class = "paymentGauge.style">{{paymentGauge.text}}</v-chip>
+					<v-chip label class ="subheading brown white--text" >
+						Commission Rate: {{technician.salary_setup.commission_rate}} Tip Rate: {{technician.salary_setup.tip_rate}}
+						</v-chip>
 					<v-divider></v-divider>
 				</template>
 				<technician-payment-form @add="addPayment"></technician-payment-form>

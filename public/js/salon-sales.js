@@ -27962,7 +27962,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27972,6 +27972,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
 //
 //
 //
@@ -28037,60 +28039,96 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																				name: 'Gross Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 																}, { //Index 1
 																				value: false,
 																				name: 'Refund',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 2
 																				value: false,
 																				name: 'Net Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 3
 																				value: false,
 																				name: 'Tips on Card',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 4
 																				value: false,
 																				name: 'Gift Sales',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
 																}, { //Index 5
 																				value: false,
 																				name: 'Total Collected',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 
-																}, { //Index 6
+																}, {
+																				//Index 6
+																				value: false,
+																				name: 'Cash',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00',
+																				icon: 'attach_money',
+																				style: 'green--text'
+																}, {
+																				//Index 7
+																				value: false,
+																				name: 'Card',
+																				square: '0.00',
+																				technician: '0.00',
+																				difference: '0.00',
+																				icon: 'credit_card',
+																				style: 'blue--text'
+																}, { //Index 8
 																				value: false,
 																				name: 'Gift Redeems',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
-																}, { //Index 7
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
+																}, { //Index 9
 																				value: false,
 																				name: 'Convenience Fees',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
-																}, { //Index 8
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
+																}, { //Index 10
 																				value: false,
 																				name: 'Processing Fees',
 																				square: '0.00',
 																				technician: '0.00',
-																				difference: '0.00'
+																				difference: '0.00',
+																				icon: '',
+																				style: ''
 																}]
 												}
 								};
@@ -28144,14 +28182,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 												this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
 												this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
 
-												this.sales.items[6].square = this.sale.sales['Gift Certificate Redeemed'];
-												this.sales.items[6].technician = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[6].square = this.sale.sales['Cash Collected'];
 
-												this.sales.items[7].square = this.sale.sales['Convenience Fee'];
-												this.sales.items[7].technician = this.sale.sales['Convenience Fee'];
+												this.sales.items[7].square = this.sale.sales['Card Collected'];
 
-												this.sales.items[8].square = this.sale.sales['CC Fees'];
-												this.sales.items[8].technician = this.sale.sales['CC Fees'];
+												this.sales.items[8].square = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[8].technician = this.sale.sales['Gift Certificate Redeemed'];
+
+												this.sales.items[9].square = this.sale.sales['Convenience Fee'];
+												this.sales.items[9].technician = this.sale.sales['Convenience Fee'];
+
+												this.sales.items[10].square = this.sale.sales['CC Fees'];
+												this.sales.items[10].technician = this.sale.sales['CC Fees'];
 								},
 								syncData: function syncData() {}
 				}
@@ -28216,7 +28258,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       fn: function(props) {
         return [_c('td', {
           staticClass: "subheading"
-        }, [_c('strong', [_vm._v(_vm._s(props.item.name))])]), _vm._v(" "), _c('td', {
+        }, [(props.item.icon) ? _c('v-icon', {
+          class: props.item.style
+        }, [_vm._v(_vm._s(props.item.icon))]) : _vm._e(), _vm._v(" "), _c('strong', [_vm._v(_vm._s(props.item.name))])], 1), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
         }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
