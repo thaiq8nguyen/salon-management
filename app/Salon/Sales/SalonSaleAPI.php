@@ -66,8 +66,8 @@ class SalonSaleAPI{
 
 
         if($sales !== null){
-            $metrics['Technician Sales'] = number_format($techSales,2);
-            $metrics['Gift Certificate Redeemed'] = number_format(0 - $sales->gift_certificate_redeemed,2);
+            $metrics['Technician Sales'] = $techSales;
+            $metrics['Gift Certificate Redeemed'] = 0 - $sales->gift_certificate_redeemed;
 
             foreach($sales->salonSaleDetails as $items){
                 $metrics[$items->item] =$items->gross_sales;
@@ -88,22 +88,22 @@ class SalonSaleAPI{
             $metrics['Cash Collected'] = $sales->cash_collected;
             $metrics['CC Fees'] = $sales->fees;
             $metrics['Refunded'] = $sales->refunded;
-            $metrics['Square Gross Sales'] = number_format($sales->gross_sales,2);
+            $metrics['Square Gross Sales'] = $sales->gross_sales;
 
-            $metrics['Gross Sales Difference'] = number_format($grossSaleDifference,2);
+            $metrics['Gross Sales Difference'] = $grossSaleDifference;
 
-            $metrics['Square Net Sales'] = number_format($squareNetSales,2);
-            $metrics['Technician Net Sales'] = number_format($technicianNetSale,2);
-            $metrics['Net Sales Difference'] = number_format($netSaleDifference,2);
+            $metrics['Square Net Sales'] = $squareNetSales;
+            $metrics['Technician Net Sales'] = $technicianNetSale;
+            $metrics['Net Sales Difference'] = $netSaleDifference;
 
-            $metrics['Square Total Collected'] = number_format($squareTotalCollected,2);
+            $metrics['Square Total Collected'] = $squareTotalCollected;
 
-            $metrics['Technician Total Collected'] = number_format($technicianTotalCollected,2);
+            $metrics['Technician Total Collected'] = $technicianTotalCollected;
 
-            $metrics['Total Collected Difference'] = number_format($totalCollectedDifference,2);
+            $metrics['Total Collected Difference'] = $totalCollectedDifference;
 
-            $tips = ['Technician Tips' => number_format($tipsOnCard,2),
-                'Square Tips' => number_format($sales->tips,2), 'Tips Difference' => number_format($tipsOnCard-$sales->tips,2)];
+            $tips = ['Technician Tips' => $tipsOnCard,2,
+                'Square Tips' => $sales->tips, 'Tips Difference' => $tipsOnCard-$sales->tips,];
             $result = ['success' => true, 'sales' => $metrics, 'tips' => $tips];
         }
         else{

@@ -215,18 +215,18 @@
                 return this.$moment(this.date).format('dddd MM/DD/YYYY');
             },
             technicianSale(){
-                let grossSale = parseFloat(this.technician.grossSale);
+                let grossSale = this.technician.grossSale;
                 for(let i = 0; i < this.sales.length; i++){
-                    grossSale += parseFloat(this.sales[i].sales);
+                    grossSale += this.sales[i].sales;
                 }
                 if(isNaN(grossSale)){
-                    grossSale = 0;
+                    grossSale = 5;
                 }
 
                 return grossSale;
 			},
 			technicianCardTip(){
-                let cardTip = parseFloat(this.technician.cardTip);
+                let cardTip = this.technician.cardTip;
                 for(let i = 0; i < this.sales.length; i++){
                     cardTip += parseFloat(this.sales[i].additional_sales);
                 }
@@ -237,13 +237,12 @@
                 return cardTip;
 			},
 
-
-
 		},
 	    mounted(){
             this.getSquareData();
             this.getAllTechnicians();
 	    },
+
 		watch:{
 	        date(){
 	            this.getSquareData();
@@ -259,8 +258,8 @@
                     console.log(response.data);
                     if(this.isSquareData){
                         this.squareData = response.data;
-                        this.technician.grossSale = response.data.sales['Technician Sales'];
-                        this.technician.cardTip = response.data.tips['Technician Tips'];
+                        this.technician.grossSale = parseFloat(response.data.sales['Technician Sales']);
+                        this.technician.cardTip = parseFloat(response.data.tips['Technician Tips']);
 
                     }
                 });
@@ -367,7 +366,6 @@
 		border-radius: 3px;
 		padding: 2px;
 		color:white;
-		text-align: center;
 		opacity:0.8;
 	}
 	#sale-sticker{
