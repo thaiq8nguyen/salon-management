@@ -83,7 +83,8 @@ class SalonSaleAPI{
             $metrics['CC Fees'] = $sales->fees;
             $metrics['Refunded'] = $sales->refunded;
             $metrics['Square Gross Sales'] = number_format((float)$sales->gross_sales,2);
-            $metrics['Gross Sales Difference'] = number_format($metrics['Technician Sales'] - $metrics['Square Gross Sales'],2);
+            $grossSaleDifference = $techSales - $sales->grossSales;
+            $metrics['Gross Sales Difference'] = number_format($grossSaleDifference,2);
 
             $metrics['Square Net Sales'] = number_format($metrics['Square Gross Sales'] - $metrics['Refunded'],2);
             $metrics['Technician Net Sales'] = number_format($metrics['Technician Sales'] - $metrics['Refunded'],2);
