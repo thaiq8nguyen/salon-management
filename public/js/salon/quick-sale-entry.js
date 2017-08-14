@@ -27962,7 +27962,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27972,9 +27972,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
 //
 //
 //
@@ -28037,9 +28034,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																items: [{ //Index 0
 																				value: false,
 																				name: 'Gross Sales',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: null,
+																				technician: null,
+																				difference: null,
 																				icon: '',
 																				style: ''
 																}, { //Index 1
@@ -28134,13 +28131,20 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 								};
 				},
 				mounted: function mounted() {
-								this.getSquareData();
+								//this.getSquareData();
+
 				},
 
 				watch: {
 								saleData: function saleData() {
-												this.sale = this.saleData;
-												this.updateSale();
+												//this.sale = this.saleData;
+												if (this.saleData.success) {
+																this.squareData = true;
+																this.sale = this.saleData;
+																this.updateSale();
+												} else {
+																this.squareData = false;
+												}
 								}
 				},
 
@@ -28194,8 +28198,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 												this.sales.items[10].square = this.sale.sales['CC Fees'];
 												this.sales.items[10].technician = this.sale.sales['CC Fees'];
-								},
-								syncData: function syncData() {}
+								}
 				}
 
 });
@@ -28219,22 +28222,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "src": _vm.squareLogo,
       "height": "60"
     }
-  })])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg1": "",
-      "ml-4": ""
-    }
-  }, [_c('v-btn', {
-    attrs: {
-      "flat": "",
-      "outline": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.syncData($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("cached")])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.isSquareData) ? [_c('v-data-table', {
+  })])])], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.isSquareData) ? [_c('v-data-table', {
     staticClass: "text-md-center",
     attrs: {
       "headers": _vm.sales.headers,
@@ -28802,6 +28790,7 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
             this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
                 _this.loadingData = false;
                 _this.isSquareData = response.data.success;
+                console.log(response.data);
                 if (_this.isSquareData) {
                     _this.squareData = response.data;
                     _this.technician.grossSale = response.data.sales['Technician Sales'];

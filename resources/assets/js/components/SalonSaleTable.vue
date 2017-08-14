@@ -6,9 +6,6 @@
 					<v-flex lg11>
 						<p class = "headline">Salon Sale with <img :src="squareLogo" height="60"></p>
 					</v-flex>
-					<v-flex lg1 ml-4>
-						<v-btn flat @click.native="syncData" outline><v-icon>cached</v-icon></v-btn>
-					</v-flex>
 				</v-layout>
 			</v-card-title>
 			<v-card-text>
@@ -71,9 +68,9 @@
 		                { //Index 0
 		                    value:false,
 		                    name:'Gross Sales',
-			                square: '0.00',
-			                technician: '0.00',
-			                difference: '0.00',
+			                square: null,
+			                technician: null,
+			                difference: null,
 			                icon:'',
 			                style:'',
 		                },
@@ -180,13 +177,21 @@
         },
 
 	    mounted(){
-            this.getSquareData();
+            //this.getSquareData();
 
 	    },
 	    watch:{
             saleData:function(){
-                this.sale = this.saleData;
-                this.updateSale();
+                //this.sale = this.saleData;
+	            if(this.saleData.success){
+	                this.squareData = true;
+	                this.sale = this.saleData;
+                    this.updateSale();
+	            }else{
+	                this.squareData  = false;
+
+	            }
+
             }
 	    },
 
@@ -243,10 +248,7 @@
 
 
             },
-	        syncData(){
 
-
-	        }
         }
 
 
