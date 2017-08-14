@@ -28840,7 +28840,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28930,12 +28930,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
             if (this.totalPayingAmount === 0) {
                 return { style: '', text: '' };
-            } else if (this.totalPayingAmount > 0 && parseFloat(this.totalPayingAmount < this.technician.total_sales_and_tips[0].total)) {
-                return { style: 'amber darken-1 white--text', text: 'Underpaying' };
+            } else if (this.totalPayingAmount > 0 && this.totalPayingAmount < parseFloat(this.technician.total_sales_and_tips[0].total).toFixed(2)) {
+                return { style: 'amber darken-1 white--text', text: 'Underpaying by $ ' + parseFloat(this.technician.total_sales_and_tips[0].total - this.totalPayingAmount).toFixed(2) };
             } else if (this.totalPayingAmount === parseFloat(this.technician.total_sales_and_tips[0].total).toFixed(2)) {
                 return { style: 'green darken-1 white--text', text: 'Right Amount!' };
             } else {
-                return { style: 'purple darken-1 white--text', text: 'Overpaying by $ ' + parseFloat(this.totalPayingAmount - parseFloat(this.technician.total_sales_and_tips[0].total)).toFixed(2) };
+                return { style: 'purple darken-1 white--text', text: 'Overpaying by $ ' + parseFloat(this.totalPayingAmount - this.technician.total_sales_and_tips[0].total).toFixed(2) };
             }
         }
     },
