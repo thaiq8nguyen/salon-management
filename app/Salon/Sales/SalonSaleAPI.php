@@ -73,11 +73,11 @@ class SalonSaleAPI{
                 $metrics[$items->item] =$items->gross_sales;
             }
 
-            $sum = 0;
+            /*$sum = 0;
 
             foreach($metrics as $item => $value){
                 $sum += $value;
-            }
+            }*/
             $metrics['Card Collected'] = $sales->cards_collected;
             $metrics['Cash Collected'] = $sales->cash_collected;
             $metrics['CC Fees'] = $sales->fees;

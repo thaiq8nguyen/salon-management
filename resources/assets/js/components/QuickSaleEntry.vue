@@ -256,6 +256,7 @@
                 this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
                     this.loadingData = false;
                     this.isSquareData = response.data.success;
+                    console.log(response.data);
                     if(this.isSquareData){
                         this.squareData = response.data;
                         this.technician.grossSale = response.data.sales['Technician Sales'];
