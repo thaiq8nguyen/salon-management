@@ -66,7 +66,7 @@ class SalonSaleAPI{
 
 
         if($sales !== null){
-            $metrics['Technician Sales'] = number_format($techSales,2);
+            $metrics['Technician Sales'] = number_format((float)$techSales,2);
             $metrics['Gift Certificate Redeemed'] = number_format(0 - $sales->gift_certificate_redeemed,2);
 
             foreach($sales->salonSaleDetails as $items){
@@ -82,7 +82,7 @@ class SalonSaleAPI{
             $metrics['Cash Collected'] = $sales->cash_collected;
             $metrics['CC Fees'] = $sales->fees;
             $metrics['Refunded'] = $sales->refunded;
-            $metrics['Square Gross Sales'] = number_format($sales->gross_sales,2);
+            $metrics['Square Gross Sales'] = number_format((float)$sales->gross_sales,2);
             $metrics['Gross Sales Difference'] = number_format($metrics['Technician Sales'] - $metrics['Square Gross Sales'],2);
 
             $metrics['Square Net Sales'] = number_format($metrics['Square Gross Sales'] - $metrics['Refunded'],2);
