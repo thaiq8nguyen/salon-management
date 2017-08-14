@@ -73,14 +73,14 @@ class SalonSaleAPI{
                 $metrics[$items->item] =$items->gross_sales;
             }
 
-            $grossSaleDifference = $techSales - $sales->grossSales;
-            $squareNetSales = $sales->grossSales - $sales->refunded;
-            $netSaleDifference = $techSales -$sales->refunded - ($sales->grossSales - $sales->refunded);
+            $grossSaleDifference = $techSales - $sales->gross_sales;
+            $squareNetSales = $sales->gross_sales - $sales->refunded;
+            $netSaleDifference = $techSales -$sales->refunded - ($sales->gross_sales - $sales->refunded);
             $technicianNetSale = $techSales - $sales->refunded;
-            $squareTotalCollected = $sales->grossSales - ($sales->refunded + (float)$metrics['Gift Certificate'] + $sales->tips);
+            $squareTotalCollected = $sales->gross_sales - $sales->refunded + (float)$metrics['Gift Certificate'] + $sales->tips;
             $technicianTotalCollected = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] + (float)$metrics['Convenience Fee'] + $tipsOnCard;
             $totalCollectedDifference = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] +
-                (float)$metrics['Convenience Fee'] + $tipsOnCard - ($sales->grossSales - $sales->refunded + $metrics['Gift Certificate'] + $sales->tips);
+                (float)$metrics['Convenience Fee'] + $tipsOnCard - ($sales->gross_sales - $sales->refunded + $metrics['Gift Certificate'] + $sales->tips);
 
 
 
