@@ -28521,7 +28521,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth: 95px;\n\tbackground-color: #2e7d32;\n\ttop:23%;\n\tright:0;\n\tz-index:10000;\n\tborder-radius: 3px;\n\tpadding: 2px;\n\tcolor:white;\n\ttext-align: center;\n\topacity:0.8;\n}\n#sale-sticker{\n\n\tbackground-color: #2e7d32;\n\ttop:23%;\n}\n#tip-sticker{\n\tbackground-color: orange;\n\ttop:40%;\n}\n", ""]);
+exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth: 95px;\n\tbackground-color: #2e7d32;\n\ttop:23%;\n\tright:0;\n\tz-index:10000;\n\tborder-radius: 3px;\n\tpadding: 2px;\n\tcolor:white;\n\topacity:0.8;\n}\n#sale-sticker{\n\n\tbackground-color: #2e7d32;\n\ttop:23%;\n}\n#tip-sticker{\n\tbackground-color: orange;\n\ttop:40%;\n}\n", ""]);
 
 // exports
 
@@ -28749,18 +28749,18 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
             return this.$moment(this.date).format('dddd MM/DD/YYYY');
         },
         technicianSale: function technicianSale() {
-            var grossSale = parseFloat(this.technician.grossSale);
+            var grossSale = this.technician.grossSale;
             for (var i = 0; i < this.sales.length; i++) {
-                grossSale += parseFloat(this.sales[i].sales);
+                grossSale += this.sales[i].sales;
             }
             if (isNaN(grossSale)) {
-                grossSale = 0;
+                grossSale = 5;
             }
 
             return grossSale;
         },
         technicianCardTip: function technicianCardTip() {
-            var cardTip = parseFloat(this.technician.cardTip);
+            var cardTip = this.technician.cardTip;
             for (var i = 0; i < this.sales.length; i++) {
                 cardTip += parseFloat(this.sales[i].additional_sales);
             }
@@ -28775,6 +28775,7 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
         this.getSquareData();
         this.getAllTechnicians();
     },
+
 
     watch: {
         date: function date() {
@@ -28793,8 +28794,8 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
                 console.log(response.data);
                 if (_this.isSquareData) {
                     _this.squareData = response.data;
-                    _this.technician.grossSale = response.data.sales['Technician Sales'];
-                    _this.technician.cardTip = response.data.tips['Technician Tips'];
+                    _this.technician.grossSale = parseFloat(response.data.sales['Technician Sales']);
+                    _this.technician.cardTip = parseFloat(response.data.tips['Technician Tips']);
                 }
             });
         },
