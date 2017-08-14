@@ -66,39 +66,41 @@ class SalonSaleAPI{
 
 
         if($sales !== null){
-            $metrics['Technician Sales'] = number_format((float)$techSales,2);
+            $metrics['Technician Sales'] = number_format($techSales,2);
             $metrics['Gift Certificate Redeemed'] = number_format(0 - $sales->gift_certificate_redeemed,2);
 
             foreach($sales->salonSaleDetails as $items){
                 $metrics[$items->item] =$items->gross_sales;
             }
 
-            /*$sum = 0;
+            $grossSaleDifference = $techSales - $sales->grossSales;
+            $squareNetSales = $sales->grossSales - $sales->refunded;
+            $netSaleDifference = $techSales -$sales->refunded - ($sales->grossSales - $sales->refunded);
+            $technicianNetSale = $techSales - $sales->refunded;
+            $squareTotalCollected = $sales->grossSales - ($sales->refunded + (float)$metrics['Gift Certificate'] + $sales->tips);
+            $technicianTotalCollected = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] + (float)$metrics['Convenience Fee'] + $tipsOnCard;
+            $totalCollectedDifference = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] +
+                (float)$metrics['Convenience Fee'] + $tipsOnCard - ($sales->grossSales - $sales->refunded + $metrics['Gift Certificate'] + $sales->tips);
 
-            foreach($metrics as $item => $value){
-                $sum += $value;
-            }*/
+
+
             $metrics['Card Collected'] = $sales->cards_collected;
             $metrics['Cash Collected'] = $sales->cash_collected;
             $metrics['CC Fees'] = $sales->fees;
             $metrics['Refunded'] = $sales->refunded;
-            $metrics['Square Gross Sales'] = number_format((float)$sales->gross_sales,2);
-            $grossSaleDifference = $techSales - $sales->grossSales;
+            $metrics['Square Gross Sales'] = number_format($sales->gross_sales,2);
+
             $metrics['Gross Sales Difference'] = number_format($grossSaleDifference,2);
 
-            $metrics['Square Net Sales'] = number_format($metrics['Square Gross Sales'] - $metrics['Refunded'],2);
-            $metrics['Technician Net Sales'] = number_format($metrics['Technician Sales'] - $metrics['Refunded'],2);
-            $metrics['Net Sales Difference'] = number_format($metrics['Technician Sales'] - $metrics['Refunded']-($metrics['Square Gross Sales'] - $metrics['Refunded']),2);
+            $metrics['Square Net Sales'] = number_format($squareNetSales,2);
+            $metrics['Technician Net Sales'] = number_format($technicianNetSale,2);
+            $metrics['Net Sales Difference'] = number_format($netSaleDifference,2);
 
-            $metrics['Square Total Collected'] = number_format($metrics['Square Gross Sales'] - $metrics['Refunded'] + $metrics['Gift Certificate'] +
-                $sales->tips,2);
+            $metrics['Square Total Collected'] = number_format($squareTotalCollected,2);
 
-            $metrics['Technician Total Collected'] = number_format($metrics['Technician Sales']
-                + $metrics['Gift Certificate'] + $metrics['Gift Certificate Redeemed'] + $metrics['Convenience Fee'] + $tipsOnCard,2);
+            $metrics['Technician Total Collected'] = number_format($technicianTotalCollected,2);
 
-            $metrics['Total Collected Difference'] = number_format($metrics['Technician Sales']
-                + $metrics['Gift Certificate'] + $metrics['Gift Certificate Redeemed'] + $metrics['Convenience Fee'] + $tipsOnCard -($metrics['Square Gross Sales']
-                    - $metrics['Refunded'] + $metrics['Gift Certificate'] + $sales->tips),2);
+            $metrics['Total Collected Difference'] = number_format($totalCollectedDifference,2);
 
             $tips = ['Technician Tips' => number_format($tipsOnCard,2),
                 'Square Tips' => number_format($sales->tips,2), 'Tips Difference' => number_format($tipsOnCard-$sales->tips,2)];
