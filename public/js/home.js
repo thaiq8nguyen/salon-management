@@ -28221,7 +28221,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28250,7 +28250,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             periods: [],
             current: null,
             payDate: null,
-            reminders: []
+            reminder: {},
+            reminders: [],
+            date: this.$moment().format('MM/DD/YYYY')
 
         };
     },
@@ -28260,7 +28262,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             if (this.payDate !== null) {
                 return this.$moment(this.current.payDate, 'MM/DD/YYYY').subtract(2, 'days').format('dddd, MM/DD/YYYY ');
             }
-            return 'Error';
+            return 'There are errors occured while processing end date';
         }
     },
     mounted: function mounted() {
@@ -28272,18 +28274,33 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             var _this = this;
 
             this.$axios.get('/api/pay-period/list').then(function (response) {
+                console.log(response.data);
                 _this.periods = response.data;
                 _this.current = response.data[response.data.length - 1];
                 _this.payDate = _this.current.payDate;
-                var reminder = {
-                    name: 'end date',
-                    text: 'This pay period ends in ' + _this.endDate
-                };
-                _this.addReminder(reminder);
+
+                if (_this.date === _this.payDate) {
+                    _this.reminder.name = 'pay_date';
+                    _this.reminder.text = 'Pay Date is today!';
+                } else {
+                    _this.reminder.name = 'end_date';
+                    _this.reminder.text = 'This pay period ends in ' + _this.endDate;
+                }
+
+                _this.addReminder();
+            }).catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 422) {
+                        _this.reminder.name = 'error';
+                        _this.reminder.text = error.response.data;
+
+                        _this.addReminder();
+                    }
+                }
             });
         },
-        addReminder: function addReminder(reminder) {
-            this.reminders.push(reminder);
+        addReminder: function addReminder() {
+            this.reminders.push(this.reminder);
         }
     }
 
@@ -28356,7 +28373,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-icon', {
     staticClass: "white--text"
-  }, [_vm._v("event_note")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('pay-day-reminder'), _vm._v(" "), _c('v-divider')], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("event_note")])], 1)], 1), _vm._v(" "), _c('v-card-text', {
+    staticClass: "text-lg-center text-xs-center"
+  }, [_c('pay-day-reminder'), _vm._v(" "), _c('v-divider')], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     staticClass: "margin-top",
     attrs: {
       "lg4": "",
@@ -28435,7 +28454,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "xs6": ""
     }
   }, [_c('h3', {
-    staticClass: "headline white&#45;&#45;text"
+    staticClass: "headline white--text"
   }, [_c('strong', [_vm._v("Trends")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",

@@ -27962,7 +27962,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28018,15 +28018,15 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 				props: ['saleData'],
 
 				data: function data() {
 								return {
-												sale: null,
 												isSquareData: true,
-												date: this.$moment().format('YYYY-MM-DD'),
+
 												squareLogo: '/images/square-logo.png',
 
 												sales: {
@@ -28034,53 +28034,54 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																items: [{ //Index 0
 																				value: false,
 																				name: 'Gross Sales',
-																				square: null,
-																				technician: null,
-																				difference: null,
+																				square: this.formatMoney(this.saleData.sales['Square Gross Sales']),
+																				technician: this.formatMoney(this.saleData.sales['Technician Sales']),
+																				difference: this.formatMoney(this.saleData.sales['Gross Sales Difference']),
 																				icon: '',
-																				style: ''
+																				style: '',
+																				square_style: 'blue lighten--4 white--text'
 																}, { //Index 1
 																				value: false,
 																				name: 'Refund',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Refunded']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
 																				icon: '',
 																				style: ''
 
 																}, { //Index 2
 																				value: false,
 																				name: 'Net Sales',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Square Net Sales']),
+																				technician: this.formatMoney(this.saleData.sales['Technician Net Sales']),
+																				difference: this.formatMoney(this.saleData.sales['Net Sales Difference']),
 																				icon: '',
 																				style: ''
 
 																}, { //Index 3
 																				value: false,
 																				name: 'Tips on Card',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.tips['Square Tips']),
+																				technician: this.formatMoney(this.saleData.tips['Technician Tips']),
+																				difference: this.formatMoney(this.saleData.tips['Tips Difference']),
 																				icon: '',
 																				style: ''
 
 																}, { //Index 4
 																				value: false,
 																				name: 'Gift Sales',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
-																				icon: '',
-																				style: ''
+																				square: this.formatMoney(this.saleData.sales['Gift Certificate']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
+																				icon: 'card_giftcard',
+																				style: 'red--text'
 
 																}, { //Index 5
 																				value: false,
 																				name: 'Total Collected',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Square Total Collected']),
+																				technician: this.formatMoney(this.saleData.sales['Technician Total Collected']),
+																				difference: this.formatMoney(this.saleData.sales['Total Collected Difference']),
 																				icon: '',
 																				style: ''
 
@@ -28088,59 +28089,58 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 																				//Index 6
 																				value: false,
 																				name: 'Cash',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Cash Collected']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
 																				icon: 'attach_money',
-																				style: 'green--text'
+																				style: 'green--text',
+																				square_style: 'blue lighten--4 white--text'
 																}, {
 																				//Index 7
 																				value: false,
 																				name: 'Card',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Card Collected']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
 																				icon: 'credit_card',
-																				style: 'blue--text'
+																				style: 'blue--text',
+																				square_style: 'blue lighten--4 white--text'
 																}, { //Index 8
 																				value: false,
 																				name: 'Gift Redeems',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
-																				icon: '',
-																				style: ''
+																				square: this.formatMoney(this.saleData.sales['Gift Certificate Redeemed']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
+																				icon: 'card_giftcard',
+																				style: 'orange--text'
 																}, { //Index 9
 																				value: false,
 																				name: 'Convenience Fees',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
+																				square: this.formatMoney(this.saleData.sales['Convenience Fee']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
 																				icon: '',
-																				style: ''
+																				style: '',
+																				square_style: 'blue lighten--4 white--text'
 																}, { //Index 10
 																				value: false,
 																				name: 'Processing Fees',
-																				square: '0.00',
-																				technician: '0.00',
-																				difference: '0.00',
-																				icon: '',
-																				style: ''
+																				square: this.formatMoney(this.saleData.sales['CC Fees']),
+																				technician: '$ 0.00',
+																				difference: '$ 0.00',
+																				icon: 'credit_card',
+																				style: 'purple--text'
 																}]
 												}
 								};
 				},
-				mounted: function mounted() {
-								//this.getSquareData();
 
-				},
 
 				watch: {
 								saleData: function saleData() {
-												//this.sale = this.saleData;
+
 												if (this.saleData.success) {
 																this.squareData = true;
-																this.sale = this.saleData;
 																this.updateSale();
 												} else {
 																this.squareData = false;
@@ -28149,55 +28149,49 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 				},
 
 				methods: {
-								getSquareData: function getSquareData() {
-												var _this = this;
+								formatMoney: function formatMoney(amount) {
 
-												this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
-																if (response.data.success) {
-																				_this.sale = response.data;
-																				_this.updateSale();
-																				_this.squareData = true;
-																} else {
-																				_this.squareData = false;
-																}
-												});
+												return '$ ' + parseFloat(amount).toFixed(2);
+								},
+								readableDate: function readableDate(date) {
+												return this.$moment(date).format('dddd MM/DD/YYYY');
 								},
 								updateSale: function updateSale() {
 
-												this.sales.items[0].square = this.sale.sales['Square Gross Sales'];
-												this.sales.items[0].technician = this.sale.sales['Technician Sales'];
-												this.sales.items[0].difference = this.sale.sales['Gross Sales Difference'];
+												this.sales.items[0].square = this.formatMoney(this.saleData.sales['Square Gross Sales']);
+												this.sales.items[0].technician = this.formatMoney(this.saleData.sales['Technician Sales']);
+												this.sales.items[0].difference = this.formatMoney(this.saleData.sales['Gross Sales Difference']);
 
-												this.sales.items[1].square = this.sale.sales['Refunded'];
-												this.sales.items[1].technician = this.sale.sales['Refunded'];
+												this.sales.items[1].square = this.formatMoney(this.saleData.sales['Refunded']);
+												this.sales.items[1].technician = this.formatMoney(this.saleData.sales['Refunded']);
 
-												this.sales.items[2].square = this.sale.sales['Square Net Sales'];
-												this.sales.items[2].technician = this.sale.sales['Technician Net Sales'];
-												this.sales.items[2].difference = this.sale.sales['Net Sales Difference'];
+												this.sales.items[2].square = this.formatMoney(this.saleData.sales['Square Net Sales']);
+												this.sales.items[2].technician = this.formatMoney(this.saleData.sales['Technician Net Sales']);
+												this.sales.items[2].difference = this.formatMoney(this.saleData.sales['Net Sales Difference']);
 
-												this.sales.items[3].square = this.sale.tips['Square Tips'];
-												this.sales.items[3].technician = this.sale.tips['Technician Tips'];
-												this.sales.items[3].difference = this.sale.tips['Tips Difference'];
+												this.sales.items[3].square = this.formatMoney(this.saleData.tips['Square Tips']);
+												this.sales.items[3].technician = this.formatMoney(this.saleData.tips['Technician Tips']);
+												this.sales.items[3].difference = this.formatMoney(this.saleData.tips['Tips Difference']);
 
-												this.sales.items[4].square = this.sale.sales['Gift Certificate'];
-												this.sales.items[4].technician = this.sale.sales['Gift Certificate'];
+												this.sales.items[4].square = this.formatMoney(this.saleData.sales['Gift Certificate']);
+												this.sales.items[4].technician = this.formatMoney(this.saleData.sales['Gift Certificate']);
 
-												this.sales.items[5].square = this.sale.sales['Square Total Collected'];
-												this.sales.items[5].technician = this.sale.sales['Technician Total Collected'];
-												this.sales.items[5].difference = this.sale.sales['Total Collected Difference'];
+												this.sales.items[5].square = this.formatMoney(this.saleData.sales['Square Total Collected']);
+												this.sales.items[5].technician = this.formatMoney(this.saleData.sales['Technician Total Collected']);
+												this.sales.items[5].difference = this.formatMoney(this.saleData.sales['Total Collected Difference']);
 
-												this.sales.items[6].square = this.sale.sales['Cash Collected'];
+												this.sales.items[6].square = this.formatMoney(this.saleData.sales['Cash Collected']);
 
-												this.sales.items[7].square = this.sale.sales['Card Collected'];
+												this.sales.items[7].square = this.formatMoney(this.saleData.sales['Card Collected']);
 
-												this.sales.items[8].square = this.sale.sales['Gift Certificate Redeemed'];
-												this.sales.items[8].technician = this.sale.sales['Gift Certificate Redeemed'];
+												this.sales.items[8].square = this.formatMoney(this.saleData.sales['Gift Certificate Redeemed']);
+												this.sales.items[8].technician = this.formatMoney(this.saleData.sales['Gift Certificate Redeemed']);
 
-												this.sales.items[9].square = this.sale.sales['Convenience Fee'];
-												this.sales.items[9].technician = this.sale.sales['Convenience Fee'];
+												this.sales.items[9].square = this.formatMoney(this.saleData.sales['Convenience Fee']);
+												this.sales.items[9].technician = this.formatMoney(this.saleData.sales['Convenience Fee']);
 
-												this.sales.items[10].square = this.sale.sales['CC Fees'];
-												this.sales.items[10].technician = this.sale.sales['CC Fees'];
+												this.sales.items[10].square = this.formatMoney(this.saleData.sales['CC Fees']);
+												this.sales.items[10].technician = this.formatMoney(this.saleData.sales['CC Fees']);
 								}
 				}
 
@@ -28213,16 +28207,20 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "grey lighten-4"
   }, [_c('v-layout', [_c('v-flex', {
     attrs: {
-      "lg11": ""
+      "lg8": ""
     }
   }, [_c('p', {
     staticClass: "headline"
-  }, [_vm._v("Salon Sale with "), _c('img', {
+  }, [_vm._v("Sales Summary with "), _c('img', {
     attrs: {
       "src": _vm.squareLogo,
-      "height": "60"
+      "height": "40"
     }
-  })])])], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.isSquareData) ? [_c('v-data-table', {
+  })])]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.readableDate(_vm.saleData.date)) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.isSquareData) ? [_c('v-data-table', {
     staticClass: "text-md-center",
     attrs: {
       "headers": _vm.sales.headers,
@@ -28249,12 +28247,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }, [(props.item.icon) ? _c('v-icon', {
           class: props.item.style
         }, [_vm._v(_vm._s(props.item.icon))]) : _vm._e(), _vm._v(" "), _c('strong', [_vm._v(_vm._s(props.item.name))])], 1), _vm._v(" "), _c('td', {
+          staticClass: "text-md-center subheading",
+          class: props.item.square_style
+        }, [_vm._v(_vm._s(props.item.square))]), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
-        }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
+        }, [_vm._v(_vm._s(props.item.technician))]), _vm._v(" "), _c('td', {
           staticClass: "text-md-center subheading"
-        }, [_vm._v("$ " + _vm._s(props.item.technician))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-center subheading"
-        }, [_vm._v("$ " + _vm._s(props.item.difference))])]
+        }, [_vm._v(_vm._s(props.item.difference))])]
       }
     }])
   })] : [_c('v-card', [_c('v-card-text', {
@@ -28521,7 +28520,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth: 95px;\n\tbackground-color: #2e7d32;\n\ttop:23%;\n\tright:0;\n\tz-index:10000;\n\tborder-radius: 3px;\n\tpadding: 2px;\n\tcolor:white;\n\topacity:0.8;\n}\n#sale-sticker{\n\n\tbackground-color: #2e7d32;\n\ttop:23%;\n}\n#tip-sticker{\n\tbackground-color: orange;\n\ttop:40%;\n}\n", ""]);
+exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth: 95px;\n\tbackground-color: #2e7d32;\n\ttop:23%;\n\tright:0;\n\tz-index:10000;\n\tborder-radius: 3px;\n\tpadding: 2px;\n\tcolor:white;\n\topacity:0.8;\n\ttext-align:center;\n}\n#sale-sticker{\n\n\tbackground-color: #2e7d32;\n\ttop:23%;\n}\n#tip-sticker{\n\tbackground-color: orange;\n\ttop:40%;\n}\n", ""]);
 
 // exports
 
@@ -28532,6 +28531,16 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__ = __webpack_require__(36);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28751,10 +28760,10 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
         technicianSale: function technicianSale() {
             var grossSale = this.technician.grossSale;
             for (var i = 0; i < this.sales.length; i++) {
-                grossSale += this.sales[i].sales;
+                grossSale += parseFloat(this.sales[i].sales);
             }
             if (isNaN(grossSale)) {
-                grossSale = 5;
+                grossSale = 0;
             }
 
             return grossSale;
@@ -28873,6 +28882,20 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
         },
         select: function select(index) {
             return this.active === index;
+        },
+        previousDate: function previousDate(date) {
+            this.date = this.$moment(date).subtract(1, 'days').format('YYYY-MM-DD');
+        },
+        nextDate: function nextDate(date) {
+            this.date = this.$moment(date).add(1, 'days').format('YYYY-MM-DD');
+        },
+        filtering: function filtering(event) {
+            var charCode = typeof event.which == "number" ? event.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46 && charCode !== 127) {
+                event.preventDefault();
+            } else {
+                return true;
+            }
         }
     }
 });
@@ -28956,6 +28979,29 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg11": ""
     }
+  }, [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg3": ""
+    }
+  }, [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.previousDate(_vm.date)
+      }
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("keyboard_arrow_left")]), _vm._v("Previous")], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
   }, [_c('v-menu', {
     attrs: {
       "lazy": "",
@@ -29002,6 +29048,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
+      "lg3": ""
+    }
+  }, [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.nextDate(_vm.date)
+      }
+    }
+  }, [_vm._v("Next"), _c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("keyboard_arrow_right")])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
       "lg11": "",
       "mt-2": ""
     }
@@ -29026,7 +29087,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('v-btn', {
     staticClass: "ma-3",
     attrs: {
-      "primary": ""
+      "primary": "",
+      "block": ""
     },
     nativeOn: {
       "click": function($event) {
@@ -29076,8 +29138,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "label": "Sale",
         "prefix": "$",
-        "type": "number",
-        "max": "3",
         "disabled": _vm.sales[index].toBeDeleted,
         "hint": "SALE"
       },
@@ -29087,7 +29147,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         },
         "blur": function($event) {
           _vm.checkInput(index, 'sale')
-        }
+        },
+        "keypress": _vm.filtering
       },
       model: {
         value: (_vm.sales[index].sales),
@@ -29110,9 +29171,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "label": "Tip",
         "prefix": "$",
-        "type": "number",
-        "max": "3",
         "disabled": _vm.sales[index].toBeDeleted,
+        "max": "6",
         "hint": "TIP"
       },
       on: {
@@ -29121,7 +29181,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         },
         "blur": function($event) {
           _vm.checkInput(index, 'tip')
-        }
+        },
+        "keypress": _vm.filtering
       },
       model: {
         value: (_vm.sales[index].additional_sales),

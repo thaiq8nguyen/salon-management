@@ -15,11 +15,15 @@ class PayPeriodApiController extends Controller
         $date = Carbon::now()->toDateString();
 
         $payPeriod = PayPeriod::where([['begin_date','<=',$date],['end_date','>=', $date]])->first();
+
+        if(!$payPeriod){
+            return response()->json('New period is not in the database',422)->header('Content-type','application/json');
+        }
+
         $periods = PayPeriod::where('pay_date','<=', $payPeriod->pay_date)->offset(1)->limit(5)->orderBy('pay_date','asc')
             ->get(['id','begin_date','end_date','pay_date']);
 
-        /*$currentPayPeriod = ['id' => $payPeriod->id,'beginDate' => $payPeriod->begin_date_mdy,
-            'endDate' => $payPeriod->end_date_mdy,'payDate' => $payPeriod->pay_date_mdy];*/
+
 
         $list = [];
 
