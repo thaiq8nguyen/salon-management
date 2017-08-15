@@ -19,7 +19,9 @@
                 periods:[],
 	            current:null,
 	            payDate:null,
+	            reminder:{},
 	            reminders:[],
+	            date: this.$moment().format('MM/DD/YYYY')
 
             }
 
@@ -30,7 +32,7 @@
                     return this.$moment(this.current.payDate,'MM/DD/YYYY').
                     subtract(2,'days').format('dddd, MM/DD/YYYY ');
                 }
-                return 'Error';
+                return 'There are errors occured while processing end date';
             }
 		},
 	    mounted(){
@@ -39,19 +41,39 @@
         methods: {
             getPayPeriod(){
                 this.$axios.get('/api/pay-period/list').then(response => {
+                    console.log(response.data);
                     this.periods = response.data;
                     this.current = response.data[response.data.length-1];
                     this.payDate = this.current.payDate;
-                    let reminder = {
-                        name: 'end date',
-	                    text: 'This pay period ends in ' + this.endDate
-                    };
-                    this.addReminder(reminder);
 
-                });
+                    if(this.date === this.payDate){
+                        this.reminder.name = 'pay_date';
+                        this.reminder.text = 'Pay Date is today!';
+
+                    }else{
+                        this.reminder.name = 'end_date';
+                        this.reminder.text = 'This pay period ends in ' + this.endDate;
+
+                    }
+
+
+                    this.addReminder();
+
+                }).catch(error =>{
+                    if(error.response){
+                        if(error.response.status === 422){
+                            this.reminder.name = 'error';
+                            this.reminder.text = error.response.data;
+
+                            this.addReminder();
+                        }
+                    }
+                })
+
+
             },
-	        addReminder(reminder){
-                this.reminders.push(reminder)
+	        addReminder(){
+                this.reminders.push(this.reminder)
 	        }
         }
 

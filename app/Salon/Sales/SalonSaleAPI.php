@@ -66,21 +66,31 @@ class SalonSaleAPI{
 
 
         if($sales !== null){
-            $metrics['Technician Sales'] = $techSales;
-            $metrics['Gift Certificate Redeemed'] = 0 - $sales->gift_certificate_redeemed;
+
 
             foreach($sales->salonSaleDetails as $items){
                 $metrics[$items->item] =$items->gross_sales;
             }
 
-            $grossSaleDifference = $techSales - $sales->gross_sales;
+            $metrics['Technician Sales'] = $techSales;
+
+            $metrics['Gift Certificate Redeemed'] = $sales->gift_certificate_redeemed;
+
+            $grossSaleDifference = $metrics['Technician Sales'] - $sales->gross_sales;
+
             $squareNetSales = $sales->gross_sales - $sales->refunded;
-            $netSaleDifference = $techSales -$sales->refunded - ($sales->gross_sales - $sales->refunded);
-            $technicianNetSale = $techSales - $sales->refunded;
-            $squareTotalCollected = $sales->gross_sales - $sales->refunded + (float)$metrics['Gift Certificate'] + $sales->tips;
-            $technicianTotalCollected = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] + (float)$metrics['Convenience Fee'] + $tipsOnCard;
-            $totalCollectedDifference = $techSales + (float)$metrics['Gift Certificate'] + (float)$metrics['Gift Certificate Redeemed'] +
-                (float)$metrics['Convenience Fee'] + $tipsOnCard - ($sales->gross_sales - $sales->refunded + $metrics['Gift Certificate'] + $sales->tips);
+
+            $technicianNetSale = $metrics['Technician Sales'] - $sales->refunded;
+
+            $netSaleDifference = $technicianNetSale - $squareNetSales;
+
+
+
+            $squareTotalCollected = $squareNetSales + $metrics['Gift Certificate'] + $sales->tips;
+
+            $technicianTotalCollected = $techSales + $metrics['Gift Certificate'] - $metrics['Gift Certificate Redeemed'] + $metrics['Convenience Fee'] + $tipsOnCard;
+
+            $totalCollectedDifference = $technicianTotalCollected - $squareTotalCollected;
 
 
 
@@ -102,9 +112,9 @@ class SalonSaleAPI{
 
             $metrics['Total Collected Difference'] = $totalCollectedDifference;
 
-            $tips = ['Technician Tips' => $tipsOnCard,2,
-                'Square Tips' => $sales->tips, 'Tips Difference' => $tipsOnCard-$sales->tips,];
-            $result = ['success' => true, 'sales' => $metrics, 'tips' => $tips];
+
+            $tips = ['Technician Tips' => $tipsOnCard, 'Square Tips' => $sales->tips, 'Tips Difference' => $tipsOnCard-$sales->tips,];
+            $result = ['success' => true, 'sales' => $metrics, 'tips' => $tips, 'date' => $date];
         }
         else{
             $result = ['success' => false, 'message' => 'no sale'];

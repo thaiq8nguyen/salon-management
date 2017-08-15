@@ -23,26 +23,38 @@
 								<v-flex lg6>
 									<v-layout row wrap>
 										<v-flex lg11>
-											<v-menu
-													lazy
-													:close-on-content-click="true"
-													v-model="dateMenu"
-													transition="scale-transition"
-													offset-y
-													full-width
-													:nudge-left="40"
-													max-width="290px"
-											>
-												<v-text-field
-														slot="activator"
-														label="Select a sale date"
-														v-model="date"
-														prepend-icon="event"
-														readonly
-												></v-text-field>
-												<v-date-picker v-model="date"
-												               no-title scrollable actions></v-date-picker>
-											</v-menu>
+											<v-layout row>
+												<v-flex lg3>
+													<v-btn primary @click.native="previousDate(date)">
+														<v-icon class = "white--text">keyboard_arrow_left</v-icon>Previous</v-btn>
+												</v-flex>
+												<v-flex lg6>
+													<v-menu
+															lazy
+															:close-on-content-click="true"
+															v-model="dateMenu"
+															transition="scale-transition"
+															offset-y
+															full-width
+															:nudge-left="40"
+															max-width="290px"
+													>
+														<v-text-field
+																slot="activator"
+																label="Select a sale date"
+																v-model="date"
+																prepend-icon="event"
+																readonly
+														></v-text-field>
+														<v-date-picker v-model="date" no-title scrollable actions ></v-date-picker>
+													</v-menu>
+												</v-flex>
+												<v-flex lg3>
+													<v-btn primary @click.native="nextDate(date)">Next<v-icon class = "white--text">keyboard_arrow_right</v-icon></v-btn>
+												</v-flex>
+											</v-layout>
+
+
 										</v-flex>
 										<v-flex lg11 mt-2><!--Square Data-->
 											<template v-if="isSquareData">
@@ -58,7 +70,7 @@
 											</template>
 										</v-flex>
 										<v-flex lg6 mt-2>
-											<v-btn class = "ma-3" primary @click.native.stop="openDialog">Verify</v-btn>
+											<v-btn class = "ma-3" primary @click.native.stop="openDialog" block >Verify</v-btn>
 										</v-flex>
 
 									</v-layout>
@@ -79,12 +91,11 @@
 													<v-flex lg3>
 														<v-text-field label = "Sale" prefix="$"
 														              v-model.number="sales[index].sales"
-														              type="number"
-														              max="3"
 														              :disabled = "sales[index].toBeDeleted"
-
 														              @focus="clearInput(index,'sale')"
-														              @blur="checkInput(index,'sale')" hint="SALE">
+														              @blur="checkInput(index,'sale')" hint="SALE"
+														              @keypress="filtering">
+
 														</v-text-field>
 													</v-flex>
 													<v-flex lg2>
@@ -95,12 +106,11 @@
 													<v-flex lg3>
 														<v-text-field label = "Tip" prefix="$"
 														              v-model.number="sales[index].additional_sales"
-														              type="number"
-														              max="3"
 														              :disabled = "sales[index].toBeDeleted"
-
+														              max="6"
 														              @focus="clearInput(index,'tip')"
-														              @blur="checkInput(index,'tip')" hint="TIP"></v-text-field>
+														              @blur="checkInput(index,'tip')" hint="TIP"
+														              @keypress="filtering"></v-text-field>
 													</v-flex>
 													<v-flex lg2>
 														<p v-if="technician.dailySales.length > 0" class = "blue--text heading">
@@ -207,6 +217,7 @@
 	            loadingData:false,
 
 
+
             }
         },
 
@@ -217,10 +228,10 @@
             technicianSale(){
                 let grossSale = this.technician.grossSale;
                 for(let i = 0; i < this.sales.length; i++){
-                    grossSale += this.sales[i].sales;
+                    grossSale += parseFloat(this.sales[i].sales);
                 }
                 if(isNaN(grossSale)){
-                    grossSale = 5;
+                    grossSale = 0;
                 }
 
                 return grossSale;
@@ -348,7 +359,23 @@
 	        select(index){
 	            return this.active === index;
 
-	        }
+	        },
+	        previousDate(date){
+	            this.date = this.$moment(date).subtract(1,'days').format('YYYY-MM-DD');
+	        },
+	        nextDate(date){
+                this.date = this.$moment(date).add(1,'days').format('YYYY-MM-DD');
+	        },
+	        filtering(event){
+                let charCode = (typeof event.which == "number") ? event.which : event.keyCode;
+                if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46 && charCode !== 127) {
+                    event.preventDefault();
+                }
+                else {
+                    return true;
+
+                }
+	        },
 
         }
     }
@@ -367,6 +394,7 @@
 		padding: 2px;
 		color:white;
 		opacity:0.8;
+		text-align:center;
 	}
 	#sale-sticker{
 

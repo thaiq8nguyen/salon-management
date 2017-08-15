@@ -16,7 +16,7 @@
 										<v-icon class = "white--text">event_note</v-icon>
 									</v-flex>
 								</v-card-title>
-								<v-card-text>
+								<v-card-text class = "text-lg-center text-xs-center">
 									<pay-day-reminder></pay-day-reminder>
 									<v-divider></v-divider>
 								</v-card-text>
@@ -62,7 +62,7 @@
 							<v-card>
 							<v-card-title class = "indigo darken-1">
 								<v-flex lg6 xs6>
-									<h3 class = "headline white&#45;&#45;text">
+									<h3 class = "headline white--text">
 										<strong>Trends</strong>
 									</h3>
 								</v-flex>
