@@ -27880,276 +27880,11 @@ process.umask = function() { return 0; };
 /* 38 */,
 /* 39 */,
 /* 40 */,
-/* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(45);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(42)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58f9601f_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/PayPeriodHeader.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] PayPeriodHeader.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58f9601f", Component.options)
-  } else {
-    hotAPI.reload("data-v-58f9601f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(43);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("0818f7a3", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58f9601f\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            currentPeriod: '',
-            selectID: null,
-            periods: []
-
-        };
-    },
-    mounted: function mounted() {
-        this.getPayPeriod();
-    },
-
-
-    computed: {
-        countDown: function countDown() {
-            var today = this.$moment();
-            return this.$moment(this.currentPeriod.payDate, 'MM/DD/YYYY').diff(today, 'days');
-        }
-    },
-
-    watch: {
-        selectID: function selectID() {
-            //store the last selected period id in a session variable
-            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectID);
-        }
-    },
-    methods: {
-        getPayPeriod: function getPayPeriod() {
-            var _this = this;
-
-            this.$axios.get('/api/pay-period/list').then(function (response) {
-                _this.periods = response.data;
-                _this.currentPeriod = response.data[response.data.length - 1];
-
-                //retrieve the last selected period id in a session variable
-                var lastSelectedPeriodId = sessionStorage.getItem('lastSelectedPeriodIdPayDay');
-                if (lastSelectedPeriodId === null) {
-                    _this.selectID = _this.currentPeriod.id;
-                } else {
-                    _this.selectID = parseInt(lastSelectedPeriodId);
-                }
-            });
-        },
-        setPayPeriodID: function setPayPeriodID() {
-            this.$emit('id', this.selectID);
-            Event.$emit('id', this.selectID);
-        }
-    }
-});
-
-/***/ }),
-/* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-card', [_c('v-card-text', {
-    staticClass: "grey lighten-4"
-  }, [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg5": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg3": ""
-    }
-  }, [_c('p', {
-    staticClass: "subheading"
-  }, [_vm._v("Pay Periods:")])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg6": ""
-    }
-  }, [_c('v-select', {
-    staticClass: "blue--text",
-    attrs: {
-      "items": _vm.periods,
-      "label": "Select",
-      "single-line": "",
-      "item-text": "periods",
-      "item-value": "id",
-      "bottom": ""
-    },
-    on: {
-      "input": _vm.setPayPeriodID
-    },
-    model: {
-      value: (_vm.selectID),
-      callback: function($$v) {
-        _vm.selectID = $$v
-      },
-      expression: "selectID"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg3": ""
-    }
-  }, [_c('v-chip', {
-    staticClass: "blue darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_c('strong', [_vm._v("Current Period: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.periods))])], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": "",
-      "ml-2": ""
-    }
-  }, [(_vm.countDown > 0) ? _c('v-chip', {
-    staticClass: "blue darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_c('strong', [_vm._v("Upcoming Pay Date: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.payDate) + " in " + _vm._s(_vm.countDown) + " days ")]) : (_vm.countDown == 0) ? _c('v-chip', {
-    staticClass: "amber darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_vm._v("Today")]) : _vm._e()], 1)], 1)], 1)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-58f9601f", esExports)
-  }
-}
-
-/***/ }),
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
 /* 46 */,
 /* 47 */,
 /* 48 */,
@@ -28195,7 +27930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_partials_PayPeriodHeader_vue__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__ = __webpack_require__(77);
 /**
  * Created by Thai Nguyen on 5/8/2017.
@@ -28222,7 +27957,7 @@ __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
 };
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('technician-header', __WEBPACK_IMPORTED_MODULE_4__components_TechnicianHeader_vue__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_PayPeriodHeader_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_partials_PayPeriodHeader_vue__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('new-technician-sale', __WEBPACK_IMPORTED_MODULE_6__components_NewTechnicianSale_vue__["a" /* default */]);
 
 window.Event = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
@@ -29590,6 +29325,342 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-91654318", esExports)
+  }
+}
+
+/***/ }),
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_05ff4740_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(161);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(158)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_05ff4740_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/PayPeriodHeader.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PayPeriodHeader.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-05ff4740", Component.options)
+  } else {
+    hotAPI.reload("data-v-05ff4740", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(159);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("cc96551a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-05ff4740\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-05ff4740\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            currentPeriod: '',
+            selectID: null,
+            periods: []
+
+        };
+    },
+    mounted: function mounted() {
+        this.getPayPeriod();
+    },
+
+
+    computed: {
+        countDown: function countDown() {
+            var today = this.$moment();
+            return this.$moment(this.currentPeriod.payDate, 'MM/DD/YYYY').diff(today, 'days');
+        }
+    },
+
+    watch: {
+        selectID: function selectID() {
+            //store the last selected period id in a session variable
+            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectID);
+        }
+    },
+    methods: {
+        getPayPeriod: function getPayPeriod() {
+            var _this = this;
+
+            this.$axios.get('/api/pay-period/list').then(function (response) {
+
+                _this.periods = response.data;
+                _this.currentPeriod = response.data[response.data.length - 1];
+
+                //retrieve the last selected period id in a session variable
+                var lastSelectedPeriodId = sessionStorage.getItem('lastSelectedPeriodIdPayDay');
+                if (lastSelectedPeriodId === null) {
+                    _this.selectID = _this.currentPeriod.id;
+                } else {
+                    _this.selectID = parseInt(lastSelectedPeriodId);
+                }
+            });
+        },
+        setPayPeriodID: function setPayPeriodID() {
+            this.$emit('id', this.selectID);
+            Event.$emit('id', this.selectID);
+        }
+    }
+});
+
+/***/ }),
+/* 161 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-card', [_c('v-card-text', {
+    staticClass: "grey lighten-4"
+  }, [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg5": ""
+    }
+  }, [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg3": ""
+    }
+  }, [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Pay Periods:")])]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
+  }, [_c('v-select', {
+    staticClass: "blue--text",
+    attrs: {
+      "items": _vm.periods,
+      "label": "Select",
+      "single-line": "",
+      "item-text": "periods",
+      "item-value": "id",
+      "bottom": ""
+    },
+    on: {
+      "input": _vm.setPayPeriodID
+    },
+    model: {
+      value: (_vm.selectID),
+      callback: function($$v) {
+        _vm.selectID = $$v
+      },
+      expression: "selectID"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg3": ""
+    }
+  }, [_c('v-chip', {
+    staticClass: "blue darken-1 subheading white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_c('strong', [_vm._v("Current Period: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.periods))])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": "",
+      "ml-2": ""
+    }
+  }, [(_vm.countDown > 0) ? _c('v-chip', {
+    staticClass: "blue darken-1 subheading white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_c('strong', [_vm._v("Upcoming Pay Date: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.payDate) + " in " + _vm._s(_vm.countDown) + " days ")]) : (_vm.countDown == 0) ? _c('v-chip', {
+    staticClass: "amber darken-1 subheading white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v("Today")]) : _vm._e()], 1)], 1)], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-05ff4740", esExports)
   }
 }
 

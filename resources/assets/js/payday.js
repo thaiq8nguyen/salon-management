@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import Vuetify from 'vuetify';
 import moment from 'moment';
-import PayPeriodHeader from './components/PayPeriodHeader.vue';
+import PayPeriodHeader from './components/partials/PayPeriodHeader.vue';
 import PayDay from './components/PayDay.vue';
 
 

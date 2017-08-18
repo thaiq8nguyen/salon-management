@@ -8,7 +8,7 @@ import moment from 'moment';
 import Vuetify from 'vuetify';
 
 import TechnicianHeader from './components/TechnicianHeader.vue';
-import PayPeriodHeader from './components/PayPeriodHeader.vue';
+import PayPeriodHeader from './components/partials/PayPeriodHeader.vue';
 import NewTechnicianSale from './components/NewTechnicianSale.vue';
 
 Object.defineProperty(Vue.prototype,'$axios',{value:axios});

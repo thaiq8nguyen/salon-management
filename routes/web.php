@@ -65,6 +65,8 @@ Route::get('/', function () {
 
     Route::get('/logout', 'Auth\LoginController@logout');
 
+    //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
+
 
 
 

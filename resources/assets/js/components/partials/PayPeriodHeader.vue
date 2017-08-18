@@ -50,8 +50,8 @@
 	            let today = this.$moment();
 	            return this.$moment(this.currentPeriod.payDate, 'MM/DD/YYYY').diff(today,'days');
 
+	        },
 
-	        }
 		},
 
 	    watch:{
@@ -61,8 +61,10 @@
 		    }
 	    },
 	    methods:{
+
             getPayPeriod(){
                 this.$axios.get('/api/pay-period/list').then(response => {
+
                     this.periods = response.data;
                     this.currentPeriod = response.data[response.data.length-1];
 

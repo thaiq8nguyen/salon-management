@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<v-app class = "blue lighten-4">
-		<v-container fluid>
+		<v-app>
+		<v-container fluid class = "blue lighten-4">
 			<div label id = "sale-sticker" class ="sticker">
 				<p class = "subheading">Gross Sale</p>
 				<p class = "body-2">$ {{technicianSale}}</p>
@@ -11,16 +11,16 @@
 				<p class = "body-2">$ {{technicianCardTip}}</p>
 			</div>
 			<v-layout row wrap>
-				<v-flex lg12>
+				<v-flex lg12 xs12>
 					<v-alert success v-model="isAdded" transition="fade" class = "text-lg-center" dismissible>
 						<p class = "headline ">Technician Sale has been updated</p>
 					</v-alert>
 				</v-flex>
-				<v-flex lg12>
+				<v-flex lg12 xs12>
 					<v-card>
 						<v-card-text>
 							<v-layout row wrap>
-								<v-flex lg6>
+								<v-flex lg6 xs12>
 									<v-layout row wrap>
 										<v-flex lg11>
 											<v-layout row>
@@ -53,8 +53,6 @@
 													<v-btn primary @click.native="nextDate(date)">Next<v-icon class = "white--text">keyboard_arrow_right</v-icon></v-btn>
 												</v-flex>
 											</v-layout>
-
-
 										</v-flex>
 										<v-flex lg11 mt-2><!--Square Data-->
 											<template v-if="isSquareData">
@@ -76,56 +74,64 @@
 									</v-layout>
 								</v-flex>
 								<v-flex lg6>
-									<v-list two-line>
+									<v-layout row wrap>
 										<template v-for="(technician,index) in technicians">
-											<v-list-tile-content @mouseover = "hover(index)" @mouseleave = "hover(null)"
-										                        :class="[{'grey lighten-4':select(index)},
+											<v-flex lg4 md4 mt-1>
+												<v-card @mouseover = "hover(index)" @mouseleave = "hover(null)"
+												        :class="[{'grey lighten-4':select(index)},
 											                     {'green--text text-darken-1':sales[index].sales !== 0},
 											                     {'red--text text-darken-1}': sales[index].toBeDeleted}]">
+													<v-card-title class = "subheading">
+														<strong>{{technician.technicianID}}. {{ technician.fullName }}</strong>
+													</v-card-title>
+													<v-card-text>
+														<v-layout row>
+															<v-flex lg6>
+																<v-text-field label = "Sale" prefix="$"
+																              v-model.number="sales[index].sales"
+																              :disabled = "sales[index].toBeDeleted"
+																              @focus="clearInput(index,'sale')"
+																              @blur="checkInput(index,'sale')" hint="SALE"
+																              @keypress="filtering">
 
-											<v-list-tile-title class = "title">
-												<v-chip label>{{ index + 1 }}</v-chip>
-												{{ technician.fullName }}</v-list-tile-title>
-											<v-list-tile-sub-title>
-												<v-layout>
-													<v-flex lg3>
-														<v-text-field label = "Sale" prefix="$"
-														              v-model.number="sales[index].sales"
-														              :disabled = "sales[index].toBeDeleted"
-														              @focus="clearInput(index,'sale')"
-														              @blur="checkInput(index,'sale')" hint="SALE"
-														              @keypress="filtering">
+																</v-text-field>
+															</v-flex>
+															<v-flex lg6>
+																<p v-if="technician.dailySales.length > 0" class = "blue--text body-2">
+																	$ {{ technician.dailySales[0].sales }}
+																</p>
+															</v-flex>
+														</v-layout>
+														<v-layout row wrap>
+															<v-flex lg6>
+																<v-text-field label = "Tip" prefix="$"
+																              v-model.number="sales[index].additional_sales"
+																              :disabled = "sales[index].toBeDeleted"
+																              max="6"
+																              @focus="clearInput(index,'tip')"
+																              @blur="checkInput(index,'tip')" hint="TIP"
+																              @keypress="filtering">
 
-														</v-text-field>
-													</v-flex>
-													<v-flex lg2>
-														<p v-if="technician.dailySales.length > 0" class = "blue--text heading">
-															$ {{ technician.dailySales[0].sales }}
-														</p>
-													</v-flex>
-													<v-flex lg3>
-														<v-text-field label = "Tip" prefix="$"
-														              v-model.number="sales[index].additional_sales"
-														              :disabled = "sales[index].toBeDeleted"
-														              max="6"
-														              @focus="clearInput(index,'tip')"
-														              @blur="checkInput(index,'tip')" hint="TIP"
-														              @keypress="filtering"></v-text-field>
-													</v-flex>
-													<v-flex lg2>
-														<p v-if="technician.dailySales.length > 0" class = "blue--text heading">
-															$ {{ technician.dailySales[0].additional_sales }}
-														</p>
-													</v-flex>
-													<v-flex lg2>
-														<v-checkbox :label="`Delete`" v-model="sales[index].toBeDeleted"
-														            v-if="sales[index].existing_sale_id && sales[index].sales == 0"></v-checkbox>
-													</v-flex>
-												</v-layout>
-											</v-list-tile-sub-title>
-										</v-list-tile-content>
-									</template>
-								</v-list>
+																</v-text-field>
+															</v-flex>
+															<v-flex lg6>
+																<p v-if="technician.dailySales.length > 0" class = "blue--text body-2">
+																	$ {{ technician.dailySales[0].sales }}
+																</p>
+
+															</v-flex>
+															<v-flex lg6>
+																<v-checkbox :label="`Delete`" v-model="sales[index].toBeDeleted"
+																            v-if="sales[index].existing_sale_id && sales[index].sales == 0">
+
+																</v-checkbox>
+															</v-flex>
+														</v-layout>
+													</v-card-text>
+												</v-card>
+											</v-flex>
+										</template>
+									</v-layout>
 							</v-flex>
 						</v-layout>
 						</v-card-text>
@@ -136,7 +142,7 @@
 		<v-dialog v-model="dialog" width="540">
 			<v-card>
 				<v-card-title class = "text-lg-center blue darken-1">
-					<p class = "headline white--text">Confirm Sale for {{ saleDate }} </p>
+					<p class = "headline white--text">Confirm Sale for {{ formattedDate }} </p>
 				</v-card-title>
 				<v-card-text>
 					<v-list>
@@ -180,9 +186,6 @@
 					<v-btn @click.native="addSale" primary v-show="newSales.length > 0"><v-icon class = "white--text">add</v-icon>Add</v-btn>
 					<v-btn @click.native="closeDialog">Close</v-btn>
 				</v-card-text>
-				<v-card-text>
-
-				</v-card-text>
 			</v-card>
 		</v-dialog>
 	</v-app>
@@ -216,13 +219,11 @@
 	            dialog: false,
 	            loadingData:false,
 
-
-
             }
         },
 
 		computed:{
-            saleDate(){
+            formattedDate(){
                 return this.$moment(this.date).format('dddd MM/DD/YYYY');
             },
             technicianSale(){
@@ -248,21 +249,35 @@
                 return cardTip;
 			},
 
+
 		},
 	    mounted(){
+            this.handleDate();
             this.getSquareData();
             this.getAllTechnicians();
+
 	    },
 
 		watch:{
 	        date(){
 	            this.getSquareData();
 	            this.getAllTechnicians();
+	            sessionStorage.setItem('saleDate',this.date);
+	            this.newSales = [];
 	        }
 		},
         methods: {
+	        handleDate(){
+				let saleDate = sessionStorage.getItem('saleDate');
+				if(saleDate === null){
+				    sessionStorage.setItem('saleDate', this.date);
+				}else{
+				    this.date = saleDate;
+				}
+	        },
 	        getSquareData(){
 	            this.loadingData = true;
+
                 this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
                     this.loadingData = false;
                     this.isSquareData = response.data.success;
@@ -301,11 +316,11 @@
 
 			},
 	        addSale(){
-
 				this.$axios.post('/api/technician-sale/handle-quick-sale',{sales:this.newSales}).then(response =>{
 				    if(response.data.success){
 				        this.dialog = false;
 				        this.isAdded = true;
+				        this.newSales = [];
 				        this.reset();
 				    }
 

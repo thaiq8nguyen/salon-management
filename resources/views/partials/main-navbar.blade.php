@@ -15,7 +15,8 @@
                     <li class = "dropdown">
                         <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown" role = "button"><i class = "fa fa-users"></i> Technicians <span class = "caret"></span></a>
                         <ul class = "dropdown-menu" role = "menu">
-                            <li><a href = "{{ route('technician-sale') }}">Sales</a></li>
+                            <li><a href = "{{ route('quick-sale-entry') }}">Quick Sale Entry</a></li>
+                            <li><a href = "{{ route('technician-sale-add') }}">Add Technician Sale</a></li>
                             <li><a href = "{{ route('technician-book') }}">Book</a></li>
                         </ul>
                     </li>

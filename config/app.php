@@ -165,6 +165,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Salon\Square\SquareServiceProvider::class,
         Salon\Sales\SalonSaleServiceProvider::class,
+        Salon\GiftCertificates\GiftServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
 
         /*
@@ -177,7 +178,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        //App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -232,6 +233,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Square' => Salon\Square\Square::class,
         'Salon' => Salon\Sales\Salon::class,
+        'GiftCertificate' => Salon\GiftCertificates\Gift::class,
 
     ],
 
