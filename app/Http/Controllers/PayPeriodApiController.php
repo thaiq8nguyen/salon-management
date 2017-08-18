@@ -20,7 +20,7 @@ class PayPeriodApiController extends Controller
             return response()->json('New period is not in the database',422)->header('Content-type','application/json');
         }
 
-        $periods = PayPeriod::where('pay_date','<=', $payPeriod->pay_date)->offset(1)->limit(5)->orderBy('pay_date','asc')
+        $periods = PayPeriod::where('pay_date','<=', $payPeriod->pay_date)->offset(2)->limit(5)->orderBy('pay_date','asc')
             ->get(['id','begin_date','end_date','pay_date']);
 
 

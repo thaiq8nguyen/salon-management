@@ -45,7 +45,7 @@ Class SquareAPI{
 
             $payments = array_merge($payments, \GuzzleHttp\json_decode($response->getBody()));
             if (array_key_exists('Link', $response->getHeaders())) {
-                $paginationHeader = $response->getHeaders()['Link'];
+                $paginationHeader = $response->getHeaders()['Link'][0];
                 if (strpos($paginationHeader, "rel='next'") !== false) {
                     $requestPath = explode('>', explode('<', $paginationHeader)[1])[0];
                 } else {
@@ -72,6 +72,32 @@ Class SquareAPI{
 
     }
 
+    public function getDailyGiftsSold(){
+
+        $date = Carbon::now()->startOfDay();
+        $this->setDatesQuery($date);
+
+        $payments = $this->getRawPayments($this->dates);
+
+        $gifts = [];
+
+        foreach($payments as $payment){
+            foreach($payment->itemizations as $item){
+                if($item->name == 'Gift Certificate'){
+                    $date = Carbon::parse($payment->created_at,'UTC')->timezone('America/Los_Angeles');
+
+                    $gift = ['squareId' => $payment->tender[0]->id,
+                        'amount' => $this->formatMoney($item->total_money->amount),
+                        'sold_at' => $date->toDateTimeString(),
+                        'expired_at' => $date->addYears(1)->toDateTimeString()];
+                    array_push($gifts, $gift);
+                }
+            }
+        }
+
+        return $gifts;
+
+    }
     public function getDailySaleMetrics(){
 
         $date = Carbon::now()->startOfDay();

@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\UpdateSalonSales::class
+        Commands\UpdateSalonSales::class,
+        Commands\UpdateGiftCertificate::class,
     ];
 
     /**
@@ -26,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('update:salon-sales')->everyFiveMinutes();
+        //$schedule->command('update:salon-sales')->everyFiveMinutes();
     }
 
     /**

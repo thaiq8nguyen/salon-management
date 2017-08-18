@@ -3,16 +3,16 @@
 		<v-card>
 			<v-card-title class = "grey lighten-4">
 				<v-layout>
-					<v-flex lg8>
-						<p class = "headline">Sales Summary with <img :src="squareLogo" height="40"></p>
+					<v-flex lg8 md4>
+						<p class = "headline">Sales Summary with <img :src = "squareLogo" height = "40px"> </p>
 					</v-flex>
-					<v-flex lg4>
+					<v-flex lg4 md4>
 						{{readableDate(saleData.date)}}
 					</v-flex>
 				</v-layout>
 			</v-card-title>
 			<v-card-text>
-				<template v-if="isSquareData">
+				<template v-if="squareData">
 					<v-data-table :headers="sales.headers" :items="sales.items" hide-actions class="text-md-center">
 						<template slot="headers" scope="props">
 							<th v-for="header in props.headers" :key="header.name" class="text-lg-center">
@@ -34,7 +34,7 @@
 					<v-card>
 						<v-card-text class = "text-lg-center">
 							<v-icon large class = "red--text">info</v-icon>
-							<p class = "subheading">There is no data recorded for this date</p>
+							<p class = "subheading">There is no data recorded for this datex</p>
 						</v-card-text>
 					</v-card>
 				</template>
@@ -51,7 +51,7 @@
 
         data(){
             return {
-				isSquareData: true,
+				squareData: true,
 
 	            squareLogo:'/images/square-logo.png',
 

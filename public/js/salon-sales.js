@@ -28025,7 +28025,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 				data: function data() {
 								return {
-												isSquareData: true,
+												squareData: true,
 
 												squareLogo: '/images/square-logo.png',
 
@@ -28207,20 +28207,22 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "grey lighten-4"
   }, [_c('v-layout', [_c('v-flex', {
     attrs: {
-      "lg8": ""
+      "lg8": "",
+      "md4": ""
     }
   }, [_c('p', {
     staticClass: "headline"
   }, [_vm._v("Sales Summary with "), _c('img', {
     attrs: {
       "src": _vm.squareLogo,
-      "height": "40"
+      "height": "40px"
     }
   })])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg4": ""
+      "lg4": "",
+      "md4": ""
     }
-  }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.readableDate(_vm.saleData.date)) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.isSquareData) ? [_c('v-data-table', {
+  }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.readableDate(_vm.saleData.date)) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [(_vm.squareData) ? [_c('v-data-table', {
     staticClass: "text-md-center",
     attrs: {
       "headers": _vm.sales.headers,
@@ -28265,7 +28267,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("info")]), _vm._v(" "), _c('p', {
     staticClass: "subheading"
-  }, [_vm._v("There is no data recorded for this date")])], 1)], 1)]], 2)], 1)], 1)
+  }, [_vm._v("There is no data recorded for this datex")])], 1)], 1)]], 2)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28433,7 +28435,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28465,38 +28467,77 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+
     props: [],
 
     data: function data() {
         return {
-            saleDate: this.$moment().format('YYYY-MM-DD'),
-            saleData: null
+            date: this.$moment().format('YYYY-MM-DD'),
+            isSquareData: false,
+            squareData: []
         };
     },
 
     watch: {
-        saleDate: function saleDate() {
-            this.getSales();
+
+        date: function date() {
+            sessionStorage.setItem('saleDate', this.date);
+            this.getSquareData();
         }
+
     },
     components: {
+
         'salon-sale-table': __WEBPACK_IMPORTED_MODULE_0__SalonSaleTable_vue__["a" /* default */],
+
         'redeem-certificate': __WEBPACK_IMPORTED_MODULE_1__RedeemCertificate_vue__["a" /* default */]
 
     },
+    mounted: function mounted() {
+
+        this.handleDate();
+        this.getSquareData();
+    },
+
 
     methods: {
-        getSales: function getSales() {
+        handleDate: function handleDate() {
+
+            var saleDate = sessionStorage.getItem('saleDate');
+            console.log(saleDate);
+            if (saleDate === null || saleDate === 'undefined') {
+
+                sessionStorage.setItem('saleDate', this.date);
+            } else {
+
+                this.date = saleDate;
+            }
+        },
+        getSquareData: function getSquareData() {
             var _this = this;
 
-            this.$axios('/api/salon/daily-sale?date=' + this.saleDate).then(function (response) {
-                _this.saleData = response.data;
+            this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
+                _this.isSquareData = response.data.success;
+                console.log(response.data);
+                if (_this.isSquareData) {
+                    _this.squareData = response.data;
+                }
             });
         },
         refresh: function refresh() {
@@ -28766,27 +28807,36 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-date-picker', {
     model: {
-      value: (_vm.saleDate),
+      value: (_vm.date),
       callback: function($$v) {
-        _vm.saleDate = $$v
+        _vm.date = $$v
       },
-      expression: "saleDate"
+      expression: "date"
     }
   })], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg6": ""
     }
-  }, [_c('salon-sale-table', {
+  }, [(_vm.isSquareData) ? [_c('salon-sale-table', {
     attrs: {
-      "saleData": _vm.saleData
+      "saleData": _vm.squareData
     }
-  })], 1), _vm._v(" "), _c('v-flex', {
+  })] : [_c('v-card', [_c('v-card-text', {
+    staticClass: "text-lg-center"
+  }, [_c('v-icon', {
+    staticClass: "red--text",
+    attrs: {
+      "large": ""
+    }
+  }, [_vm._v("info")]), _vm._v(" "), _c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("There is no data recorded for this datex")])], 1)], 1)]], 2), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg3": ""
     }
   }, [_c('redeem-certificate', {
     attrs: {
-      "date": _vm.saleDate
+      "date": _vm.date
     },
     on: {
       "redeemed": _vm.refresh
