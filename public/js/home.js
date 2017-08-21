@@ -28125,7 +28125,7 @@ exports.push([module.i, "\n@media only screen\nand (min-device-width: 414px)\nan
 
     data: function data() {
         return {
-            shortcuts: [{ name: 'Add Technician Sale', href: '/technician-sale/add', color: 'blue darken-4' }, { name: 'Pay Technicians', href: '/wages/pay', color: 'blue darken-4' }, { name: 'Salon Sale', href: '/salon-sales', color: 'blue darken-4' }, { name: 'Quick Sale Entry', href: '/technician-sale/quick-sale-entry', color: 'red darken-4' }]
+            shortcuts: [{ name: 'Add Technician Sale', href: '/technician-sale/add', color: 'blue darken-4' }, { name: 'Pay Technicians', href: '/wages/pay', color: 'blue darken-4' }, { name: 'Salon Sale', href: '/salon-sales', color: 'blue darken-4' }, { name: 'Quick Sale Entry', href: '/technician-sale/quick-sale-entry', color: 'red darken-4' }, { name: 'Gift Certificate', href: '/gift-certificate', color: 'blue darken-4' }]
         };
     },
 

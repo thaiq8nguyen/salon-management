@@ -50,6 +50,18 @@ Route::get('/salon/tech-sale','SalonSaleApiController@getTechSale')->middleware(
 Route::get('/technician-sale/pay-period/{payPeriod}/technician/{technician}','TechnicianSaleApiController@searchSaleByPeriod')->middleware('auth:api');
 
 
+
+/***GIFT CERTIFICATES***/
+
+Route::get('/gift-certificate/recent','GiftCertificateController@recent')->middleware('auth:api');
+
+Route::post('/gift-certificate/use','GiftCertificateController@useGift')->middleware('auth:api');
+
+Route::post('/gift-certificate/void','GiftCertificateController@voidGift')->middleware('auth:api');
+
+Route::get('/gift-certificate/search','GiftCertificateController@search')->middleware('auth:api');
+
+
 /*****Test API*****/
 Route::get('/salon/square-test/metric', function(){
     $dailySale = Square::getDailySaleMetrics();

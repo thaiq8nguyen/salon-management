@@ -25,7 +25,6 @@
 
     </head>
     <body>
-        @include('partials.main-navbar')
         @yield('content')
     </body>
     <!--JavaScript-->

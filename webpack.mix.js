@@ -21,7 +21,9 @@ const webpack = require('webpack');
         .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
         .js(['resources/assets/js/api-dashboard.js'], 'public/js')
         .js(['resources/assets/js/payday.js'], 'public/js/salon')
-        .js(['resources/assets/js/quick-sale-entry.js'], 'public/js/salon');
+        .js(['resources/assets/js/quick-sale-entry.js'], 'public/js/salon')
+        .js(['resources/assets/js/salon/gift-certificate.js'], 'public/js/salon');
+
 
 
 
