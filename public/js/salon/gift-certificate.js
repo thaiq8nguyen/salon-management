@@ -28036,10 +28036,39 @@ __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
 
 //console.log(Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait');
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __WEBPACK_IMPORTED_MODULE_4__components_salon_GiftCertificate_vue__["a" /* default */]);
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    el: '#root'
+    el: '#root',
+    data: {
+        orientation: { degree: window.orientation }
+    },
 
+    watch: {
+        orientation: function orientation() {
+            this.readDeviceOrientation(this.orientation);
+        }
+    },
+
+    computed: {
+        mode: function mode() {
+            return window.orientation;
+        }
+    },
+
+    methods: {
+        readDeviceOrientation: function readDeviceOrientation(degree) {
+            var orientation = null;
+
+            if (Math.abs(degree) === 90) {
+                orientation = 'landscape';
+            } else {
+                orientation = 'portrait';
+            }
+
+            alert(this.orientation);
+        }
+    }
 });
 
 /***/ }),
