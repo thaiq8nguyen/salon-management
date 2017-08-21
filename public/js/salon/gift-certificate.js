@@ -28034,41 +28034,19 @@ __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
 
 
 
-//console.log(Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait');
-
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __WEBPACK_IMPORTED_MODULE_4__components_salon_GiftCertificate_vue__["a" /* default */]);
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#root',
-    data: {
-        orientation: { degree: window.orientation }
-    },
+    data: {},
 
-    watch: {
-        orientation: function orientation() {
-            this.readDeviceOrientation(this.orientation);
-        }
-    },
+    mounted: function mounted() {},
 
-    computed: {
-        mode: function mode() {
-            return window.orientation;
-        }
-    },
 
-    methods: {
-        readDeviceOrientation: function readDeviceOrientation(degree) {
-            var orientation = null;
+    watch: {},
 
-            if (Math.abs(degree) === 90) {
-                orientation = 'landscape';
-            } else {
-                orientation = 'portrait';
-            }
+    computed: {},
 
-            alert(this.orientation);
-        }
-    }
+    methods: {}
 });
 
 /***/ }),
@@ -28159,7 +28137,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:2px;\n\ttext-align: center;\n}\n.certificateTitle h5{\n\tfont-weight: bold;\n\tcolor:white;\n}\n", ""]);
+exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:2px;\n\ttext-align: center;\n}\n.certificateTitle h5{\n\tfont-weight: bold;\n\tcolor:white;\n}\n", ""]);
 
 // exports
 
@@ -28173,6 +28151,21 @@ exports.push([module.i, "\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SearchGiftCertificate_vue__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UseGiftCertificate_vue__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__VoidGiftCertificate_vue__ = __webpack_require__(178);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28281,8 +28274,10 @@ exports.push([module.i, "\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:
 				},
 
 				mounted: function mounted() {
+								window.addEventListener('orientationchange', this.detectDeviceOrientation);
 								this.recent();
 				},
+
 
 				computed: {},
 				data: function data() {
@@ -28294,11 +28289,16 @@ exports.push([module.i, "\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:
 												amountChange: false,
 												selected: {},
 												currentDialog: null,
-												dialogTitle: null
+												dialogTitle: null,
+												landscape: window.matchMedia("(orientation: landscape)").matches
+
 								};
 				},
 
 				methods: {
+								detectDeviceOrientation: function detectDeviceOrientation() {
+												this.landscape = window.matchMedia("(orientation: landscape)").matches;
+								},
 								recent: function recent() {
 												var _this = this;
 
@@ -29258,7 +29258,7 @@ if (false) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', [_c('nav-top-bar'), _vm._v(" "), _c('v-container', {
+  return _c('div', [(_vm.landscape) ? _c('v-app', [_c('nav-top-bar'), _vm._v(" "), _c('v-container', {
     attrs: {
       "fluid": ""
     }
@@ -29422,7 +29422,27 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.showDialog = false
       }
     }
-  })], 1)], 1)], 1)
+  })], 1)], 1) : _c('v-app', [_c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  }, [_c('v-layout', {
+    staticClass: "top-buffer"
+  }, [_c('v-flex', {
+    attrs: {
+      "xs10": "",
+      "offset-xs1": ""
+    }
+  }, [_c('v-card', [_c('v-card-text', [_c('p', {
+    staticClass: "text-xs-center"
+  }, [_c('v-icon', {
+    staticClass: "display-1",
+    attrs: {
+      "large": ""
+    }
+  }, [_vm._v("screen_rotation")])], 1), _vm._v(" "), _c('p', {
+    staticClass: "headline text-xs-center"
+  }, [_vm._v("Please rotate your device to the landscape position")])])], 1)], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
