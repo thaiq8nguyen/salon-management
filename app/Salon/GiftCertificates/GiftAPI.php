@@ -33,7 +33,7 @@ class GiftAPI{
 
     public function getRecentGifts(){
 
-        $gifts = GiftCertificate::where('amount','>',0.00)->limit(7)->offset(5)->get();
+        $gifts = GiftCertificate::where('amount','>',0.00)->get();
 
         return $gifts;
     }
