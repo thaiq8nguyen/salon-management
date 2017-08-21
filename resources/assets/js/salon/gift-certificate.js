@@ -15,45 +15,33 @@ axios.defaults.headers.common ={
 
 import GiftCertificate from '../components/salon/GiftCertificate.vue';
 
-//console.log(Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait');
+
 
 
 Vue.component('app', GiftCertificate);
 const app = new Vue({
     el: '#root',
     data:{
-        orientation:{degree:window.orientation},
+
     },
 
+    mounted(){
+
+    },
 
     watch:{
-       orientation(){
-           this.readDeviceOrientation(this.orientation);
-       }
+
 
     },
 
     computed:{
-        mode(){
-            return window.orientation;
-        }
+
     },
 
 
 
     methods:{
 
-        readDeviceOrientation(degree){
-            let orientation = null;
 
-            if(Math.abs(degree) === 90){
-                orientation = 'landscape';
-            }
-            else{
-                orientation = 'portrait';
-            }
-
-            alert(this.orientation);
-        }
     }
 });

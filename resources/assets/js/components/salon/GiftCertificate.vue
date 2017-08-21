@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-app>
+		<v-app v-if="landscape">
 			<nav-top-bar></nav-top-bar>
 			<v-container fluid>
 				<v-layout>
@@ -86,6 +86,21 @@
 				<component :is="currentDialog" :id="selected.id" :title="dialogTitle" v-on:completed="completed" v-on:cancel="showDialog = false"></component>
 			</v-dialog>
 		</v-app>
+		<v-app v-else>
+			<v-container fluid>
+				<v-layout class = "top-buffer">
+					<v-flex xs10 offset-xs1>
+						<v-card>
+							<v-card-text>
+								<p class = "text-xs-center"><v-icon large class="display-1">screen_rotation</v-icon></p>
+								<p class = "headline text-xs-center">Please rotate your device to the landscape position</p>
+							</v-card-text>
+						</v-card>
+
+					</v-flex>
+				</v-layout>
+			</v-container>
+		</v-app>
 	</div>
 </template>
 
@@ -106,8 +121,10 @@
 	    },
 
 	    mounted(){
+            window.addEventListener('orientationchange',this.detectDeviceOrientation);
             this.recent();
 	    },
+
 		computed:{
 
 		},
@@ -121,9 +138,15 @@
 	            selected:{},
 	            currentDialog:null,
 	            dialogTitle:null,
+	            landscape: window.matchMedia("(orientation: landscape)").matches,
+
             }
         },
         methods: {
+	        detectDeviceOrientation(){
+                this.landscape = window.matchMedia("(orientation: landscape)").matches;
+
+	        },
 			recent(){
 			    this.$axios.get('/api/gift-certificate/recent').then(response =>{
 			        this.gifts = response.data;
@@ -174,6 +197,9 @@
     }
 </script>
 <style>
+	.top-buffer{
+		margin-top: 50%;
+	}
 	.certificateTitle{
 		background:#2196f3;
 		padding:2px;
