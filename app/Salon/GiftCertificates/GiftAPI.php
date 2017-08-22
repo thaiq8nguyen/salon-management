@@ -32,8 +32,13 @@ class GiftAPI{
     }
 
     public function getRecentGifts(){
+        $today = Carbon::now();
+        $date = clone $today;
+        $aWeekAgo = $date->subWeek(1)->toDateString();
 
-        $gifts = GiftCertificate::where('amount','>',0.00)->get();
+
+        $gifts = GiftCertificate::hasValue()->active()->
+        whereBetween('sold_at',array($aWeekAgo,$today->toDateTimeString()))->orderBy('sold_at','desc')->get();
 
         return $gifts;
     }

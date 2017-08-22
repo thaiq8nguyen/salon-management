@@ -7,34 +7,32 @@
 					<v-flex lg12 md12>
 						<v-card>
 							<v-card-text>
-
 								<search v-on:selected="searchSelect"></search>
-
 								<v-layout>
 									<v-flex :class="certificateListing">
 										<v-card flat>
-											<v-card-title>
-												<p class = "headline">Recent Sold Certificates</p>
+											<v-card-title class = "amber darken-1 white--text">
+												<p id = "certificate-listing-title">Recent Sales</p>
 											</v-card-title>
-											<v-card-text>
+											<v-card-text id = "certificate-listing">
 												<template v-for="(gift,index) in gifts">
 													<v-card :key="gift.squareId" @click="select(index)"
-													        :class="{'blue lighten-1 white--text':selectedStyle(gift.id)}">
+													        :class="{'blue lighten-4 white--text':selectedStyle(gift.id)}">
 														<v-card-text>
 															<v-layout row>
 																<v-flex lg4>
 																	<v-list-tile-title>
-																		<p class = "title">ID: {{ gift.squareId.substring(0,5) }}</p>
+																		<p class = "title green--text text-darken-1">{{ gift.squareId.substring(0,5) }}</p>
 																	</v-list-tile-title>
 																</v-flex>
 																<v-flex lg4>
 																	<v-list-tile-title>
-																		<p class = "title">Value: $ {{ gift.amount }}</p>
+																		<p class = "title">$ {{ gift.amount }}</p>
 																	</v-list-tile-title>
 																</v-flex>
 																<v-flex lg4>
 																	<v-list-tile-title>
-																		<p class = "title">Sold On: {{ formattedDate(gift.sold_at) }}</p>
+																		<p class = "title">{{ formattedDate(gift.sold_at) }}</p>
 																	</v-list-tile-title>
 																</v-flex>
 															</v-layout>
@@ -43,25 +41,26 @@
 												</template>
 											</v-card-text>
 										</v-card>
+
 									</v-flex>
 									<v-flex lg6 v-if="showCertificate" >
 										<div class = "certificate">
 											<div class = "certificateTitle">
-												<h5>Sugar Nail Certificate</h5>
+												<p>Gift Certificate</p>
 											</div>
 											<div class = "certificateText">
 												<v-layout row wrap>
 													<v-flex lg12 md12>
-														<h1 class = text-lg-center :class="{'green--text text--darken-1':amountChange}">$ {{selected.amount}}</h1>
+														<h1 class = text-xs-center :class="{'green--text text--darken-1':amountChange}">$ {{selected.amount}}</h1>
 													</v-flex>
-													<v-flex lg6 md12 mt-3>
-														<p class = "subheading">ID: {{selected.squareId}}</p>
+													<v-flex lg12 md12 mt-3>
+														<p class = "title">ID: {{selected.squareId}}</p>
 													</v-flex>
-													<v-flex lg3 md6 mt-3>
-														<p class = "subheading">Sold: {{formattedDate(selected.sold_at)}}</p>
+													<v-flex lg6 md6 mt-3>
+														<p class = "title">Sold: {{formattedDate(selected.sold_at)}}</p>
 													</v-flex>
-													<v-flex lg3 md6 mt-3>
-														<p class = "subheading">Expired: {{formattedDate(selected.expired_at)}}</p>
+													<v-flex lg6 md6 mt-3>
+														<p class = "title">Expired: {{formattedDate(selected.expired_at)}}</p>
 													</v-flex>
 												</v-layout>
 											</div>
@@ -83,7 +82,7 @@
 				</v-layout>
 			</v-container>
 			<v-dialog v-model="showDialog" width="540">
-				<component :is="currentDialog" :id="selected.id" :title="dialogTitle" v-on:completed="completed" v-on:cancel="showDialog = false"></component>
+				<component :is="currentDialog" :gift="selected" :title="dialogTitle" v-on:completed="completed" v-on:cancel="showDialog = false"></component>
 			</v-dialog>
 		</v-app>
 		<v-app v-else>
@@ -96,7 +95,6 @@
 								<p class = "headline text-xs-center">Please rotate your device to the landscape position</p>
 							</v-card-text>
 						</v-card>
-
 					</v-flex>
 				</v-layout>
 			</v-container>
@@ -197,6 +195,7 @@
     }
 </script>
 <style>
+	@import url('https://fonts.googleapis.com/css?family=Patua+One');
 	.top-buffer{
 		margin-top: 50%;
 	}
@@ -204,8 +203,22 @@
 		background:#2196f3;
 		padding:2px;
 		text-align: center;
+
+
 	}
-	.certificateTitle h5{
+	.certificateTitle p{
+		font-size:28px;
+		font-family: 'Patua One', cursive;
+		font-weight: bold;
+		color:white;
+	}
+	#certificate-listing{
+		max-height: 480px;
+		overflow-y: scroll;
+	}
+	#certificate-listing-title{
+		font-size:24px;
+		font-family: 'Patua One', cursive;
 		font-weight: bold;
 		color:white;
 	}

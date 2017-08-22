@@ -3,7 +3,7 @@
 		<v-layout>
 			<v-flex lg8 md8>
 				<v-text-field prepend-icon="search" v-model="parameter"
-				              label="Search Gift Certificate" @keyup.enter="search"></v-text-field>
+				              label="Search Gift Certificate" @keyup.enter="search" id="search-input"></v-text-field>
 			</v-flex>
 			<v-flex lg4 md4>
 				<v-btn @click.native="search" primary>Search</v-btn>
@@ -57,9 +57,7 @@
 	            results: null,
 	            showDialog: false,
 	            resultsFound:true,
-
             }
-
 
         },
         methods: {
@@ -116,5 +114,7 @@
 </script>
 
 <style>
-
+	#search-input{
+		font-size:36px;
+	}
 </style>
