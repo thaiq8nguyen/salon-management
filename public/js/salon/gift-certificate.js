@@ -28134,10 +28134,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Patua+One);", ""]);
 
 // module
-exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:2px;\n\ttext-align: center;\n}\n.certificateTitle h5{\n\tfont-weight: bold;\n\tcolor:white;\n}\n", ""]);
+exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitle{\n\tbackground:#2196f3;\n\tpadding:2px;\n\ttext-align: center;\n}\n.certificateTitle p{\n\tfont-size:28px;\n\tfont-family: 'Patua One', cursive;\n\tfont-weight: bold;\n\tcolor:white;\n}\n#certificate-listing{\n\tmax-height: 480px;\n\toverflow-y: scroll;\n}\n#certificate-listing-title{\n\tfont-size:24px;\n\tfont-family: 'Patua One', cursive;\n\tfont-weight: bold;\n\tcolor:white;\n}\n", ""]);
 
 // exports
 
@@ -28151,8 +28151,6 @@ exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SearchGiftCertificate_vue__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UseGiftCertificate_vue__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__VoidGiftCertificate_vue__ = __webpack_require__(178);
-//
-//
 //
 //
 //
@@ -28434,7 +28432,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28454,13 +28452,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: [],
 
     data: function data() {
         return {
-            main: '/home'
+            home: '/home',
+            logout: '/logout'
 
         };
     },
@@ -28478,9 +28481,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   return _c('div', [_c('v-toolbar', [_c('v-btn', {
     attrs: {
       "icon": "",
-      "href": _vm.main
+      "href": _vm.home
     }
-  }, [_c('v-icon', [_vm._v("home")])], 1)], 1)], 1)
+  }, [_c('v-icon', [_vm._v("home")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "icon": "",
+      "href": _vm.logout
+    }
+  }, [_c('v-icon', [_vm._v("exit_to_app")])], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28581,7 +28589,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#search-input{\n\tfont-size:36px;\n}\n", ""]);
 
 // exports
 
@@ -28650,7 +28658,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             results: null,
             showDialog: false,
             resultsFound: true
-
         };
     },
 
@@ -28715,7 +28722,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('v-text-field', {
     attrs: {
       "prepend-icon": "search",
-      "label": "Search Gift Certificate"
+      "label": "Search Gift Certificate",
+      "id": "search-input"
     },
     on: {
       "keyup": function($event) {
@@ -28906,7 +28914,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#amount-input{\n\tfont-size: 36px;\n}\n", ""]);
 
 // exports
 
@@ -28948,11 +28956,28 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     components: {},
-    props: ['id', 'title'],
+    props: ['gift', 'title'],
+
+    computed: {
+        amountError: function amountError() {
+            if (this.amount) {
+                return this.amount > this.gift.amount;
+            }
+        }
+    },
 
     data: function data() {
         return {
@@ -28965,18 +28990,27 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         useCertificate: function useCertificate() {
             var _this = this;
 
-            var detail = { amount: this.amount, comments: this.comments };
-
-            this.$axios.post('/api/gift-certificate/use', { id: this.id, detail: detail }).then(function (response) {
-                if (response.data.success) {
-                    _this.amount = null;
-                    _this.comments = null;
-                    _this.$emit('completed', response.data.amount);
-                }
-            });
+            if (!this.amountError) {
+                this.$axios.post('/api/gift-certificate/use', { id: this.gift.id,
+                    detail: { amount: this.amount, comments: this.comments } }).then(function (response) {
+                    if (response.data.success) {
+                        _this.amount = null;
+                        _this.comments = null;
+                        _this.$emit('completed', response.data.amount);
+                    }
+                });
+            }
         },
         cancel: function cancel() {
             this.$emit('cancel');
+        },
+        numberFilter: function numberFilter(event) {
+            var charCode = typeof event.which == "number" ? event.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46 && charCode !== 127) {
+                event.preventDefault();
+            } else {
+                return true;
+            }
         }
     }
 
@@ -28989,7 +29023,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('v-card', [_c('v-card-title', {
-    staticClass: "display-1",
+    staticClass: "display-1 green darken-1 white--text",
     domProps: {
       "textContent": _vm._s(_vm.title)
     }
@@ -29006,12 +29040,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "headline"
   }, [_vm._v("Amount: ")])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg4": "",
-      "md4": ""
+      "lg6": "",
+      "md6": ""
     }
   }, [_c('v-text-field', {
     attrs: {
-      "prepend-icon": "attach_money"
+      "prepend-icon": "attach_money",
+      "id": "amount-input",
+      "type": "tel",
+      "maxlength": "3"
+    },
+    on: {
+      "keypress": _vm.numberFilter
     },
     model: {
       value: (_vm.amount),
@@ -29020,7 +29060,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "amount"
     }
-  })], 1)], 1), _vm._v(" "), _c('v-layout', {
+  }), _vm._v(" "), (_vm.amountError) ? _c('p', {
+    staticClass: "red--text darken-1 subheading"
+  }, [_vm._v("\n\t\t\t\t\t\tThe amount is greater than the certificate value\n\t\t\t\t\t")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('v-layout', {
     attrs: {
       "row": ""
     }
@@ -29038,8 +29080,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-text-field', {
     attrs: {
-      "prepend-icon": "comment",
-      "multi-line": ""
+      "prepend-icon": "comment"
     },
     model: {
       value: (_vm.comments),
@@ -29050,7 +29091,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-btn', {
     attrs: {
-      "primary": ""
+      "primary": "",
+      "large": ""
     },
     nativeOn: {
       "click": function($event) {
@@ -29058,6 +29100,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }
   }, [_vm._v("Use")]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "large": ""
+    },
     nativeOn: {
       "click": function($event) {
         _vm.cancel($event)
@@ -29190,7 +29235,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    props: ['id', 'title'],
+    props: ['gift', 'title'],
 
     data: function data() {
         return {};
@@ -29200,7 +29245,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
         voiding: function voiding() {
             var _this = this;
 
-            this.$axios.post('/api/gift-certificate/void', { id: this.id }).then(function (response) {
+            this.$axios.post('/api/gift-certificate/void', { id: this.gift.id }).then(function (response) {
                 if (response.data.success) {
                     _this.$emit('completed', response.data.amount);
                 }
@@ -29220,11 +29265,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('v-card', [_c('v-card-title', {
-    staticClass: "display-1",
+    staticClass: "display-1 deep-purple darken-1 white--text headline",
     domProps: {
       "textContent": _vm._s(_vm.title)
     }
-  }), _vm._v(" "), _c('v-card-text', [_c('v-btn', {
+  }), _vm._v(" "), _c('v-card-text', {
+    staticClass: "text-xs-center"
+  }, [_c('v-btn', {
     attrs: {
       "primary": ""
     },
@@ -29277,13 +29324,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "flat": ""
     }
-  }, [_c('v-card-title', [_c('p', {
-    staticClass: "headline"
-  }, [_vm._v("Recent Sold Certificates")])]), _vm._v(" "), _c('v-card-text', [_vm._l((_vm.gifts), function(gift, index) {
+  }, [_c('v-card-title', {
+    staticClass: "amber darken-1 white--text"
+  }, [_c('p', {
+    attrs: {
+      "id": "certificate-listing-title"
+    }
+  }, [_vm._v("Recent Sales")])]), _vm._v(" "), _c('v-card-text', {
+    attrs: {
+      "id": "certificate-listing"
+    }
+  }, [_vm._l((_vm.gifts), function(gift, index) {
     return [_c('v-card', {
       key: gift.squareId,
       class: {
-        'blue lighten-1 white--text': _vm.selectedStyle(gift.id)
+        'blue lighten-4 white--text': _vm.selectedStyle(gift.id)
       },
       on: {
         "click": function($event) {
@@ -29299,20 +29354,20 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "lg4": ""
       }
     }, [_c('v-list-tile-title', [_c('p', {
-      staticClass: "title"
-    }, [_vm._v("ID: " + _vm._s(gift.squareId.substring(0, 5)))])])], 1), _vm._v(" "), _c('v-flex', {
+      staticClass: "title green--text text-darken-1"
+    }, [_vm._v(_vm._s(gift.squareId.substring(0, 5)))])])], 1), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg4": ""
       }
     }, [_c('v-list-tile-title', [_c('p', {
       staticClass: "title"
-    }, [_vm._v("Value: $ " + _vm._s(gift.amount))])])], 1), _vm._v(" "), _c('v-flex', {
+    }, [_vm._v("$ " + _vm._s(gift.amount))])])], 1), _vm._v(" "), _c('v-flex', {
       attrs: {
         "lg4": ""
       }
     }, [_c('v-list-tile-title', [_c('p', {
       staticClass: "title"
-    }, [_vm._v("Sold On: " + _vm._s(_vm.formattedDate(gift.sold_at)))])])], 1)], 1)], 1)], 1)]
+    }, [_vm._v(_vm._s(_vm.formattedDate(gift.sold_at)))])])], 1)], 1)], 1)], 1)]
   })], 2)], 1)], 1), _vm._v(" "), (_vm.showCertificate) ? _c('v-flex', {
     attrs: {
       "lg6": ""
@@ -29321,7 +29376,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "certificate"
   }, [_c('div', {
     staticClass: "certificateTitle"
-  }, [_c('h5', [_vm._v("Sugar Nail Certificate")])]), _vm._v(" "), _c('div', {
+  }, [_c('p', [_vm._v("Gift Certificate")])]), _vm._v(" "), _c('div', {
     staticClass: "certificateText"
   }, [_c('v-layout', {
     attrs: {
@@ -29334,34 +29389,34 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "md12": ""
     }
   }, [_c('h1', {
-    staticClass: "text-lg-center",
+    staticClass: "text-xs-center",
     class: {
       'green--text text--darken-1': _vm.amountChange
     }
   }, [_vm._v("$ " + _vm._s(_vm.selected.amount))])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg6": "",
+      "lg12": "",
       "md12": "",
       "mt-3": ""
     }
   }, [_c('p', {
-    staticClass: "subheading"
+    staticClass: "title"
   }, [_vm._v("ID: " + _vm._s(_vm.selected.squareId))])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": "",
+      "lg6": "",
       "md6": "",
       "mt-3": ""
     }
   }, [_c('p', {
-    staticClass: "subheading"
+    staticClass: "title"
   }, [_vm._v("Sold: " + _vm._s(_vm.formattedDate(_vm.selected.sold_at)))])]), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": "",
+      "lg6": "",
       "md6": "",
       "mt-3": ""
     }
   }, [_c('p', {
-    staticClass: "subheading"
+    staticClass: "title"
   }, [_vm._v("Expired: " + _vm._s(_vm.formattedDate(_vm.selected.expired_at)))])])], 1)], 1)]), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-layout', {
     attrs: {
       "row": "",
@@ -29413,7 +29468,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c(_vm.currentDialog, {
     tag: "component",
     attrs: {
-      "id": _vm.selected.id,
+      "gift": _vm.selected,
       "title": _vm.dialogTitle
     },
     on: {
