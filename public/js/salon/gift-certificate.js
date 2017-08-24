@@ -28255,6 +28255,9 @@ exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitl
 //
 //
 //
+//
+//
+//
 
 
 
@@ -28286,6 +28289,7 @@ exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitl
 												showDialog: false,
 												amountChange: false,
 												selected: {},
+												showRecentSales: false,
 												currentDialog: null,
 												dialogTitle: null,
 												landscape: window.matchMedia("(orientation: landscape)").matches
@@ -28301,7 +28305,10 @@ exports.push([module.i, "\n.top-buffer{\n\tmargin-top: 50%;\n}\n.certificateTitl
 												var _this = this;
 
 												this.$axios.get('/api/gift-certificate/recent').then(function (response) {
-																_this.gifts = response.data;
+																if (response.data.length > 0) {
+																				_this.gifts = response.data;
+																				_this.showRecentSales = true;
+																}
 												});
 								},
 								select: function select(index) {
@@ -28648,6 +28655,29 @@ exports.push([module.i, "\n#search-input{\n\tfont-size:36px;\n}\n", ""]);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: [],
@@ -28657,8 +28687,18 @@ exports.push([module.i, "\n#search-input{\n\tfont-size:36px;\n}\n", ""]);
             parameter: null,
             results: null,
             showDialog: false,
-            resultsFound: true
+            showSearchById: false,
+            showSearchByDate: false,
+            noResultsFound: false,
+            showSearching: false,
+            date: null
         };
+    },
+
+    watch: {
+        date: function date() {
+            this.searchByDate();
+        }
     },
 
     methods: {
@@ -28666,17 +28706,43 @@ exports.push([module.i, "\n#search-input{\n\tfont-size:36px;\n}\n", ""]);
             var _this = this;
 
             if (this.parameter) {
-                this.$axios.get('/api/gift-certificate/search?query=' + this.parameter).then(function (response) {
-                    if (response.data.length > 0) {
-                        _this.results = response.data;
-                        _this.resultsFound = true;
-                    } else {
-                        _this.resultsFound = false;
-                    }
+                this.results = null;
+                this.showSearchById = false;
+                this.showSearchByDate = false;
+                this.noResultsFound = false;
+                this.showSearching = true;
+                this.$axios.get('/api/gift-certificate/search?squareId=' + this.parameter).then(function (response) {
 
                     _this.showDialog = true;
+                    if (response.data.length > 0) {
+                        _this.results = response.data;
+                        _this.showSearching = false;
+                        _this.showSearchById = true;
+                        _this.parameter = null;
+                    } else {
+                        _this.showSearchById = false;
+                        _this.showSearchByDate = true;
+                    }
                 });
             }
+        },
+        searchByDate: function searchByDate() {
+            var _this2 = this;
+
+            this.showSearching = true;
+            this.$axios.get('/api/gift-certificate/search?squareId= ' + this.parameter + '&date=' + this.date).then(function (response) {
+
+                if (response.data.length > 0) {
+                    _this2.results = response.data;
+                    _this2.showSearching = false;
+                    _this2.showSearchByDate = false;
+                    _this2.showSearchById = true;
+                } else {
+                    _this2.showSearching = false;
+                    _this2.showSearchByDate = false;
+                    _this2.noResultsFound = true;
+                }
+            });
         },
         giftStatus: function giftStatus(index) {
             var keyword = '';
@@ -28763,7 +28829,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "showDialog"
     }
-  }, [_c('v-card', [_c('v-card-text', [(_vm.resultsFound) ? _c('v-list', {
+  }, [_c('v-card', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showSearching),
+      expression: "showSearching"
+    }]
+  }, [_c('v-card-text', [_c('h3', [_vm._v("Searching certificates...")])])], 1), _vm._v(" "), _c('v-card', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showSearchById),
+      expression: "showSearchById"
+    }]
+  }, [_c('v-card-text', [_c('v-list', {
     attrs: {
       "two-line": ""
     }
@@ -28802,12 +28882,57 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "lg4": ""
       }
     }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\tExpired: " + _vm._s(_vm.readableDate(result.expired_at)) + "\n\t\t\t\t\t\t\t\t\t\t")])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-divider')]
-  })], 2) : _c('v-alert', {
+  })], 2), _vm._v(" "), _c('v-btn', {
+    nativeOn: {
+      "click": function($event) {
+        _vm.showDialog = false
+      }
+    }
+  }, [_vm._v("Close")])], 1)], 1), _vm._v(" "), _c('v-card', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showSearchByDate),
+      expression: "showSearchByDate"
+    }]
+  }, [_c('v-card-text', [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg6": "",
+      "md6": ""
+    }
+  }, [_c('v-date-picker', {
+    model: {
+      value: (_vm.date),
+      callback: function($$v) {
+        _vm.date = $$v
+      },
+      expression: "date"
+    }
+  })], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": "",
+      "md6": ""
+    }
+  }, [_c('p', {
+    staticClass: "title text-xs-center"
+  }, [_vm._v("Please select the date the certificate was sold on the left.")])])], 1)], 1)], 1), _vm._v(" "), _c('v-card', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.noResultsFound),
+      expression: "noResultsFound"
+    }]
+  }, [_c('v-card-text', [_c('v-alert', {
+    staticClass: "title",
     attrs: {
       "warning": "",
       "value": "true"
     }
-  }, [_vm._v("No Search Results")]), _vm._v(" "), _c('v-btn', {
+  }, [_vm._v("No Certificates Found")]), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-btn', {
     nativeOn: {
       "click": function($event) {
         _vm.showDialog = false
@@ -29330,7 +29455,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "certificate-listing-title"
     }
-  }, [_vm._v("Recent Sales")])]), _vm._v(" "), _c('v-card-text', {
+  }, [_vm._v("Recent Sales")])]), _vm._v(" "), (_vm.showRecentSales) ? _c('v-card-text', {
     attrs: {
       "id": "certificate-listing"
     }
@@ -29368,7 +29493,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }, [_c('v-list-tile-title', [_c('p', {
       staticClass: "title"
     }, [_vm._v(_vm._s(_vm.formattedDate(gift.sold_at)))])])], 1)], 1)], 1)], 1)]
-  })], 2)], 1)], 1), _vm._v(" "), (_vm.showCertificate) ? _c('v-flex', {
+  })], 2) : _c('v-card-text', [_c('p', {
+    staticClass: "title text-xs-center"
+  }, [_vm._v("There are no recent gift certificate sale within a week")])])], 1)], 1), _vm._v(" "), (_vm.showCertificate) ? _c('v-flex', {
     attrs: {
       "lg6": ""
     }

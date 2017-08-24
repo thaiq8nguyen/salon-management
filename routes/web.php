@@ -67,7 +67,9 @@ Route::get('/', function () {
 
     Route::get('/gift-certificate','GiftCertificateController@index');
 
+    //Testing Only -- Route::get('/gift-certificate/search/date/{date}','GiftCertificateController@searchByDate');
     //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
+
 
 
 
