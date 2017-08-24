@@ -62,6 +62,7 @@ Route::post('/gift-certificate/void','GiftCertificateController@voidGift')->midd
 Route::get('/gift-certificate/search','GiftCertificateController@search')->middleware('auth:api');
 
 
+
 /*****Test API*****/
 Route::get('/salon/square-test/metric', function(){
     $dailySale = Square::getDailySaleMetrics();

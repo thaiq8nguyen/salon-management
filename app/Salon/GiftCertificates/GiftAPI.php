@@ -30,6 +30,19 @@ class GiftAPI{
         }
 
     }
+    public function getGiftsSold($saleDate){
+
+        $gifts = Square::getGiftCardsSold($saleDate);
+
+
+        if(isset($gifts)){
+            foreach($gifts as $gift){
+                $this->gift->firstOrCreate($gift);
+            }
+        }
+
+    }
+
 
     public function getRecentGifts(){
         $today = Carbon::now();
@@ -63,7 +76,7 @@ class GiftAPI{
                 $result = ['success' => true, 'amount' => number_format($gift->amount,2)];
 
             }else{
-                $result = ['success' => false, 'message' => 'There is not enough value'];
+                $result = ['success' => false, 'message' => 'Not enough value to use'];
             }
         }
         else{
@@ -87,9 +100,14 @@ class GiftAPI{
 
     }
 
-    public function search($parameter){
+    public function search($squareId, $date){
 
-        $gifts = GiftCertificate::where('squareId','like',$parameter.'%')->get();
+        if(!is_null($date)){
+            $this->getGiftsSold($date);
+        }
+
+        $gifts = GiftCertificate::where('squareId','like',$squareId.'%')->get();
+
 
         return $gifts;
     }

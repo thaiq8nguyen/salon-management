@@ -14,7 +14,7 @@
 											<v-card-title class = "amber darken-1 white--text">
 												<p id = "certificate-listing-title">Recent Sales</p>
 											</v-card-title>
-											<v-card-text id = "certificate-listing">
+											<v-card-text id = "certificate-listing" v-if="showRecentSales">
 												<template v-for="(gift,index) in gifts">
 													<v-card :key="gift.squareId" @click="select(index)"
 													        :class="{'blue lighten-4 white--text':selectedStyle(gift.id)}">
@@ -39,6 +39,9 @@
 														</v-card-text>
 													</v-card>
 												</template>
+											</v-card-text>
+											<v-card-text v-else>
+												<p class="title text-xs-center">There are no recent gift certificate sale within a week</p>
 											</v-card-text>
 										</v-card>
 
@@ -134,6 +137,7 @@
 	            showDialog:false,
 	            amountChange:false,
 	            selected:{},
+	            showRecentSales: false,
 	            currentDialog:null,
 	            dialogTitle:null,
 	            landscape: window.matchMedia("(orientation: landscape)").matches,
@@ -147,7 +151,11 @@
 	        },
 			recent(){
 			    this.$axios.get('/api/gift-certificate/recent').then(response =>{
-			        this.gifts = response.data;
+			        if(response.data.length > 0){
+                        this.gifts = response.data;
+                        this.showRecentSales = true;
+			        }
+
 			    })
 			},
 	        select(index){

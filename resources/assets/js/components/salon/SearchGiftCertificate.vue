@@ -9,10 +9,16 @@
 				<v-btn @click.native="search" primary>Search</v-btn>
 			</v-flex>
 		</v-layout>
+
 		<v-dialog v-model="showDialog" width="640">
-			<v-card>
+			<v-card v-show="showSearching">
 				<v-card-text>
-					<v-list two-line v-if="resultsFound">
+					<h3>Searching certificates...</h3>
+				</v-card-text>
+			</v-card>
+			<v-card v-show="showSearchById">
+				<v-card-text>
+					<v-list two-line >
 						<template v-for="(result,index) in results">
 							<v-list-tile :key="index" @click.native="select(index)">
 								<v-list-tile-avatar>
@@ -38,10 +44,27 @@
 							<v-divider></v-divider>
 						</template>
 					</v-list>
-					<v-alert v-else warning value="true">No Search Results</v-alert>
 					<v-btn @click.native="showDialog = false">Close</v-btn>
 				</v-card-text>
-
+			</v-card>
+			<v-card v-show="showSearchByDate">
+				<v-card-text>
+					<v-layout row>
+						<v-flex lg6 md6>
+							<v-date-picker v-model="date"></v-date-picker>
+						</v-flex>
+						<v-flex lg6 md6>
+							<p class = "title text-xs-center">Please select the date the certificate was sold on the left.</p>
+						</v-flex>
+					</v-layout>
+				</v-card-text>
+			</v-card>
+			<v-card v-show="noResultsFound">
+				<v-card-text>
+					<v-alert warning value="true" class = "title">No Certificates Found</v-alert>
+					<v-divider></v-divider>
+					<v-btn @click.native="showDialog = false">Close</v-btn>
+				</v-card-text>
 			</v-card>
 		</v-dialog>
 	</div>
@@ -56,27 +79,64 @@
                 parameter: null,
 	            results: null,
 	            showDialog: false,
-	            resultsFound:true,
+	            showSearchById: false,
+	            showSearchByDate:false,
+	            noResultsFound: false,
+	            showSearching:false,
+	            date:null,
             }
 
         },
+	    watch:{
+		    date(){
+		        this.searchByDate();
+		    }
+	    },
+
         methods: {
             search(){
 				if(this.parameter){
-                    this.$axios.get('/api/gift-certificate/search?query=' + this.parameter).then(response => {
+					this.results = null;
+					this.showSearchById = false;
+					this.showSearchByDate = false;
+					this.noResultsFound = false;
+					this.showSearching = true;
+                    this.$axios.get('/api/gift-certificate/search?squareId=' + this.parameter).then(response => {
+
+                        this.showDialog =true;
                         if(response.data.length > 0){
                             this.results = response.data;
-                            this.resultsFound = true;
+                            this.showSearching = false;
+                            this.showSearchById = true;
+                            this.parameter = null;
                         }
                         else{
-                            this.resultsFound = false;
+                            this.showSearchById = false;
+                            this.showSearchByDate = true;
                         }
-
-                        this.showDialog = true;
                     });
 				}
 
             },
+
+	        searchByDate(){
+                this.showSearching = true;
+                this.$axios.get('/api/gift-certificate/search?squareId= ' + this.parameter + '&date=' + this.date).then(response => {
+
+                    if(response.data.length > 0){
+                        this.results = response.data;
+                        this.showSearching = false;
+						this.showSearchByDate = false;
+						this.showSearchById = true;
+                    }
+                    else{
+                        this.showSearching = false;
+                        this.showSearchByDate = false;
+                        this.noResultsFound = true;
+                    }
+
+                });
+	        },
 	        giftStatus(index){
                 let keyword = '';
                 if(parseFloat(this.results[index].amount) > 0 && this.$moment(this.results[index].expired_at) >= this.$moment()){

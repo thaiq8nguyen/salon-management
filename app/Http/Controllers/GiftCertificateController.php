@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Salon\GiftCertificates\Gift;
 use Carbon\Carbon;
-
+use Salon\Square\Square;
 
 
 class GiftCertificateController extends Controller
@@ -40,11 +40,18 @@ class GiftCertificateController extends Controller
     }
 
     public function search(Request $request){
+        if($request->has('date')){
+            $result = Gift::search($request->input('squareId'), $request->input('date'));
+        }
+        else{
+            $result = Gift::search($request->input('squareId'),null);
+        }
 
-        $result = Gift::search($request->input('query'));
 
 
         return response()->json($result);
 
     }
+
+
 }

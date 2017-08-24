@@ -72,6 +72,41 @@ Class SquareAPI{
 
     }
 
+    /**
+     * @param $saleDate
+     * @return array
+     * This is run on demand depending on the user's sale date to find and import all g/c sold on that date
+     */
+    public function getGiftCardsSold($saleDate){
+
+        $date = Carbon::createFromFormat('Y-m-d',$saleDate)->startOfDay();
+        $this->setDatesQuery($date);
+
+        $payments = $this->getRawPayments($this->dates);
+
+        $gifts = [];
+
+        foreach($payments as $payment){
+            foreach($payment->itemizations as $item){
+                if($item->name == 'Gift Certificate'){
+                    $date = Carbon::parse($payment->created_at,'UTC')->timezone('America/Los_Angeles');
+
+                    $gift = ['squareId' => $payment->tender[0]->id,
+                        'amount' => $this->formatMoney($item->total_money->amount),
+                        'sold_at' => $date->toDateTimeString(),
+                        'expired_at' => $date->addYears(1)->toDateTimeString()];
+                    array_push($gifts, $gift);
+                }
+            }
+        }
+
+        return $gifts;
+
+    }
+    /**
+     * @return array
+     * This is run daily in order to get and import all gift certificates sold on that date
+     */
     public function getDailyGiftsSold(){
 
         $date = Carbon::now()->startOfDay();
