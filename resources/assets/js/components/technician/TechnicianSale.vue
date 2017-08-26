@@ -1,0 +1,186 @@
+<template>
+	<div id = "technician-sale">
+		<v-app>
+			<v-toolbar class = "blue">
+				<v-btn icon :href="home">
+					<v-icon class = "white--text">home</v-icon>
+				</v-btn>
+				<v-btn icon :href="sale">
+					<v-icon class = "white--text">attach_money</v-icon>
+				</v-btn>
+				<v-spacer></v-spacer>
+				<v-btn icon :href="logout">
+					<v-icon class = "white--text">exit_to_app</v-icon>
+				</v-btn>
+			</v-toolbar>
+			<v-container fluid>
+				<v-layout>
+					<v-flex xs12>
+						<v-select :items="payPeriods" label="Select Working Period" single-line class = "blue--text"
+						          v-model="selectPayPeriodId" item-text="periods" item-value="id" bottom>
+						</v-select>
+					</v-flex>
+				</v-layout>
+				<v-layout row>
+					<v-flex xs12 id = "content-container">
+						<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
+						<wage :total-sales="wage" v-show="show.wage"></wage>
+						<payment :payments="payment" v-show="show.payment"></payment>
+					</v-flex>
+				</v-layout>
+			</v-container>
+			<v-bottom-nav absolute value="true" class="white">
+				<v-btn flat light class="blue--text" @click.native="toggleScreen('sale')" :value="screen === 'sale'">
+					<span>Sales</span>
+					<v-icon>fa-credit-card</v-icon>
+				</v-btn>
+				<v-btn flat light class="blue--text" @click.natives="toggleScreen('wage')" :value="screen === 'wage'">
+					<span>Wages</span>
+					<v-icon>fa-clock-o</v-icon>
+				</v-btn>
+				<v-btn flat light class="blue--text" @click.native="toggleScreen('pay')" :value="screen === 'pay'">
+					<span>Pays</span>
+					<v-icon>fa-bank</v-icon>
+				</v-btn>
+			</v-bottom-nav>
+		</v-app>
+	</div>
+</template>
+
+<script>
+	import TechnicianDailySaleTable from '../TechnicianDailySaleTable.vue';
+	import TechnicianTotalSaleTable from '../TechnicianTotalSaleTable.vue';
+	import TechnicianPaymentTable from '../TechnicianPaymentTable.vue';
+    export default {
+        props: [],
+
+	    components:{
+            'sale':TechnicianDailySaleTable,
+		    'wage':TechnicianTotalSaleTable,
+		    'payment': TechnicianPaymentTable,
+	    },
+
+        data() {
+            return {
+                home:'/technician',
+                logout:'/logout',
+                sale: '/technician/sale',
+	            payPeriods:[],
+	            currentPayPeriod:null,
+	            selectPayPeriodId:null,
+	            selectPayPeriod: null,
+	            dailySales:['default'],
+	            wage:'',
+	            payment:['default'],
+	            firstName: sessionStorage.getItem('firstName'),
+	            screen:'sale',
+	            show:{
+                    dailySales:true,
+		            wage:false,
+		            payment:false,
+	            }
+
+            }
+
+
+        },
+	    mounted(){
+          this.getPayPeriod();
+
+	    },
+
+	    watch:{
+	        selectPayPeriodId(){
+
+	            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
+	            this.getSaleByPeriod();
+	            this.getWageByPeriod();
+	            this.getPaymentByPeriod();
+	        }
+	    },
+        methods: {
+            getPayPeriod() {
+                this.$axios.get('/api/pay-period/list').then(response => {
+
+                    this.payPeriods = response.data;
+                    this.currentPayPeriod = response.data[response.data.length - 1];
+                    this.selectPayPeriod = this.currentPayPeriod.periods;
+                    //retrieve the last selected period id in a session variable
+                    this.selectPayPeriodId = parseInt(sessionStorage.getItem('lastSelectedPeriodIdPayDay'));
+                    if (this.selectPayPeriodId === null) {
+                        this.selectPayPeriodId = this.currentPayPeriod.id;
+
+                    }
+
+                    this.getSaleByPeriod();
+                    this.getWageByPeriod();
+                    this.getPaymentByPeriod();
+
+                });
+            },
+            getSaleByPeriod() {
+                this.$axios.get('/api/technician-sale/pay-period/' + this.selectPayPeriodId + '/technician/'
+                    + this.firstName).then(response => {
+                    this.dailySales = response.data.daily_sales;
+
+                });
+            },
+            getWageByPeriod() {
+                this.$axios.get('/api/technician-wage/pay-period/' + this.selectPayPeriodId + '/technician/'
+                    + this.firstName).then(response => {
+                    this.wage = response.data;
+
+                });
+            },
+
+	        getPaymentByPeriod(){
+                this.$axios.get('/api/technician-payment/pay-period/' + this.selectPayPeriodId + '/technician/'
+	                + this.firstName) .then(response => {
+	                    this.payment = response.data;
+                });
+	        },
+            toggleScreen(screen) {
+
+				if(screen === 'sale'){
+				    this.screen = 'sale';
+				    this.show.dailySales = true;
+				    this.show.wage = false;
+				    this.show.payment = false;
+
+				}
+				else if(screen === 'wage'){
+                    this.screen = 'wage';
+                    this.show.dailySales = false;
+                    this.show.wage = true;
+                    this.show.payment = false;
+				}
+				else if(screen === 'pay'){
+                    this.screen = 'pay';
+                    this.show.dailySales = false;
+                    this.show.wage = false;
+                    this.show.payment = true;
+				}
+
+
+            }
+        }
+
+
+    }
+</script>
+
+<style>
+	@media screen and (max-width:320px)  {
+		th, td{
+			padding:1px !important;
+
+		}
+		#content-container{
+			max-height: 330px;
+			overflow-y: scroll;
+		}
+
+	}
+
+
+</style>

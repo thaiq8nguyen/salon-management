@@ -120,7 +120,7 @@ class TechnicianSaleApiController extends Controller
 
 
         return response()->json(['daily_sales'=>$technician->dailySales,'full_name'=>$technician->full_name, 'id'=>$technician->id],
-            200)->header('Content-type','application/json');
+            200);
 
     }
 

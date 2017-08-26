@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+/******/ 	return __webpack_require__(__webpack_require__.s = 191);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -27885,24 +27885,647 @@ process.umask = function() { return 0; };
 /* 43 */,
 /* 44 */,
 /* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(57);
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(50);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(47)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianDailySaleTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianDailySaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bfc11e4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-bfc11e4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
 
 /***/ }),
-/* 57 */
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(48);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("6e06f512", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['dailySales'],
+
+    data: function data() {
+        return {
+
+            headers: [{ text: 'Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }],
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight,
+            loadingSale: true
+
+        };
+    },
+
+    watch: {
+        dailySales: function dailySales() {
+            if (this.dailySales.length >= 0) {
+                this.loadingSale = false;
+            }
+        }
+    },
+
+    computed: {
+        salesExist: function salesExist() {
+            return this.dailySales.length > 0;
+        }
+    },
+    methods: {
+        readableDate: function readableDate(date) {
+            if (this.screenWidth < 375) {
+                //for iPhone 5
+                return this.$moment(date).format('M/D/YY');
+            } else {
+                return this.$moment(date).format('M/D/YY dd');
+            }
+        }
+    }
+
+});
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "technician-daily-sale"
+    }
+  }, [_c('v-card', {
+    staticClass: "elevation-1 grey lighten-4"
+  }, [(_vm.loadingSale) ? _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("Loading Sales...")])]) : _vm._e(), _vm._v(" "), (_vm.salesExist) ? _c('v-card-text', [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.dailySales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.text
+          }, [_c('p', {
+            staticClass: "subheading text-lg-center"
+          }, [_vm._v(_vm._s(header.text))])])
+        })
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-left subheading"
+        }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-left subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-left subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
+      }
+    }])
+  })], 1) : _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("No Sales Found")])])], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-bfc11e4e", esExports)
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(55);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(52)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianTotalSaleTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianTotalSaleTable.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a1c91ce4", Component.options)
+  } else {
+    hotAPI.reload("data-v-a1c91ce4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(53);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("03b64872", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !important;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['totalSales'],
+
+    data: function data() {
+        return {
+            headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }],
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight,
+            loadingSale: true
+        };
+    },
+
+    computed: {
+        salesExist: function salesExist() {
+            return this.totalSales.length > 0;
+        }
+    },
+    watch: {
+        totalSales: function totalSales() {
+            if (this.totalSales.length >= 0) {
+                this.loadingSale = false;
+            }
+        }
+    },
+    methods: {}
+
+});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-card', {
+    staticClass: "elevation-1 grey lighten-4"
+  }, [(_vm.loadingSale) ? _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("Loading Sales...")])]) : _vm._e(), _vm._v(" "), (_vm.salesExist) ? _c('v-card-text', [(_vm.screenWidth > 768) ? _c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.totalSales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.text
+          }, [_c('p', {
+            staticClass: "subheading text-lg-center"
+          }, [_vm._v(_vm._s(header.text))])])
+        })
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotal))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTip))]), _vm._v(" "), _c('td', {
+          staticClass: "text-lg-center red--text headline"
+        }, [_vm._v("$ " + _vm._s(props.item.total))])]
+      }
+    }])
+  }) : _c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.totalSales,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return [_c('tr', {
+          attrs: {
+            "id": "small-screen-size-table-header"
+          }
+        })]
+      }
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('tr', [_c('th', [_vm._v("Sub Total")]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotal))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Sub Total Tip")]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.subTotalTip))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Earned Total")]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTotal))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Credit Card Tip")]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.earnedTip))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Wage")]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-right subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.total))])])]
+      }
+    }])
+  })], 1) : _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("No Wages Found")])])], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-a1c91ce4", esExports)
+  }
+}
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(192);
+
+
+/***/ }),
+/* 192 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27915,7 +28538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Home_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianSale_vue__ = __webpack_require__(193);
 
 
 
@@ -27933,24 +28556,26 @@ __WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('home', __WEBPACK_IMPORTED_MODULE_4__components_Home_vue__["a" /* default */]);
-
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    el: '#root'
-
+    el: '#root',
+    components: {
+        TechnicianSale: __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianSale_vue__["a" /* default */]
+    },
+    data: {},
+    methods: {}
 });
 
 /***/ }),
-/* 58 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Home_vue__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4955bef4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Home_vue__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianSale_vue__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc555b02_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianSale_vue__ = __webpack_require__(197);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(59)
+  __webpack_require__(194)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -27964,15 +28589,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Home_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4955bef4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Home_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianSale_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc555b02_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianSale_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Home.vue"
+Component.options.__file = "resources/assets/js/components/technician/TechnicianSale.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Home.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianSale.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -27981,9 +28606,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4955bef4", Component.options)
+    hotAPI.createRecord("data-v-fc555b02", Component.options)
   } else {
-    hotAPI.reload("data-v-4955bef4", Component.options)
+    hotAPI.reload("data-v-fc555b02", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -27994,23 +28619,23 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 59 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(60);
+var content = __webpack_require__(195);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("707a6b4b", content, false);
+var update = __webpack_require__(2)("72b11e08", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4955bef4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4955bef4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fc555b02\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianSale.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fc555b02\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianSale.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -28020,7 +28645,7 @@ if(false) {
 }
 
 /***/ }),
-/* 60 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -28028,17 +28653,19 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n@media only screen\nand (min-device-width: 414px)\nand (max-device-width: 736px)\nand (-webkit-min-device-pixel-ratio: 3)\nand (orientation: portrait) {\n.margin-top{\n\n\t\tmargin-top: 10px;\n}\n}\n", ""]);
+exports.push([module.i, "\n@media screen and (max-width:320px)  {\nth, td{\n\t\tpadding:1px !important;\n}\n#content-container{\n\t\tmax-height: 330px;\n\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 61 */
+/* 196 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PaydayReminder_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__ = __webpack_require__(198);
 //
 //
 //
@@ -28088,41 +28715,7 @@ exports.push([module.i, "\n@media only screen\nand (min-device-width: 414px)\nan
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -28130,30 +28723,276 @@ exports.push([module.i, "\n@media only screen\nand (min-device-width: 414px)\nan
     props: [],
 
     components: {
-        PayDayReminder: __WEBPACK_IMPORTED_MODULE_0__PaydayReminder_vue__["a" /* default */]
+        'sale': __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__["a" /* default */],
+        'wage': __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__["a" /* default */],
+        'payment': __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__["a" /* default */]
     },
 
     data: function data() {
         return {
-            shortcuts: [{ name: 'Add Technician Sale', href: '/technician-sale/add', color: 'blue darken-4' }, { name: 'Pay Technicians', href: '/wages/pay', color: 'blue darken-4' }, { name: 'Salon Sale', href: '/salon-sales', color: 'blue darken-4' }, { name: 'Quick Sale Entry', href: '/technician-sale/quick-sale-entry', color: 'red darken-4' }, { name: 'Gift Certificate', href: '/gift-certificate', color: 'blue darken-4' }]
+            home: '/technician',
+            logout: '/logout',
+            sale: '/technician/sale',
+            payPeriods: [],
+            currentPayPeriod: null,
+            selectPayPeriodId: null,
+            selectPayPeriod: null,
+            dailySales: ['default'],
+            wage: '',
+            payment: ['default'],
+            firstName: sessionStorage.getItem('firstName'),
+            screen: 'sale',
+            show: {
+                dailySales: true,
+                wage: false,
+                payment: false
+            }
+
         };
     },
+    mounted: function mounted() {
+        this.getPayPeriod();
+    },
 
-    methods: {}
+
+    watch: {
+        selectPayPeriodId: function selectPayPeriodId() {
+
+            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
+            this.getSaleByPeriod();
+            this.getWageByPeriod();
+            this.getPaymentByPeriod();
+        }
+    },
+    methods: {
+        getPayPeriod: function getPayPeriod() {
+            var _this = this;
+
+            this.$axios.get('/api/pay-period/list').then(function (response) {
+
+                _this.payPeriods = response.data;
+                _this.currentPayPeriod = response.data[response.data.length - 1];
+                _this.selectPayPeriod = _this.currentPayPeriod.periods;
+                //retrieve the last selected period id in a session variable
+                _this.selectPayPeriodId = parseInt(sessionStorage.getItem('lastSelectedPeriodIdPayDay'));
+                if (_this.selectPayPeriodId === null) {
+                    _this.selectPayPeriodId = _this.currentPayPeriod.id;
+                }
+
+                _this.getSaleByPeriod();
+                _this.getWageByPeriod();
+                _this.getPaymentByPeriod();
+            });
+        },
+        getSaleByPeriod: function getSaleByPeriod() {
+            var _this2 = this;
+
+            this.$axios.get('/api/technician-sale/pay-period/' + this.selectPayPeriodId + '/technician/' + this.firstName).then(function (response) {
+                _this2.dailySales = response.data.daily_sales;
+            });
+        },
+        getWageByPeriod: function getWageByPeriod() {
+            var _this3 = this;
+
+            this.$axios.get('/api/technician-wage/pay-period/' + this.selectPayPeriodId + '/technician/' + this.firstName).then(function (response) {
+                _this3.wage = response.data;
+            });
+        },
+        getPaymentByPeriod: function getPaymentByPeriod() {
+            var _this4 = this;
+
+            this.$axios.get('/api/technician-payment/pay-period/' + this.selectPayPeriodId + '/technician/' + this.firstName).then(function (response) {
+                _this4.payment = response.data;
+            });
+        },
+        toggleScreen: function toggleScreen(screen) {
+
+            if (screen === 'sale') {
+                this.screen = 'sale';
+                this.show.dailySales = true;
+                this.show.wage = false;
+                this.show.payment = false;
+            } else if (screen === 'wage') {
+                this.screen = 'wage';
+                this.show.dailySales = false;
+                this.show.wage = true;
+                this.show.payment = false;
+            } else if (screen === 'pay') {
+                this.screen = 'pay';
+                this.show.dailySales = false;
+                this.show.wage = false;
+                this.show.payment = true;
+            }
+        }
+    }
 
 });
 
 /***/ }),
-/* 62 */
+/* 197 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PaydayReminder_vue__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f8efbed_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PaydayReminder_vue__ = __webpack_require__(66);
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "technician-sale"
+    }
+  }, [_c('v-app', [_c('v-toolbar', {
+    staticClass: "blue"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "",
+      "href": _vm.home
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("home")])], 1), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "icon": "",
+      "href": _vm.sale
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("attach_money")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "icon": "",
+      "href": _vm.logout
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("exit_to_app")])], 1)], 1), _vm._v(" "), _c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  }, [_c('v-layout', [_c('v-flex', {
+    attrs: {
+      "xs12": ""
+    }
+  }, [_c('v-select', {
+    staticClass: "blue--text",
+    attrs: {
+      "items": _vm.payPeriods,
+      "label": "Select Working Period",
+      "single-line": "",
+      "item-text": "periods",
+      "item-value": "id",
+      "bottom": ""
+    },
+    model: {
+      value: (_vm.selectPayPeriodId),
+      callback: function($$v) {
+        _vm.selectPayPeriodId = $$v
+      },
+      expression: "selectPayPeriodId"
+    }
+  })], 1)], 1), _vm._v(" "), _c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "xs12": "",
+      "id": "content-container"
+    }
+  }, [_c('sale', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show.dailySales),
+      expression: "show.dailySales"
+    }],
+    staticClass: "white",
+    attrs: {
+      "daily-sales": _vm.dailySales
+    }
+  }), _vm._v(" "), _c('wage', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show.wage),
+      expression: "show.wage"
+    }],
+    attrs: {
+      "total-sales": _vm.wage
+    }
+  }), _vm._v(" "), _c('payment', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show.payment),
+      expression: "show.payment"
+    }],
+    attrs: {
+      "payments": _vm.payment
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-bottom-nav', {
+    staticClass: "white",
+    attrs: {
+      "absolute": "",
+      "value": "true"
+    }
+  }, [_c('v-btn', {
+    staticClass: "blue--text",
+    attrs: {
+      "flat": "",
+      "light": "",
+      "value": _vm.screen === 'sale'
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.toggleScreen('sale')
+      }
+    }
+  }, [_c('span', [_vm._v("Sales")]), _vm._v(" "), _c('v-icon', [_vm._v("fa-credit-card")])], 1), _vm._v(" "), _c('v-btn', {
+    staticClass: "blue--text",
+    attrs: {
+      "flat": "",
+      "light": "",
+      "value": _vm.screen === 'wage'
+    },
+    on: {
+      "click": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "natives")) { return null; }
+        _vm.toggleScreen('wage')
+      }
+    }
+  }, [_c('span', [_vm._v("Wages")]), _vm._v(" "), _c('v-icon', [_vm._v("fa-clock-o")])], 1), _vm._v(" "), _c('v-btn', {
+    staticClass: "blue--text",
+    attrs: {
+      "flat": "",
+      "light": "",
+      "value": _vm.screen === 'pay'
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.toggleScreen('pay')
+      }
+    }
+  }, [_c('span', [_vm._v("Pays")]), _vm._v(" "), _c('v-icon', [_vm._v("fa-bank")])], 1)], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-fc555b02", esExports)
+  }
+}
+
+/***/ }),
+/* 198 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentTable_vue__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_14588c53_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__ = __webpack_require__(202);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(63)
+  __webpack_require__(199)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -28167,15 +29006,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PaydayReminder_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f8efbed_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PaydayReminder_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_14588c53_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/PaydayReminder.vue"
+Component.options.__file = "resources/assets/js/components/TechnicianPaymentTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] PaydayReminder.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentTable.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28184,9 +29023,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f8efbed", Component.options)
+    hotAPI.createRecord("data-v-14588c53", Component.options)
   } else {
-    hotAPI.reload("data-v-7f8efbed", Component.options)
+    hotAPI.reload("data-v-14588c53", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28197,23 +29036,23 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 63 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(64);
+var content = __webpack_require__(200);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("d16a63fa", content, false);
+var update = __webpack_require__(2)("53333825", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7f8efbed\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PaydayReminder.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7f8efbed\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PaydayReminder.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14588c53\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14588c53\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -28223,7 +29062,7 @@ if(false) {
 }
 
 /***/ }),
-/* 64 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -28231,16 +29070,32 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 65 */
+/* 201 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28253,86 +29108,76 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    props: [],
+    props: ['payments'],
 
     data: function data() {
         return {
-            periods: [],
-            current: null,
-            payDate: null,
-            reminder: {},
-            reminders: [],
-            date: this.$moment().format('MM/DD/YYYY')
-
+            headers: [{ text: 'Amount', value: 'amount', sortable: false }, { text: 'Method', value: 'method', sortable: false }],
+            loadingSale: true
         };
     },
 
-    computed: {
-        endDate: function endDate() {
-            if (this.payDate !== null) {
-                return this.$moment(this.current.payDate, 'MM/DD/YYYY').subtract(2, 'days').format('dddd, MM/DD/YYYY ');
+    watch: {
+        payments: function payments() {
+            if (this.payments.length >= 0) {
+                this.loadingSale = false;
             }
-            return 'There are errors occured while processing end date';
         }
     },
-    mounted: function mounted() {
-        this.getPayPeriod();
-    },
 
-    methods: {
-        getPayPeriod: function getPayPeriod() {
-            var _this = this;
-
-            this.$axios.get('/api/pay-period/list').then(function (response) {
-                console.log(response.data);
-                _this.periods = response.data;
-                _this.current = response.data[response.data.length - 1];
-                _this.payDate = _this.current.payDate;
-
-                if (_this.date === _this.payDate) {
-                    _this.reminder.name = 'pay_date';
-                    _this.reminder.text = 'Pay Date is today!';
-                } else {
-                    _this.reminder.name = 'end_date';
-                    _this.reminder.text = 'This pay period ends in ' + _this.endDate;
-                }
-
-                _this.addReminder();
-            }).catch(function (error) {
-                if (error.response) {
-                    if (error.response.status === 422) {
-                        _this.reminder.name = 'error';
-                        _this.reminder.text = error.response.data;
-
-                        _this.addReminder();
-                    }
-                }
-            });
-        },
-        addReminder: function addReminder() {
-            this.reminders.push(this.reminder);
+    computed: {
+        paymentsExist: function paymentsExist() {
+            return this.payments.length > 0;
         }
-    }
+    },
+    methods: {}
 
 });
 
 /***/ }),
-/* 66 */
+/* 202 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._l((_vm.reminders), function(reminder) {
-    return [_c('v-chip', {
-      staticClass: "amber black--text",
-      attrs: {
-        "label": "",
-        "outline": ""
+  return _c('div', {
+    attrs: {
+      "id": "technician-payment-record"
+    }
+  }, [_c('v-card', {
+    staticClass: "elevation-1 grey lighten-4"
+  }, [(_vm.loadingSale) ? _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("Loading Payment...")])]) : _vm._e(), _vm._v(" "), (_vm.paymentsExist) ? _c('v-card-text', [_c('v-data-table', {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.payments,
+      "hide-actions": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "headers",
+      fn: function(props) {
+        return _vm._l((props.headers), function(header) {
+          return _c('th', {
+            key: header.text
+          }, [_c('p', {
+            staticClass: "subheading text-lg-center"
+          }, [_vm._v(_vm._s(header.text))])])
+        })
       }
-    }, [_c('v-icon', {
-      staticClass: "amber--text"
-    }, [_vm._v("star")]), _vm._v(_vm._s(reminder.text) + "\n\t\t")], 1)]
-  })], 2)
+    }, {
+      key: "items",
+      fn: function(props) {
+        return [_c('td', {
+          staticClass: "text-xs-left subheading"
+        }, [_vm._v("$ " + _vm._s(props.item.amount))]), _vm._v(" "), _c('td', {
+          staticClass: "text-xs-left subheading"
+        }, [_vm._v(_vm._s(props.item.method))])]
+      }
+    }])
+  })], 1) : _c('v-card-text', [_c('p', {
+    staticClass: "title"
+  }, [_vm._v("No Payments Found")])])], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28341,152 +29186,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7f8efbed", esExports)
-  }
-}
-
-/***/ }),
-/* 67 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', [_c('main', [_c('v-container', {
-    attrs: {
-      "fluid": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg4": "",
-      "xs12": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "amber darken-1"
-  }, [_c('v-flex', {
-    attrs: {
-      "lg6": "",
-      "xs6": ""
-    }
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_c('strong', [_vm._v("Reminders")])])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg2": "",
-      "xs2": "",
-      "offset-lg4": "",
-      "offset-xs4": ""
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("event_note")])], 1)], 1), _vm._v(" "), _c('v-card-text', {
-    staticClass: "text-lg-center text-xs-center"
-  }, [_c('pay-day-reminder'), _vm._v(" "), _c('v-divider')], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    staticClass: "margin-top",
-    attrs: {
-      "lg4": "",
-      "xs12": "",
-      "hidden-xs-only": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "green darken-1"
-  }, [_c('v-flex', {
-    attrs: {
-      "lg6": "",
-      "xs6": ""
-    }
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_c('strong', [_vm._v("New Features")])])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg2": "",
-      "xs2": "",
-      "offset-lg4": "",
-      "offset-xs4": ""
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text",
-    attrs: {
-      "medium": ""
-    }
-  }, [_vm._v("view_headline")])], 1)], 1), _vm._v(" "), _c('v-card-text')], 1)], 1), _vm._v(" "), _c('v-flex', {
-    staticClass: "margin-top",
-    attrs: {
-      "lg4": "",
-      "xs12": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "deep-purple darken-1"
-  }, [_c('v-flex', {
-    attrs: {
-      "lg6": "",
-      "xs6": ""
-    }
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_c('strong', [_vm._v("Shortcuts")])])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg2": "",
-      "xs2": "",
-      "offset-lg4": "",
-      "offset-xs4": ""
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text",
-    attrs: {
-      "medium": ""
-    }
-  }, [_vm._v("bookmark")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_vm._l((_vm.shortcuts), function(shortcut) {
-    return [_c('v-btn', {
-      class: shortcut.color,
-      attrs: {
-        "href": shortcut.href,
-        "primary": "",
-        "block": ""
-      }
-    }, [_vm._v(_vm._s(shortcut.name))])]
-  })], 2)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    staticClass: "margin-top",
-    attrs: {
-      "lg4": "",
-      "xs12": "",
-      "hidden-xs-only": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "indigo darken-1"
-  }, [_c('v-flex', {
-    attrs: {
-      "lg6": "",
-      "xs6": ""
-    }
-  }, [_c('h3', {
-    staticClass: "headline white--text"
-  }, [_c('strong', [_vm._v("Trends")])])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg2": "",
-      "xs2": "",
-      "offset-lg4": "",
-      "offset-xs4": ""
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text",
-    attrs: {
-      "medium": ""
-    }
-  }, [_vm._v("trending_up")])], 1)], 1), _vm._v(" "), _c('v-card-text')], 1)], 1)], 1)], 1)], 1)])], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4955bef4", esExports)
+     require("vue-hot-reload-api").rerender("data-v-14588c53", esExports)
   }
 }
 

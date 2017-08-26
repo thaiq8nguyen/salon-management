@@ -13,28 +13,21 @@ use App\PayPeriod;
 class TechnicianSaleController extends Controller
 {
     public function __construct(){
-        //$this->middleware(['auth','checkPayPeriod']);checkPayPeriod middleware check for existing payPeriod collection in the session
+        $this->middleware('admin');
     }
-    //
-    /**Route: /technician-sale
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
+
     public function index(){
 
-        $payPeriod = session()->get('payPeriod');
 
-        $technician = Technician::all()->first();
-
-        return view('technicians.sales', ['pageTitle' => 'Technician Sale','technician' => $technician, 'payPeriodDates' => $payPeriod->pay_period_mdy,
-            'payDate' => $payPeriod->pay_date_mdy]);
 
     }
 
 
     /**
      * Route: /technician-sale/create
-     * @param $saleDate
-     * @param Technician $technician
+     *
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(){

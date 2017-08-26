@@ -14,37 +14,12 @@ class WagePaymentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'checkPayPeriod']);
+        $this->middleware(['admin']);
     }
-    /**
-     * Route: wage/pay/{technician}
-     * Function: feed technician and sale date to pay-technician.blade.php
-     * @param Technician $technician
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function create(Technician $technician){
 
-        $payPeriod = session()->get('payPeriod');
 
-        $technicianID = $technician->id; //get the technician ID from the $technician parameter
-        $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
-        //store $technicianID to session for paying technician to pay that technician in the store method
-        session()->put('payingTechnicianID', $technicianID);
-
-        //get the technician along with her associated sale object using the $payPeriod above and the technician ID
-        $technician = Technician::with(['dailySales' =>
-                function($query) use ($payPeriodDates){
-                    $query->whereBetween('sale_date',$payPeriodDates);
-                },
-                'totalSalesAndTips' =>
-                    function($query) use($payPeriodDates) {
-                        $query->whereBetween('sale_date', $payPeriodDates);
-                    }
-            ]
-        )->where('id','=',$technicianID)->first(['id','first_name','last_name']);
-
-        return view('wages.pay-technician',['technician' => $technician, 'payPeriod' =>$payPeriod->pay_period_mdy,
-            'payDate' => $payPeriod->pay_date_mdy]);
     }
 
     /**

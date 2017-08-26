@@ -8,6 +8,7 @@
 @push('scripts')
     <script src = "{{ asset('js/technicians/create-sales.js')}}"></script>
 @endpush
+@include('partials.main-navbar')
 @section('content')
     <div class = 'main-content' id = "root">
         <technician-header :full-name="technicianName"></technician-header>

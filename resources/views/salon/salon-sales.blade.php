@@ -7,6 +7,7 @@
 @push('scripts')
     <script src = "{{ asset('js/salon-sales.js') }}"></script>
 @endpush
+@include('partials.main-navbar')
 @section('content')
     <div class = "main-content" id = "root">
         <salon-sale></salon-sale>

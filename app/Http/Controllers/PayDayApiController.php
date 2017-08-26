@@ -128,6 +128,32 @@ class PayDayApiController extends Controller
 
         return response()->json(['success'=>true, 'message'=> $technician->full_name . ' \'s is paid!'],200)->header('Content-type','application-json');
     }
+
+    public function searchWageByPeriod(PayPeriod $payPeriod, Technician $technician){
+
+        $technicianId = $technician->id;
+
+        $technician = Technician::with(['totalSalesAndTips' =>
+            function($query) use ($payPeriod){
+
+                $query->whereBetween('sale_date',[$payPeriod->begin_date, $payPeriod->end_date]);
+
+            }])->where('id', '=', $technicianId)->first();
+
+
+        return response()->json($technician->totalSalesAndTips,
+            200);
+
+    }
+
+    public function searchPaymentByPeriod(PayPeriod $payPeriod, Technician $technician){
+        $technicianId = $technician->id;
+        $payPeriodId = $payPeriod->id;
+
+        $payments = WagePayment::where('pay_period_id','=',$payPeriodId)->where('technician_id','=',$technicianId)->get();
+
+        return response()->json($payments,200);
+    }
 }
 
 
