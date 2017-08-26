@@ -53,6 +53,10 @@ class Handler extends ExceptionHandler
         else if($exception instanceof ModelNotFoundException){
             return redirect()->route('home');
         }
+        else if ($exception instanceof TokenMismatchException) {
+
+            return redirect('/login')->with('message', 'You page session expired. Please try again');
+        }
         return parent::render($request, $exception);
     }
 

@@ -11,72 +11,34 @@
 |
 */
 
+    /*ADMIN ROUTES*/
 
-
-Route::get('/', function () {
-    return view('auth.login');
-});
-
-    Route::get('/api-dashboard','ApiDashBoardController@index')->name('api-dashboard');
-
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/gift-certificate','GiftCertificateController@index')->name('gift-certificate');
     Route::get('/salon-sales','SalonSaleController@index')->name('salon-sale');
-
-    Route::get('/salon-sale/create', 'SalonSaleController@create')->name('salon-sale-create');
-
-    Route::get('/technician-sale', 'TechnicianSaleController@index')->name('technician-sale');
-
     Route::get('/technician-sale/quick-sale-entry','TechnicianSaleController@quickSaleEntry')->name('quick-sale-entry');
-
+    Route::get('/api-dashboard','ApiDashBoardController@index')->name('api-dashboard');
     Route::get('/wages/pay', 'WageController@payday')->name('payday');
-
-    /*Technician create sale*/
     Route::get('/technician-sale/add', 'TechnicianSaleController@create')
-        ->name('technician-sale-add');
-    /*Pay Technicians dashboard*/
-
-
-    /*Create technician payments*/
-    Route::get('/wages/pay/{technician}', 'WagePaymentController@create')->name('create-technician-pay');
-
-    /*Create technician pay period report in PDF*/
-    Route::get('/report/{technician}/payment/{payPeriod?}', 'PaymentReportController@show')->name('create-pay-report');
-
-    /*Technician book dashboard*/
+    ->name('technician-sale-add');
     Route::get('/technician-book', 'TechnicianBookController@index')->name('technician-book');
 
-    /*Create a technician book with an opening balance*/
-    Route::get('/technician-book/create' , 'TechnicianBookController@create')->name('display-create-book-form');
+    Route::get('/report/{technician}/payment/{payPeriod?}', 'PaymentReportController@show')->name('create-pay-report');
 
-    Route::get('/technician-book/insert/payments','TechnicianBookController@insertWages')->name('insert-wages-to-book');
+    /*TECHNICIAN ROUTES*/
+    Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');
+    Route::get('/technician/sale','TechnicianHomeController@sale')->name('technician-sale')->middleware('auth');
 
-    Route::get('/technician-book/insert/sales', 'TechnicianBookController@insertSales')->name('insert-sales-to-book');
-
-    /*Pay a technician with one or more payments*/
-    Route::post('/wages/pay/{technician}', 'WagePaymentController@store')->name('pay-technician');
-
-    /*Record a technician sale for a day */
-    Route::post('/technician-sale', 'TechnicianSaleController@storeSale')->name('record-technician-sale');
-
-    /*Create a technician opening balance record */
-    Route::post('/technician-book/create' , 'TechnicianBookController@store')->name('create-technician-book');
-
-    /*Home page*/
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::get('/logout', 'Auth\LoginController@logout');
-
-    Route::get('/gift-certificate','GiftCertificateController@index');
-
+    /*TESTING ROUTES*/
     //Testing Only -- Route::get('/gift-certificate/search/date/{date}','GiftCertificateController@searchByDate');
     //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
 
+    /*Authentication routes*/
+    Auth::routes();
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+    Route::get('/logout', 'Auth\LoginController@logout');
 
 
 
-
-
-/*Authentication routes*/
-Auth::routes();
-
-
-Route::get('/home', 'HomeController@index')->name('home');

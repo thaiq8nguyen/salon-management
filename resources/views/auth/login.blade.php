@@ -9,7 +9,7 @@
     <div class = "main-content">
         <div class="container">
             <div class="row top-buffer">
-                <div class="col-md-5 col-md-offset-3">
+                <div class="col-md-4 col-md-offset-3">
                     @component('panels.darkblue')
                         @slot('title')
                             Login

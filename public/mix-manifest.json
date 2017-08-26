@@ -3,7 +3,9 @@
     "/js/salon/gift-certificate.js": "/js/salon/gift-certificate.js",
     "/js/technicians/create-sales.js": "/js/technicians/create-sales.js",
     "/js/api-dashboard.js": "/js/api-dashboard.js",
+    "/js/technicians/technician-sale.js": "/js/technicians/technician-sale.js",
     "/js/salon-sales.js": "/js/salon-sales.js",
     "/js/salon/quick-sale-entry.js": "/js/salon/quick-sale-entry.js",
-    "/js/home.js": "/js/home.js"
+    "/js/home.js": "/js/home.js",
+    "/js/technicians/technician.js": "/js/technicians/technician.js"
 }

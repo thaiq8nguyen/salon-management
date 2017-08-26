@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Technician extends Model
 {
 
-    //
+    public function user(){
+
+        return $this->hasOne(User::class);
+
+    }
     public function sales(){
 
         return $this->hasMany(TechnicianSale::class);

@@ -8,6 +8,7 @@
 @push('scripts')
     <script src = "{{ asset('js/salon/quick-sale-entry.js') }}"></script>
 @endpush
+@include('partials.main-navbar')
 @section('content')
     <div class = "main-content" id = "root">
         <quick-sale-entry></quick-sale-entry>

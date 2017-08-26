@@ -49,6 +49,9 @@ Route::get('/salon/tech-sale','SalonSaleApiController@getTechSale')->middleware(
 
 Route::get('/technician-sale/pay-period/{payPeriod}/technician/{technician}','TechnicianSaleApiController@searchSaleByPeriod')->middleware('auth:api');
 
+Route::get('/technician-wage/pay-period/{payPeriod}/technician/{technician}', 'PayDayApiController@searchWageByPeriod')->middleware('auth:api');
+
+Route::get('/technician-payment/pay-period/{payPeriod}/technician/{technician}','PayDayApiController@searchPaymentByPeriod')->middleware('auth:api');
 
 
 /***GIFT CERTIFICATES***/
@@ -61,6 +64,10 @@ Route::post('/gift-certificate/void','GiftCertificateController@voidGift')->midd
 
 Route::get('/gift-certificate/search','GiftCertificateController@search')->middleware('auth:api');
 
+/***TECHNICIAN***/
+
+Route::get('/technician/home','TechnicianHomeController@homeApp')->middleware('auth:api');
+Route::get('/technician/sale','TechnicianHomeController@saleApp')->middleware('auth:api');
 
 
 /*****Test API*****/

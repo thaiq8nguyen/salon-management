@@ -12,6 +12,11 @@ use Salon\Square\Square;
 
 class GiftCertificateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index(){
 
         return view('salon/gift-certificate',['pageTitle' => 'Gift Certificate','defaultNavBar' => false]);

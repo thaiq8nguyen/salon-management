@@ -17,4 +17,5 @@ class WagePayment extends Model
 
         return $this->belongsTo(PayPeriod::class);
     }
+
 }
