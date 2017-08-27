@@ -1,23 +1,23 @@
 <template>
 	<div id = "technician-sale">
-		<v-app>
-			<v-toolbar class = "blue">
+		<v-app id = "technician-sale-app">
+			<v-toolbar class = "white">
 				<v-btn icon :href="home">
-					<v-icon class = "white--text">home</v-icon>
+					<v-icon>home</v-icon>
 				</v-btn>
 				<v-btn icon :href="sale">
-					<v-icon class = "white--text">attach_money</v-icon>
+					<v-icon>attach_money</v-icon>
 				</v-btn>
 				<v-spacer></v-spacer>
 				<v-btn icon :href="logout">
-					<v-icon class = "white--text">exit_to_app</v-icon>
+					<v-icon>exit_to_app</v-icon>
 				</v-btn>
 			</v-toolbar>
 			<v-container fluid>
 				<v-layout>
 					<v-flex xs12>
-						<v-select :items="payPeriods" label="Select Working Period" single-line class = "blue--text"
-						          v-model="selectPayPeriodId" item-text="periods" item-value="id" bottom>
+						<v-select :items="payPeriods" label="Select Working Period" single-line dark auto
+						          v-model="selectPayPeriodId" item-text="periods" item-value="id">
 						</v-select>
 					</v-flex>
 				</v-layout>
@@ -69,7 +69,7 @@
 	            currentPayPeriod:null,
 	            selectPayPeriodId:null,
 	            selectPayPeriod: null,
-	            dailySales:['default'],
+	            dailySales:[],
 	            wage:'',
 	            payment:['default'],
 	            firstName: sessionStorage.getItem('firstName'),
@@ -170,6 +170,10 @@
 </script>
 
 <style>
+	#technician-sale-app{
+		background-color: #2196F3;
+	}
+
 	@media screen and (max-width:320px)  {
 		th, td{
 			padding:1px !important;

@@ -1,10 +1,7 @@
 <template>
 	<div id = "technician-payment-record">
-		<v-card class = "elevation-1 grey lighten-4">
-			<v-card-text v-if="loadingSale">
-				<p class = "title">Loading Payment...</p>
-			</v-card-text>
-			<v-card-text v-if="paymentsExist">
+		<v-card class = "elevation-1 white" v-if="payments.length > 0">
+			<v-card-text>
 				<v-data-table :headers="headers" :items="payments" hide-actions >
 					<template slot="headers" scope="props">
 						<th v-for="header in props.headers" :key="header.text">
@@ -17,9 +14,13 @@
 					</template>
 				</v-data-table>
 			</v-card-text>
-			<v-card-text v-else>
+
+		</v-card>
+		<v-card v-else>
+			<v-card-text>
 				<p class = "title">No Payments Found</p>
 			</v-card-text>
+
 		</v-card>
 	</div>
 </template>
@@ -45,12 +46,6 @@
                 if((this.payments).length >= 0){
                     this.loadingSale = false;
                 }
-            }
-        },
-
-        computed:{
-            paymentsExist(){
-                return (this.payments).length > 0;
             }
         },
         methods: {

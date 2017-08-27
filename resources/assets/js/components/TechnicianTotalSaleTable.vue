@@ -1,9 +1,6 @@
 <template>
-	<v-card class = "elevation-1 grey lighten-4">
-		<v-card-text v-if="loadingSale">
-			<p class = "title">Loading Sales...</p>
-		</v-card-text>
-		<v-card-text v-if="salesExist">
+	<v-card class = "elevation-1 white" v-if="totalSales.length > 0">
+		<v-card-text>
 			<v-data-table :headers="headers" :items="totalSales"
 			              hide-actions v-if="screenWidth > 768">
 				<template slot="headers" scope="props">
@@ -49,9 +46,13 @@
 			</v-data-table>
 
 		</v-card-text>
-		<v-card-text v-else>
+
+	</v-card>
+	<v-card v-else>
+		<v-card-text>
 			<p class = "title">No Wages Found</p>
 		</v-card-text>
+
 	</v-card>
 </template>
 
@@ -76,11 +77,6 @@
 
 
         },
-	    computed:{
-            salesExist(){
-                return (this.totalSales).length > 0;
-            }
-	    },
         watch:{
             totalSales(){
                 if((this.totalSales).length >= 0){

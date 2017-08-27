@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkPayPeriod' => \App\Http\Middleware\CheckForPayPeriod::class,
         'admin' => \App\Http\Middleware\MustBeAdmin::class,
+        'completed.registration' => \App\Http\Middleware\CheckIfCompletedRegistration::class,
     ];
 }
