@@ -1,0 +1,9 @@
+body{
+    background-color: #2196F3;;
+}
+.top-buffer{
+    margin-top:100px;
+}
+.notification{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24) !important;
+}
