@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Log;
 
 class Handler extends ExceptionHandler
 {
@@ -54,8 +55,8 @@ class Handler extends ExceptionHandler
             return redirect()->route('home');
         }
         else if ($exception instanceof TokenMismatchException) {
-
-            return redirect('/login')->with('message', 'You page session expired. Please try again');
+            Log::info('detect token mismatch');
+            return redirect()->guest(route('login'))->with('session_expired', 'You have been log out due to inactivity. Please log in again');
         }
         return parent::render($request, $exception);
     }

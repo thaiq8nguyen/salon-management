@@ -174,7 +174,11 @@
 		background-color: #2196F3;
 	}
 
-	@media screen and (max-width:320px)  {
+	/*IPHONE 5/5S*/
+	@media only screen
+	and (min-device-width: 320px)
+	and (max-device-width: 568px)
+	and (-webkit-min-device-pixel-ratio: 2) {
 		th, td{
 			padding:1px !important;
 
@@ -183,7 +187,58 @@
 			max-height: 330px;
 			overflow-y: scroll;
 		}
+	}
 
+	/*IPHONE 6/6S*/
+	@media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 667px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+		th, td{
+
+			padding:1px !important;
+
+		}
+		#content-container{
+			max-height: 429px;
+			overflow-y: scroll;
+		}
+	}
+
+	/*IPHONE 6+*/
+	@media only screen
+	and (min-device-width: 414px)
+	and (max-device-width: 736px)
+	and (-webkit-min-device-pixel-ratio: 3) {
+		th, td{
+
+			padding:1px !important;
+
+		}
+		#content-container{
+			max-height: 498px;
+			overflow-y: scroll;
+		}
+	}
+	/*IPAD*/
+	@media only screen
+	and (min-device-width: 768px)
+	and (max-device-width: 1024px)
+	and (-webkit-min-device-pixel-ratio: 2) {
+		#content-container{
+			max-height: 786px;
+			overflow-y: scroll;
+		}
+	}
+	/*IPAD PRO*/
+	@media only screen
+	and (min-device-width: 1024px)
+	and (max-device-width: 1366px)
+	and (-webkit-min-device-pixel-ratio: 2) {
+		#content-container{
+			max-height: 1128px;
+			overflow-y: scroll;
+		}
 	}
 
 
