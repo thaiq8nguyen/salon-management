@@ -48,15 +48,18 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceof NotFoundHttpException){
+            Log::info('detect invalid route request');
             return redirect()->route('home');
 
         }
         else if($exception instanceof ModelNotFoundException){
+
             return redirect()->route('home');
         }
+
         else if ($exception instanceof TokenMismatchException) {
             Log::info('detect token mismatch');
-            return redirect()->guest(route('login'))->with('session_expired', 'You have been log out due to inactivity. Please log in again');
+            return redirect()->guest(route('/'))->with('session_expired', 'You have been log out due to inactivity. Please log in again');
         }
         return parent::render($request, $exception);
     }
