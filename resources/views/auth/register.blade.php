@@ -2,6 +2,9 @@
 @push('styles')
     <link rel = "stylesheet" href = "{{asset('/css/register.css')}}">
 @endpush
+@push('scripts')
+    <script src = "{{ asset('js/refresh.js') }}"></script>
+@endpush
 @section('content')
 <div class="container">
     <div class="row top-buffer">

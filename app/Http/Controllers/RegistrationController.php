@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Technician;
 use App\User;
 use Auth;
-
+use Log;
 class RegistrationController extends Controller
 {
     public function __construct()
@@ -15,6 +15,7 @@ class RegistrationController extends Controller
     }
 
     public function index(){
+        Log::info('register view is loaded');
         return view('auth.register');
     }
 

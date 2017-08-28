@@ -24,7 +24,8 @@ const webpack = require('webpack');
         .js(['resources/assets/js/quick-sale-entry.js'], 'public/js/salon')
         .js(['resources/assets/js/salon/gift-certificate.js'], 'public/js/salon')
         .js(['resources/assets/js/technician/technician.js'],'public/js/technicians')
-        .js(['resources/assets/js/technician/technician-sale.js'], 'public/js/technicians');
+        .js(['resources/assets/js/technician/technician-sale.js'], 'public/js/technicians')
+        .js(['resources/assets/js/refresh.js'], 'public/js/');
 
 
 
