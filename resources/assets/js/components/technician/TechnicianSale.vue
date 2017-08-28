@@ -1,5 +1,5 @@
 <template>
-	<div id = "technician-sale">
+	<div id = "technician-sale-container">
 		<v-app id = "technician-sale-app">
 			<v-toolbar class = "white">
 				<v-btn icon :href="home">
@@ -22,14 +22,16 @@
 					</v-flex>
 				</v-layout>
 				<v-layout row>
-					<v-flex xs12 id = "content-container">
-						<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
-						<wage :total-sales="wage" v-show="show.wage"></wage>
-						<payment :payments="payment" v-show="show.payment"></payment>
+					<v-flex xs12>
+						<div  id = "content-container">
+							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
+							<wage :total-sales="wage" v-show="show.wage"></wage>
+							<payment :payments="payment" v-show="show.payment"></payment>
+						</div>
 					</v-flex>
 				</v-layout>
 			</v-container>
-			<v-bottom-nav absolute value="true" class="white">
+			<v-bottom-nav value="true" class="white">
 				<v-btn flat light class="blue--text" @click.native="toggleScreen('sale')" :value="screen === 'sale'">
 					<span>Sales</span>
 					<v-icon>fa-credit-card</v-icon>
@@ -183,8 +185,9 @@
 			padding:1px !important;
 
 		}
+
 		#content-container{
-			max-height: 330px;
+			height: 330px;
 			overflow-y: scroll;
 		}
 	}

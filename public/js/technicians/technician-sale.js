@@ -28638,7 +28638,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;\n}\n\n\t/*IPHONE 5/5S*/\n@media only screen\n\tand (min-device-width: 320px)\n\tand (max-device-width: 568px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 330px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6/6S*/\n@media only screen\n    and (min-device-width: 375px)\n    and (max-device-width: 667px)\n    and (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 429px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6+*/\n@media only screen\n\tand (min-device-width: 414px)\n\tand (max-device-width: 736px)\n\tand (-webkit-min-device-pixel-ratio: 3) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 498px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD*/\n@media only screen\n\tand (min-device-width: 768px)\n\tand (max-device-width: 1024px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 786px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD PRO*/\n@media only screen\n\tand (min-device-width: 1024px)\n\tand (max-device-width: 1366px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 1128px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;\n}\n\n\t/*IPHONE 5/5S*/\n@media only screen\n\tand (min-device-width: 320px)\n\tand (max-device-width: 568px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 330px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6/6S*/\n@media only screen\n    and (min-device-width: 375px)\n    and (max-device-width: 667px)\n    and (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 429px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6+*/\n@media only screen\n\tand (min-device-width: 414px)\n\tand (max-device-width: 736px)\n\tand (-webkit-min-device-pixel-ratio: 3) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 498px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD*/\n@media only screen\n\tand (min-device-width: 768px)\n\tand (max-device-width: 1024px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 786px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD PRO*/\n@media only screen\n\tand (min-device-width: 1024px)\n\tand (max-device-width: 1366px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 1128px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -28651,6 +28651,8 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__ = __webpack_require__(197);
+//
+//
 //
 //
 //
@@ -29022,7 +29024,7 @@ if (false) {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
-      "id": "technician-sale"
+      "id": "technician-sale-container"
     }
   }, [_c('v-app', {
     attrs: {
@@ -29076,7 +29078,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-flex', {
     attrs: {
-      "xs12": "",
+      "xs12": ""
+    }
+  }, [_c('div', {
+    attrs: {
       "id": "content-container"
     }
   }, [_c('sale', {
@@ -29110,10 +29115,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "payments": _vm.payment
     }
-  })], 1)], 1)], 1), _vm._v(" "), _c('v-bottom-nav', {
+  })], 1)])], 1)], 1), _vm._v(" "), _c('v-bottom-nav', {
     staticClass: "white",
     attrs: {
-      "absolute": "",
       "value": "true"
     }
   }, [_c('v-btn', {
