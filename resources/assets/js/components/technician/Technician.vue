@@ -18,7 +18,7 @@
 					<v-flex xs12>
 						<v-card flat>
 							<v-card-title>
-								<p class = "title">Welcome {{ firstName }}!</p>
+								<p class = "title">Welcome {{ formattedName }}!</p>
 							</v-card-title>
 							<v-card-text>
 								<v-layout row wrap>
@@ -61,6 +61,15 @@
 
 	    mounted(){
             this.welcome();
+	    },
+
+	    computed:{
+	        formattedName(){
+	            if(this.firstName !== null){
+                    return (this.firstName).substr(0,1).toUpperCase() + (this.firstName).slice(1);
+	            }
+
+	        }
 	    },
         methods: {
 			welcome(){

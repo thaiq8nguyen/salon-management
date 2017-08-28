@@ -28299,8 +28299,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
     },
     methods: {
         readableDate: function readableDate(date) {
-            if (this.screenWidth < 375) {
-                //for iPhone 5
+            if (this.screenWidth < 768) {
+                //for iPhone 5,6,6+
                 return this.$moment(date).format('M/D/YY');
             } else {
                 return this.$moment(date).format('M/D/YY dd');

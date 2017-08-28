@@ -11156,7 +11156,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11229,6 +11229,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 								this.welcome();
 				},
 
+
+				computed: {
+								formattedName: function formattedName() {
+												if (this.firstName !== null) {
+																return this.firstName.substr(0, 1).toUpperCase() + this.firstName.slice(1);
+												}
+								}
+				},
 				methods: {
 								welcome: function welcome() {
 												var _this = this;
@@ -11321,7 +11329,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-card-title', [_c('p', {
     staticClass: "title"
-  }, [_vm._v("Welcome " + _vm._s(_vm.firstName) + "!")])]), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
+  }, [_vm._v("Welcome " + _vm._s(_vm.formattedName) + "!")])]), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
     attrs: {
       "row": "",
       "wrap": ""

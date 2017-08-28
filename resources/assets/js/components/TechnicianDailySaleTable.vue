@@ -53,7 +53,7 @@
 	    },
         methods: {
             readableDate(date){
-                if(this.screenWidth < 375){ //for iPhone 5
+                if(this.screenWidth < 768){ //for iPhone 5,6,6+
                     return this.$moment(date).format('M/D/YY');
                 }
                 else{

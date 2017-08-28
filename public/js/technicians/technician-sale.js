@@ -28033,8 +28033,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
     },
     methods: {
         readableDate: function readableDate(date) {
-            if (this.screenWidth < 375) {
-                //for iPhone 5
+            if (this.screenWidth < 768) {
+                //for iPhone 5,6,6+
                 return this.$moment(date).format('M/D/YY');
             } else {
                 return this.$moment(date).format('M/D/YY dd');
@@ -28638,7 +28638,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n#technician-sale-app{\n\tbackground-color: #2196F3;\n}\n@media screen and (max-width:320px)  {\nth, td{\n\t\tpadding:1px !important;\n}\n#content-container{\n\t\tmax-height: 330px;\n\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;\n}\n\n\t/*IPHONE 5/5S*/\n@media only screen\n\tand (min-device-width: 320px)\n\tand (max-device-width: 568px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 330px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6/6S*/\n@media only screen\n    and (min-device-width: 375px)\n    and (max-device-width: 667px)\n    and (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 429px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6+*/\n@media only screen\n\tand (min-device-width: 414px)\n\tand (max-device-width: 736px)\n\tand (-webkit-min-device-pixel-ratio: 3) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\tmax-height: 498px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD*/\n@media only screen\n\tand (min-device-width: 768px)\n\tand (max-device-width: 1024px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 786px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD PRO*/\n@media only screen\n\tand (min-device-width: 1024px)\n\tand (max-device-width: 1366px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\tmax-height: 1128px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
 
 // exports
 
