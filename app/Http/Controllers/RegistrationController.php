@@ -72,8 +72,6 @@ class RegistrationController extends Controller
         //send notification email to the manager --FUTURE UPDATE
 
 
-
-
         //redirect user to successful confirmation page
         $request->session()->put('completed_registration');
 

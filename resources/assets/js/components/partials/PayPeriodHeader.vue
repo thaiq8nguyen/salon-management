@@ -17,9 +17,9 @@
 						</v-layout>
 					</v-flex>
 					<v-flex lg3>
-						<v-chip label class = "blue darken-1 subheading white--text"><strong>Current Period: </strong> {{ currentPeriod.periods }}</v-chip>
+						<v-chip label class = "blue darken-1 subheading white--text"><strong>Current Period:</strong><span>{{ currentPeriod.periods }}</span></v-chip>
 					</v-flex>
-					<v-flex lg4 ml-2>
+					<v-flex lg4>
 						<v-chip label class = "blue darken-1 subheading white--text" v-if="countDown > 0"><strong>Upcoming Pay Date: </strong> {{ currentPeriod.payDate }} in {{countDown}} days </v-chip>
 						<v-chip label class = "amber darken-1 subheading white--text" v-else-if="countDown == 0">Today</v-chip>
 					</v-flex>
