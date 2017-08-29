@@ -8,9 +8,9 @@ class TechnicianBook extends Model
 {
     protected $guarded = [];
 
-    public function scopeTotalBalance($query, $technicianId){
+    public function scopeTotalBalance($query){
 
-        return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as total_balance')->where('technician_id','=',$technicianId);
+        return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as total_balance');
     }
 
     public function scopePeriodBalance($query){
