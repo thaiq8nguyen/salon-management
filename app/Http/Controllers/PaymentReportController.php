@@ -38,7 +38,7 @@ class PaymentReportController extends Controller
 
             ->first(['id','first_name','last_name']);
 
-        $totalBalance = TechnicianBook::totalBalance()->having('technician_id','=',$technicianID)->first();
+        $totalBalance = TechnicianBook::totalBalance($technicianID)->where('pay_period_id','=',$payPeriodID)->first();
         $periodBalance = TechnicianBook::periodBalance()->where('technician_id','=',$technicianID)->groupBy('pay_period_id')->
         having('pay_period_id','=',$payPeriodID)->first();
 
