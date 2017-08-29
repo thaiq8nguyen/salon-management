@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2119cc4e944ee6c37951d483d157ebc2",
+    "content-hash": "6641a81665591a8d8d5e0f92104b8786",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1486,6 +1486,58 @@
                 "server"
             ],
             "time": "2016-10-12T14:08:15+00:00"
+        },
+        {
+            "name": "logentries/logentries-monolog-handler",
+            "version": "v2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/logentries/logentries-monolog-handler.git",
+                "reference": "f3391fb68a90b4a59c49b533056660d17ea318a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/logentries/logentries-monolog-handler/zipball/f3391fb68a90b4a59c49b533056660d17ea318a1",
+                "reference": "f3391fb68a90b4a59c49b533056660d17ea318a1",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": ">=1.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Logentries": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes Schickling",
+                    "email": "schickling.j@gmail.com"
+                },
+                {
+                    "name": "Mark Lacomber",
+                    "email": "marklacomber@gmail.com"
+                }
+            ],
+            "description": "A handler for Monolog that sends messages to Logentries.com.",
+            "homepage": "https://github.com/logentries/logentries-monolog-handler",
+            "keywords": [
+                "laravel",
+                "log",
+                "logentries",
+                "logging",
+                "monolog",
+                "symfony"
+            ],
+            "time": "2016-05-31T15:23:00+00:00"
         },
         {
             "name": "mashape/unirest-php",

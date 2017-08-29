@@ -11,13 +11,6 @@
 @section('content')
     <div class = "main-content" id = "root">
         <div class="container">
-            @if(session('session_expired'))
-                <div class = "card">
-                    <div class = "card-body">
-                        {{ session('session_expired') }}
-                    </div>
-                </div>
-            @endif
             <div class="row top-buffer">
                 <div class="col-md-8 col-lg-6 mx-auto">
                     <div class = "card login-card">

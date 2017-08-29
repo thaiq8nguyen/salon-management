@@ -6,16 +6,23 @@ use Illuminate\Http\Request;
 use App\Technician;
 use App\User;
 use Auth;
-use Log;
+use LogEntries;
+
+
 class RegistrationController extends Controller
 {
     public function __construct()
     {
+
+
         $this->middleware('completed.registration')->only('postRegister');
     }
 
     public function index(){
-        Log::info('register view is loaded');
+
+
+
+
         return view('auth.register');
     }
 
@@ -72,6 +79,7 @@ class RegistrationController extends Controller
 
         if(Auth::attempt(['username' => $username, 'password' => $password])){
 
+            LogEntries::logInfo($technician->full_name .' has registered.');
             return redirect()->route('post-register')->
 
             with('success','Thank you for registering, '.$technician->full_name);

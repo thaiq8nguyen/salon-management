@@ -167,6 +167,7 @@ return [
         Salon\Sales\SalonSaleServiceProvider::class,
         Salon\GiftCertificates\GiftServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Salon\LogEntries\LogEntriesServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ return [
         'Square' => Salon\Square\Square::class,
         'Salon' => Salon\Sales\Salon::class,
         'GiftCertificate' => Salon\GiftCertificates\Gift::class,
+        'LogEntries' => Salon\LogEntries\LogEntriesFacade::class,
 
     ],
 

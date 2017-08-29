@@ -7,7 +7,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Log;
+use LogEntries;
+use Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -48,7 +49,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceof NotFoundHttpException){
-            Log::info('detect invalid route request');
+
             return redirect()->route('home');
 
         }
@@ -58,7 +59,7 @@ class Handler extends ExceptionHandler
         }
 
         else if ($exception instanceof TokenMismatchException) {
-            Log::info('detect token mismatch');
+            LogEntries::logWarning('token mismatch exception has occured to username '. Auth::user());
             return redirect()->guest(route('/'))->with('session_expired', 'You have been log out due to inactivity. Please log in again');
         }
         return parent::render($request, $exception);
