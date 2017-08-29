@@ -11,27 +11,23 @@
 										<v-expansion-panel>
 											<v-expansion-panel-content v-for="(technician,index) in technicians" :key="technician.id">
 												<div slot="header" @click.capture="selectedPanel(index)">
-													<v-container>
-														<v-layout row wrap>
-															<v-flex lg4>
-																<p class = "headline" :class="{'amber--text text--darken-1':activePanel(index)}" >{{technician.full_name}}</p>
-															</v-flex>
-															<v-flex lg4 v-if="technician.daily_sales.length > 0">
-																<template v-if="technician.count_payments.length > 0">
-																	<v-chip label small class = "green darken-1 white--text subheading elevation-4">
-																	<v-icon class = "white--text">done</v-icon>Paid</v-chip>
-																</template>
-																<template v-else>
-																	<v-chip label small class = "amber darken-1 white--text subheading">
-																	<v-icon class = "white--text">monetization_on</v-icon>{{ technician.total_sales_and_tips[0].total}}</v-chip>
-																</template>
-															</v-flex>
-															<v-flex lg4 v-else>
-																<v-chip label small class = "grey darken-1 white--text subheading">
-																	<v-icon class = "white--text">money_off</v-icon>No Sales</v-chip>
-															</v-flex>
-														</v-layout>
-													</v-container>
+													<p>
+														<span class = "headline technician-name" :class="{'amber--text text--darken-1':activePanel(index)}">{{technician.full_name}}</span>
+														<span v-if="technician.daily_sales.length > 0" class = "chip-container">
+															<template v-if="technician.count_payments.length > 0">
+																<v-chip label small class = "green darken-1 white--text subheading elevation-4">
+																<v-icon class = "white--text">done</v-icon>Paid</v-chip>
+															</template>
+															<template v-else>
+																<v-chip label small class = "amber darken-1 white--text subheading">
+																<v-icon class = "white--text">monetization_on</v-icon>{{ technician.total_sales_and_tips[0].total}}</v-chip>
+															</template>
+														</span>
+														<span v-else class = "chip-container">
+															<v-chip label small class = "grey darken-1 white--text subheading">
+																<v-icon class = "white--text">money_off</v-icon>No Sales</v-chip>
+														</span>
+													</p>
 												</div>
 												<v-card>
 													<v-card-text class = "blue lighten-3">
@@ -161,5 +157,12 @@
 </script>
 
 <style>
-
+	.technician-name{
+		float:left;
+		width:250px;
+	}
+	.chip-container{
+		float:right;
+		width:250px;
+	}
 </style>

@@ -28122,10 +28122,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "label": ""
     }
-  }, [_c('strong', [_vm._v("Current Period: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.periods))])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('strong', [_vm._v("Current Period:")]), _c('span', [_vm._v(_vm._s(_vm.currentPeriod.periods))])])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg4": "",
-      "ml-2": ""
+      "lg4": ""
     }
   }, [(_vm.countDown > 0) ? _c('v-chip', {
     staticClass: "blue darken-1 subheading white--text",
@@ -28847,7 +28846,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.technician-name{\n\tfloat:left;\n\twidth:250px;\n}\n.chip-container{\n\tfloat:right;\n\twidth:250px;\n}\n", ""]);
 
 // exports
 
@@ -28861,10 +28860,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianDailySaleTable_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
-//
-//
-//
-//
 //
 //
 //
@@ -30046,24 +30041,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }
       },
       slot: "header"
-    }, [_c('v-container', [_c('v-layout', {
-      attrs: {
-        "row": "",
-        "wrap": ""
-      }
-    }, [_c('v-flex', {
-      attrs: {
-        "lg4": ""
-      }
-    }, [_c('p', {
-      staticClass: "headline",
+    }, [_c('p', [_c('span', {
+      staticClass: "headline technician-name",
       class: {
         'amber--text text--darken-1': _vm.activePanel(index)
       }
-    }, [_vm._v(_vm._s(technician.full_name))])]), _vm._v(" "), (technician.daily_sales.length > 0) ? _c('v-flex', {
-      attrs: {
-        "lg4": ""
-      }
+    }, [_vm._v(_vm._s(technician.full_name))]), _vm._v(" "), (technician.daily_sales.length > 0) ? _c('span', {
+      staticClass: "chip-container"
     }, [(technician.count_payments.length > 0) ? [_c('v-chip', {
       staticClass: "green darken-1 white--text subheading elevation-4",
       attrs: {
@@ -30080,10 +30064,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-icon', {
       staticClass: "white--text"
-    }, [_vm._v("monetization_on")]), _vm._v(_vm._s(technician.total_sales_and_tips[0].total))], 1)]], 2) : _c('v-flex', {
-      attrs: {
-        "lg4": ""
-      }
+    }, [_vm._v("monetization_on")]), _vm._v(_vm._s(technician.total_sales_and_tips[0].total))], 1)]], 2) : _c('span', {
+      staticClass: "chip-container"
     }, [_c('v-chip', {
       staticClass: "grey darken-1 white--text subheading",
       attrs: {
@@ -30092,7 +30074,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-icon', {
       staticClass: "white--text"
-    }, [_vm._v("money_off")]), _vm._v("No Sales")], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-card', [_c('v-card-text', {
+    }, [_vm._v("money_off")]), _vm._v("No Sales")], 1)], 1)])]), _vm._v(" "), _c('v-card', [_c('v-card-text', {
       staticClass: "blue lighten-3"
     }, [_c('v-layout', [_c('v-flex', {
       attrs: {

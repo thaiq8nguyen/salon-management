@@ -28122,10 +28122,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "label": ""
     }
-  }, [_c('strong', [_vm._v("Current Period: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.periods))])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('strong', [_vm._v("Current Period:")]), _c('span', [_vm._v(_vm._s(_vm.currentPeriod.periods))])])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg4": "",
-      "ml-2": ""
+      "lg4": ""
     }
   }, [(_vm.countDown > 0) ? _c('v-chip', {
     staticClass: "blue darken-1 subheading white--text",
