@@ -28726,6 +28726,12 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -28814,7 +28820,7 @@ exports.push([module.i, "\n.sticker{\n\tposition:fixed;\n\theight:75px;\n\twidth
 
 												this.loadingData = true;
 
-												this.$axios('/api/salon/daily-sale?date=' + this.date).then(function (response) {
+												this.$axios.get('/api/salon/daily-sale?date=' + this.date).then(function (response) {
 																_this.loadingData = false;
 																_this.isSquareData = response.data.success;
 																console.log(response.data);
@@ -29247,7 +29253,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }) : _vm._e()], 1)], 1)], 1)], 1)], 1)]
   })], 2)], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
     attrs: {
-      "width": "540"
+      "width": "600"
     },
     model: {
       value: (_vm.dialog),
@@ -29260,7 +29266,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "text-lg-center blue darken-1"
   }, [_c('p', {
     staticClass: "headline white--text"
-  }, [_vm._v("Confirm Sale for " + _vm._s(_vm.formattedDate) + " ")])]), _vm._v(" "), _c('v-card-text', [_c('v-list', [_c('v-layout', {
+  }, [_vm._v("Confirm Sale for " + _vm._s(_vm.formattedDate) + " ")])]), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
     attrs: {
       "row": ""
     }
@@ -29285,7 +29291,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "lg2": ""
     }
   })], 1), _vm._v(" "), _vm._l((_vm.technicians), function(technician, index) {
-    return [_c('v-list-tile-content', [_c('v-list-tile-sub-title', [_c('v-layout', [_c('v-flex', {
+    return [_c('v-card', {
+      attrs: {
+        "flat": ""
+      }
+    }, [_c('v-card-text', [_c('v-layout', [_c('v-flex', {
       attrs: {
         "lg6": ""
       }
@@ -29309,17 +29319,23 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "lg2": ""
       }
-    }, [(_vm.sales[index].existing_sale_id !== null && _vm.sales[index].sales > 0) ? _c('p', {
-      staticClass: "text-xs-center",
-      class: ['title blue white--text']
-    }, [_vm._v("Update")]) : _vm._e(), _vm._v(" "), (_vm.sales[index].existing_sale_id == null && _vm.sales[index].sales > 0) ? _c('p', {
-      staticClass: "text-xs-center",
-      class: ['title green white--text']
-    }, [_vm._v("Add")]) : _vm._e(), _vm._v(" "), (_vm.sales[index].toBeDeleted) ? _c('p', {
-      staticClass: "text-xs-center",
-      class: ['title red white--text']
-    }, [_vm._v("Delete")]) : _vm._e()])], 1)], 1)], 1)]
-  })], 2), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    }, [(_vm.sales[index].existing_sale_id !== null && _vm.sales[index].sales > 0) ? _c('v-chip', {
+      staticClass: "subheading blue white--text",
+      attrs: {
+        "label": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tUpdate\n\t\t\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.sales[index].existing_sale_id == null && _vm.sales[index].sales > 0) ? _c('v-chip', {
+      staticClass: "subheading green white--text",
+      attrs: {
+        "label": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAdd\n\t\t\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.sales[index].toBeDeleted) ? _c('v-chip', {
+      staticClass: "subheading red white--text",
+      attrs: {
+        "label": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t")]) : _vm._e()], 1)], 1)], 1)], 1)]
+  }), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -29342,7 +29358,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.closeDialog($event)
       }
     }
-  }, [_vm._v("Close")])], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("Close")])], 2)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -34,6 +34,8 @@ Route::get('/pay-period/list', 'PayPeriodApiController@listing')->middleware('au
 
 Route::get('/technician-sale/all/', 'TechnicianSaleApiController@searchSaleByDate')->middleware('auth:api');
 
+Route::get('/technician-detail/by-position','TechnicianDetailApiController@getByCategory');
+
 
 Route::post('/salon-sale/redeem-gift-certificate','SalonSaleApiController@redeemGiftCertificate')
     ->middleware('auth:api');
@@ -53,6 +55,9 @@ Route::get('/technician-wage/pay-period/{payPeriod}/technician/{technician}', 'P
 
 Route::get('/technician-payment/pay-period/{payPeriod}/technician/{technician}','PayDayApiController@searchPaymentByPeriod')->middleware('auth:api');
 
+Route::get('/technician-payment/search/by-date','WagePaymentController@getPaymentByDates')->middleware('auth:api');
+
+Route::post('/technician-payment/delete','WagePaymentController@deletePayment')->middleware('auth:api');
 
 /***GIFT CERTIFICATES***/
 

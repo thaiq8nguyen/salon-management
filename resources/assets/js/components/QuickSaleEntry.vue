@@ -50,7 +50,8 @@
 													</v-menu>
 												</v-flex>
 												<v-flex lg3>
-													<v-btn primary @click.native="nextDate(date)">Next<v-icon class = "white--text">keyboard_arrow_right</v-icon></v-btn>
+													<v-btn primary @click.native="nextDate(date)">Next<v-icon
+															class = "white--text">keyboard_arrow_right</v-icon></v-btn>
 												</v-flex>
 											</v-layout>
 										</v-flex>
@@ -139,49 +140,54 @@
 				</v-flex>
 			</v-layout>
 		</v-container>
-		<v-dialog v-model="dialog" width="540">
+		<v-dialog v-model="dialog" width="600">
 			<v-card>
 				<v-card-title class = "text-lg-center blue darken-1">
 					<p class = "headline white--text">Confirm Sale for {{ formattedDate }} </p>
 				</v-card-title>
 				<v-card-text>
-					<v-list>
-						<v-layout row>
-							<v-flex lg6></v-flex>
-							<v-flex lg2>
-								<p class = "title">Sale</p>
-							</v-flex>
-							<v-flex lg2>
-								<p class = "title">Tip</p>
-							</v-flex>
-							<v-flex lg2></v-flex>
-						</v-layout>
-						<template v-for="(technician,index) in technicians">
-							<v-list-tile-content>
-								<v-list-tile-sub-title>
-									<v-layout>
-										<v-flex lg6>
-											<p class = "title">{{ technician.fullName }}</p>
-										</v-flex>
-										<v-flex lg2 ml-1>
-											<p class = "title">$ {{ sales[index].sales }}</p>
-										</v-flex>
-										<v-flex lg2 ml-1>
-											<p class = "title">$ {{ sales[index].additional_sales }}</p>
-										</v-flex>
-										<v-flex lg2>
-											<p class = "text-xs-center":class="['title blue white--text']"
-											   v-if="sales[index].existing_sale_id !== null && sales[index].sales > 0 ">Update</p>
-											<p class = "text-xs-center":class="['title green white--text']"
-											   v-if="sales[index].existing_sale_id == null && sales[index].sales > 0">Add</p>
-											<p class = "text-xs-center":class="['title red white--text']"
-											   v-if="sales[index].toBeDeleted">Delete</p>
-										</v-flex>
-									</v-layout>
-								</v-list-tile-sub-title>
-							</v-list-tile-content>
-						</template>
-					</v-list>
+					<v-layout row>
+						<v-flex lg6></v-flex>
+						<v-flex lg2>
+							<p class = "title">Sale</p>
+						</v-flex>
+						<v-flex lg2>
+							<p class = "title">Tip</p>
+						</v-flex>
+						<v-flex lg2></v-flex>
+					</v-layout>
+					<template v-for="(technician,index) in technicians">
+						<v-card flat>
+							<v-card-text>
+								<v-layout>
+									<v-flex lg6>
+										<p class = "title">{{ technician.fullName }}</p>
+									</v-flex>
+									<v-flex lg2 ml-1>
+										<p class = "title">$ {{ sales[index].sales }}</p>
+									</v-flex>
+									<v-flex lg2 ml-1>
+										<p class = "title">$ {{ sales[index].additional_sales }}</p>
+									</v-flex>
+									<v-flex lg2>
+										<v-chip label class = "subheading blue white--text"
+										        v-if="sales[index].existing_sale_id !== null && sales[index].sales > 0">
+											Update
+										</v-chip>
+										<v-chip label class = "subheading green white--text"
+										        v-if="sales[index].existing_sale_id == null && sales[index].sales > 0">
+											Add
+										</v-chip>
+										<v-chip label class = "subheading red white--text"
+										        v-if="sales[index].toBeDeleted">
+											Delete
+										</v-chip>
+									</v-flex>
+								</v-layout>
+							</v-card-text>
+						</v-card>
+					</template>
+
 					<v-spacer></v-spacer>
 					<v-btn @click.native="addSale" primary v-show="newSales.length > 0"><v-icon class = "white--text">add</v-icon>Add</v-btn>
 					<v-btn @click.native="closeDialog">Close</v-btn>
@@ -278,7 +284,7 @@
 	        getSquareData(){
 	            this.loadingData = true;
 
-                this.$axios('/api/salon/daily-sale?date=' + this.date).then(response=>{
+                this.$axios.get('/api/salon/daily-sale?date=' + this.date).then(response=>{
                     this.loadingData = false;
                     this.isSquareData = response.data.success;
                     console.log(response.data);

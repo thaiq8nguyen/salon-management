@@ -41,7 +41,6 @@
         methods: {
             getPayPeriod(){
                 this.$axios.get('/api/pay-period/list').then(response => {
-                    console.log(response.data);
                     this.periods = response.data;
                     this.current = response.data[response.data.length-1];
                     this.payDate = this.current.payDate;
