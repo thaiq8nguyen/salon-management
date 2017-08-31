@@ -17,9 +17,7 @@
 			</v-card-text>
 
 		</v-card>
-		<v-card v-else>
-			<p class = "title">No Sales Found</p>
-		</v-card>
+		<v-alert v-else warning value="true"><div class = "title">No Sales Found</div></v-alert>
 	</div>
 
 </template>

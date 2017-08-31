@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Technician;
 use App\PayPeriod;
+use App\TechnicianBook;
+use Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
@@ -42,6 +44,17 @@ class PaymentReportController extends Controller
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
 
         return $pdf->stream('payment_report.pdf');
+
+    }
+
+    public function balance(PayPeriod $payPeriod,Technician $technician){
+
+        $totalBalance = $this->sales->getTotalBalance($technician, $payPeriod);
+        $payPeriodBalance = $this->sales->getPayPeriodBalance($technician, $payPeriod);
+
+        return response()->json(['total_balance'=> $totalBalance, 'pay_period_balance' => $payPeriodBalance]);
+
+
 
     }
 
