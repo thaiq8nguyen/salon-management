@@ -22,8 +22,9 @@
     Route::get('/technician-sale/add', 'TechnicianSaleController@create')
     ->name('technician-sale-add');
     Route::get('/technician-book', 'TechnicianBookController@index')->name('technician-book');
+    Route::get('/wages/report/','WageController@report')->name('wage-report');
 
-    Route::get('/report/{technician}/payment/{payPeriod?}', 'PaymentReportController@show')->name('create-pay-report');
+    Route::get('/report/{technician}/payment/{payPeriod?}', 'PaymentReportController@create')->name('create-pay-report');
 
     /*TECHNICIAN ROUTES*/
     Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');

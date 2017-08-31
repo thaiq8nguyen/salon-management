@@ -18,6 +18,21 @@ class TechnicianBook extends Model
         return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as period_balance');
     }
 
+    public function scopeWages($query){
+
+        return $query->where('description','=','wages');
+    }
+
+    public function scopeTechnician($query, $technicianId){
+
+        return $query->where('technician_id','=',$technicianId);
+    }
+
+    public function scopePayPeriod($query, $payPeriodId){
+
+        return $query->where('pay_period_id','=',$payPeriodId);
+    }
+
 
 
 }

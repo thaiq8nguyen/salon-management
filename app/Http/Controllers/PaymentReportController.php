@@ -1,51 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\PayPeriod;
 use App\Technician;
-use App\TechnicianBook;
-use Illuminate\Http\Request;
+use App\PayPeriod;
 use Barryvdh\DomPDF\Facade as PDF;
+
+use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
+use Salon\Repositories\TechnicianWageRepository\TechnicianWageRepositoryInterface;
+use Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentRepositoryInterface;
 
 class PaymentReportController extends Controller
 {
-    public function __construct()
+    protected $sales;
+    protected $wage;
+    protected $payments;
+    protected $paymentReport;
+    public function __construct(TechnicianSaleRepositoryInterface $sales,
+                                TechnicianWageRepositoryInterface $wage,
+                                TechnicianPaymentRepositoryInterface $payments)
     {
-        //$this->middleware(['auth','checkPayPeriod']);
+        $this->middleware('auth');
+        $this->sales = $sales;
+        $this->wage = $wage;
+        $this->payments = $payments;
     }
 
-    public function show(Technician $technician, PayPeriod $payPeriod){
 
+    public function create(Technician $technician, PayPeriod $payPeriod)
+    {
 
-        $payPeriodID = $payPeriod->id;
-        $payPeriodDates = [$payPeriod->begin_date, $payPeriod->end_date];
-        $technicianID = $technician->id;
-        $technician = Technician::with(['dailySales' =>
-            function($query) use ($payPeriodDates) {
-                $query->whereBetween('sale_date', $payPeriodDates);
-            },
-            'totalSalesAndTips' =>
-                function($query) use($payPeriodDates){
-                    $query->whereBetween('sale_date', $payPeriodDates);
-                }
-        ])->with(['payments' =>
+        $technicianSales = $this->sales->getSales($technician, $payPeriod);
+        $technicianWage =  $this->wage->getWage($technician, $payPeriod);
+        $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
+        $totalBalance = $this->sales->getTotalBalance($technician, $payPeriod);
+        $payPeriodBalance = $this->sales->getPayPeriodBalance($technician, $payPeriod);
 
-            function($query) use($payPeriodID){
-                $query->where('pay_period_id', '=', $payPeriodID);
-            }])
-            ->where('id', '=' ,$technician->id)
-
-            ->first(['id','first_name','last_name']);
-
-        $totalBalance = TechnicianBook::totalBalance()->where('technician_id','=',$technicianID)->where('pay_period_id','<=',$payPeriodID)->first();
-        $periodBalance = TechnicianBook::periodBalance()->where('technician_id','=',$technicianID)->groupBy('pay_period_id')->
-        having('pay_period_id','=',$payPeriodID)->first();
-
-        $pdf = PDF::loadView('pdf.payment', ['technician' => $technician,
+        $pdf = PDF::loadView('pdf.payment', ['technician' => $technician, 'dailySales'=>$technicianSales,'totalSalesAndTips'=>$technicianWage
+            ,'payments'=>$technicianPayment,
             'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
-            'totalBalance' => $totalBalance, 'periodBalance' => $periodBalance])
-        ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
-        return $pdf->stream('payment.pdf');
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance])
+            ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
+
+        return $pdf->stream('payment_report.pdf');
+
     }
+
+
 }

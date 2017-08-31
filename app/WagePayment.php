@@ -18,4 +18,14 @@ class WagePayment extends Model
         return $this->belongsTo(PayPeriod::class);
     }
 
+    public function scopeToTechnician($query, $technicianId){
+
+        return $query->where('technician_id','=',$technicianId);
+
+    }
+
+    public function scopeBetweenDates($query, $dates){
+        return $query->whereBetween('pay_date',$dates);
+    }
+
 }

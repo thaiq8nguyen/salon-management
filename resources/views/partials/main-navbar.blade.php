@@ -28,6 +28,13 @@
                 </li>
                 <li class = "nav-item dropdown">
                     <a href = "#" class = "nav-link dropdown-toggle" data-toggle = "dropdown" role = "button" id="technician-dropdown"
+                       aria-haspopup="true" aria-expanded="false">Reports</a>
+                    <ul class = "dropdown-menu" aria-labelledby="technician-dropdown">
+                        <a class = "dropdown-item" href = "{{ route('wage-report') }}">Technician Wages</a>
+                    </ul>
+                </li>
+                <li class = "nav-item dropdown">
+                    <a href = "#" class = "nav-link dropdown-toggle" data-toggle = "dropdown" role = "button" id="technician-dropdown"
                        aria-haspopup="true" aria-expanded="false">Settings </a>
                     <ul class = "dropdown-menu" aria-labelledby="technician-dropdown">
                         <a class = "dropdown-item" href = "{{ route('api-dashboard') }}">API Dashboard</a>

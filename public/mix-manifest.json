@@ -7,6 +7,7 @@
     "/js/salon-sales.js": "/js/salon-sales.js",
     "/js/salon/quick-sale-entry.js": "/js/salon/quick-sale-entry.js",
     "/js/home.js": "/js/home.js",
+    "/js/wages/wage-report.js": "/js/wages/wage-report.js",
     "/js/technicians/technician.js": "/js/technicians/technician.js",
     "/js/refresh.js": "/js/refresh.js"
 }

@@ -168,6 +168,10 @@ return [
         Salon\GiftCertificates\GiftServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Salon\LogEntries\LogEntriesServiceProvider::class,
+        Salon\Repositories\TechnicianSaleRepository\TechnicianSaleServiceProvider::class,
+        Salon\Repositories\TechnicianWageRepository\TechnicianWageServiceProvider::class,
+        Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentServiceProvider::class,
+        Salon\Repositories\TechnicianRepository\TechnicianServiceProvider::class,
 
         /*
          * Package Service Providers...
