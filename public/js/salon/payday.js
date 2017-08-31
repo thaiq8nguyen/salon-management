@@ -28237,7 +28237,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28247,8 +28247,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
 //
 //
 //
@@ -28350,7 +28348,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }, [_vm._v("$ " + _vm._s(props.item.additional_sales))])]
       }
     }])
-  })], 1)], 1) : _c('v-card', [_c('p', {
+  })], 1)], 1) : _c('v-alert', {
+    attrs: {
+      "warning": "",
+      "value": "true"
+    }
+  }, [_c('div', {
     staticClass: "title"
   }, [_vm._v("No Sales Found")])])], 1)
 }
@@ -28516,11 +28519,6 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: ['totalSales'],
@@ -28617,9 +28615,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }, [_vm._v("$ " + _vm._s(props.item.total))])])]
       }
     }])
-  })], 1)], 1) : _c('v-card', [_c('v-card-text', [_c('p', {
+  })], 1)], 1) : _c('v-alert', {
+    attrs: {
+      "warning": "",
+      "value": "true"
+    }
+  }, [_c('div', {
     staticClass: "title"
-  }, [_vm._v("No Wages Found")])])], 1)
+  }, [_vm._v("No Wages Found")])])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -17,7 +17,7 @@
 				<v-layout>
 					<v-flex xs12>
 						<v-select :items="payPeriods" label="Select Working Period" single-line dark auto
-						          v-model="selectPayPeriodId" item-text="periods" item-value="id">
+						          v-model="selectPayPeriodId" item-text="periods" item-value="id" @input="getData">
 						</v-select>
 					</v-flex>
 				</v-layout>
@@ -27,6 +27,7 @@
 							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
 							<wage :total-sales="wage" v-show="show.wage"></wage>
 							<payment :payments="payment" v-show="show.payment"></payment>
+							<balance :pay-period-id="selectPayPeriodId" :first-name="firstName"></balance>
 						</div>
 					</v-flex>
 				</v-layout>
@@ -53,6 +54,7 @@
 	import TechnicianDailySaleTable from '../TechnicianDailySaleTable.vue';
 	import TechnicianTotalSaleTable from '../TechnicianTotalSaleTable.vue';
 	import TechnicianPaymentTable from '../TechnicianPaymentTable.vue';
+	import TechnicianBalance from '../TechnicianBalance.vue';
     export default {
         props: [],
 
@@ -60,6 +62,8 @@
             'sale':TechnicianDailySaleTable,
 		    'wage':TechnicianTotalSaleTable,
 		    'payment': TechnicianPaymentTable,
+		    'balance': TechnicianBalance,
+
 	    },
 
         data() {
@@ -92,13 +96,7 @@
 	    },
 
 	    watch:{
-	        selectPayPeriodId(){
 
-	            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
-	            this.getSaleByPeriod();
-	            this.getWageByPeriod();
-	            this.getPaymentByPeriod();
-	        }
 	    },
         methods: {
             getPayPeriod() {
@@ -111,15 +109,17 @@
                     this.selectPayPeriodId = parseInt(sessionStorage.getItem('lastSelectedPeriodIdPayDay'));
                     if (this.selectPayPeriodId === null) {
                         this.selectPayPeriodId = this.currentPayPeriod.id;
-
+                        sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
                     }
-
-                    this.getSaleByPeriod();
-                    this.getWageByPeriod();
-                    this.getPaymentByPeriod();
-
                 });
             },
+
+	        getData(){
+                this.getSaleByPeriod();
+                this.getWageByPeriod();
+                this.getPaymentByPeriod();
+
+	        },
             getSaleByPeriod() {
                 this.$axios.get('/api/technician-sale/pay-period/' + this.selectPayPeriodId + '/technician/'
                     + this.firstName).then(response => {
@@ -137,10 +137,12 @@
 
 	        getPaymentByPeriod(){
                 this.$axios.get('/api/technician-payment/pay-period/' + this.selectPayPeriodId + '/technician/'
-	                + this.firstName) .then(response => {
+	                + this.firstName).then(response => {
 	                    this.payment = response.data;
                 });
 	        },
+
+
             toggleScreen(screen) {
 
 				if(screen === 'sale'){

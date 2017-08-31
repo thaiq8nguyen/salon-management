@@ -48,12 +48,7 @@
 		</v-card-text>
 
 	</v-card>
-	<v-card v-else>
-		<v-card-text>
-			<p class = "title">No Wages Found</p>
-		</v-card-text>
-
-	</v-card>
+	<v-alert v-else warning value="true"><div class = "title">No Wages Found</div></v-alert>
 </template>
 
 <script>
