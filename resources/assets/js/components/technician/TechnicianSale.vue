@@ -27,7 +27,7 @@
 							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
 							<wage :total-sales="wage" v-show="show.wage"></wage>
 							<payment :payments="payments" v-show="show.payment"></payment>
-							<balance :pay-period-id="selectPayPeriodId" :first-name="firstName"></balance>
+							<balance :pay-period-id="selectPayPeriodId" :first-name="firstName" v-show="show.payment"></balance>
 						</div>
 					</v-flex>
 				</v-layout>
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-	import TechnicianDailySaleTable from '../TechnicianDailySaleTable.vue';
-	import TechnicianTotalSaleTable from '../TechnicianTotalSaleTable.vue';
-	import TechnicianPaymentTable from '../TechnicianPaymentTable.vue';
-	import TechnicianBalance from '../TechnicianBalance.vue';
+	import TechnicianDailySaleTable from '../common/TechnicianDailySaleTable.vue';
+	import TechnicianTotalSaleTable from '../common/TechnicianTotalSaleTable.vue';
+	import TechnicianPaymentTable from '../common/TechnicianPaymentTable.vue';
+	import TechnicianBalance from '../common/TechnicianBalance.vue';
     export default {
         props: [],
 

@@ -144,7 +144,7 @@
 <script>
 
     import DailySaleCard from './DailySaleCard.vue';
-    import Alert from './Alert.vue';
+    import Alert from '../partials/Alert.vue';
 
     export default{
 

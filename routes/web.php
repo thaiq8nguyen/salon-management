@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +33,13 @@
     /*TESTING ROUTES*/
     //Testing Only -- Route::get('/gift-certificate/search/date/{date}','GiftCertificateController@searchByDate');
     //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
+
+    Route::get('/mailable', function () {
+
+
+        return new App\Mail\Test();
+
+    })->middleware('auth');
 
     /*Authentication routes*/
     Auth::routes();

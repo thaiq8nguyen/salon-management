@@ -100,8 +100,8 @@
 
     import TechnicianPaymentPanelHeader from './TechnicianPaymentPanelHeader.vue';
     import MakePayment from './MakeTechnicianPayment.vue';
-    import TechnicianDailySaleTable from './TechnicianDailySaleTable.vue';
-    import TechnicianTotalSaleTable from './TechnicianTotalSaleTable.vue';
+    import TechnicianDailySaleTable from '../common/TechnicianDailySaleTable.vue';
+    import TechnicianTotalSaleTable from '../common/TechnicianTotalSaleTable.vue';
 
     export default {
         components:

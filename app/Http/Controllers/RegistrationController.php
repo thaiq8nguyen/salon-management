@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use Illuminate\Http\Request;
 use App\Technician;
 use App\User;
@@ -77,7 +78,10 @@ class RegistrationController extends Controller
 
         if(Auth::attempt(['username' => $username, 'password' => $password])){
 
-            LogEntries::logInfo($technician->full_name .' has registered.');
+            //Fire UserRegisteredEvent
+
+            event(new UserRegistered(Auth::user())); //send an authenticated model to the event
+
             return redirect()->route('post-register')->
 
             with('success','Thank you for registering, '.$technician->full_name);

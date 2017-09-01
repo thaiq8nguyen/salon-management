@@ -14,7 +14,7 @@ axios.defaults.headers.common ={
     'X-Requested-With': 'XMLHttpRequest'
 };
 
-import QuickSaleEntry from './components/QuickSaleEntry.vue';
+import QuickSaleEntry from './components/admin/QuickSaleEntry.vue';
 Vue.component('quick-sale-entry', QuickSaleEntry);
 
 const app = new Vue({
