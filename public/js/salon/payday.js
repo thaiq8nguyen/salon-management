@@ -28527,18 +28527,11 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
         return {
             headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }],
             screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            loadingSale: true
+            screenHeight: window.innerHeight
         };
     },
 
-    watch: {
-        totalSales: function totalSales() {
-            if (this.totalSales.length >= 0) {
-                this.loadingSale = false;
-            }
-        }
-    },
+    watch: {},
     methods: {}
 
 });

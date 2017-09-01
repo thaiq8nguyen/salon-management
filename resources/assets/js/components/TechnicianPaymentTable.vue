@@ -1,6 +1,6 @@
 <template>
-	<div id = "technician-payment-record">
-		<v-card class = "elevation-1 white" v-if="payments.length > 0">
+	<div id = "technician-payment-report">
+		<v-card class = "elevation-1 white" v-if="showPayments">
 			<v-card-text>
 				<v-data-table :headers="headers" :items="payments" hide-actions >
 					<template slot="headers" scope="props">
@@ -26,22 +26,23 @@
 
         data() {
             return {
-                headers:[
-                    {text: 'Amount', value:'amount', sortable:false},
-                    {text: 'Method', value:'method', sortable:false},
+                headers: [
+                    {text: 'Amount', value: 'amount', sortable: false},
+                    {text: 'Method', value: 'method', sortable: false},
 
                 ],
-                loadingSale:true,
-            }
 
+            }
+        },
+
+		computed:{
+            showPayments(){
+                return this.payments !== null;
+            }
 
         },
         watch:{
-            payments(){
-                if((this.payments).length >= 0){
-                    this.loadingSale = false;
-                }
-            }
+
         },
         methods: {
 
