@@ -27890,7 +27890,7 @@ process.umask = function() { return 0; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7a506dbf_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__ = __webpack_require__(50);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -27909,12 +27909,12 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bfc11e4e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7a506dbf_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianDailySaleTable_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/TechnicianDailySaleTable.vue"
+Component.options.__file = "resources/assets/js/components/common/TechnicianDailySaleTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TechnicianDailySaleTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -27925,9 +27925,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bfc11e4e", Component.options)
+    hotAPI.createRecord("data-v-7a506dbf", Component.options)
   } else {
-    hotAPI.reload("data-v-bfc11e4e", Component.options)
+    hotAPI.reload("data-v-7a506dbf", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -27948,13 +27948,13 @@ var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("6e06f512", content, false);
+var update = __webpack_require__(2)("567b56ec", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bfc11e4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a506dbf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a506dbf\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianDailySaleTable.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -28097,7 +28097,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-bfc11e4e", esExports)
+     require("vue-hot-reload-api").rerender("data-v-7a506dbf", esExports)
   }
 }
 
@@ -28107,7 +28107,7 @@ if (false) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ed672318_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__ = __webpack_require__(55);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -28126,12 +28126,12 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a1c91ce4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ed672318_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTotalSaleTable_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/TechnicianTotalSaleTable.vue"
+Component.options.__file = "resources/assets/js/components/common/TechnicianTotalSaleTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TechnicianTotalSaleTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28142,9 +28142,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a1c91ce4", Component.options)
+    hotAPI.createRecord("data-v-ed672318", Component.options)
   } else {
-    hotAPI.reload("data-v-a1c91ce4", Component.options)
+    hotAPI.reload("data-v-ed672318", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28165,13 +28165,13 @@ var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("03b64872", content, false);
+var update = __webpack_require__(2)("4c8bed70", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a1c91ce4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ed672318\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ed672318\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTotalSaleTable.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -28362,7 +28362,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-a1c91ce4", esExports)
+     require("vue-hot-reload-api").rerender("data-v-ed672318", esExports)
   }
 }
 
@@ -28647,10 +28647,10 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TechnicianBalance_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_TechnicianDailySaleTable_vue__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_TechnicianPaymentTable_vue__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_TechnicianBalance_vue__ = __webpack_require__(202);
 //
 //
 //
@@ -28712,10 +28712,10 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
     props: [],
 
     components: {
-        'sale': __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__["a" /* default */],
-        'wage': __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__["a" /* default */],
-        'payment': __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__["a" /* default */],
-        'balance': __WEBPACK_IMPORTED_MODULE_3__TechnicianBalance_vue__["a" /* default */]
+        'sale': __WEBPACK_IMPORTED_MODULE_0__common_TechnicianDailySaleTable_vue__["a" /* default */],
+        'wage': __WEBPACK_IMPORTED_MODULE_1__common_TechnicianTotalSaleTable_vue__["a" /* default */],
+        'payment': __WEBPACK_IMPORTED_MODULE_2__common_TechnicianPaymentTable_vue__["a" /* default */],
+        'balance': __WEBPACK_IMPORTED_MODULE_3__common_TechnicianBalance_vue__["a" /* default */]
 
     },
 
@@ -28823,7 +28823,7 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentTable_vue__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_14588c53_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_104f8ab9_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__ = __webpack_require__(201);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -28842,12 +28842,12 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentTable_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_14588c53_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_104f8ab9_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentTable_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/TechnicianPaymentTable.vue"
+Component.options.__file = "resources/assets/js/components/common/TechnicianPaymentTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentTable.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -28858,9 +28858,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14588c53", Component.options)
+    hotAPI.createRecord("data-v-104f8ab9", Component.options)
   } else {
-    hotAPI.reload("data-v-14588c53", Component.options)
+    hotAPI.reload("data-v-104f8ab9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28881,13 +28881,13 @@ var content = __webpack_require__(199);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("53333825", content, false);
+var update = __webpack_require__(2)("6be2dd2c", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14588c53\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14588c53\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-104f8ab9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-104f8ab9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentTable.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -29015,7 +29015,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-14588c53", esExports)
+     require("vue-hot-reload-api").rerender("data-v-104f8ab9", esExports)
   }
 }
 
@@ -29025,7 +29025,7 @@ if (false) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_755fe51b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__ = __webpack_require__(206);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -29044,12 +29044,12 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_755fe51b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/TechnicianBalance.vue"
+Component.options.__file = "resources/assets/js/components/common/TechnicianBalance.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TechnicianBalance.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29060,9 +29060,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cce2697e", Component.options)
+    hotAPI.createRecord("data-v-755fe51b", Component.options)
   } else {
-    hotAPI.reload("data-v-cce2697e", Component.options)
+    hotAPI.reload("data-v-755fe51b", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -29083,13 +29083,13 @@ var content = __webpack_require__(204);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("186f4a5a", content, false);
+var update = __webpack_require__(2)("115385e5", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-755fe51b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-755fe51b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -29230,7 +29230,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-cce2697e", esExports)
+     require("vue-hot-reload-api").rerender("data-v-755fe51b", esExports)
   }
 }
 
@@ -29334,6 +29334,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "payments": _vm.payments
     }
   }), _vm._v(" "), _c('balance', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show.payment),
+      expression: "show.payment"
+    }],
     attrs: {
       "pay-period-id": _vm.selectPayPeriodId,
       "first-name": _vm.firstName
