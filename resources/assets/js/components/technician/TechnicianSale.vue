@@ -206,7 +206,7 @@
 
 		}
 		#content-container{
-			max-height: 429px;
+			height: 429px; /*429*/
 			overflow-y: scroll;
 		}
 	}
@@ -222,7 +222,7 @@
 
 		}
 		#content-container{
-			max-height: 498px;
+			height: 498px;
 			overflow-y: scroll;
 		}
 	}
@@ -232,7 +232,7 @@
 	and (max-device-width: 1024px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 		#content-container{
-			max-height: 786px;
+			height: 786px;
 			overflow-y: scroll;
 		}
 	}
@@ -242,7 +242,7 @@
 	and (max-device-width: 1366px)
 	and (-webkit-min-device-pixel-ratio: 2) {
 		#content-container{
-			max-height: 1128px;
+			height: 1128px;
 			overflow-y: scroll;
 		}
 	}
