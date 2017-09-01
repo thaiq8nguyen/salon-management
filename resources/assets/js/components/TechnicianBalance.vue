@@ -41,14 +41,14 @@
         },
 	    watch:{
             payPeriodId(){
-                if(this.payPeriodId !== null && this.firstName !== null){
-                    this.getBalance();
-                }
+
+                this.getBalance();
+
             },
 		    firstName(){
-                if(this.payPeriodId !== null && this.firstName !== null){
-                    this.getBalance();
-                }
+
+                this.getBalance();
+
 		    }
 	    },
 	    computed:{

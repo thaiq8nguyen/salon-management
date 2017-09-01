@@ -28012,23 +28012,21 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     data: function data() {
         return {
-
+            sales: this.dailySales,
             headers: [{ text: 'Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }],
             screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            loadingSale: true
+            screenHeight: window.innerHeight
 
         };
     },
 
 
     watch: {
-        sales: function sales() {
-            if (this.dailySales.length >= 0) {
-                this.loadingSale = false;
-            }
+        dailySales: function dailySales() {
+            this.sales = this.dailySales;
         }
     },
+
     methods: {
         readableDate: function readableDate(date) {
             if (this.screenWidth < 768) {
@@ -28052,12 +28050,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "technician-daily-sale"
     }
-  }, [(_vm.dailySales.length > 0) ? _c('v-card', {
+  }, [(_vm.sales.length) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [_c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.dailySales,
+      "items": _vm.sales,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -28260,13 +28258,18 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
 
     data: function data() {
         return {
+            wage: this.totalSales,
             headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }],
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight
         };
     },
 
-    watch: {},
+    watch: {
+        totalSales: function totalSales() {
+            this.wage = this.totalSales;
+        }
+    },
     methods: {}
 
 });
@@ -28277,12 +28280,12 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.totalSales.length > 0) ? _c('v-card', {
+  return (_vm.wage.length) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [(_vm.screenWidth > 768) ? _c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.totalSales,
+      "items": _vm.wage,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -28315,7 +28318,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }) : _c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.totalSales,
+      "items": _vm.wage,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -28726,8 +28729,8 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
             selectPayPeriodId: null,
             selectPayPeriod: null,
             dailySales: [],
-            wage: '',
-            payments: null,
+            wage: [],
+            payments: [],
             firstName: sessionStorage.getItem('firstName'),
             screen: 'sale',
             show: {
@@ -28742,7 +28745,14 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
         this.getPayPeriod();
     },
 
-
+    watch: {
+        selectPayPeriodId: function selectPayPeriodId() {
+            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
+            this.getSaleByPeriod();
+            this.getWageByPeriod();
+            this.getPaymentByPeriod();
+        }
+    },
     methods: {
         getPayPeriod: function getPayPeriod() {
             var _this = this;
@@ -28752,18 +28762,16 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
                 _this.payPeriods = response.data;
                 _this.currentPayPeriod = response.data[response.data.length - 1];
                 _this.selectPayPeriod = _this.currentPayPeriod.periods;
-                //retrieve the last selected period id in a session variable
                 _this.selectPayPeriodId = parseInt(sessionStorage.getItem('lastSelectedPeriodIdPayDay'));
-                if (_this.selectPayPeriodId === null) {
+
+                if (isNaN(_this.selectPayPeriodId)) {
                     _this.selectPayPeriodId = _this.currentPayPeriod.id;
                     sessionStorage.setItem('lastSelectedPeriodIdPayDay', _this.selectPayPeriodId);
                 }
+                _this.getSaleByPeriod();
+                _this.getWageByPeriod();
+                _this.getPaymentByPeriod();
             });
-        },
-        getData: function getData() {
-            this.getSaleByPeriod();
-            this.getWageByPeriod();
-            this.getPaymentByPeriod();
         },
         getSaleByPeriod: function getSaleByPeriod() {
             var _this2 = this;
@@ -28897,7 +28905,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28935,18 +28943,19 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     data: function data() {
         return {
+            pays: this.payments,
             headers: [{ text: 'Amount', value: 'amount', sortable: false }, { text: 'Method', value: 'method', sortable: false }]
 
         };
     },
 
 
-    computed: {
-        showPayments: function showPayments() {
-            return this.payments !== null;
+    computed: {},
+    watch: {
+        payments: function payments() {
+            this.pays = this.payments;
         }
     },
-    watch: {},
     methods: {}
 
 });
@@ -28961,7 +28970,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "technician-payment-report"
     }
-  }, [(_vm.showPayments) ? _c('v-card', {
+  }, [(_vm.pays.length) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [_c('v-data-table', {
     attrs: {
@@ -29152,14 +29161,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     watch: {
         payPeriodId: function payPeriodId() {
-            if (this.payPeriodId !== null && this.firstName !== null) {
-                this.getBalance();
-            }
+
+            this.getBalance();
         },
         firstName: function firstName() {
-            if (this.payPeriodId !== null && this.firstName !== null) {
-                this.getBalance();
-            }
+
+            this.getBalance();
         }
     },
     computed: {
@@ -29275,9 +29282,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "auto": "",
       "item-text": "periods",
       "item-value": "id"
-    },
-    on: {
-      "input": _vm.getData
     },
     model: {
       value: (_vm.selectPayPeriodId),
