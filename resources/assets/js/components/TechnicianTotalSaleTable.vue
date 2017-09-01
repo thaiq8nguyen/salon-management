@@ -67,19 +67,16 @@
                 ],
                 screenWidth:window.innerWidth,
                 screenHeight:window.innerHeight,
-	            loadingSale:true,
             }
 
 
         },
         watch:{
-            totalSales(){
-                if((this.totalSales).length >= 0){
-                    this.loadingSale = false;
-                }
-            }
+
         },
-        methods: {}
+        methods: {
+
+        }
 
 
     }

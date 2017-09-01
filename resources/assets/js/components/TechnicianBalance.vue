@@ -57,11 +57,9 @@
             }
 	    },
         methods: {
-
             getBalance(){
                 this.$axios.get('/api/technician-payment/balance/pay-period/' + this.payPeriodId + '/technician/'
                     + this.firstName).then(response => {
-                    console.log(response.data);
                     this.payPeriodBalance = response.data.pay_period_balance;
                     this.totalBalance = response.data.total_balance;
                 });

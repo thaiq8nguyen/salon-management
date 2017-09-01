@@ -26,7 +26,7 @@
 						<div  id = "content-container">
 							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
 							<wage :total-sales="wage" v-show="show.wage"></wage>
-							<payment :payments="payment" v-show="show.payment"></payment>
+							<payment :payments="payments" v-show="show.payment"></payment>
 							<balance :pay-period-id="selectPayPeriodId" :first-name="firstName"></balance>
 						</div>
 					</v-flex>
@@ -77,7 +77,7 @@
 	            selectPayPeriod: null,
 	            dailySales:[],
 	            wage:'',
-	            payment:['default'],
+	            payments:null,
 	            firstName: sessionStorage.getItem('firstName'),
 	            screen:'sale',
 	            show:{
@@ -95,9 +95,6 @@
 
 	    },
 
-	    watch:{
-
-	    },
         methods: {
             getPayPeriod() {
                 this.$axios.get('/api/pay-period/list').then(response => {
@@ -138,7 +135,7 @@
 	        getPaymentByPeriod(){
                 this.$axios.get('/api/technician-payment/pay-period/' + this.selectPayPeriodId + '/technician/'
 	                + this.firstName).then(response => {
-	                    this.payment = response.data;
+	                    this.payments = response.data;
                 });
 	        },
 

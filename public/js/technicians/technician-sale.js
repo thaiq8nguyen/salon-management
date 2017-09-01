@@ -28262,18 +28262,11 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
         return {
             headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }],
             screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            loadingSale: true
+            screenHeight: window.innerHeight
         };
     },
 
-    watch: {
-        totalSales: function totalSales() {
-            if (this.totalSales.length >= 0) {
-                this.loadingSale = false;
-            }
-        }
-    },
+    watch: {},
     methods: {}
 
 });
@@ -28559,7 +28552,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianSale_vue__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc555b02_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianSale_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc555b02_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianSale_vue__ = __webpack_require__(207);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -28654,7 +28647,7 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianDailySaleTable_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TechnicianPaymentTable_vue__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TechnicianBalance_vue__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TechnicianBalance_vue__ = __webpack_require__(202);
 //
 //
 //
@@ -28734,7 +28727,7 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
             selectPayPeriod: null,
             dailySales: [],
             wage: '',
-            payment: ['default'],
+            payments: null,
             firstName: sessionStorage.getItem('firstName'),
             screen: 'sale',
             show: {
@@ -28750,7 +28743,6 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
     },
 
 
-    watch: {},
     methods: {
         getPayPeriod: function getPayPeriod() {
             var _this = this;
@@ -28791,7 +28783,7 @@ exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;
             var _this4 = this;
 
             this.$axios.get('/api/technician-payment/pay-period/' + this.selectPayPeriodId + '/technician/' + this.firstName).then(function (response) {
-                _this4.payment = response.data;
+                _this4.payments = response.data;
             });
         },
         toggleScreen: function toggleScreen(screen) {
@@ -28905,7 +28897,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28943,18 +28935,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     data: function data() {
         return {
-            headers: [{ text: 'Amount', value: 'amount', sortable: false }, { text: 'Method', value: 'method', sortable: false }],
-            loadingSale: true
+            headers: [{ text: 'Amount', value: 'amount', sortable: false }, { text: 'Method', value: 'method', sortable: false }]
+
         };
     },
 
-    watch: {
-        payments: function payments() {
-            if (this.payments.length >= 0) {
-                this.loadingSale = false;
-            }
+
+    computed: {
+        showPayments: function showPayments() {
+            return this.payments !== null;
         }
     },
+    watch: {},
     methods: {}
 
 });
@@ -28967,9 +28959,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
-      "id": "technician-payment-record"
+      "id": "technician-payment-report"
     }
-  }, [(_vm.payments.length > 0) ? _c('v-card', {
+  }, [(_vm.showPayments) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [_c('v-data-table', {
     attrs: {
@@ -29020,6 +29012,223 @@ if (false) {
 
 /***/ }),
 /* 202 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__ = __webpack_require__(206);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(203)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/TechnicianBalance.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianBalance.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cce2697e", Component.options)
+  } else {
+    hotAPI.reload("data-v-cce2697e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(204);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("186f4a5a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 205 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: ['payPeriodId', 'firstName'],
+
+    data: function data() {
+        return {
+            payPeriodBalance: null,
+            totalBalance: null,
+            id: null,
+            name: null,
+            balances: false
+
+        };
+    },
+
+    watch: {
+        payPeriodId: function payPeriodId() {
+            if (this.payPeriodId !== null && this.firstName !== null) {
+                this.getBalance();
+            }
+        },
+        firstName: function firstName() {
+            if (this.payPeriodId !== null && this.firstName !== null) {
+                this.getBalance();
+            }
+        }
+    },
+    computed: {
+        showBalance: function showBalance() {
+            return this.payPeriodBalance !== null && this.totalBalance !== null;
+        }
+    },
+    methods: {
+        getBalance: function getBalance() {
+            var _this = this;
+
+            this.$axios.get('/api/technician-payment/balance/pay-period/' + this.payPeriodId + '/technician/' + this.firstName).then(function (response) {
+                _this.payPeriodBalance = response.data.pay_period_balance;
+                _this.totalBalance = response.data.total_balance;
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 206 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "technician-balance-report"
+    }
+  }, [(_vm.showBalance) ? _c('v-card', [_c('v-card-text', [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg8": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\tPeriod Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.payPeriodBalance.period_balance) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg8": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\tTotal Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.totalBalance.total_balance) + "\n\t\t\t\t")])], 1)], 1)], 1) : _vm._e()], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-cce2697e", esExports)
+  }
+}
+
+/***/ }),
+/* 207 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29118,7 +29327,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       expression: "show.payment"
     }],
     attrs: {
-      "payments": _vm.payment
+      "payments": _vm.payments
     }
   }), _vm._v(" "), _c('balance', {
     attrs: {
@@ -29177,234 +29386,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-fc555b02", esExports)
-  }
-}
-
-/***/ }),
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__ = __webpack_require__(217);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(214)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianBalance_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cce2697e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianBalance_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/TechnicianBalance.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] TechnicianBalance.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cce2697e", Component.options)
-  } else {
-    hotAPI.reload("data-v-cce2697e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(215);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("186f4a5a", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cce2697e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianBalance.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 216 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    props: ['payPeriodId', 'firstName'],
-
-    data: function data() {
-        return {
-            payPeriodBalance: null,
-            totalBalance: null,
-            id: null,
-            name: null,
-            balances: false
-
-        };
-    },
-
-    watch: {
-        payPeriodId: function payPeriodId() {
-            if (this.payPeriodId !== null && this.firstName !== null) {
-                this.getBalance();
-            }
-        },
-        firstName: function firstName() {
-            if (this.payPeriodId !== null && this.firstName !== null) {
-                this.getBalance();
-            }
-        }
-    },
-    computed: {
-        showBalance: function showBalance() {
-            return this.payPeriodBalance !== null && this.totalBalance !== null;
-        }
-    },
-    methods: {
-        getBalance: function getBalance() {
-            var _this = this;
-
-            this.$axios.get('/api/technician-payment/balance/pay-period/' + this.payPeriodId + '/technician/' + this.firstName).then(function (response) {
-                console.log(response.data);
-                _this.payPeriodBalance = response.data.pay_period_balance;
-                _this.totalBalance = response.data.total_balance;
-            });
-        }
-    }
-
-});
-
-/***/ }),
-/* 217 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    attrs: {
-      "id": "technician-balance-report"
-    }
-  }, [(_vm.showBalance) ? _c('v-card', [_c('v-card-text', [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg8": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\tPeriod Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.payPeriodBalance.period_balance) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg8": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\tTotal Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.totalBalance.total_balance) + "\n\t\t\t\t")])], 1)], 1)], 1) : _vm._e()], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-cce2697e", esExports)
   }
 }
 
