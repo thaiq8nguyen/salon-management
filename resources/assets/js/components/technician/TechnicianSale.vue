@@ -51,10 +51,10 @@
 </template>
 
 <script>
-	import TechnicianDailySaleTable from '../TechnicianDailySaleTable.vue';
-	import TechnicianTotalSaleTable from '../TechnicianTotalSaleTable.vue';
-	import TechnicianPaymentTable from '../TechnicianPaymentTable.vue';
-	import TechnicianBalance from '../TechnicianBalance.vue';
+	import TechnicianDailySaleTable from '../common/TechnicianDailySaleTable.vue';
+	import TechnicianTotalSaleTable from '../common/TechnicianTotalSaleTable.vue';
+	import TechnicianPaymentTable from '../common/TechnicianPaymentTable.vue';
+	import TechnicianBalance from '../common/TechnicianBalance.vue';
     export default {
         props: [],
 

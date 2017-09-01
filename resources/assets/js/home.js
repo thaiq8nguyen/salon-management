@@ -13,7 +13,7 @@ axios.defaults.headers.common ={
     'X-Requested-With': 'XMLHttpRequest'
 };
 
-import Home from './components/Home.vue';
+import Home from './components/admin/Home.vue';
 
 Vue.component('home',Home);
 

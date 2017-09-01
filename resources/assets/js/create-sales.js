@@ -7,9 +7,9 @@ import axios from 'axios';
 import moment from 'moment';
 import Vuetify from 'vuetify';
 
-import TechnicianHeader from './components/TechnicianHeader.vue';
+import TechnicianHeader from './components/common/TechnicianHeader.vue';
 import PayPeriodHeader from './components/partials/PayPeriodHeader.vue';
-import NewTechnicianSale from './components/NewTechnicianSale.vue';
+import NewTechnicianSale from './components/admin/NewTechnicianSale.vue';
 
 Object.defineProperty(Vue.prototype,'$axios',{value:axios});
 Object.defineProperty(Vue.prototype, '$moment',{value:moment});
