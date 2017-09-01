@@ -1,8 +1,8 @@
 <template>
 	<div id = "technician-daily-sale">
-		<v-card class = "elevation-1 white" v-if="dailySales.length > 0">
+		<v-card class = "elevation-1 white" v-if="sales.length">
 			<v-card-text >
-				<v-data-table :headers="headers" :items="dailySales" hide-actions >
+				<v-data-table :headers="headers" :items="sales" hide-actions >
 					<template slot="headers" scope="props">
 						<th v-for="header in props.headers" :key="header.text">
 							<p class = "subheading text-xs-center">{{ header.text }}</p>
@@ -28,8 +28,9 @@
 
         data() {
             return {
-
+				sales: this.dailySales,
                 headers: [
+
                     {text: 'Date', value: 'sale_date', sortable: false},
                     {text: 'Sale', value: 'sales', sortable: false},
                     {text: 'Tip', value: 'additional_sales', sortable: false}
@@ -37,18 +38,17 @@
                 ],
 	            screenWidth:window.innerWidth,
                 screenHeight:window.innerHeight,
-	            loadingSale:true,
 
             }
         },
 
 	    watch:{
-            sales(){
-                if((this.dailySales).length >= 0){
-                    this.loadingSale = false;
-                }
-            }
+			dailySales(){
+                this.sales = this.dailySales;
+			}
 	    },
+
+
         methods: {
             readableDate(date){
                 if(this.screenWidth < 768){ //for iPhone 5,6,6+

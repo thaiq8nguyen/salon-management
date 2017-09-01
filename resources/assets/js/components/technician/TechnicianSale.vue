@@ -17,7 +17,7 @@
 				<v-layout>
 					<v-flex xs12>
 						<v-select :items="payPeriods" label="Select Working Period" single-line dark auto
-						          v-model="selectPayPeriodId" item-text="periods" item-value="id" @input="getData">
+						          v-model="selectPayPeriodId" item-text="periods" item-value="id">
 						</v-select>
 					</v-flex>
 				</v-layout>
@@ -76,8 +76,8 @@
 	            selectPayPeriodId:null,
 	            selectPayPeriod: null,
 	            dailySales:[],
-	            wage:'',
-	            payments:null,
+	            wage:[],
+	            payments:[],
 	            firstName: sessionStorage.getItem('firstName'),
 	            screen:'sale',
 	            show:{
@@ -94,7 +94,14 @@
           this.getPayPeriod();
 
 	    },
-
+		watch:{
+	        selectPayPeriodId(){
+                sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
+                this.getSaleByPeriod();
+                this.getWageByPeriod();
+                this.getPaymentByPeriod();
+	        }
+		},
         methods: {
             getPayPeriod() {
                 this.$axios.get('/api/pay-period/list').then(response => {
@@ -102,21 +109,18 @@
                     this.payPeriods = response.data;
                     this.currentPayPeriod = response.data[response.data.length - 1];
                     this.selectPayPeriod = this.currentPayPeriod.periods;
-                    //retrieve the last selected period id in a session variable
                     this.selectPayPeriodId = parseInt(sessionStorage.getItem('lastSelectedPeriodIdPayDay'));
-                    if (this.selectPayPeriodId === null) {
+
+                    if (isNaN(this.selectPayPeriodId)) {
                         this.selectPayPeriodId = this.currentPayPeriod.id;
                         sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectPayPeriodId);
                     }
+                    this.getSaleByPeriod();
+                    this.getWageByPeriod();
+                    this.getPaymentByPeriod();
                 });
             },
 
-	        getData(){
-                this.getSaleByPeriod();
-                this.getWageByPeriod();
-                this.getPaymentByPeriod();
-
-	        },
             getSaleByPeriod() {
                 this.$axios.get('/api/technician-sale/pay-period/' + this.selectPayPeriodId + '/technician/'
                     + this.firstName).then(response => {

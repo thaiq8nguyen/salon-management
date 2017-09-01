@@ -28277,23 +28277,21 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
     data: function data() {
         return {
-
+            sales: this.dailySales,
             headers: [{ text: 'Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }],
             screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            loadingSale: true
+            screenHeight: window.innerHeight
 
         };
     },
 
 
     watch: {
-        sales: function sales() {
-            if (this.dailySales.length >= 0) {
-                this.loadingSale = false;
-            }
+        dailySales: function dailySales() {
+            this.sales = this.dailySales;
         }
     },
+
     methods: {
         readableDate: function readableDate(date) {
             if (this.screenWidth < 768) {
@@ -28317,12 +28315,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "technician-daily-sale"
     }
-  }, [(_vm.dailySales.length > 0) ? _c('v-card', {
+  }, [(_vm.sales.length) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [_c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.dailySales,
+      "items": _vm.sales,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -28525,13 +28523,18 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
 
     data: function data() {
         return {
+            wage: this.totalSales,
             headers: [{ text: 'Sub Total', value: 'subTotal', sortable: false }, { text: 'Sub Total Tip', value: 'subTotalTip', sortable: false }, { text: 'Earned Total', value: 'earnedTotal', sortable: false }, { text: 'Tip Deduction', value: 'earnedTip', sortable: false }, { text: 'To Pay', value: 'total', sortable: false }],
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight
         };
     },
 
-    watch: {},
+    watch: {
+        totalSales: function totalSales() {
+            this.wage = this.totalSales;
+        }
+    },
     methods: {}
 
 });
@@ -28542,12 +28545,12 @@ exports.push([module.i, "\n#small-screen-size-table-header{\n\theight: 0 !import
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.totalSales.length > 0) ? _c('v-card', {
+  return (_vm.wage.length) ? _c('v-card', {
     staticClass: "elevation-1 white"
   }, [_c('v-card-text', [(_vm.screenWidth > 768) ? _c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.totalSales,
+      "items": _vm.wage,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{
@@ -28580,7 +28583,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }) : _c('v-data-table', {
     attrs: {
       "headers": _vm.headers,
-      "items": _vm.totalSales,
+      "items": _vm.wage,
       "hide-actions": ""
     },
     scopedSlots: _vm._u([{

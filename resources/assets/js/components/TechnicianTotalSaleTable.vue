@@ -1,7 +1,7 @@
 <template>
-	<v-card class = "elevation-1 white" v-if="totalSales.length > 0">
+	<v-card class = "elevation-1 white" v-if="wage.length">
 		<v-card-text>
-			<v-data-table :headers="headers" :items="totalSales"
+			<v-data-table :headers="headers" :items="wage"
 			              hide-actions v-if="screenWidth > 768">
 				<template slot="headers" scope="props">
 					<th v-for="header in props.headers" :key="header.text">
@@ -16,7 +16,7 @@
 					<td class = "text-lg-center red--text headline">$ {{ props.item.total }}</td>
 				</template>
 			</v-data-table>
-			<v-data-table :headers="headers" :items="totalSales"
+			<v-data-table :headers="headers" :items="wage"
 			              hide-actions v-else>
 				<template slot="headers" scope="props">
 					<tr id = "small-screen-size-table-header"></tr>
@@ -57,6 +57,7 @@
 
         data() {
             return {
+                wage:this.totalSales,
                 headers: [
                     {text: 'Sub Total', value: 'subTotal', sortable: false},
                     {text: 'Sub Total Tip', value: 'subTotalTip', sortable: false},
@@ -72,7 +73,9 @@
 
         },
         watch:{
-
+            totalSales(){
+                this.wage = this.totalSales;
+            }
         },
         methods: {
 
