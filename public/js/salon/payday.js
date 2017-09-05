@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 123);
+/******/ 	return __webpack_require__(__webpack_require__.s = 124);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -28699,14 +28699,15 @@ if (false) {
 /* 120 */,
 /* 121 */,
 /* 122 */,
-/* 123 */
+/* 123 */,
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(124);
+module.exports = __webpack_require__(125);
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28720,7 +28721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_partials_PayPeriodHeader_vue__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_PayDay_vue__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_PayDay_vue__ = __webpack_require__(126);
 
 
 
@@ -28758,16 +28759,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 });
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayDay_vue__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cde61a8a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayDay_vue__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayDay_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cde61a8a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayDay_vue__ = __webpack_require__(150);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(126)
+  __webpack_require__(127)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -28811,13 +28812,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(127);
+var content = __webpack_require__(128);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -28837,7 +28838,7 @@ if(false) {
 }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -28851,14 +28852,17 @@ exports.push([module.i, "\n.technician-name{\n\tfloat:left;\n\twidth:250px;\n}\n
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentPanelHeader_vue__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentPanelHeader_vue__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MakeTechnicianPayment_vue__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_TechnicianDailySaleTable_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_TechnicianTotalSaleTable_vue__ = __webpack_require__(51);
+//
+//
+//
 //
 //
 //
@@ -28993,7 +28997,6 @@ exports.push([module.i, "\n.technician-name{\n\tfloat:left;\n\twidth:250px;\n}\n
             var _this = this;
 
             this.$axios.get('/api/salon/payday?id=' + periodId).then(function (response) {
-                console.log(response.data);
                 _this.technicians = response.data;
                 _this.periodId = periodId;
             });
@@ -29004,8 +29007,19 @@ exports.push([module.i, "\n.technician-name{\n\tfloat:left;\n\twidth:250px;\n}\n
         activePanel: function activePanel(index) {
             return this.activeIndex === index;
         },
-        viewPaymentReport: function viewPaymentReport(first_name) {
-            window.location.href = '/report/' + first_name + '/payment/' + this.periodId;
+        createPaymentReport: function createPaymentReport(index) {
+            var _this2 = this;
+
+            var technicianId = this.technicians[index].id;
+            this.$axios.post('/api/technician-payment/report/create', { technicianId: technicianId, payPeriodId: this.periodId }).then(function (response) {
+                if (response.data.success) {
+                    _this2.getWages(_this2.periodId);
+                }
+            });
+        },
+        viewPaymentReport: function viewPaymentReport(index) {
+            var url = this.technicians[index].payment_report[0].pivot.payment_report_url;
+            window.open(url);
         },
         paid: function paid() {
             this.getWages(this.periodId);
@@ -29014,16 +29028,16 @@ exports.push([module.i, "\n.technician-name{\n\tfloat:left;\n\twidth:250px;\n}\n
 });
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77a8c314_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77a8c314_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentPanelHeader_vue__ = __webpack_require__(134);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(130)
+  __webpack_require__(131)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -29067,13 +29081,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(131);
+var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -29093,7 +29107,7 @@ if(false) {
 }
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -29107,7 +29121,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29159,7 +29173,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29231,16 +29245,16 @@ if (false) {
 }
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d4e5c7c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d4e5c7c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MakeTechnicianPayment_vue__ = __webpack_require__(149);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(135)
+  __webpack_require__(136)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -29284,13 +29298,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(136);
+var content = __webpack_require__(137);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -29310,7 +29324,7 @@ if(false) {
 }
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -29324,12 +29338,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianPaymentForm_vue__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TechnicianPayment_vue__ = __webpack_require__(144);
 //
 //
 //
@@ -29459,16 +29473,16 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_13256162_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_13256162_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentForm_vue__ = __webpack_require__(143);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(139)
+  __webpack_require__(140)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -29512,13 +29526,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(140);
+var content = __webpack_require__(141);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -29538,7 +29552,7 @@ if(false) {
 }
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -29552,7 +29566,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29609,7 +29623,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29697,16 +29711,16 @@ if (false) {
 }
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ace67c2a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPayment_vue__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ace67c2a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPayment_vue__ = __webpack_require__(148);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(144)
+  __webpack_require__(145)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -29750,13 +29764,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(145);
+var content = __webpack_require__(146);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -29776,7 +29790,7 @@ if(false) {
 }
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -29790,7 +29804,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29839,7 +29853,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 });
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29933,7 +29947,7 @@ if (false) {
 }
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30010,7 +30024,7 @@ if (false) {
 }
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30047,7 +30061,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_vm._v(_vm._s(technician.full_name))]), _vm._v(" "), (technician.daily_sales.length > 0) ? _c('span', {
       staticClass: "chip-container"
-    }, [(technician.count_payments.length > 0) ? [_c('v-chip', {
+    }, [(technician.payment_report.length > 0) ? [_c('v-chip', {
       staticClass: "green darken-1 white--text subheading elevation-4",
       attrs: {
         "label": "",
@@ -30118,7 +30132,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "href": "/technician-sale/quick-sale-entry",
         "primary": ""
       }
-    }, [_vm._v("Quick Sale Entry")])], 1)] : (technician.count_payments.length == 0) ? [_c('make-payment', {
+    }, [_vm._v("Quick Sale Entry")])], 1)] : (technician.payments.length == 0) ? [_c('make-payment', {
       attrs: {
         "technician": technician,
         "period-id": _vm.periodId,
@@ -30135,13 +30149,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "headline white--text"
     }, [_vm._v("Make Payments")])]), _vm._v(" "), _c('v-card-text', [_c('h3', {
       staticClass: "headline"
-    }, [_vm._v(_vm._s(technician.full_name + ' \'s has been paid'))])]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
+    }, [_vm._v(_vm._s(technician.full_name + ' \'s has been paid'))])]), _vm._v(" "), (technician.payment_report.length == 0) ? _c('v-card-actions', [_c('v-btn', {
+      nativeOn: {
+        "click": function($event) {
+          _vm.createPaymentReport(index)
+        }
+      }
+    }, [_vm._v("Create Report")])], 1) : _c('v-card-actions', [_c('v-btn', {
       attrs: {
         "primary": ""
       },
       nativeOn: {
         "click": function($event) {
-          _vm.viewPaymentReport(technician.first_name)
+          _vm.viewPaymentReport(index)
         }
       }
     }, [_vm._v("View Report")])], 1)], 1)]], 2)], 1)], 1)], 1)], 1)], 1)], 1)

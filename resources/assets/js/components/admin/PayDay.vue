@@ -14,7 +14,7 @@
 													<p>
 														<span class = "headline technician-name" :class="{'amber--text text--darken-1':activePanel(index)}">{{technician.full_name}}</span>
 														<span v-if="technician.daily_sales.length > 0" class = "chip-container">
-															<template v-if="technician.count_payments.length > 0">
+															<template v-if="technician.payment_report.length > 0">
 																<v-chip label small class = "green darken-1 white--text subheading elevation-4">
 																<v-icon class = "white--text">done</v-icon>Paid</v-chip>
 															</template>
@@ -53,7 +53,7 @@
 																				<v-btn href="/technician-sale/quick-sale-entry" primary>Quick Sale Entry</v-btn>
 																			</v-card>
 																		</template>
-																		<template v-else-if="technician.count_payments.length == 0">
+																		<template v-else-if="technician.payments.length == 0">
 																			<make-payment :technician="technician" :period-id="periodId" :index="index" v-on:paid="paid"></make-payment>
 																		</template>
 																		<template v-else>
@@ -64,8 +64,11 @@
 																				<v-card-text>
 																					<h3 class = "headline">{{ technician.full_name + ' \'s has been paid' }}</h3>
 																				</v-card-text>
-																				<v-card-actions>
-																					<v-btn @click.native="viewPaymentReport(technician.first_name)" primary>View Report</v-btn>
+																				<v-card-actions v-if = "technician.payment_report.length == 0">
+																					<v-btn @click.native ="createPaymentReport(index)">Create Report</v-btn>
+																				</v-card-actions>
+																				<v-card-actions v-else>
+																					<v-btn @click.native ="viewPaymentReport(index)" primary>View Report</v-btn>
 																				</v-card-actions>
 																			</v-card>
 																		</template>
@@ -119,7 +122,7 @@
         data() {
             return {
                 periodId: '',
-                technicians: [],
+                technicians:[],
 	            activeIndex:null,
 
             }
@@ -132,7 +135,6 @@
         methods: {
             getWages(periodId){
                 this.$axios.get('/api/salon/payday?id=' + periodId).then(response =>{
-					console.log(response.data);
                     this.technicians = response.data;
                     this.periodId = periodId;
                 });
@@ -145,9 +147,20 @@
 	        activePanel(index){
 	            return this.activeIndex === index;
 	        },
+			createPaymentReport(index){
+	            const technicianId = this.technicians[index].id;
+				this.$axios.post('/api/technician-payment/report/create',
+					{technicianId: technicianId, payPeriodId: this.periodId}).then(response => {
+					    if(response.data.success){
+                            this.getWages(this.periodId);
+					    }
 
-            viewPaymentReport(first_name){
-                window.location.href='/report/'+ first_name + '/payment/' + this.periodId
+				});
+			},
+            viewPaymentReport(index){
+	            const url = this.technicians[index].payment_report[0].pivot.payment_report_url;
+				window.open(url);
+
             },
 	        paid(){
                 this.getWages(this.periodId);

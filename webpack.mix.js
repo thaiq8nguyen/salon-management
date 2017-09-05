@@ -26,7 +26,8 @@ const webpack = require('webpack');
         .js(['resources/assets/js/technician/technician.js'],'public/js/technicians')
         .js(['resources/assets/js/technician/technician-sale.js'], 'public/js/technicians')
         .js(['resources/assets/js/refresh.js'], 'public/js/')
-        .js(['resources/assets/js/wages/wage-report.js'], 'public/js/wages');
+        .js(['resources/assets/js/wages/wage-report.js'], 'public/js/wages')
+        .js(['resources/assets/js/payment-reports-viewer.js'], 'public/js/salon');
 
 
 

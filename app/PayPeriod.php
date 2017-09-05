@@ -3,16 +3,42 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Technician;
 use Carbon\Carbon;
 class PayPeriod extends Model
 {
     protected $fillable = ['begin_date','end_date','pay_date'];
 
     public function wagePayments(){
+
         $this->hasMany(WagePayment::class);
+
     }
+
+    public function technicians(){
+
+        $this->belongsToMany(Technician::class,'technician_pay_period')
+            ->withPivot('payment_report_url')
+            ->withTimestamps();
+
+    }
+    public function paymentReport(){
+
+
+        return $this->hasMany(PaymentReport::class);
+
+    }
+
+    public function getPaymentReport(){
+
+        return $this->paymentReport()->orderBy('created_at','asc');
+
+    }
+
     public function getBeginDateMDYAttribute(){
+
         return(Carbon::createFromFormat('Y-m-d', $this->begin_date )->format('m/d/Y'));
+
     }
 
     public function getEndDateMDYAttribute(){

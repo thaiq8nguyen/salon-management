@@ -61,6 +61,11 @@ Route::post('/technician-payment/delete','WagePaymentController@deletePayment')-
 
 Route::get('/technician-payment/balance/pay-period/{payPeriod}/technician/{technician}','PaymentReportController@balance')->middleware('auth:api');
 
+Route::get('/technician-payment/report/show-all','PaymentReportController@all')->middleware('auth:api');
+
+Route::post('/technician-payment/report/create','PaymentReportController@create')->middleware('auth:api');
+
+
 /***GIFT CERTIFICATES***/
 
 Route::get('/gift-certificate/recent','GiftCertificateController@recent')->middleware('auth:api');

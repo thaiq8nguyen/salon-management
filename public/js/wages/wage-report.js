@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 210);
+/******/ 	return __webpack_require__(__webpack_require__.s = 211);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11389,22 +11389,22 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(211);
+module.exports = __webpack_require__(212);
 
 
 /***/ }),
 
-/***/ 211:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_http__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_http__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(34);
@@ -11447,25 +11447,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         }*/
     }
 
-});
-
-/***/ }),
-
-/***/ 212:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return http; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-
-var http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
-    baseURL: '/api',
-    headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        'X-Requested-With': 'XMLHttpRequest'
-    }
 });
 
 /***/ }),
@@ -28271,6 +28252,25 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return http; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+var http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+    baseURL: '/api',
+    headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+});
 
 /***/ }),
 
