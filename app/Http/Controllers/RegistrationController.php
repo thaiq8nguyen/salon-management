@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use App\Technician;
 use App\User;
 use Auth;
-use LogEntries;
-
 
 class RegistrationController extends Controller
 {
@@ -68,9 +66,6 @@ class RegistrationController extends Controller
         //create the user
         $technician->user()->create(['name' => $technician->full_name,
             'email' => $email, 'password' => bcrypt($password),'username' => $username ]);
-
-
-        //send notification email to the manager --FUTURE UPDATE
 
 
         //redirect user to successful confirmation page

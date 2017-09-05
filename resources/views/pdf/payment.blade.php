@@ -23,7 +23,7 @@
                          <th>Sales</th>
                          <th>Tips</th>
                      </tr>
-                     @foreach($technician->dailySales as $dailySale)
+                     @foreach($sales->dailySales as $dailySale)
                          <tr>
                              <td>{{ $dailySale->sale_date_mdyd }}</td>
                              <td>{{ $dailySale->sales_amount }}</td>
@@ -41,9 +41,9 @@
                          <th>Total Earning</th>
                      </tr>
                      <tr>
-                         <td>$ {{ $technician->totalSalesAndTips[0]->earnedTotal }}</td>
-                         <td>$ {{ $technician->totalSalesAndTips[0]->earnedTip }}</td>
-                         <td>$ {{ $technician->totalSalesAndTips[0]->total }}</td>
+                         <td>$ {{ $wage->totalSalesAndTips[0]->earnedTotal }}</td>
+                         <td>$ {{ $wage->totalSalesAndTips[0]->earnedTip }}</td>
+                         <td>$ {{ $wage->totalSalesAndTips[0]->total }}</td>
                      </tr>
                  </table>
              </div>
@@ -52,8 +52,8 @@
              <div class = "subtotal-table-container">
                  <table class = "subtotal-table">
                      <th>Sub Total</th>
-                     <td>$ {{ $technician->totalSalesAndTips[0]->subTotal }}</td>
-                     <td>$ {{ $technician->totalSalesAndTips[0]->subTotalTip }}</td>
+                     <td>$ {{ $wage->totalSalesAndTips[0]->subTotal }}</td>
+                     <td>$ {{ $wage->totalSalesAndTips[0]->subTotalTip }}</td>
                  </table>
              </div>
              <div class = "payments-table-container">
@@ -67,7 +67,7 @@
                          <th>Method</th>
                          <th>Reference</th>
                      </tr>
-                     @foreach($technician->payments as $payment)
+                     @foreach($payments->payments as $payment)
                         @php
                             $totalPayment += $payment->amount;
                         @endphp
@@ -84,8 +84,8 @@
          <div class = "row">
              <div class = "balance-container">
                  <p>Total Payment Amount: $ {{ $totalPayment }}</p>
-                 <p>Pay Period Balance: $ {{ $periodBalance->period_balance }}</p>
-                 <p>Total Balance: $ {{ $totalBalance->total_balance }}</p>
+                 <p>Pay Period Balance: $ {{ $periodBalance['period_balance'] }}</p>
+                 <p>Total Balance: $ {{ $totalBalance['total_balance'] }}</p>
              </div>
          </div>
      </div>

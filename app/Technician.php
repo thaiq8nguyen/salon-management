@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\PayPeriod;
 use Illuminate\Database\Eloquent\Model;
 /*
  * @property $first_name
@@ -19,16 +19,34 @@ class Technician extends Model
         return $this->hasMany(TechnicianSale::class);
 
     }
+    public function payPeriods(){
 
-    public function countSales(){
-        return $this->sales()
-            ->selectRaw('technician_id, count(*) as numberOfSale')
-            ->groupBy('technician_id');
+        return $this->belongsToMany(PayPeriod::class,'technician_pay_period')
+            ->withPivot('payment_report_url')
+            ->withTimestamps();
+    }
+
+    public function paymentReport(){
+
+        return $this->payPeriods();
+
     }
 
     public function payments(){
+
         return $this->hasMany(WagePayment::class);
+
     }
+
+    public function countSales(){
+
+        return $this->sales()
+            ->selectRaw('technician_id, count(*) as numberOfSale')
+            ->groupBy('technician_id');
+
+    }
+
+
 
     public function countPayments(){
         return $this->payments()

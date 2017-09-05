@@ -172,6 +172,8 @@ return [
         Salon\Repositories\TechnicianWageRepository\TechnicianWageServiceProvider::class,
         Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentServiceProvider::class,
         Salon\Repositories\TechnicianRepository\TechnicianServiceProvider::class,
+        Salon\Repositories\PaymentReportRepository\PaymentReportServiceProvider::class,
+        Salon\Repositories\PayDayRepository\PaydayServiceProvider::class,
 
         /*
          * Package Service Providers...

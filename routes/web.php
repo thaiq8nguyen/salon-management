@@ -1,5 +1,6 @@
 <?php
 use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,7 @@ use App\User;
     Route::get('/technician-book', 'TechnicianBookController@index')->name('technician-book');
     Route::get('/wages/report/','WageController@report')->name('wage-report');
 
-    Route::get('/report/{technician}/payment/{payPeriod?}', 'PaymentReportController@create')->name('create-pay-report');
+    Route::get('technician-reports/payment','PaymentReportController@index')->name('payment-reports');
 
     /*TECHNICIAN ROUTES*/
     Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');
@@ -40,6 +41,12 @@ use App\User;
         return new App\Mail\Test();
 
     })->middleware('auth');
+
+    Route::get('/s3',function(){
+
+        Storage::disk('s3')->put('payment.text','world');
+
+    });
 
     /*Authentication routes*/
     Auth::routes();

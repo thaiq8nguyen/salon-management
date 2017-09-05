@@ -3,49 +3,54 @@
 namespace App\Http\Controllers;
 use App\Technician;
 use App\PayPeriod;
-use App\TechnicianBook;
-use Request;
-use Barryvdh\DomPDF\Facade as PDF;
-
-use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
-use Salon\Repositories\TechnicianWageRepository\TechnicianWageRepositoryInterface;
-use Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentRepositoryInterface;
+use Illuminate\Http\Request;
+use Salon\Repositories\PaymentReportRepository\PaymentReportRepositoryInterface;
 
 class PaymentReportController extends Controller
 {
-    protected $sales;
-    protected $wage;
-    protected $payments;
-    protected $paymentReport;
-    public function __construct(TechnicianSaleRepositoryInterface $sales,
-                                TechnicianWageRepositoryInterface $wage,
-                                TechnicianPaymentRepositoryInterface $payments)
+    protected $report;
+
+    public function __construct(PaymentReportRepositoryInterface $report)
     {
         $this->middleware('auth');
-        $this->sales = $sales;
-        $this->wage = $wage;
-        $this->payments = $payments;
+        $this->report = $report;
+
+    }
+
+    public function index(){
+
+        return view('technicians.payment-reports');
     }
 
 
-    public function create(Technician $technician, PayPeriod $payPeriod)
+    public function all()
     {
+        return response()->json($this->report->all(),200);
 
-        $technicianSales = $this->sales->getSales($technician, $payPeriod);
-        $technicianWage =  $this->wage->getWage($technician, $payPeriod);
-        $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
-        $totalBalance = $this->sales->getTotalBalance($technician, $payPeriod);
-        $payPeriodBalance = $this->sales->getPayPeriodBalance($technician, $payPeriod);
-
-        $pdf = PDF::loadView('pdf.payment', ['technician' => $technician, 'dailySales'=>$technicianSales,'totalSalesAndTips'=>$technicianWage
-            ,'payments'=>$technicianPayment,
-            'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
-            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance])
-            ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
-
-        return $pdf->stream('payment_report.pdf');
 
     }
+
+    public function create(Request $request){
+
+        $url = $this->report->create($request->technicianId, $request->payPeriodId);
+
+        if(isset($url)){
+            $result = ['success' => true, 'message' => 'The report has been created'];
+        }
+        else{
+            $result = ['success' => false];
+        }
+
+        return response()->json($result,200);
+
+    }
+
+    public function show(Request $request){
+
+
+    }
+
+
 
     public function balance(PayPeriod $payPeriod,Technician $technician){
 
