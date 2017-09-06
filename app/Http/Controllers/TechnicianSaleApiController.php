@@ -7,8 +7,16 @@ use App\Technician;
 use Validator;
 use App\TechnicianSale;
 use App\PayPeriod;
+use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
 class TechnicianSaleApiController extends Controller
 {
+    protected $sale;
+
+    public function __construct(TechnicianSaleRepositoryInterface $sale)
+    {
+        $this->sale = $sale;
+    }
+
     public function addSale(Request $request){
 
         $validator =  Validator::make($request->all(),[
@@ -102,25 +110,16 @@ class TechnicianSaleApiController extends Controller
     }
 
     /**
-     * @param PayPeriod $payPeriod
-     * @param Technician $technician
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function searchSaleByPeriod(PayPeriod $payPeriod, Technician $technician){
+    public function getSaleByPeriod(Request $request){
 
+        $technician = Technician::find($request->technicianId);
+        $payPeriod = PayPeriod::find($request->payPeriodId);
 
-        $technicianID = $technician->id; //get technician ID
+        return response()->json($this->sale->getSales($technician, $payPeriod),200);
 
-        $technician = Technician::with(['dailySales' =>
-            function($query) use ($payPeriod){
-
-                $query->whereBetween('sale_date',[$payPeriod->begin_date, $payPeriod->end_date]);
-
-            }])->where('id', '=', $technicianID)->first();
-
-
-        return response()->json(['daily_sales'=>$technician->dailySales,'full_name'=>$technician->full_name, 'id'=>$technician->id],
-            200);
 
     }
 
@@ -177,6 +176,14 @@ class TechnicianSaleApiController extends Controller
 
         return response()->json(['success'=>true,'technicians'=>$response],200)
             ->header('Content-type','application/json');
+
+    }
+
+    public function getBalance(Request $request){
+        $totalBalance = $this->sale->getTotalBalance($request->technicianId, $request->payPeriodId);
+        $payPeriodBalance = $this->sale->getPayPeriodBalance($request->technicianId, $request->payPeriodId);
+
+        return response()->json(['total_balance'=> $totalBalance, 'pay_period_balance' => $payPeriodBalance],200);
 
     }
 

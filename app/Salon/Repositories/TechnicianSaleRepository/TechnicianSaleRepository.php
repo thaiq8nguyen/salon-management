@@ -33,14 +33,11 @@ class TechnicianSaleRepository implements TechnicianSaleRepositoryInterface {
 
     /**
      * Return technician book pay period balance for a particular pay period
-     * @param Technician $technician
-     * @param PayPeriod $payPeriod
+     * @param $technicianId
+     * @param $payPeriodId
      * @return mixed
      */
-    public function getPayPeriodBalance(Technician $technician, PayPeriod $payPeriod){
-
-        $payPeriodId = $payPeriod->id;
-        $technicianId = $technician->id;
+    public function getPayPeriodBalance($technicianId, $payPeriodId){
 
         return TechnicianBook::periodBalance()->where('technician_id','=',$technicianId)->groupBy('pay_period_id')->
         having('pay_period_id','=',$payPeriodId)->first();
@@ -49,14 +46,11 @@ class TechnicianSaleRepository implements TechnicianSaleRepositoryInterface {
 
     /**
      * Return technician book total balance from the first pay period until a given pay period
-     * @param Technician $technician
-     * @param PayPeriod $payPeriod
+     * @param $technicianId
+     * @param $payPeriodId
      * @return mixed
      */
-    public function getTotalBalance(Technician $technician, PayPeriod $payPeriod){
-
-        $payPeriodId = $payPeriod->id;
-        $technicianId = $technician->id;
+    public function getTotalBalance($technicianId, $payPeriodId){
 
         return $totalBalance = TechnicianBook::totalBalance()->
         where('technician_id','=',$technicianId)->where('pay_period_id','<=',$payPeriodId)->first();

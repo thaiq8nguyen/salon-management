@@ -86,8 +86,8 @@
 			getReports(){
 
 			    this.$http.get('/technician-payment/report/show-all').then(response => {
+
 					this.technicians = response.data;
-			        console.log(response.data);
 
 			    });
 			},

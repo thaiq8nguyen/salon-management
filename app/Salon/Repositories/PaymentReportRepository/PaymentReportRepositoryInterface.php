@@ -13,6 +13,8 @@ interface PaymentReportRepositoryInterface{
 
     public function show($technicianId, $payPeriodId);
 
+    public function listReports($technicianId, $months);
+
     public function delete();
 
 

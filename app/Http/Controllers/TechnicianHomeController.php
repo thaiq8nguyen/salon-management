@@ -21,14 +21,17 @@ class TechnicianHomeController extends Controller
 
         $user = User::find(Auth::id());
         $technician = Technician::find($user->technician_id);
-        return response()->json($technician->first_name,200);
+        return response()->json(['technician_id' => $user->technician_id,'first_name' => $technician->first_name],200);
     }
 
     public function sale(){
         return view('technicians.sales');
     }
 
-    public function saleApp(){
+    public function paymentReport(){
 
+        return view('technicians.technician-payment-reports');
     }
+
+
 }

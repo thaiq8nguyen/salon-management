@@ -9,18 +9,16 @@ use App\Technician;
 use App\TechnicianSale;
 use Validator;
 use App\PayPeriod;
+use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
 
 class TechnicianSaleController extends Controller
 {
-    public function __construct(){
-        $this->middleware('admin');
-    }
+    protected $sale;
+    public function __construct(TechnicianSaleRepositoryInterface $sale){
 
-
-    public function index(){
-
-
-
+        $this->middleware('admin')->only(['create','quick-sale-entry']);
+        $this->middleware('auth:api')->only(['getSaleByPeriod']);
+        $this->sale = $sale;
     }
 
 
@@ -60,7 +58,21 @@ class TechnicianSaleController extends Controller
     }
 
     public function quickSaleEntry(){
+
         return view('technicians.quick-sale-entry',['pageTitle' => 'Quick Sale Entry']);
+    }
+
+
+
+    public function balance(Request $request){
+
+        //$totalBalance = $this->sale->getTotalBalance($request->technicianId, $request->payPeriodId);
+        //$payPeriodBalance = $this->sale->getPayPeriodBalance($request->technicianId, $request->payPeriodId);
+        return response()->json('hello');
+        //return response()->json(['total_balance'=> $totalBalance, 'pay_period_balance' => $payPeriodBalance],200);
+
+
+
     }
 
 }

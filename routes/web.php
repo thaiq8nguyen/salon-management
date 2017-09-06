@@ -30,6 +30,7 @@ use App\User;
     /*TECHNICIAN ROUTES*/
     Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');
     Route::get('/technician/sale','TechnicianHomeController@sale')->name('technician-sale')->middleware('auth');
+    Route::get('/technician/reports/payment-report','TechnicianHomeController@paymentReport')->middleware('auth');
 
     /*TESTING ROUTES*/
     //Testing Only -- Route::get('/gift-certificate/search/date/{date}','GiftCertificateController@searchByDate');

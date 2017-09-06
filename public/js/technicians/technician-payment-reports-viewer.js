@@ -60,11 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 86);
+/******/ 	return __webpack_require__(__webpack_require__.s = 230);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -374,7 +375,8 @@ module.exports = {
 
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /***/ (function(module, exports) {
 
 /*
@@ -456,693 +458,8 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
 
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(33)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction) {
-  isProduction = _isProduction
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(17);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(6);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(6);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(18);
-var buildURL = __webpack_require__(20);
-var parseHeaders = __webpack_require__(21);
-var isURLSameOrigin = __webpack_require__(22);
-var createError = __webpack_require__(7);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(23);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if ("development" !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(24);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(19);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 10 */
+/***/ 10:
 /***/ (function(module, exports) {
 
 var g;
@@ -1169,7 +486,8 @@ module.exports = g;
 
 
 /***/ }),
-/* 11 */
+
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11264,13 +10582,15 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 12 */
+
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(13);
 
 /***/ }),
-/* 13 */
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11329,7 +10649,8 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 14 */
+
+/***/ 14:
 /***/ (function(module, exports) {
 
 /*!
@@ -11356,7 +10677,8 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 15 */
+
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11449,7 +10771,8 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 16 */
+
+/***/ 16:
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11639,7 +10962,8 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 17 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11658,7 +10982,8 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 18 */
+
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11691,7 +11016,8 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 19 */
+
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11719,7 +11045,230 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 20 */
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(33)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11794,7 +11343,8 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 21 */
+
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11838,7 +11388,8 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 22 */
+
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11913,7 +11464,8 @@ module.exports = (
 
 
 /***/ }),
-/* 23 */
+
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11956,7 +11508,308 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 24 */
+
+/***/ 230:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(231);
+
+
+/***/ }),
+
+/***/ 231:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__axios_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportViewer_vue__ = __webpack_require__(232);
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
+Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$http', { value: __WEBPACK_IMPORTED_MODULE_3__axios_http__["a" /* http */] });
+Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$moment', { value: __WEBPACK_IMPORTED_MODULE_2_moment___default.a });
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+
+    el: '#root',
+
+    data: {},
+    components: {
+        PaymentReportViewer: __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportViewer_vue__["a" /* default */]
+    },
+    mounted: function mounted() {},
+
+
+    methods: {}
+});
+
+/***/ }),
+
+/***/ 232:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportViewer_vue__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_533c7704_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportViewer_vue__ = __webpack_require__(236);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(233)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportViewer_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_533c7704_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportViewer_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/technician/TechnicianPaymentReportViewer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentReportViewer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-533c7704", Component.options)
+  } else {
+    hotAPI.reload("data-v-533c7704", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ 233:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(234);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("c17a985a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-533c7704\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportViewer.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-533c7704\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportViewer.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 234:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n#technician-payment-report-viewer-app{\n\tbackground-color: #2196F3;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 235:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+				props: [],
+				components: {
+
+								'top-nav-bar': __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__["a" /* default */]
+
+				},
+				data: function data() {
+								return {
+												technicianId: sessionStorage.getItem('technicianId'),
+												reports: [],
+												maxHeight: window.innerHeight
+								};
+				},
+				mounted: function mounted() {
+								this.getReports();
+				},
+
+				computed: {
+								contentHeight: function contentHeight() {
+												return this.maxHeight - 10;
+								}
+				},
+
+				methods: {
+								getReports: function getReports() {
+												var _this = this;
+
+												this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId + '&months=2').then(function (response) {
+																console.log(response.data);
+																_this.reports = response.data[0].payment_report;
+												});
+								},
+								navigate: function navigate(link) {
+
+												window.open(link);
+								},
+								formatDate: function formatDate(date) {
+												return this.$moment(date, 'YYYY-MM-DD').format('MM/DD/YY');
+								}
+				}
+
+});
+
+/***/ }),
+
+/***/ 236:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-app', {
+    attrs: {
+      "id": "technician-payment-report-viewer-app"
+    }
+  }, [_c('top-nav-bar'), _vm._v(" "), _c('main', [_c('v-container', [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    style: ({
+      height: _vm.contentHeight
+    }),
+    attrs: {
+      "xs12": ""
+    }
+  }, [_c('v-card', [_c('v-card-title', [_c('h4', [_vm._v("Recent Payment Reports")]), _vm._v(" "), _c('v-chip', {
+    staticClass: "green darken-1 white--text",
+    attrs: {
+      "label": ""
+    }
+  }, [_vm._v(_vm._s(_vm.reports.length) + " reports savailable")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.reports.length > 0) ? _c('div', [_vm._l((_vm.reports), function(report) {
+    return [_c('v-card-text', {
+      key: report.id
+    }, [_c('v-layout', {
+      attrs: {
+        "row": ""
+      }
+    }, [_c('v-flex', {
+      attrs: {
+        "lg2": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tPay Date: " + _vm._s(_vm.formatDate(report.pay_date)) + "\n\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg10": ""
+      }
+    }, [_c('v-btn', {
+      attrs: {
+        "primary": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.navigate(report.pivot.payment_report_url)
+        }
+      }
+    }, [_vm._v("View")])], 1)], 1)], 1), _vm._v(" "), _c('hr')]
+  })], 2) : _vm._e()], 1)], 1)], 1)], 1)], 1)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-533c7704", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12016,7 +11869,8 @@ module.exports = (
 
 
 /***/ }),
-/* 25 */
+
+/***/ 25:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12075,7 +11929,8 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 26 */
+
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12161,7 +12016,8 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 27 */
+
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12188,7 +12044,8 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 28 */
+
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12209,7 +12066,8 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 29 */
+
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12230,7 +12088,106 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 30 */
+
+/***/ 3:
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12294,7 +12251,8 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 31 */
+
+/***/ 31:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12328,7 +12286,8 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 32 */
+
+/***/ 32:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -12356,7 +12315,8 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 33 */
+
+/***/ 33:
 /***/ (function(module, exports) {
 
 /**
@@ -12389,7 +12349,8 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 34 */
+
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -16859,7 +16820,8 @@ return hooks;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
-/* 35 */
+
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -27875,27 +27837,17 @@ process.umask = function() { return 0; };
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */
+
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_05ff4740_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(40);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(48)
+  __webpack_require__(37)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -27909,15 +27861,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_PayPeriodHeader_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_05ff4740_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PayPeriodHeader_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/partials/PayPeriodHeader.vue"
+Component.options.__file = "resources/assets/js/components/technician/TechnicianTopNavBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] PayPeriodHeader.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianTopNavBar.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -27926,9 +27878,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-05ff4740", Component.options)
+    hotAPI.createRecord("data-v-4831a2c6", Component.options)
   } else {
-    hotAPI.reload("data-v-05ff4740", Component.options)
+    hotAPI.reload("data-v-4831a2c6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -27939,23 +27891,24 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 48 */
+
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(38);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("cc96551a", content, false);
+var update = __webpack_require__(2)("8dcd8c34", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-05ff4740\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-05ff4740\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PayPeriodHeader.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -27965,7 +27918,8 @@ if(false) {
 }
 
 /***/ }),
-/* 49 */
+
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -27973,30 +27927,17 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 50 */
+
+/***/ 39:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -28018,1585 +27959,152 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+    props: [],
+
     data: function data() {
         return {
-            currentPeriod: '',
-            selectID: null,
-            periods: []
-
+            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-report', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }]
         };
     },
-    mounted: function mounted() {
-        this.getPayPeriod();
-    },
 
-
-    computed: {
-        countDown: function countDown() {
-            var today = this.$moment();
-            return this.$moment(this.currentPeriod.payDate, 'MM/DD/YYYY').diff(today, 'days');
-        }
-    },
-
-    watch: {
-        selectID: function selectID() {
-            //store the last selected period id in a session variable
-            sessionStorage.setItem('lastSelectedPeriodIdPayDay', this.selectID);
-        }
-    },
     methods: {
-        getPayPeriod: function getPayPeriod() {
-            var _this = this;
-
-            this.$axios.get('/api/pay-period/list').then(function (response) {
-
-                _this.periods = response.data;
-                _this.currentPeriod = response.data[response.data.length - 1];
-
-                //retrieve the last selected period id in a session variable
-                var lastSelectedPeriodId = sessionStorage.getItem('lastSelectedPeriodIdPayDay');
-                if (lastSelectedPeriodId === null) {
-                    _this.selectID = _this.currentPeriod.id;
-                } else {
-                    _this.selectID = parseInt(lastSelectedPeriodId);
-                }
-            });
-        },
-        setPayPeriodID: function setPayPeriodID() {
-            this.$emit('id', this.selectID);
-            Event.$emit('id', this.selectID);
+        navigate: function navigate(link) {
+            location.href = link;
         }
     }
+
 });
 
 /***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-card', [_c('v-card-text', {
-    staticClass: "grey lighten-4"
-  }, [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg5": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg3": ""
-    }
-  }, [_c('p', {
-    staticClass: "subheading"
-  }, [_vm._v("Pay Periods:")])]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg6": ""
-    }
-  }, [_c('v-select', {
-    staticClass: "blue--text",
-    attrs: {
-      "items": _vm.periods,
-      "label": "Select",
-      "single-line": "",
-      "item-text": "periods",
-      "item-value": "id",
-      "bottom": ""
-    },
-    on: {
-      "input": _vm.setPayPeriodID
-    },
-    model: {
-      value: (_vm.selectID),
-      callback: function($$v) {
-        _vm.selectID = $$v
-      },
-      expression: "selectID"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg3": ""
-    }
-  }, [_c('v-chip', {
-    staticClass: "blue darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_c('strong', [_vm._v("Current Period:")]), _c('span', [_vm._v(_vm._s(_vm.currentPeriod.periods))])])], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [(_vm.countDown > 0) ? _c('v-chip', {
-    staticClass: "blue darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_c('strong', [_vm._v("Upcoming Pay Date: ")]), _vm._v(" " + _vm._s(_vm.currentPeriod.payDate) + " in " + _vm._s(_vm.countDown) + " days ")]) : (_vm.countDown == 0) ? _c('v-chip', {
-    staticClass: "amber darken-1 subheading white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_vm._v("Today")]) : _vm._e()], 1)], 1)], 1)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-05ff4740", esExports)
-  }
-}
-
-/***/ }),
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(87);
-
-
-/***/ }),
-/* 87 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_common_TechnicianHeader_vue__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_partials_PayPeriodHeader_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_admin_NewTechnicianSale_vue__ = __webpack_require__(93);
-/**
- * Created by Thai Nguyen on 5/8/2017.
- */
+/* WEBPACK VAR INJECTION */(function(process) {
 
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(17);
 
-
-
-
-
-
-
-
-
-Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$axios', { value: __WEBPACK_IMPORTED_MODULE_1_axios___default.a });
-Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$moment', { value: __WEBPACK_IMPORTED_MODULE_2_moment___default.a });
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
-
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.common = {
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    'X-Requested-With': 'XMLHttpRequest'
-
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
 };
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('technician-header', __WEBPACK_IMPORTED_MODULE_4__components_common_TechnicianHeader_vue__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pay-period-header', __WEBPACK_IMPORTED_MODULE_5__components_partials_PayPeriodHeader_vue__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('new-technician-sale', __WEBPACK_IMPORTED_MODULE_6__components_admin_NewTechnicianSale_vue__["a" /* default */]);
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
 
-window.Event = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(6);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(6);
+  }
+  return adapter;
+}
 
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    el: '#root',
-    data: {
-        periodID: '',
-        technicianName: ''
+var defaults = {
+  adapter: getDefaultAdapter(),
 
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
+
+/***/ }),
+
+/***/ 40:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-toolbar', {
+    staticClass: "white"
+  }, [_c('v-menu', {
+    attrs: {
+      "offset-y": ""
+    }
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": ""
     },
-
-    methods: {
-        getTechnician: function getTechnician(fullName) {
-            this.technicianName = fullName;
-        },
-        setPayPeriod: function setPayPeriod(id) {
-            this.periodID = id;
-        }
-    }
-});
-
-/***/ }),
-/* 88 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianHeader_vue__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5985a41e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianHeader_vue__ = __webpack_require__(92);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(89)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianHeader_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5985a41e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianHeader_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/common/TechnicianHeader.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] TechnicianHeader.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5985a41e", Component.options)
-  } else {
-    hotAPI.reload("data-v-5985a41e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(90);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("380008be", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5985a41e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianHeader.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5985a41e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianHeader.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 91 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-	props: ['fullName'],
-
-	data: function data() {
-		return {
-			name: null
-		};
-	},
-
-
-	watch: {
-		fullName: function fullName() {
-			if (this.fullName !== null) {
-				this.name = this.fullName;
-			} else {
-				this.name = null;
-			}
-		}
-	},
-	methods: {}
-});
-
-/***/ }),
-/* 92 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.name !== null) ? [_c('v-layout', {
-    staticClass: "blue darken-1"
-  }, [_c('v-flex', {
-    attrs: {
-      "lg1": ""
-    }
-  }, [_c('v-card', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-card-title', [_c('i', {
-    staticClass: "fa fa-user fa-2x white--text"
-  })])], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg11": ""
-    }
-  }, [_c('v-card', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-card-text', [_c('p', {
-    staticClass: "display-1 white--text text-lg-center"
-  }, [_vm._v(_vm._s(_vm.name))])])], 1)], 1)], 1)] : _vm._e()], 2)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5985a41e", esExports)
-  }
-}
-
-/***/ }),
-/* 93 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_NewTechnicianSale_vue__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_054136f4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_NewTechnicianSale_vue__ = __webpack_require__(107);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(94)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_NewTechnicianSale_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_054136f4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_NewTechnicianSale_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/admin/NewTechnicianSale.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] NewTechnicianSale.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-054136f4", Component.options)
-  } else {
-    hotAPI.reload("data-v-054136f4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(95);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("de1a9f22", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-054136f4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewTechnicianSale.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-054136f4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewTechnicianSale.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 96 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DailySaleCard_vue__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Alert_vue__ = __webpack_require__(102);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-
-				props: ['periodId'],
-
-				components: {
-								'daily-sale-card': __WEBPACK_IMPORTED_MODULE_0__DailySaleCard_vue__["a" /* default */]
-
-				},
-
-				data: function data() {
-								return {
-												allTechnicians: null,
-
-												saleDate: this.$moment().format('YYYY-MM-DD'),
-
-												newSale: {
-																technicianID: null,
-																saleDate: null,
-																sale: null,
-																tip: null
-
-												},
-												onTechnician: {
-																fullName: null,
-																sales: null
-												},
-												technicianSale: {
-																headers: [{ text: 'Sale Date', value: 'sale_date', sortable: false }, { text: 'Sale', value: 'sales', sortable: false }, { text: 'Tip', value: 'additional_sales', sortable: false }, { text: 'Change', value: '', sortable: false }],
-																items: []
-
-												},
-
-												selectedTechnician: null,
-
-												editSaleDialogConfig: {
-																show: false,
-																saleID: null,
-																sale: null,
-																tip: null
-												},
-
-												addSaleAlert: {
-																icon: null,
-																status: null,
-																message: null,
-																show: false,
-																hasError: false
-												},
-												alert: {
-																show: false,
-																message: null,
-																hasError: false
-												},
-
-												saleAdded: false
-
-								};
-				},
-				mounted: function mounted() {
-								this.getAllTechnicians();
-				},
-
-				watch: {
-								saleDate: function saleDate() {
-												this.resetAddSale();
-								}
-				},
-				computed: {
-								onPeriodID: function onPeriodID() {
-												if (this.periodId !== null) {
-																return this.periodId;
-												}
-								}
-				},
-				methods: {
-								getAllTechnicians: function getAllTechnicians() {
-												var _this = this;
-
-												this.$axios.get('/api/technician-sale/all?saleDate=' + this.saleDate).then(function (response) {
-																_this.allTechnicians = response.data.technicians;
-																if (_this.saleAdded === false) {
-																				_this.setSaleAlert('info', 'info', 'Select a technician to begin adding', true, false);
-																}
-												});
-								},
-								getTechnicianDetails: function getTechnicianDetails(firstName) {
-												var _this2 = this;
-
-												this.selectedTechnician = firstName;
-												this.$axios.get('/api/technician-sale/pay-period/' + this.onPeriodID + '/technician/' + firstName).then(function (response) {
-																_this2.newSale.technicianID = response.data.id;
-																_this2.newSale.saleDate = _this2.saleDate;
-																_this2.newSale.tip = 0;
-																_this2.onTechnician.fullName = response.data.full_name;
-																_this2.onTechnician.sales = response.data.daily_sales;
-																_this2.saleAdded = false;
-																_this2.$emit('name', _this2.onTechnician.fullName);
-												});
-								},
-								readableDate: function readableDate(date) {
-												return this.$moment(date).format('MM/DD/YY dd');
-								},
-								addSale: function addSale() {
-												var _this3 = this;
-
-												this.$axios.post('/api/technician-sale/add', this.newSale).then(function (response) {
-
-																if (response.data.success) {
-																				_this3.setSaleAlert('check', 'success', response.data.message, true);
-																				_this3.saleAdded = true;
-																				_this3.resetAddSale();
-																} else {
-																				_this3.setSaleAlert('error', 'error', response.data.message, true, false);
-																}
-												}).catch(function (error) {
-																if (error.response) {
-																				_this3.setSaleAlert('error', 'error', error.response.data.message, true, true);
-																}
-												});
-								},
-								showEditSaleDialog: function showEditSaleDialog(saleID, sale, tip) {
-
-												this.editSaleDialogConfig.show = true;
-												this.editSaleDialogConfig.saleID = saleID;
-												this.editSaleDialogConfig.sale = sale;
-												this.editSaleDialogConfig.tip = tip;
-												this.alert.show = false; //hide any alert from the previous edit
-								},
-								editSale: function editSale() {
-												var _this4 = this;
-
-												this.$axios.put('/api/technician-sale/edit', {
-																saleID: this.editSaleDialogConfig.saleID,
-																sale: this.editSaleDialogConfig.sale,
-																tip: this.editSaleDialogConfig.tip
-												}).then(function (response) {
-																if (response.data.success) {
-																				_this4.alert.show = true;
-																				_this4.alert.message = response.data.message;
-																}
-												}).catch(function (error) {
-																if (error.response) {
-																				_this4.alert.show = true;
-																				_this4.alert.hasError = true;
-																				_this4.alert.message = error.response.data.message;
-																}
-												});
-								},
-								resetAddSale: function resetAddSale() {
-
-												this.newSale.sale = null;
-												this.newSale.tip = null;
-												this.allTechnicians = '';
-												this.getAllTechnicians();
-												this.onTechnician.fullName = null;
-												this.selectedTechnician = null;
-												this.$emit('name', null);
-								},
-								setSaleAlert: function setSaleAlert(icon, status, message, show, hasError) {
-												this.addSaleAlert.icon = icon;
-												this.addSaleAlert.status = status;
-												this.addSaleAlert.message = message;
-												this.addSaleAlert.show = show;
-												this.addSaleAlert.hasError = hasError;
-								},
-								doesSaleExist: function doesSaleExist() {
-												var saleExists = false;
-												for (var i = 0; i < this.onTechnician.sales.length; i++) {
-																if (this.saleDate === this.onTechnician.sales[i].sale_date) {
-																				saleExists = true;
-																}
-												}
-												return saleExists;
-								}
-				}
-});
-
-/***/ }),
-/* 97 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DailySaleCard_vue__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1e1e3099_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_DailySaleCard_vue__ = __webpack_require__(101);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(98)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DailySaleCard_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1e1e3099_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_DailySaleCard_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/admin/DailySaleCard.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] DailySaleCard.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1e1e3099", Component.options)
-  } else {
-    hotAPI.reload("data-v-1e1e3099", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(99);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("ac1ad890", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1e1e3099\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DailySaleCard.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1e1e3099\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DailySaleCard.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 99 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 100 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-				props: ['date', 'refresh'],
-
-				data: function data() {
-
-								return {
-												saleExists: null,
-												saleDate: this.$moment().format('YYYY-MM-DD'),
-												headers: [{ text: '', value: 'name', sortable: false }, { text: 'Square', value: 'square', sortable: false }, { text: 'Technician', value: 'technician', sortable: false }, { text: 'Difference', value: 'difference', sortable: false }],
-												items: [{
-																value: false,
-																name: 'Gross Sales',
-																square: 0,
-																technician: 0,
-																difference: 0
-												}, {
-																value: false,
-																name: 'Raw Technician Sales',
-																square: 0,
-																technician: 0,
-																difference: 0
-												}, {
-																value: false,
-																name: 'Tips on Card',
-																square: 0,
-																technician: 0,
-																difference: 0
-
-												}, {
-																value: false,
-																name: 'Certificates Sold',
-																square: 0,
-																technician: 0,
-																difference: 0
-
-												}, {
-																value: false,
-																name: 'Certificates Redeemed',
-																square: 0,
-																technician: 0,
-																difference: 0
-												}, {
-																value: false,
-																name: 'Convenience Fees',
-																square: 0,
-																technician: 0,
-																difference: 0
-												}, {
-																value: false,
-																name: 'Processing Fees',
-																square: 0,
-																technician: 0,
-																difference: 0
-												}]
-								};
-				},
-				mounted: function mounted() {
-								this.getSales();
-				},
-
-
-				watch: {
-								date: function date() {
-												this.saleDate = this.date;
-												this.getSales();
-								},
-								refresh: function refresh() {
-												if (this.refresh === true) {
-																this.getSales();
-												}
-								}
-				},
-
-				computed: {
-								readableSaleDate: function readableSaleDate() {
-												if (this.saleDate !== null) {
-																return this.$moment(this.saleDate, 'YYYY-MM-DD').format('MM/DD/YYYY');
-												}
-								}
-				},
-				methods: {
-								getSales: function getSales() {
-												this.$axios('/api/salon/daily-sale?date=' + this.saleDate).then(this.updateSales);
-								},
-								updateSales: function updateSales(response) {
-												if (response.data.success) {
-																this.saleExists = true;
-																this.items[0].square = response.data.sales['Square Gross Sales'];
-																this.items[0].technician = response.data.sales['Technician Gross Sales'];
-																this.items[0].difference = response.data.sales['Gross Sales Difference'];
-
-																this.items[1].technician = response.data.sales['Technician Sales'];
-
-																this.items[2].square = response.data.tips['Square Tips'];
-																this.items[2].technician = response.data.tips['Technician Tips'];
-																this.items[2].difference = response.data.tips['Tips Difference'];
-
-																this.items[4].square = response.data.sales['Gift Certificate Redeemed'];
-																this.items[5].square = response.data.sales['Convenience Fee'];
-												} else {
-																this.saleExists = false;
-												}
-								}
-				}
-
-});
-
-/***/ }),
-/* 101 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    attrs: {
-      "id": "daily-sale-card"
-    }
-  }, [_c('v-card', [_c('v-card-text', {
-    staticClass: "mt-0"
-  }, [(_vm.saleExists) ? [_c('v-data-table', {
-    attrs: {
-      "headers": _vm.headers,
-      "items": _vm.items,
-      "hide-actions": ""
-    },
-    scopedSlots: _vm._u([{
-      key: "items",
-      fn: function(props) {
-        return [_c('td', [_vm._v(_vm._s(props.item.name))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
-        }, [_vm._v("$ " + _vm._s(props.item.square))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
-        }, [_vm._v("$ " + _vm._s(props.item.technician))]), _vm._v(" "), _c('td', {
-          staticClass: "text-md-right"
-        }, [_vm._v("$ " + _vm._s(props.item.difference))])]
-      }
-    }])
-  })] : [_c('v-alert', {
-    attrs: {
-      "error": "",
-      "value": "true"
-    }
-  }, [_vm._v("\n\t\t\t\t\tThere is no sale recorded for " + _vm._s(_vm.readableSaleDate) + "\n\t\t\t\t\t"), _c('v-btn', {
-    attrs: {
-      "href": "/salon-sales"
-    }
-  }, [_vm._v("Salon Sale")])], 1)]], 2)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1e1e3099", esExports)
-  }
-}
-
-/***/ }),
-/* 102 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Alert_vue__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4aab68c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Alert_vue__ = __webpack_require__(106);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(103)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Alert_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4aab68c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Alert_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/partials/Alert.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Alert.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4aab68c6", Component.options)
-  } else {
-    hotAPI.reload("data-v-4aab68c6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* unused harmony default export */ var _unused_webpack_default_export = (Component.exports);
-
-
-/***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(104);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("19367aa4", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4aab68c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Alert.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4aab68c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Alert.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 105 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    props: ['message']
-
-});
-
-/***/ }),
-/* 106 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-alert', {
-    attrs: {
-      "info": "",
-      "value": true
-    }
-  }, [_vm._v(_vm._s(_vm.message))])], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4aab68c6", esExports)
-  }
-}
-
-/***/ }),
-/* 107 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', [_c('v-container', {
-    attrs: {
-      "fluid": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg5": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg12": ""
-    }
-  }, [_c('v-card', [_c('v-card-text', [_c('v-date-picker', {
-    staticClass: "elevation-0",
-    attrs: {
-      "landscape": ""
-    },
-    model: {
-      value: (_vm.saleDate),
-      callback: function($$v) {
-        _vm.saleDate = $$v
-      },
-      expression: "saleDate"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg12": "",
-      "mt-2": ""
-    }
-  }, [_c('daily-sale-card', {
-    attrs: {
-      "date": _vm.saleDate,
-      "refresh": _vm.saleAdded
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg3": ""
-    }
-  }, [_c('v-card', [_c('v-card-text', [_c('v-list', [_vm._l((_vm.allTechnicians), function(technician) {
-    return [_c('v-list-tile', {
-      class: {
-        orange: _vm.selectedTechnician == technician.firstName
-      },
-      nativeOn: {
+    slot: "activator"
+  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.menu), function(item) {
+    return [(item.divider) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('v-list-tile', {
+      on: {
         "click": function($event) {
-          _vm.getTechnicianDetails(technician.firstName)
+          _vm.navigate(item.link)
         }
       }
-    }, [_c('v-list-tile-avatar', [_c('i', {
-      staticClass: "fa fa-user-circle fa-lg"
-    })]), _vm._v(" "), _c('v-list-tile-content', [_c('v-list-tile-title', {
-      class: {
-        'white--text': _vm.selectedTechnician == technician.firstName
-      },
-      domProps: {
-        "innerHTML": _vm._s(technician.fullName)
-      }
-    })], 1), _vm._v(" "), (technician.countSales.length == 1) ? _c('v-icon', {
-      staticClass: "teal--text"
-    }, [_vm._v("done")]) : _vm._e()], 1), _vm._v(" "), _c('v-divider')]
-  })], 2)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg12": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', {
-    staticClass: "blue lighten-1",
-    attrs: {
-      "primary-title": ""
-    }
-  }, [_c('p', {
-    staticClass: "headline white--text"
-  }, [_vm._v("Add Sale")])]), _vm._v(" "), (_vm.onTechnician.fullName) ? [(_vm.doesSaleExist()) ? [_c('v-card-text', [_c('v-alert', {
-    attrs: {
-      "info": "",
-      "value": "true",
-      "transition": "scale-transition"
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t" + _vm._s(_vm.onTechnician.fullName + ' \'s sale is already recorded for ' + _vm.readableDate(_vm.saleDate)))])], 1)] : [_c('v-card-text', [_c('form', {
-    on: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.addSale($event)
-      }
-    }
-  }, [_c('v-text-field', {
-    attrs: {
-      "label": "Sale",
-      "name": "sale",
-      "prefix": "$",
-      "autofocus": ""
-    },
-    model: {
-      value: (_vm.newSale.sale),
-      callback: function($$v) {
-        _vm.newSale.sale = $$v
-      },
-      expression: "newSale.sale"
-    }
-  }), _vm._v(" "), _c('v-text-field', {
-    attrs: {
-      "label": "Tip",
-      "name": "tip",
-      "prefix": "$"
-    },
-    model: {
-      value: (_vm.newSale.tip),
-      callback: function($$v) {
-        _vm.newSale.tip = $$v
-      },
-      expression: "newSale.tip"
-    }
-  })], 1)]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
-    attrs: {
-      "primary": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.addSale($event)
-      }
-    }
-  }, [_vm._v("Save")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (_vm.addSaleAlert.hasError) ? [_c('v-card-text', [_c('v-alert', {
-    class: _vm.addSaleAlert.status,
-    attrs: {
-      "icon": _vm.addSaleAlert.icon
-    },
-    model: {
-      value: (_vm.addSaleAlert.show),
-      callback: function($$v) {
-        _vm.addSaleAlert.show = $$v
-      },
-      expression: "addSaleAlert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.addSaleAlert.message))])], 1)] : _vm._e()]] : [_c('v-card-text', [_c('v-alert', {
-    class: _vm.addSaleAlert.status,
-    attrs: {
-      "icon": _vm.addSaleAlert.icon
-    },
-    model: {
-      value: (_vm.addSaleAlert.show),
-      callback: function($$v) {
-        _vm.addSaleAlert.show = $$v
-      },
-      expression: "addSaleAlert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.addSaleAlert.message))])], 1)]], 2)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg-12": "",
-      "mt-2": ""
-    }
-  }, [(_vm.onTechnician.fullName) ? _c('v-card', [_c('v-card-title', {
-    staticClass: "blue lighten-1",
-    attrs: {
-      "primary-title": ""
-    }
-  }, [_c('p', {
-    staticClass: "headline white--text"
-  }, [_vm._v("Sale Records")])]), _vm._v(" "), _c('v-card-text', [(_vm.onTechnician.sales.length == 0) ? _c('div', [_c('p', {
-    staticClass: "text-lg-center"
-  }, [_vm._v("There are no recorded sales")])]) : _c('div', [_c('v-data-table', {
-    attrs: {
-      "headers": _vm.technicianSale.headers,
-      "items": _vm.onTechnician.sales,
-      "hide-actions": ""
-    },
-    scopedSlots: _vm._u([{
-      key: "items",
-      fn: function(props) {
-        return [_c('td', {
-          staticClass: "text-xs-right"
-        }, [_vm._v(_vm._s(_vm.readableDate(props.item.sale_date)))]), _vm._v(" "), _c('td', {
-          staticClass: "text-xs-right"
-        }, [_vm._v("$ " + _vm._s(props.item.sales))]), _vm._v(" "), _c('td', {
-          staticClass: "text-xs-right"
-        }, [_vm._v("$ " + _vm._s(props.item.additional_sales))]), _vm._v(" "), _c('td', {
-          staticClass: "text-xs-right"
-        }, [_c('a', {
-          attrs: {
-            "href": "#"
-          },
-          on: {
-            "click": function($event) {
-              $event.preventDefault();
-              $event.stopPropagation();
-              _vm.showEditSaleDialog(props.item.id, props.item.sales, props.item.additional_sales)
-            }
-          }
-        }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\tChange")])])]
-      }
-    }])
-  })], 1)])], 1) : _vm._e()], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
-    model: {
-      value: (_vm.editSaleDialogConfig.show),
-      callback: function($$v) {
-        _vm.editSaleDialogConfig.show = $$v
-      },
-      expression: "editSaleDialogConfig.show"
-    }
-  }, [_c('v-card', [_c('v-card-title', [_c('div', {
-    staticClass: "headline"
-  }, [_vm._v("Edit Sale")])]), _vm._v(" "), _c('v-card-text', [_c('form', [_c('v-text-field', {
-    attrs: {
-      "label": "SaleID",
-      "name": "sale-id",
-      "disabled": ""
-    },
-    model: {
-      value: (_vm.editSaleDialogConfig.saleID),
-      callback: function($$v) {
-        _vm.editSaleDialogConfig.saleID = $$v
-      },
-      expression: "editSaleDialogConfig.saleID"
-    }
-  }), _vm._v(" "), _c('v-text-field', {
-    attrs: {
-      "label": "Sale:",
-      "name": "sale"
-    },
-    model: {
-      value: (_vm.editSaleDialogConfig.sale),
-      callback: function($$v) {
-        _vm.editSaleDialogConfig.sale = $$v
-      },
-      expression: "editSaleDialogConfig.sale"
-    }
-  }), _vm._v(" "), _c('v-text-field', {
-    attrs: {
-      "label": "Tip:",
-      "name": "additonal-sale"
-    },
-    model: {
-      value: (_vm.editSaleDialogConfig.tip),
-      callback: function($$v) {
-        _vm.editSaleDialogConfig.tip = $$v
-      },
-      expression: "editSaleDialogConfig.tip"
-    }
-  })], 1)]), _vm._v(" "), _c('v-card-actions', [_c('v-btn', {
-    attrs: {
-      "primary": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.editSale($event)
-      }
-    }
-  }, [_vm._v("Save")]), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "light": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.editSaleDialogConfig.show = false
-      }
-    }
-  }, [_vm._v("Exit")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (!_vm.alert.hasError) ? _c('v-card-text', [_c('v-alert', {
-    attrs: {
-      "success": "",
-      "transition": "scale-transition"
-    },
-    model: {
-      value: (_vm.alert.show),
-      callback: function($$v) {
-        _vm.alert.show = $$v
-      },
-      expression: "alert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.alert.message))])], 1) : _c('v-card-text', [_c('v-alert', {
-    attrs: {
-      "error": "",
-      "transition": "scale-transition"
-    },
-    model: {
-      value: (_vm.alert.show),
-      callback: function($$v) {
-        _vm.alert.show = $$v
-      },
-      expression: "alert.show"
-    }
-  }, [_vm._v(_vm._s(_vm.alert.message))])], 1)], 1)], 1)], 1)], 1)
+    }, [_c('v-list-tile-title', {
+      class: item.format
+    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(_vm._s(item.title))], 1)], 1)]
+  })], 2)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -29605,9 +28113,302 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-054136f4", esExports)
+     require("vue-hot-reload-api").rerender("data-v-4831a2c6", esExports)
   }
 }
+
+/***/ }),
+
+/***/ 41:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return http; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+var http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+    baseURL: '/api',
+    headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+});
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(18);
+var buildURL = __webpack_require__(20);
+var parseHeaders = __webpack_require__(21);
+var isURLSameOrigin = __webpack_require__(22);
+var createError = __webpack_require__(7);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(23);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if ("development" !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(24);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(19);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
 
 /***/ })
-/******/ ]);
+
+/******/ });

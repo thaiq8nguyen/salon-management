@@ -49,7 +49,7 @@ Route::get('/salon/daily-sale','SalonSaleApiController@getDailySales')->middlewa
 
 Route::get('/salon/tech-sale','SalonSaleApiController@getTechSale')->middleware('auth:api');
 
-Route::get('/technician-sale/pay-period/{payPeriod}/technician/{technician}','TechnicianSaleApiController@searchSaleByPeriod')->middleware('auth:api');
+Route::get('/technician-sale/by-pay-period/','TechnicianSaleApiController@getSaleByPeriod')->middleware('auth:api');
 
 Route::get('/technician-wage/pay-period/{payPeriod}/technician/{technician}', 'PayDayApiController@searchWageByPeriod')->middleware('auth:api');
 
@@ -59,9 +59,11 @@ Route::get('/technician-payment/search/by-date','WagePaymentController@getPaymen
 
 Route::post('/technician-payment/delete','WagePaymentController@deletePayment')->middleware('auth:api');
 
-Route::get('/technician-payment/balance/pay-period/{payPeriod}/technician/{technician}','PaymentReportController@balance')->middleware('auth:api');
+Route::get('/technician-sale/balance/','TechnicianSaleApiController@getBalance')->middleware('auth:api');
 
 Route::get('/technician-payment/report/show-all','PaymentReportController@all')->middleware('auth:api');
+
+Route::get('/technician-payment/report/by-technician','PaymentReportApiController@byTechnician')->middleware('auth:api');
 
 Route::post('/technician-payment/report/create','PaymentReportController@create')->middleware('auth:api');
 

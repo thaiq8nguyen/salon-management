@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 185);
+/******/ 	return __webpack_require__(__webpack_require__.s = 190);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11017,15 +11017,44 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 185:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(186);
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+  error.request = request;
+  error.response = response;
+  return error;
+};
 
 
 /***/ }),
 
-/***/ 186:
+/***/ 190:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(191);
+
+
+/***/ }),
+
+/***/ 191:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11038,7 +11067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_Technician_vue__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_Technician_vue__ = __webpack_require__(192);
 
 
 
@@ -11067,16 +11096,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 /***/ }),
 
-/***/ 187:
+/***/ 192:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Technician_vue__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_42502998_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Technician_vue__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Technician_vue__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_42502998_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Technician_vue__ = __webpack_require__(196);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(188)
+  __webpack_require__(193)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -11121,13 +11150,13 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 188:
+/***/ 193:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(189);
+var content = __webpack_require__(194);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11148,7 +11177,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 189:
+/***/ 194:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -11156,46 +11185,18 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#technician-home-app{\n\tbackground-color: #2196F3;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The error.
- */
-module.exports = function enhanceError(error, config, code, request, response) {
-  error.config = config;
-  if (code) {
-    error.code = code;
-  }
-  error.request = request;
-  error.response = response;
-  return error;
-};
-
-
-/***/ }),
-
-/***/ 190:
+/***/ 195:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
 //
 //
 //
@@ -11215,43 +11216,17 @@ module.exports = function enhanceError(error, config, code, request, response) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 				props: [],
-
+				components: {
+								'top-nav-bar': __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__["a" /* default */]
+				},
 				data: function data() {
 								return {
-												home: '/technician',
-												logout: '/logout',
-												sale: '/technician/sale',
-												firstName: null
+												firstName: null,
+												technicianId: null
 								};
 				},
 				mounted: function mounted() {
@@ -11271,8 +11246,10 @@ module.exports = function enhanceError(error, config, code, request, response) {
 												var _this = this;
 
 												this.$axios.get('/api/technician/home').then(function (response) {
-																_this.firstName = response.data;
-																sessionStorage.setItem('firstName', response.data);
+																_this.firstName = response.data.first_name;
+																_this.technicianId = response.data.technician_id;
+																sessionStorage.setItem('firstName', response.data.first_name);
+																sessionStorage.setItem('technicianId', response.data.technician_id);
 												});
 								}
 				}
@@ -11281,41 +11258,20 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 /***/ }),
 
-/***/ 191:
+/***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
-      "id": "technician-home"
+      "id": "technician-home-container"
     }
   }, [_c('v-app', {
-    staticClass: "white"
-  }, [_c('v-toolbar', {
-    staticClass: "blue"
-  }, [_c('v-btn', {
     attrs: {
-      "icon": "",
-      "href": _vm.home
+      "id": "technician-home-app"
     }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("home")])], 1), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "icon": "",
-      "href": _vm.sale
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("attach_money")])], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "icon": "",
-      "href": _vm.logout
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("exit_to_app")])], 1)], 1), _vm._v(" "), _c('v-container', {
+  }, [_c('top-nav-bar'), _vm._v(" "), _c('v-container', {
     attrs: {
       "fluid": ""
     }
@@ -11329,36 +11285,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-card-title', [_c('p', {
     staticClass: "title"
-  }, [_vm._v("Welcome " + _vm._s(_vm.formattedName) + "!")])]), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "xs12": ""
-    }
-  }, [_c('v-btn', {
-    staticClass: "green white--text",
-    attrs: {
-      "block": "",
-      "href": _vm.sale
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("attach_money")]), _vm._v(" "), _c('span', [_vm._v("How much do I make?")])], 1)], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "xs12": ""
-    }
-  }, [_c('v-btn', {
-    staticClass: "amber white--text",
-    attrs: {
-      "block": "",
-      "href": _vm.logout
-    }
-  }, [_c('v-icon', {
-    staticClass: "white--text"
-  }, [_vm._v("exit_to_app")]), _vm._v(" "), _c('span', [_vm._v("Log Out")])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("Welcome " + _vm._s(_vm.formattedName) + "!")])])], 1)], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27865,6 +27792,145 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ 36:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(40);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(37)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/technician/TechnicianTopNavBar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianTopNavBar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4831a2c6", Component.options)
+  } else {
+    hotAPI.reload("data-v-4831a2c6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(38);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("8dcd8c34", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 38:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 39:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: [],
+
+    data: function data() {
+        return {
+            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-report', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }]
+        };
+    },
+
+    methods: {
+        navigate: function navigate(link) {
+            location.href = link;
+        }
+    }
+
+});
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27963,6 +28029,47 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
+
+/***/ }),
+
+/***/ 40:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-toolbar', {
+    staticClass: "white"
+  }, [_c('v-menu', {
+    attrs: {
+      "offset-y": ""
+    }
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": ""
+    },
+    slot: "activator"
+  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.menu), function(item) {
+    return [(item.divider) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('v-list-tile', {
+      on: {
+        "click": function($event) {
+          _vm.navigate(item.link)
+        }
+      }
+    }, [_c('v-list-tile-title', {
+      class: item.format
+    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(_vm._s(item.title))], 1)], 1)]
+  })], 2)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4831a2c6", esExports)
+  }
+}
 
 /***/ }),
 

@@ -1,18 +1,7 @@
 <template>
 	<div id = "technician-sale-container">
 		<v-app id = "technician-sale-app">
-			<v-toolbar class = "white">
-				<v-btn icon :href="home">
-					<v-icon>home</v-icon>
-				</v-btn>
-				<v-btn icon :href="sale">
-					<v-icon>attach_money</v-icon>
-				</v-btn>
-				<v-spacer></v-spacer>
-				<v-btn icon :href="logout">
-					<v-icon>exit_to_app</v-icon>
-				</v-btn>
-			</v-toolbar>
+			<top-nav-bar></top-nav-bar>
 			<v-container fluid>
 				<v-layout>
 					<v-flex xs12>
@@ -27,7 +16,7 @@
 							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
 							<wage :total-sales="wage" v-show="show.wage"></wage>
 							<payment :payments="payments" v-show="show.payment"></payment>
-							<balance :pay-period-id="selectPayPeriodId" :first-name="firstName" v-show="show.payment"></balance>
+							<balance :pay-period-id="selectPayPeriodId" :technician-id="technicianId" v-show="show.payment"></balance>
 						</div>
 					</v-flex>
 				</v-layout>
@@ -51,14 +40,18 @@
 </template>
 
 <script>
+	import TechnicianTopNavBar from './TechnicianTopNavBar.vue';
 	import TechnicianDailySaleTable from '../common/TechnicianDailySaleTable.vue';
 	import TechnicianTotalSaleTable from '../common/TechnicianTotalSaleTable.vue';
 	import TechnicianPaymentTable from '../common/TechnicianPaymentTable.vue';
 	import TechnicianBalance from '../common/TechnicianBalance.vue';
+
     export default {
         props: [],
 
 	    components:{
+
+            'top-nav-bar': TechnicianTopNavBar,
             'sale':TechnicianDailySaleTable,
 		    'wage':TechnicianTotalSaleTable,
 		    'payment': TechnicianPaymentTable,
@@ -68,9 +61,6 @@
 
         data() {
             return {
-                home:'/technician',
-                logout:'/logout',
-                sale: '/technician/sale',
 	            payPeriods:[],
 	            currentPayPeriod:null,
 	            selectPayPeriodId:null,
@@ -79,6 +69,7 @@
 	            wage:[],
 	            payments:[],
 	            firstName: sessionStorage.getItem('firstName'),
+	            technicianId: sessionStorage.getItem('technicianId'),
 	            screen:'sale',
 	            show:{
                     dailySales:true,
@@ -105,7 +96,6 @@
         methods: {
             getPayPeriod() {
                 this.$axios.get('/api/pay-period/list').then(response => {
-
                     this.payPeriods = response.data;
                     this.currentPayPeriod = response.data[response.data.length - 1];
                     this.selectPayPeriod = this.currentPayPeriod.periods;
@@ -122,9 +112,12 @@
             },
 
             getSaleByPeriod() {
-                this.$axios.get('/api/technician-sale/pay-period/' + this.selectPayPeriodId + '/technician/'
-                    + this.firstName).then(response => {
-                    this.dailySales = response.data.daily_sales;
+                const path = '/api/technician-sale/by-pay-period/?technicianId=' + this.technicianId +
+                    '&payPeriodId=' + this.selectPayPeriodId;
+
+                this.$axios.get(path).then(response => {
+
+	                this.dailySales = response.data.daily_sales;
 
                 });
             },

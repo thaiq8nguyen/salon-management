@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        props: ['payPeriodId','firstName'],
+        props: ['payPeriodId','technicianId'],
 
         data() {
             return {
@@ -45,11 +45,7 @@
                 this.getBalance();
 
             },
-		    firstName(){
 
-                this.getBalance();
-
-		    }
 	    },
 	    computed:{
             showBalance(){
@@ -58,10 +54,11 @@
 	    },
         methods: {
             getBalance(){
-                this.$axios.get('/api/technician-payment/balance/pay-period/' + this.payPeriodId + '/technician/'
-                    + this.firstName).then(response => {
-                    this.payPeriodBalance = response.data.pay_period_balance;
-                    this.totalBalance = response.data.total_balance;
+                this.$axios.get('/api/technician-sale/balance/?technicianId=' + this.technicianId + "&payPeriodId="
+                    + this.payPeriodId).then(response => {
+
+                        this.payPeriodBalance = response.data.pay_period_balance;
+                        this.totalBalance = response.data.total_balance;
                 });
             },
         }

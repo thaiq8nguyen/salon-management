@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Technician;
-use App\PayPeriod;
+
 use Illuminate\Http\Request;
 use Salon\Repositories\PaymentReportRepository\PaymentReportRepositoryInterface;
 
@@ -19,16 +18,19 @@ class PaymentReportController extends Controller
 
     public function index(){
 
-        return view('technicians.payment-reports');
+        return view('technicians.admin-payment-reports');
     }
 
 
     public function all()
     {
+
         return response()->json($this->report->all(),200);
 
 
     }
+
+
 
     public function create(Request $request){
 
@@ -52,16 +54,7 @@ class PaymentReportController extends Controller
 
 
 
-    public function balance(PayPeriod $payPeriod,Technician $technician){
 
-        $totalBalance = $this->sales->getTotalBalance($technician, $payPeriod);
-        $payPeriodBalance = $this->sales->getPayPeriodBalance($technician, $payPeriod);
-
-        return response()->json(['total_balance'=> $totalBalance, 'pay_period_balance' => $payPeriodBalance]);
-
-
-
-    }
 
 
 }
