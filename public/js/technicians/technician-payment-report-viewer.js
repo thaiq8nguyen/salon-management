@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 230);
+/******/ 	return __webpack_require__(__webpack_require__.s = 237);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11509,15 +11509,15 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 230:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(231);
+module.exports = __webpack_require__(238);
 
 
 /***/ }),
 
-/***/ 231:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11529,7 +11529,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__axios_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportViewer_vue__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportPDF_vue__ = __webpack_require__(239);
 
 
 
@@ -11546,7 +11546,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     data: {},
     components: {
-        'payment-report-viewer': __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportViewer_vue__["a" /* default */]
+        'payment-report-pdf': __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportPDF_vue__["a" /* default */]
     },
     mounted: function mounted() {},
 
@@ -11556,16 +11556,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 /***/ }),
 
-/***/ 232:
+/***/ 239:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportViewer_vue__ = __webpack_require__(235);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_533c7704_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportViewer_vue__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportPDF_vue__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ae80d20_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportPDF_vue__ = __webpack_require__(243);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(233)
+  __webpack_require__(240)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -11579,15 +11579,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportViewer_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_533c7704_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportViewer_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianPaymentReportPDF_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ae80d20_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianPaymentReportPDF_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/technician/TechnicianPaymentReportViewer.vue"
+Component.options.__file = "resources/assets/js/components/technician/TechnicianPaymentReportPDF.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentReportViewer.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] TechnicianPaymentReportPDF.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -11596,9 +11596,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-533c7704", Component.options)
+    hotAPI.createRecord("data-v-7ae80d20", Component.options)
   } else {
-    hotAPI.reload("data-v-533c7704", Component.options)
+    hotAPI.reload("data-v-7ae80d20", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11607,204 +11607,6 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
-
-/***/ }),
-
-/***/ 233:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(234);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("c17a985a", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-533c7704\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportViewer.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-533c7704\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportViewer.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 234:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n#technician-payment-report-viewer-app{\n\tbackground-color: #2196F3;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 235:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-				props: [],
-				components: {
-
-								'top-nav-bar': __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__["a" /* default */]
-
-				},
-				data: function data() {
-								return {
-												technicianId: sessionStorage.getItem('technicianId'),
-												reports: [],
-												maxHeight: window.innerHeight
-								};
-				},
-				mounted: function mounted() {
-								this.getReports();
-				},
-
-				computed: {
-								contentHeight: function contentHeight() {
-												return this.maxHeight - 10;
-								}
-				},
-
-				methods: {
-								getReports: function getReports() {
-												var _this = this;
-
-												this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId + '&months=2').then(function (response) {
-																_this.reports = response.data[0].payment_report;
-												});
-								},
-								navigate: function navigate(link) {
-												sessionStorage.setItem('reportUrl', link);
-												location.href = '/technician/reports/payment-report';
-								},
-								formatDate: function formatDate(date) {
-												return this.$moment(date, 'YYYY-MM-DD').format('MM/DD/YY');
-								}
-				}
-
-});
-
-/***/ }),
-
-/***/ 236:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('v-app', {
-    attrs: {
-      "id": "technician-payment-report-viewer-app"
-    }
-  }, [_c('top-nav-bar'), _vm._v(" "), _c('main', [_c('v-container', [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    style: ({
-      height: _vm.contentHeight
-    }),
-    attrs: {
-      "xs12": ""
-    }
-  }, [_c('v-card', [_c('v-card-title', [_c('h4', [_vm._v("Recent Payment Reports")]), _vm._v(" "), _c('v-chip', {
-    staticClass: "green darken-1 white--text",
-    attrs: {
-      "label": ""
-    }
-  }, [_vm._v(_vm._s(_vm.reports.length) + " reports savailable")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.reports.length > 0) ? _c('div', [_vm._l((_vm.reports), function(report) {
-    return [_c('v-card-text', {
-      key: report.id
-    }, [_c('v-layout', {
-      attrs: {
-        "row": ""
-      }
-    }, [_c('v-flex', {
-      attrs: {
-        "lg2": ""
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tPay Date: " + _vm._s(_vm.formatDate(report.pay_date)) + "\n\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg10": ""
-      }
-    }, [_c('v-btn', {
-      attrs: {
-        "primary": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.navigate(report.pivot.payment_report_url)
-        }
-      }
-    }, [_vm._v("View")])], 1)], 1)], 1), _vm._v(" "), _c('hr')]
-  })], 2) : _vm._e()], 1)], 1)], 1)], 1)], 1)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-533c7704", esExports)
-  }
-}
 
 /***/ }),
 
@@ -11866,6 +11668,147 @@ module.exports = (
   })()
 );
 
+
+/***/ }),
+
+/***/ 240:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(241);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("0e20baba", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7ae80d20\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportPDF.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7ae80d20\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianPaymentReportPDF.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 241:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 242:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+											props: [],
+
+											components: {
+
+																						'top-nav-bar': __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__["a" /* default */]
+
+											},
+
+											data: function data() {
+																						return {
+																																	url: null,
+																																	maxHeight: window.innerHeight,
+																																	topNavBarHeight: null
+																						};
+											},
+											mounted: function mounted() {
+																						this.handle();
+																						this.topNavBarHeight = document.getElementById('top-nav-bar').clientHeight;
+											},
+
+
+											computed: {
+																						allowedWidth: function allowedWidth() {
+																																	return '100%';
+																						},
+																						allowedHeight: function allowedHeight() {
+																																	return this.maxHeight - this.topNavBarHeight + 'px';
+																						}
+											},
+											methods: {
+																						handle: function handle() {
+																																	this.url = sessionStorage.getItem('reportUrl');
+																						}
+											}
+
+});
+
+/***/ }),
+
+/***/ 243:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('v-app', {
+    attrs: {
+      "id": "technician-payment-report-viewer-app"
+    }
+  }, [_c('top-nav-bar'), _vm._v(" "), _c('main', [_c('div', {
+    style: ({
+      width: _vm.allowedWidth,
+      height: _vm.allowedHeight
+    })
+  }, [_c('object', {
+    attrs: {
+      "data": _vm.url,
+      "name": "url",
+      "type": "application/pdf",
+      "width": "100%",
+      "height": "100%"
+    }
+  }, [_vm._v("\n\t\t\t\t\tNo File Found\n\t\t\t\t")])])])], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7ae80d20", esExports)
+  }
+}
 
 /***/ }),
 

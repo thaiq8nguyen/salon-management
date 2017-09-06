@@ -70,13 +70,12 @@
 
                 this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId + '&months=2')
 	                .then(response => {
-                    console.log(response.data);
                     this.reports = response.data[0].payment_report;
                 })
             },
 	        navigate(link){
-
-				window.open(link);
+		        sessionStorage.setItem('reportUrl', link);
+		        location.href='/technician/reports/payment-report'
 	        },
 	        formatDate(date){
 	            return this.$moment(date,'YYYY-MM-DD').format('MM/DD/YY');

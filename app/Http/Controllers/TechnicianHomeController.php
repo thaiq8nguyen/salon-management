@@ -28,9 +28,14 @@ class TechnicianHomeController extends Controller
         return view('technicians.sales');
     }
 
-    public function paymentReport(){
+    public function paymentReports(){
 
         return view('technicians.technician-payment-reports');
+    }
+
+    public function paymentReport(){
+
+        return view('technicians.technician-payment-report');
     }
 
 
