@@ -6,6 +6,7 @@
     "/js/api-dashboard.js": "/js/api-dashboard.js",
     "/js/salon-sales.js": "/js/salon-sales.js",
     "/js/technicians/technician-payment-reports-viewer.js": "/js/technicians/technician-payment-reports-viewer.js",
+    "/js/technicians/technician-payment-report-viewer.js": "/js/technicians/technician-payment-report-viewer.js",
     "/js/technicians/technician.js": "/js/technicians/technician.js",
     "/js/salon/quick-sale-entry.js": "/js/salon/quick-sale-entry.js",
     "/js/home.js": "/js/home.js",

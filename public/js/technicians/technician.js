@@ -27881,7 +27881,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27911,16 +27911,26 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: [],
 
     data: function data() {
         return {
-            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-report', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }]
+            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-reports', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }],
+
+            maxWidth: window.innerWidth
         };
     },
 
+    computed: {
+        allowedWidth: function allowedWidth() {
+            return this.maxWidth * 0.6 + 'px';
+        }
+    },
     methods: {
         navigate: function navigate(link) {
             location.href = link;
@@ -28038,17 +28048,25 @@ module.exports = defaults;
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('v-toolbar', {
-    staticClass: "white"
+    staticClass: "white",
+    attrs: {
+      "id": "top-nav-bar"
+    }
   }, [_c('v-menu', {
     attrs: {
-      "offset-y": ""
+      "offset-y": "",
+      "id": "top-nav-bar-menu"
     }
   }, [_c('v-btn', {
     attrs: {
       "icon": ""
     },
     slot: "activator"
-  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.menu), function(item) {
+  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', {
+    style: ({
+      width: _vm.allowedWidth
+    })
+  }, [_vm._l((_vm.menu), function(item) {
     return [(item.divider) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('v-list-tile', {
       on: {
         "click": function($event) {
@@ -28057,7 +28075,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('v-list-tile-title', {
       class: item.format
-    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(_vm._s(item.title))], 1)], 1)]
+    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(" \n\t\t\t\t\t\t" + _vm._s(item.title) + "\n\t\t\t\t\t")], 1)], 1)]
   })], 2)], 1)], 1)
 }
 var staticRenderFns = []

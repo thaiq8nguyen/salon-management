@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import moment from 'moment';
 import {http} from './axios-http';
-import PaymentReportViewer from './components/technician/TechnicianPaymentReportViewer.vue'
+import PaymentReportPDF from './components/technician/TechnicianPaymentReportPDF.vue';
 
 Vue.use(Vuetify);
 Object.defineProperty(Vue.prototype,'$http',{value:http});
@@ -16,7 +16,7 @@ const app = new Vue({
 
     },
     components:{
-       'payment-report-viewer':PaymentReportViewer,
+        'payment-report-pdf':PaymentReportPDF,
     },
     mounted(){
 

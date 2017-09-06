@@ -31,7 +31,6 @@ class PaymentReportController extends Controller
     }
 
 
-
     public function create(Request $request){
 
         $url = $this->report->create($request->technicianId, $request->payPeriodId);
@@ -40,7 +39,9 @@ class PaymentReportController extends Controller
             $result = ['success' => true, 'message' => 'The report has been created'];
         }
         else{
+
             $result = ['success' => false];
+
         }
 
         return response()->json($result,200);
