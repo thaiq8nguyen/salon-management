@@ -30,7 +30,6 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
     public function all()
     {
-
         $sixMonthAgo = Carbon::now()->subMonth(6)->toDateTimeString();
 
         $this->report = Technician::with(['paymentReport' =>
@@ -66,8 +65,8 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
         $technicianSales = $this->sales->getSales($technician, $payPeriod);
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
         $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
-        $totalBalance = $this->sales->getTotalBalance($technician, $payPeriod);
-        $payPeriodBalance = $this->sales->getPayPeriodBalance($technician, $payPeriod);
+        $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
+        $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
 
         $data = ['technician' => $technician, 'sales'=>$technicianSales,
             'wage'=>$technicianWage,'payments'=>$technicianPayment,
@@ -99,6 +98,21 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
         $this->create($technicianId, $payPeriodId);
 
         return $this->report->save('payment.pdf');
+
+    }
+
+    public function listReports($technicianId, $months)
+    {
+        $date = Carbon::now()->subMonth($months)->toDateTimeString();
+
+        $this->report = Technician::with(['paymentReport' =>
+            function($query) use($date){
+                $query->wherePivot('created_at','>',$date);
+            }])
+            ->orderBy('last_name','asc')->where('id','=',$technicianId)
+            ->get(['id', 'first_name', 'last_name']);
+
+        return $this->report;
 
     }
 

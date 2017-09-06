@@ -1,18 +1,7 @@
 <template>
-	<div id = "technician-home">
-		<v-app class = "white">
-			<v-toolbar class = "blue">
-				<v-btn icon :href="home">
-					<v-icon class = "white--text">home</v-icon>
-				</v-btn>
-				<v-btn icon :href="sale">
-					<v-icon class = "white--text">attach_money</v-icon>
-				</v-btn>
-				<v-spacer></v-spacer>
-				<v-btn icon :href="logout">
-					<v-icon class = "white--text">exit_to_app</v-icon>
-				</v-btn>
-			</v-toolbar>
+	<div id = "technician-home-container">
+		<v-app id = "technician-home-app">
+			<top-nav-bar></top-nav-bar>
 			<v-container fluid>
 				<v-layout>
 					<v-flex xs12>
@@ -20,22 +9,6 @@
 							<v-card-title>
 								<p class = "title">Welcome {{ formattedName }}!</p>
 							</v-card-title>
-							<v-card-text>
-								<v-layout row wrap>
-									<v-flex xs12>
-										<v-btn class = "green white--text" block :href="sale">
-											<v-icon class = "white--text">attach_money</v-icon>
-											<span>How much do I make?</span>
-										</v-btn>
-									</v-flex>
-									<v-flex xs12>
-										<v-btn class = "amber white--text" block :href="logout">
-											<v-icon class = "white--text">exit_to_app</v-icon>
-											<span>Log Out</span>
-										</v-btn>
-									</v-flex>
-								</v-layout>
-							</v-card-text>
 						</v-card>
 					</v-flex>
 				</v-layout>
@@ -45,15 +18,16 @@
 </template>
 
 <script>
+	import TechnicianTopNavBar from './TechnicianTopNavBar.vue'
     export default {
         props: [],
-
+		components:{
+            'top-nav-bar': TechnicianTopNavBar,
+		},
         data() {
             return {
-				home:'/technician',
-	            logout:'/logout',
-	            sale: '/technician/sale',
 	            firstName: null,
+	            technicianId: null,
             }
 
 
@@ -74,8 +48,10 @@
         methods: {
 			welcome(){
 				this.$axios.get('/api/technician/home').then(response => {
-				    this.firstName = response.data;
-				    sessionStorage.setItem('firstName',response.data);
+				    this.firstName = response.data.first_name;
+				    this.technicianId = response.data.technician_id;
+				    sessionStorage.setItem('firstName', response.data.first_name);
+				    sessionStorage.setItem('technicianId', response.data.technician_id )
 				});
 			}
         }
@@ -85,5 +61,7 @@
 </script>
 
 <style>
-
+	#technician-home-app{
+		background-color: #2196F3;
+	}
 </style>
