@@ -11528,7 +11528,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__axios_http__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__axios_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_technician_TechnicianPaymentReportViewer_vue__ = __webpack_require__(232);
 
 
@@ -11656,7 +11656,7 @@ exports.push([module.i, "\n#technician-payment-report-viewer-app{\n\tbackground-
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
 //
 //
 //
@@ -27842,31 +27842,12 @@ process.umask = function() { return 0; };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return http; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-
-var http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
-    baseURL: '/api',
-    headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        'X-Requested-With': 'XMLHttpRequest'
-    }
-});
-
-/***/ }),
-
-/***/ 37:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4831a2c6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_TechnicianTopNavBar_vue__ = __webpack_require__(40);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(37)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -27908,6 +27889,91 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(38);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("8dcd8c34", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 38:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 39:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: [],
+
+    data: function data() {
+        return {
+            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-report', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }]
+        };
+    },
+
+    methods: {
+        navigate: function navigate(link) {
+            location.href = link;
+        }
+    }
+
+});
 
 /***/ }),
 
@@ -28012,6 +28078,66 @@ module.exports = defaults;
 
 /***/ }),
 
+/***/ 40:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-toolbar', {
+    staticClass: "white"
+  }, [_c('v-menu', {
+    attrs: {
+      "offset-y": ""
+    }
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": ""
+    },
+    slot: "activator"
+  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.menu), function(item) {
+    return [(item.divider) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('v-list-tile', {
+      on: {
+        "click": function($event) {
+          _vm.navigate(item.link)
+        }
+      }
+    }, [_c('v-list-tile-title', {
+      class: item.format
+    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(_vm._s(item.title))], 1)], 1)]
+  })], 2)], 1)], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4831a2c6", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 41:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return http; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+var http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+    baseURL: '/api',
+    headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+});
+
+/***/ }),
+
 /***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28027,48 +28153,6 @@ module.exports = function bind(fn, thisArg) {
     return fn.apply(thisArg, args);
   };
 };
-
-
-/***/ }),
-
-/***/ 58:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(59);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("8dcd8c34", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4831a2c6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TechnicianTopNavBar.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 59:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
 
 
 /***/ }),
@@ -28258,90 +28342,6 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-
-/***/ }),
-
-/***/ 60:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    props: [],
-
-    data: function data() {
-        return {
-            menu: [{ title: 'Home', link: '/technician', format: '', icon: 'home', divider: false }, { title: 'Sale', link: '/technician/sale', format: '', icon: 'attach_money', divider: false }, { title: 'Report', link: '/technician/reports/payment-report', format: '', icon: 'content_paste', divider: false }, { title: 'Log Out', link: '/logout', format: 'red--text', icon: 'exit_to_app', divider: true }]
-        };
-    },
-
-    methods: {
-        navigate: function navigate(link) {
-            location.href = link;
-        }
-    }
-
-});
-
-/***/ }),
-
-/***/ 61:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('v-toolbar', {
-    staticClass: "white"
-  }, [_c('v-menu', {
-    attrs: {
-      "offset-y": ""
-    }
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": ""
-    },
-    slot: "activator"
-  }, [_c('v-icon', [_vm._v("menu")])], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.menu), function(item) {
-    return [(item.divider) ? _c('v-divider') : _vm._e(), _vm._v(" "), _c('v-list-tile', {
-      on: {
-        "click": function($event) {
-          _vm.navigate(item.link)
-        }
-      }
-    }, [_c('v-list-tile-title', {
-      class: item.format
-    }, [_c('v-icon', [_vm._v(_vm._s(item.icon))]), _vm._v(_vm._s(item.title))], 1)], 1)]
-  })], 2)], 1)], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4831a2c6", esExports)
-  }
-}
 
 /***/ }),
 
