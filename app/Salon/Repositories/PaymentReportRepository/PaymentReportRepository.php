@@ -61,17 +61,19 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
     {
         $technician = Technician::find($technicianId);
         $payPeriod = PayPeriod::find($payPeriodId);
+        $previousPayPeriod = PayPeriod::orderBy('pay_date','desc')->take(1)->skip(1)->first();
 
         $technicianSales = $this->sales->getSales($technician, $payPeriod);
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
         $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
         $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
+        $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
         $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
 
         $data = ['technician' => $technician, 'sales'=>$technicianSales,
             'wage'=>$technicianWage,'payments'=>$technicianPayment,
             'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
-            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance];
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
 
         $this->report = PDF::loadView('pdf.payment', $data )
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
@@ -114,6 +116,30 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
         return $this->report;
 
+    }
+
+    public function preview($technicianId, $payPeriodId)
+    {
+        $technician = Technician::find($technicianId);
+        $payPeriod = PayPeriod::find($payPeriodId);
+        $previousPayPeriod = PayPeriod::orderBy('pay_date','desc')->take(1)->skip(1)->first();
+
+        $technicianSales = $this->sales->getSales($technician, $payPeriod);
+        $technicianWage =  $this->wage->getWage($technician, $payPeriod);
+        $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
+        $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
+        $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
+        $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
+
+        $data = ['technician' => $technician, 'sales'=>$technicianSales,
+            'wage'=>$technicianWage,'payments'=>$technicianPayment,
+            'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
+
+        $this->report = PDF::loadView('pdf.payment', $data )
+            ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
+
+        return $this->report->stream('payment-report.pdf');
     }
 
 }

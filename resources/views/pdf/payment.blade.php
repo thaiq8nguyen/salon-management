@@ -78,14 +78,31 @@
                          </tr>
                      @endforeach
                  </table>
-
              </div>
          </div>
          <div class = "row">
              <div class = "balance-container">
-                 <p>Total Payment Amount: $ {{ $totalPayment }}</p>
-                 <p>Pay Period Balance: $ {{ $periodBalance['period_balance'] }}</p>
-                 <p>Total Balance: $ {{ $totalBalance['total_balance'] }}</p>
+                 <h4>Balances</h4>
+                 <p>Previous Balance: $ {{ number_format($previousBalance['period_balance'],2,'.',',') }}</p>
+                 <p>( + )  Total Earning: $ {{ number_format($wage->totalSalesAndTips[0]->total,2,'.',',')}}</p>
+                 <p>( - )  Total Payment: $ {{ number_format($totalPayment,2,'.',',') }}</p>
+                 <p>Pay Period Balance: $ {{ number_format($periodBalance['period_balance'],2,'.',',') }}</p>
+                 <p>Balance: $ {{ number_format($totalBalance['total_balance'],2,'.',',') }}</p>
+             </div>
+         </div>
+         <div class = "row">
+             <div class = "message-container">
+                 <h4>Important Message</h4>
+                 <p>Sugar Nails now offers technician's sale, wage, pay reports at
+                     <span style="text-decoration: underline">salon.resonancecorp.com</span></p>
+                 <p>Instructions</p>
+                 <ol>
+                     <li>Go to <span style = "text-decoration: underline">salon.resonancecorp.com</span> on your mobile phone.</li>
+                     <li>Click on Register</li>
+                     <li>Use Invitation Code <span style = "font-weight: bold">{{ $technician->id }}</span>.</li>
+                     <li>Complete the form and click register.</li>
+                     <li>Now you can access your account using your user name and password.</li>
+                 </ol>
              </div>
          </div>
      </div>

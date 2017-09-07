@@ -26,8 +26,14 @@
 }
 .balance-container{
     position: absolute;
-    top: 350px;
+    top: 400px;
     left: 330px;
+}
+.message-container{
+    position: absolute;
+    top: 650px;
+    left: 330px;
+    border: dashed 1px;
 }
 .heading-table td{
     width: 200px;
