@@ -65,7 +65,7 @@
 												</v-card-text>
 											</template>
 											<v-card-text>
-												<v-btn class = "red--text" @click.native.once="deletePayment">
+												<v-btn class = "red--text" @click.native="deletePayment">
 													Delete</v-btn>
 											</v-card-text>
 										</div>
@@ -83,7 +83,7 @@
 										<v-card-text>
 											<v-layout row wrap>
 												<v-flex lg6>
-													<v-btn @click.native.once="updateReport">Update Report</v-btn>
+													<v-btn @click.native="updateReport">Update Report</v-btn>
 												</v-flex>
 												<v-flex lg6>
 													<p class = "green--text text-xs-center" v-if="reportUpdated">Report is updated!</p>
