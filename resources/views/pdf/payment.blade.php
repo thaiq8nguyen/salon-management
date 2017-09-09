@@ -67,7 +67,7 @@
                          <th>Method</th>
                          <th>Reference</th>
                      </tr>
-                     @foreach($payments->payments as $payment)
+                     @foreach($payments as $payment)
                         @php
                             $totalPayment += $payment->amount;
                         @endphp

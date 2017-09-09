@@ -25,8 +25,6 @@
     Route::get('/technician-book', 'TechnicianBookController@index')->name('technician-book');
     Route::get('/wages/report/','WageController@report')->name('wage-report');
 
-    Route::get('technician-reports/payment','PaymentReportController@index')->name('payment-reports');
-
     /*TECHNICIAN ROUTES*/
     Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');
     Route::get('/technician/sale','TechnicianHomeController@sale')->name('technician-sale')->middleware('auth');

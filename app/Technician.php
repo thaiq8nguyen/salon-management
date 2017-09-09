@@ -28,7 +28,7 @@ class Technician extends Model
 
     public function paymentReport(){
 
-        return $this->payPeriods();
+        return $this->payPeriods()->select('payment_report_url');
 
     }
 

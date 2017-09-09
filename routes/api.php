@@ -57,6 +57,8 @@ Route::get('/technician-payment/pay-period/{payPeriod}/technician/{technician}',
 
 Route::get('/technician-payment/search/by-date','WagePaymentController@getPaymentByDates')->middleware('auth:api');
 
+Route::get('/technician-report/search/by-pay-period', 'WagePaymentController@report')->middleware('auth:api');
+
 Route::post('/technician-payment/delete','WagePaymentController@deletePayment')->middleware('auth:api');
 
 Route::get('/technician-sale/balance/','TechnicianSaleApiController@getBalance')->middleware('auth:api');
@@ -66,6 +68,8 @@ Route::get('/technician-payment/report/show-all','PaymentReportController@all')-
 Route::get('/technician-payment/report/by-technician','PaymentReportApiController@byTechnician')->middleware('auth:api');
 
 Route::post('/technician-payment/report/create','PaymentReportController@create')->middleware('auth:api');
+
+Route::get('/technician-wage/report/update','PaymentReportApiController@update')->middleware('auth:api');
 
 
 /***GIFT CERTIFICATES***/

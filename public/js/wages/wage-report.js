@@ -11421,10 +11421,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuet
 Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$http', { value: __WEBPACK_IMPORTED_MODULE_1__axios_http__["a" /* http */] });
 Object.defineProperty(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype, '$moment', { value: __WEBPACK_IMPORTED_MODULE_3_moment___default.a });
 
-/*axios.defaults.headers.common ={
-    'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    'X-Requested-With': 'XMLHttpRequest'
-};*/
 
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -11432,19 +11428,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     components: {
         WageReportApp: __WEBPACK_IMPORTED_MODULE_4__components_wages_WageReportApp_vue__["a" /* default */]
-    },
-    data: {},
-
-    mounted: function mounted() {
-        //this.getPayPeriod();
-    },
-
-    methods: {
-        /*getPayPeriod(){
-            this.$http.get('pay-period/list').then(response =>{
-                //console.log(response.data);
-            });
-        }*/
     }
 
 });
@@ -11616,7 +11599,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !important;\n}\n.select{\n\twidth: 200px !important;\n}\n.time-input{\n\tfloat:left;\n\tmargin-right:20px !important;\n\tdisplay: inline-block;\n\twidth: 150px !important;\n\tfont-size: 18px !important;\n}\n", ""]);
+exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !important;\n}\n.select{\n\twidth: 250px !important;\n}\n", ""]);
 
 // exports
 
@@ -11719,125 +11702,115 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-	props: [],
+				props: [],
 
-	data: function data() {
-		return {
-			times: [{
-				id: 0,
-				time: 'this month',
-				from: this.$moment().startOf('month'),
-				to: this.$moment().endOf('month')
-			}, {
-				id: 1,
-				time: 'last pay period',
-				from: null,
-				to: null
+				data: function data() {
+								return {
 
-			}, {
-				id: 2,
-				time: 'last month',
-				from: this.$moment().subtract(1, 'months').startOf('month'),
-				to: this.$moment().subtract(1, 'months').endOf('month')
+												selectTechnician: null,
+												technicians: [],
+												payPeriods: [],
+												currentPeriod: null,
+												payments: [],
+												selectPayPeriodId: null,
+												reportSrc: null
 
-			}],
-			selectTime: null,
-			selectTechnician: null,
-			technicians: [],
-			payPeriods: [],
-			fromDate: null,
-			toDate: null,
-			payments: []
+								};
+				},
+				mounted: function mounted() {
+								this.getPayPeriod();
+								this.getTechnicians();
+				},
 
-		};
-	},
-	mounted: function mounted() {
-		this.getTechnicians();
-		this.getPayPeriod();
-		this.defaultTime();
-	},
+				computed: {},
+				watch: {
+								selectPayPeriodId: function selectPayPeriodId() {
+												sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
+												if (this.selectTechnician !== null) {
+																this.getReport();
+												}
+								},
+								selectTechnician: function selectTechnician() {
+												if (this.selectPayPeriodId !== null) {
+																this.getReport();
+												}
+								}
+				},
 
-	computed: {
-		lastPayPeriod: function lastPayPeriod() {
-			return this.payPeriods[this.payPeriods.length - 2];
-		},
-		formattedFromDate: function formattedFromDate() {
-			return this.$moment(this.fromDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
-		},
-		formattedToDate: function formattedToDate() {
-			return this.$moment(this.toDate, 'MM/DD/YYYY').format('YYYY-MM-DD');
-		}
-	},
-	watch: {
-		selectTime: function selectTime() {
-			if (this.selectTechnician !== null) {
-				this.getPayments();
-			}
-		},
-		selectTechnician: function selectTechnician() {
-			if (this.selectTime !== null) {
-				this.getPayments();
-			}
-		}
-	},
+				methods: {
+								getPayPeriod: function getPayPeriod() {
+												var _this = this;
 
-	methods: {
-		defaultTime: function defaultTime() {
+												this.$http.get('pay-period/list').then(function (response) {
 
-			this.selectTime = 0;
-		},
-		setTime: function setTime() {
-			if (this.selectTime === 1) {
-				this.fromDate = this.lastPayPeriod.periods.substr(0, 10);
-				this.toDate = this.lastPayPeriod.payDate;
-			} else {
-				this.fromDate = this.times[this.selectTime].from.format('MM/DD/YYYY');
-				this.toDate = this.times[this.selectTime].to.format('MM/DD/YYYY');
-			}
-		},
-		getTechnicians: function getTechnicians() {
-			var _this = this;
+																_this.payPeriods = response.data;
+																_this.currentPeriod = response.data[response.data.length - 1];
 
-			this.$http.get('technician-detail/by-position?category=employee').then(function (response) {
+																//retrieve the last selected period id in a session variable
+																var selectedPeriodId = sessionStorage.getItem('selectedPayPeriodId');
+																if (selectedPeriodId === null) {
+																				_this.selectPayPeriodId = _this.currentPeriod.id;
+																} else {
+																				_this.selectPayPeriodId = parseInt(selectedPeriodId);
+																}
+												});
+								},
+								getTechnicians: function getTechnicians() {
+												var _this2 = this;
 
-				_this.technicians = response.data;
-				_this.selectTechnician = _this.technicians[0].id;
-			});
-		},
-		getPayPeriod: function getPayPeriod() {
-			var _this2 = this;
+												this.$http.get('technician-detail/by-position?category=employee').then(function (response) {
 
-			this.$http.get('pay-period/list').then(function (response) {
-				_this2.payPeriods = response.data;
-			});
-		},
-		getPayments: function getPayments() {
-			var _this3 = this;
+																_this2.technicians = response.data;
+												});
+								},
+								getReport: function getReport() {
+												var _this3 = this;
 
-			this.$http.get('technician-payment/search/by-date?technicianId=' + this.selectTechnician + '&from=' + this.formattedFromDate + '&to=' + this.formattedToDate).then(function (response) {
-				_this3.payments = response.data;
-			});
-		},
-		deletePayment: function deletePayment(index) {
-			var _this4 = this;
+												this.$http.get('technician-report/search/by-pay-period?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
+																console.log(response.data);
+																if (response.data.pay_period !== null) {
+																				_this3.reportSrc = response.data.pay_period.payment_report_url;
+																}
 
-			var payment = { paymentId: this.payments[index].id,
-				payPeriodId: this.payments[index].pay_period_id,
-				technicianId: this.payments[index].technician_id
-			};
-			this.$http.post('technician-payment/delete', payment).then(function (response) {
-				if (response.data === 1) {
-					_this4.payments.splice(index, 1);
+																_this3.payments = response.data.payments;
+												});
+								},
+								updateReport: function updateReport() {
+												var _this4 = this;
+
+												this.$http.get('technician-wage/report/update?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
+
+																_this4.reportSrc = response.data;
+												});
+								},
+								deletePayment: function deletePayment(index) {
+												var _this5 = this;
+
+												var payment = { paymentId: this.payments[index].id,
+																payPeriodId: this.selectPayPeriodId,
+																technicianId: this.selectTechnician
+												};
+												this.$http.post('technician-payment/delete', payment).then(function (response) {
+																if (response.data === 1) {
+																				_this5.payments.splice(index, 1);
+																}
+												});
+								},
+								readableDate: function readableDate(date) {
+												return this.$moment(date).format('MM/DD/YYYY');
+								}
 				}
-			});
-		},
-		readableDate: function readableDate(date) {
-			return this.$moment(date).format('MM/DD/YYYY');
-		}
-	}
 
 });
 
@@ -11862,66 +11835,33 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('v-flex', {
     attrs: {
-      "lg1": ""
+      "lg2": ""
     }
   }, [_c('v-subheader', {
     staticClass: "subheading"
-  }, [_vm._v("Times")])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Pay Periods")])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg2": ""
+      "lg4": ""
     }
   }, [_c('v-select', {
     staticClass: "select",
     attrs: {
-      "items": _vm.times,
+      "items": _vm.payPeriods,
       "label": "Select",
       "single-line": "",
-      "item-text": "time",
+      "item-text": "periods",
       "item-value": "id"
     },
-    on: {
-      "input": _vm.setTime
-    },
     model: {
-      value: (_vm.selectTime),
+      value: (_vm.selectPayPeriodId),
       callback: function($$v) {
-        _vm.selectTime = $$v
+        _vm.selectPayPeriodId = $$v
       },
-      expression: "selectTime"
+      expression: "selectPayPeriodId"
     }
   })], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg3": ""
-    }
-  }, [_c('v-text-field', {
-    staticClass: "time-input",
-    attrs: {
-      "label": "From",
-      "readonly": ""
-    },
-    model: {
-      value: (_vm.fromDate),
-      callback: function($$v) {
-        _vm.fromDate = $$v
-      },
-      expression: "fromDate"
-    }
-  }), _vm._v(" "), _c('v-text-field', {
-    staticClass: "time-input",
-    attrs: {
-      "label": "To",
-      "readonly": ""
-    },
-    model: {
-      value: (_vm.toDate),
-      callback: function($$v) {
-        _vm.toDate = $$v
-      },
-      expression: "toDate"
-    }
-  })], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg1": ""
+      "lg2": ""
     }
   }, [_c('v-subheader', {
     staticClass: "subheading"
@@ -11958,6 +11898,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg4": ""
     }
+  }, [_c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  }, [_c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg12": ""
+    }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "green darken-1"
   }, [_c('v-flex', {
@@ -11980,66 +11932,40 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "flat": ""
       }
-    }, [_c('v-card-text', [_c('v-layout', {
-      attrs: {
-        "row": "",
-        "wrap": ""
-      }
-    }, [_c('v-flex', {
-      attrs: {
-        "lg3": ""
-      }
-    }, [_c('div', {
-      staticClass: "subheading"
-    }, [_vm._v("Payment # " + _vm._s(index + 1))])]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg6": "",
-        "offset-lg3": ""
-      }
-    }, [_c('div', {
-      staticClass: "subheading"
-    }, [_vm._v("Pay Date: "), _c('strong', [_vm._v(_vm._s(_vm.readableDate(payment.pay_date)))])])]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg6": "",
-        "offset-lg4": "",
-        "mt-3": ""
-      }
-    }, [_c('div', {
-      staticClass: "headline"
-    }, [_vm._v("$ " + _vm._s(payment.amount))])]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg4": "",
-        "mt-3": ""
-      }
-    }, [_c('div', {
-      staticClass: "subheading"
-    }, [_vm._v("By " + _vm._s(payment.method))])]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg4": "",
-        "offset-lg3": "",
-        "mt-3": ""
-      }
-    }, [(payment.reference !== null) ? _c('div', {
-      staticClass: "subheading"
-    }, [_vm._v("Reference: " + _vm._s(payment.reference))]) : _vm._e()])], 1), _vm._v(" "), _c('v-layout', {
+    }, [_c('v-card-text', [_c('v-container', [_c('v-layout', {
       attrs: {
         "row": ""
       }
     }, [_c('v-flex', {
       attrs: {
+        "lg2": ""
+      }
+    }, [_c('div', {
+      staticClass: "subheading"
+    }, [_vm._v("# " + _vm._s(index + 1))])]), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg3": ""
+      }
+    }, [_c('div', {
+      staticClass: "subheading"
+    }, [_vm._v("$ " + _vm._s(payment.amount))])]), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg3": ""
+      }
+    }, [_c('div', {
+      staticClass: "subheading"
+    }, [_vm._v(_vm._s(payment.method))])]), _vm._v(" "), _c('v-flex', {
+      attrs: {
         "lg3": ""
       }
     }, [_c('v-btn', {
       staticClass: "red--text",
-      attrs: {
-        "icon": ""
-      },
       nativeOn: {
         "~click": function($event) {
           _vm.deletePayment(index)
         }
       }
-    }, [_c('v-icon', [_vm._v("fa-trash")])], 1)], 1)], 1)], 1)], 1)], 1)]
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tDelete")])], 1)], 1)], 1)], 1)], 1)], 1)]
   })], 2) : _c('div', [_c('v-card-text', [_c('v-alert', {
     staticClass: "green darken-1 text-xs-center",
     attrs: {
@@ -12047,7 +11973,31 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('p', {
     staticClass: "subheading"
-  }, [_vm._v("No payments found at this time")])])], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tNo payments found at this time")])])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg12": "",
+      "mt-2": ""
+    }
+  }, [_c('v-card', [_c('v-card-text', [_c('v-btn', {
+    nativeOn: {
+      "~click": function($event) {
+        _vm.updateReport($event)
+      }
+    }
+  }, [_vm._v("Update Report")])], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg8": ""
+    }
+  }, [(_vm.reportSrc !== null) ? _c('div', [_c('iframe', {
+    staticStyle: {
+      "width": "100%",
+      "height": "800px"
+    },
+    attrs: {
+      "src": _vm.reportSrc,
+      "frameborder": "0"
+    }
+  })]) : _vm._e()])], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

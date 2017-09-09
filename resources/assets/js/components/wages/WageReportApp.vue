@@ -4,20 +4,16 @@
 			<v-card flat>
 				<v-card-text>
 					<v-layout row>
-						<v-flex lg1>
-							<v-subheader class = "subheading">Times</v-subheader>
-						</v-flex>
 						<v-flex lg2>
-							<v-select :items="times" label="Select" single-line class = "select"
-							          v-model="selectTime" item-text="time" item-value="id" @input="setTime">
+							<v-subheader class = "subheading">Pay Periods</v-subheader>
+						</v-flex>
+						<v-flex lg4>
+							<v-select :items="payPeriods" label="Select" single-line class = "select"
+							          v-model="selectPayPeriodId" item-text="periods" item-value="id" >
 
 							</v-select>
 						</v-flex>
-						<v-flex lg3>
-							<v-text-field label="From" class = "time-input" v-model="fromDate" readonly></v-text-field>
-							<v-text-field label="To" class = "time-input" v-model="toDate" readonly></v-text-field>
-						</v-flex>
-						<v-flex lg1>
+						<v-flex lg2>
 							<v-subheader class = "subheading">Technicians</v-subheader>
 						</v-flex>
 						<v-flex lg2>
@@ -32,57 +28,69 @@
 			<v-container fluid>
 				<v-layout row>
 					<v-flex lg4>
-						<v-card>
-							<v-card-title class = "green darken-1">
-								<v-flex lg6>
-									<h3 class = "headline white--text">
-										<strong>Payments</strong>
-									</h3>
-								</v-flex>
-								<v-flex lg2 xs2 offset-lg4 offset-xs4>
-									<v-icon class = "white--text">fa-money</v-icon>
-								</v-flex>
-							</v-card-title>
-								<div v-if="payments.length > 0">
-									<template v-for="(payment,index) in payments">
-										<v-card-text>
-											<v-card flat>
+						<v-container fluid>
+							<v-layout row>
+								<v-flex lg12>
+									<v-card>
+										<v-card-title class = "green darken-1">
+											<v-flex lg6>
+												<h3 class = "headline white--text">
+													<strong>Payments</strong>
+												</h3>
+											</v-flex>
+											<v-flex lg2 xs2 offset-lg4 offset-xs4>
+												<v-icon class = "white--text">fa-money</v-icon>
+											</v-flex>
+										</v-card-title>
+										<div v-if="payments.length > 0">
+											<template v-for="(payment,index) in payments">
 												<v-card-text>
-													<v-layout row wrap>
-														<v-flex lg3>
-															<div class = "subheading">Payment # {{ index + 1}}</div>
-														</v-flex>
-														<v-flex lg6 offset-lg3>
-															<div class = "subheading">Pay Date: <strong>{{ readableDate(payment.pay_date)}}</strong></div>
-														</v-flex>
-														<v-flex lg6 offset-lg4 mt-3>
-															<div class = "headline">$ {{ payment.amount}}</div>
-														</v-flex>
-														<v-flex lg4 mt-3>
-															<div class = "subheading">By {{ payment.method}}</div>
-														</v-flex>
-														<v-flex lg4 offset-lg3 mt-3>
-															<div class = "subheading" v-if="payment.reference !== null">Reference: {{ payment.reference }}</div>
-														</v-flex>
-													</v-layout>
-													<v-layout row>
-														<v-flex lg3>
-															<v-btn icon class = "red--text" @click.native.once="deletePayment(index)"><v-icon>fa-trash</v-icon></v-btn>
-														</v-flex>
-													</v-layout>
+													<v-card flat>
+														<v-card-text>
+															<v-container>
+																<v-layout row>
+																	<v-flex lg2>
+																		<div class = "subheading"># {{ index + 1}}</div>
+																	</v-flex>
+																	<v-flex lg3>
+																		<div class = "subheading">$ {{ payment.amount}}</div>
+																	</v-flex>
+																	<v-flex lg3>
+																		<div class = "subheading">{{ payment.method}}</div>
+																	</v-flex>
+																	<v-flex lg3>
+																		<v-btn class = "red--text" @click.native.once="deletePayment(index)">
+																			Delete</v-btn>
+																	</v-flex>
+																</v-layout>
+															</v-container>
+														</v-card-text>
+													</v-card>
 												</v-card-text>
-											</v-card>
+											</template>
+										</div>
+										<div v-else>
+											<v-card-text>
+												<v-alert value="true" class = "green darken-1 text-xs-center"><p class = "subheading">
+													No payments found at this time</p></v-alert>
+											</v-card-text>
+										</div>
+									</v-card>
+								</v-flex>
+								<v-flex lg12 mt-2>
+									<v-card>
+										<v-card-text>
+											<v-btn @click.native.once="updateReport">Update Report</v-btn>
 										</v-card-text>
-									</template>
-								</div>
-
-								<div v-else>
-									<v-card-text>
-										<v-alert value="true" class = "green darken-1 text-xs-center"><p class = "subheading">No payments found at this time</p></v-alert>
-									</v-card-text>
-								</div>
-
-						</v-card>
+									</v-card>
+								</v-flex>
+							</v-layout>
+						</v-container>
+					</v-flex>
+					<v-flex lg8>
+						<div v-if="reportSrc !== null">
+							<iframe :src = "reportSrc" style="width:100%; height:800px;" frameborder="0" ></iframe>
+						</div>
 					</v-flex>
 				</v-layout>
 			</v-container>
@@ -98,64 +106,39 @@
 
         data() {
             return {
-                times:[
-	                {
-	                    id:0,
-		                time:'this month',
-		                from: this.$moment().startOf('month'),
-		                to: this.$moment().endOf('month'),
-	                },
-	                {
-	                    id:1,
-		                time:'last pay period',
-		                from: null,
-		                to: null,
 
-	                },
-	                {
-	                    id:2,
-		                time:'last month',
-		                from: this.$moment().subtract(1,'months').startOf('month'),
-	                    to: this.$moment().subtract(1,'months').endOf('month'),
-
-	                },
-                ],
-	            selectTime:null,
 	            selectTechnician: null,
 	            technicians: [],
 	            payPeriods:[],
-	            fromDate:null,
-	            toDate:null,
+	            currentPeriod: null,
 	            payments:[],
+	            selectPayPeriodId:null,
+	            reportSrc: null,
 
             }
         },
 
 	    mounted(){
-            this.getTechnicians();
             this.getPayPeriod();
-            this.defaultTime();
+            this.getTechnicians();
+
+
+
 	    },
 	    computed:{
-	        lastPayPeriod(){
-	            return this.payPeriods[this.payPeriods.length - 2];
-	        },
-		    formattedFromDate(){
-	            return this.$moment(this.fromDate,'MM/DD/YYYY').format('YYYY-MM-DD');
-		    },
-		    formattedToDate(){
-                return this.$moment(this.toDate,'MM/DD/YYYY').format('YYYY-MM-DD');
-		    }
+
 	    },
 	    watch:{
-	        selectTime(){
-	            if(this.selectTechnician !== null){
-	                this.getPayments();
-	            }
-		    },
+			selectPayPeriodId(){
+			    sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
+			    if(this.selectTechnician !== null){
+			        this.getReport();
+			    }
+
+			},
 		    selectTechnician(){
-	            if(this.selectTime !== null){
-	                this.getPayments();
+	            if(this.selectPayPeriodId !== null){
+	                this.getReport();
 	            }
 		    }
 
@@ -163,51 +146,60 @@
 
         methods: {
 
-			defaultTime(){
+            getPayPeriod(){
+                this.$http.get('pay-period/list').then(response => {
 
-			    this.selectTime = 0;
+                    this.payPeriods = response.data;
+                    this.currentPeriod = response.data[response.data.length-1];
 
-			},
-			setTime(){
-				if(this.selectTime === 1){
-				    this.fromDate = (this.lastPayPeriod.periods).substr(0,10);
-				    this.toDate = (this.lastPayPeriod.payDate);
- 				}
-				else{
-                    this.fromDate =  (this.times[this.selectTime].from).format('MM/DD/YYYY');
-                    this.toDate = (this.times[this.selectTime].to).format('MM/DD/YYYY');
-				}
+                    //retrieve the last selected period id in a session variable
+                    const selectedPeriodId = sessionStorage.getItem('selectedPayPeriodId');
+                    if(selectedPeriodId === null){
+                        this.selectPayPeriodId = this.currentPeriod.id;
 
+                    }else{
+                        this.selectPayPeriodId = parseInt(selectedPeriodId);
+                    }
 
-			},
+                });
+            },
+
             getTechnicians(){
                 this.$http.get('technician-detail/by-position?category=employee').then(response => {
 
                     this.technicians = response.data;
-                    this.selectTechnician = this.technicians[0].id;
+
                 });
             },
-            getPayPeriod(){
-				this.$http.get('pay-period/list').then(response =>{
-				this.payPeriods = response.data;
-				});
 
+	        getReport(){
 
-			},
-
-	        getPayments(){
-				this.$http.get('technician-payment/search/by-date?technicianId='
-					+ this.selectTechnician + '&from=' + this.formattedFromDate + '&to=' + this.formattedToDate)
+				this.$http.get('technician-report/search/by-pay-period?technicianId='
+					+ this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId)
 					.then(response => {
-				        this.payments = response.data;
+						console.log(response.data);
+						if(response.data.pay_period !== null){
+                            this.reportSrc = response.data.pay_period.payment_report_url;
+						}
+
+				        this.payments = response.data.payments;
 				});
 
 	        },
 
+	        updateReport(){
+
+	            this.$http.get('technician-wage/report/update?technicianId=' +  this.selectTechnician + '&payPeriodId='
+	            + this.selectPayPeriodId).then(response => {
+
+	                this.reportSrc = response.data;
+	            })
+	        },
+
 	        deletePayment(index){
 	            const payment = {paymentId:this.payments[index].id,
-		            payPeriodId:this.payments[index].pay_period_id,
-		            technicianId: this.payments[index].technician_id
+		            payPeriodId:this.selectPayPeriodId,
+		            technicianId: this.selectTechnician
 	            };
 	            this.$http.post('technician-payment/delete',payment).then(response => {
 	                    if(response.data === 1){
@@ -230,13 +222,6 @@
 		background-color: #2196F3 !important;
 	}
 	.select{
-		width: 200px !important;
-	}
-	.time-input{
-		float:left;
-		margin-right:20px !important;
-		display: inline-block;
-		width: 150px !important;
-		font-size: 18px !important;
+		width: 250px !important;
 	}
 </style>

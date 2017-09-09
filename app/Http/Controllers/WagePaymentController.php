@@ -1,29 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Technician;
+
 use Illuminate\Http\Request;
-use Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentRepositoryInterface;
-use Validator;
 
 
+use App\Services\PayPeriodService\TechnicianReporter as TechnicianReporter;
+use Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentRepositoryInterface as Payment;
 
 
 class WagePaymentController extends Controller
 {
+    protected $reporter;
     protected $payment;
-    public function __construct(TechnicianPaymentRepositoryInterface $payment)
-    {
-        $this->middleware('admin');
-        $this->payment = $payment;
 
+
+    public function __construct(TechnicianReporter $reporter, Payment $payment)
+    {
+        $this->reporter = $reporter;
+        $this->payment = $payment;
     }
 
-    public function getPaymentByDates(Request $request){
+    public function report(Request $request)
+    {
 
-        $payments = $this->payment->getPaymentsByDates($request->technicianId, $request->from, $request->to);
-        return response()->json($payments, 200);
-
+        return response()->json($this->reporter->report($request->technicianId, $request->payPeriodId),200);
 
     }
 

@@ -1,11 +1,10 @@
 <?php
 namespace Salon\Repositories\TechnicianPaymentRepository;
-use App\Technician;
-use App\PayPeriod;
+
 
 interface TechnicianPaymentRepositoryInterface{
 
-    public function getPayments(Technician $technician, PayPeriod $payPeriod);
+    public function getPaymentsByPayPeriod($technicianId, $payPeriodId);
 
     public function getPaymentsByDates($technicianId, $fromDate, $toDate);
 

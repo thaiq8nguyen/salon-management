@@ -79,10 +79,10 @@ class RegistrationController extends Controller
 
             return redirect()->route('post-register')->
 
-            with('success','Thank you for registering, '.$technician->full_name);
+            with('success','Thank you for registering, '.$technician->full_name. '. Your username is ' . $username);
         }
         else{
-            $request->session()->put('completed_registration');
+            //$request->session()->put('completed_registration');
             return redirect()->route('post-register')
                 ->with('error','There have been errors logging into your account. Please contact the business manager for assistance');
         }
@@ -92,7 +92,7 @@ class RegistrationController extends Controller
 
     public function postRegister(){
 
-        session()->forget('completed_registration');
+        //session()->forget('completed_registration');
         return view('auth.post-register');
 
 

@@ -31,7 +31,6 @@
                        aria-haspopup="true" aria-expanded="false">Reports</a>
                     <ul class = "dropdown-menu" aria-labelledby="technician-dropdown">
                         <a class = "dropdown-item" href = "{{ route('wage-report') }}">Technician Wages</a>
-                        <a class = "dropdown-item" href = "{{ route('payment-reports') }}">Technician Payments</a>
                     </ul>
                 </li>
                 <li class = "nav-item dropdown">

@@ -7,15 +7,15 @@ interface PaymentReportRepositoryInterface{
 
     public function create($technicianId, $payPeriodId);
 
-    public function store();
+    public function store($file);
 
-    public function update();
+    public function update($technicianId, $payPeriodId);
 
-    public function show($technicianId, $payPeriodId);
+    public function url($technicianId, $payPeriodId);
 
     public function listReports($technicianId, $months);
 
-    public function delete();
+    public function delete($file);
 
     public function preview($technicianId, $payPeriodId);
 

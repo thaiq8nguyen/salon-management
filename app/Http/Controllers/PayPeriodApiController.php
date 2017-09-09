@@ -36,6 +36,6 @@ class PayPeriodApiController extends Controller
         foreach($periods as $period){
             $list[] = ['id' => $period->id, 'periods' => $period->begin_date_mdy . ' - ' . $period->end_date_mdy, 'payDate' => $period->pay_date_mdy];
         }
-        return response()->json($list);
+        return response()->json($list,200);
     }
 }

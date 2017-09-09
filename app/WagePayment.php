@@ -25,7 +25,9 @@ class WagePayment extends Model
     }
 
     public function scopeBetweenDates($query, $dates){
+
         return $query->whereBetween('pay_date',$dates);
+
     }
 
 }

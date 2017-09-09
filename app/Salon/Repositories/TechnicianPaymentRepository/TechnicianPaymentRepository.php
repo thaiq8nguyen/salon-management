@@ -3,6 +3,7 @@ namespace Salon\Repositories\TechnicianPaymentRepository;
 
 use App\Technician;
 use App\PayPeriod;
+use App\Wage;
 use App\WagePayment;
 use App\TechnicianBook;
 
@@ -10,19 +11,9 @@ class TechnicianPaymentRepository implements TechnicianPaymentRepositoryInterfac
 
 
 
-    public function getPayments(Technician $technician, PayPeriod $payPeriod){
+    public function getPaymentsByPayPeriod($technicianId, $payPeriodId){
 
-        $technicianId =  $technician->id;
-        $payPeriodId = $payPeriod->id;
-
-        return Technician::with(['payments' =>
-
-            function($query) use($payPeriodId){
-                $query->where('pay_period_id', '=', $payPeriodId);
-            }])
-            ->where('id', '=' ,$technicianId)
-
-            ->first(['id','first_name','last_name']);
+        return WagePayment::toTechnician($technicianId)->where('pay_period_id','=',$payPeriodId)->get(['id','amount','method','reference']);
 
     }
 

@@ -41,14 +41,45 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
     }
 
-    public function update()
+    public function update($technicianId, $payPeriodId)
     {
-        // TODO: Implement update() method.
+        $technician = Technician::find($technicianId);
+        $payPeriod = PayPeriod::find($payPeriodId);
+        $previousPayPeriod = PayPeriod::orderBy('pay_date','desc')->take(1)->skip(1)->first();
+
+        $technicianSales = $this->sales->getSales($technician, $payPeriod);
+        $technicianWage =  $this->wage->getWage($technician, $payPeriod);
+        $technicianPayment = $this->payments->getPaymentsByPayPeriod($technicianId, $payPeriodId);
+        $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
+        $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
+        $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
+
+        $data = ['technician' => $technician, 'sales'=>$technicianSales,
+            'wage'=>$technicianWage,'payments'=>$technicianPayment,
+            'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
+
+        $this->report = PDF::loadView('pdf.payment', $data )
+            ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
+
+        $file = "technician-payment/reports/".$technician->first_name."_".$technician->last_name."_payment_report_".$payPeriod->pay_date.".pdf";
+
+        $this->delete($file);
+
+        $url = $this->store($file);
+
+        $technician->payPeriods()->updateExistingPivot($payPeriodId, ['payment_report_url' => $url]);
+
+        return $url;
+
+
     }
 
-    public function delete()
+    public function delete($file)
     {
-        // TODO: Implement delete() method.
+
+        Storage::cloud()->delete($file);
+
     }
 
     /**
@@ -65,7 +96,7 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
         $technicianSales = $this->sales->getSales($technician, $payPeriod);
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
-        $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
+        $technicianPayment = $this->payments->getPaymentsByPayPeriod($technicianId, $payPeriodId);
         $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
         $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
         $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
@@ -78,28 +109,34 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
         $this->report = PDF::loadView('pdf.payment', $data )
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
 
-        $filePath = "technician-payment/reports/".$technician->first_name."_".$technician->last_name."_payment_report_".$payPeriod->pay_date.".pdf";
+        $file = "technician-payment/reports/".$technician->first_name."_".$technician->last_name."_payment_report_".$payPeriod->pay_date.".pdf";
 
-        Storage::cloud()->put($filePath,$this->report->output());
-
-        $url = Storage::cloud()->url($filePath);
+        $url = $this->store($file);
 
         $technician->payPeriods()->attach($payPeriodId,['payment_report_url' => $url]);
 
         return $url;
 
-    }
-
-    public function store(){
-
 
     }
 
-    public function show($technicianId, $payPeriodId)
+
+    public function store($file){
+
+        Storage::cloud()->put($file,$this->report->output());
+
+        $url = Storage::cloud()->url($file);
+
+        return $url;
+
+    }
+
+    public function url($technicianId, $payPeriodId)
     {
-        $this->create($technicianId, $payPeriodId);
+        $technician = Technician::find($technicianId);
 
-        return $this->report->save('payment.pdf');
+        return $technician->paymentReport()->wherePivot('pay_period_id','=',$payPeriodId)->first();
+
 
     }
 
@@ -126,18 +163,20 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
         $technicianSales = $this->sales->getSales($technician, $payPeriod);
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
-        $technicianPayment = $this->payments->getPayments($technician, $payPeriod);
+        $technicianPayment = $this->payments->getPaymentsByPayPeriod($technicianId, $payPeriodId);
         $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
         $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
         $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
 
         $data = ['technician' => $technician, 'sales'=>$technicianSales,
-            'wage'=>$technicianWage,'payments'=>$technicianPayment,
+            'wage'=>$technicianWage,'payments' => $technicianPayment,
             'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
             'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
 
         $this->report = PDF::loadView('pdf.payment', $data )
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
+
+        //print_r($data);
 
         return $this->report->stream('payment-report.pdf');
     }

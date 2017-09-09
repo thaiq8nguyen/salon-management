@@ -22,14 +22,14 @@
                     @endif
                     @if(session('success'))
                         <div class = "card-header bg-success">
-                            <h3>Registration Completed</h3>
+                            <h3 class = "text-white">Registration Completed</h3>
                         </div>
                         <div class = "card-body">
                             <div class = "text-success">
                                 {{ session('success') }}
                             </div>
                         </div>
-                        <div class = "footer">
+                        <div class = "card-footer">
                             <a class = "btn btn-primary" href="/technician">Home</a>
                         </div>
                     @endif
