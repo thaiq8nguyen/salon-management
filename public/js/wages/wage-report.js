@@ -11718,6 +11718,7 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -11733,7 +11734,7 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												payments: [],
 												selectPayPeriodId: null,
 												reportSrc: null,
-												reportUpdated: null
+												reportUpdated: false
 
 								};
 				},
@@ -11748,11 +11749,13 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
 												if (this.selectTechnician !== null) {
 																this.getReport();
+																this.reportUpdated = false;
 												}
 								},
 								selectTechnician: function selectTechnician() {
 												if (this.selectPayPeriodId !== null) {
 																this.getReport();
+																this.reportUpdated = false;
 												}
 								}
 				},
@@ -11802,16 +11805,13 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 																_this4.reportSrc = response.data;
 												});
 								},
-								deletePayment: function deletePayment(index) {
+								deletePayment: function deletePayment() {
 												var _this5 = this;
 
-												var payment = { paymentId: this.payments[index].id,
-																payPeriodId: this.selectPayPeriodId,
-																technicianId: this.selectTechnician
-												};
+												var payment = { technicianId: this.selectTechnician, payPeriodId: this.selectPayPeriodId };
 												this.$http.post('technician-payment/delete', payment).then(function (response) {
-																if (response.data === 1) {
-																				_this5.payments.splice(index, 1);
+																if (response.data.success) {
+																				_this5.payments = [];
 																}
 												});
 								},
@@ -11885,7 +11885,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "single-line": "",
       "item-text": "full_name",
       "last": "",
-      "item-value": "id"
+      "item-value": "id",
+      "autocomplete": ""
     },
     model: {
       value: (_vm.selectTechnician),
@@ -11962,19 +11963,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('div', {
       staticClass: "subheading"
-    }, [_vm._v(_vm._s(payment.method))])]), _vm._v(" "), _c('v-flex', {
-      attrs: {
-        "lg3": ""
+    }, [_vm._v(_vm._s(payment.method))])])], 1)], 1)], 1)], 1)], 1)]
+  }), _vm._v(" "), _c('v-card-text', [_c('v-btn', {
+    staticClass: "red--text",
+    nativeOn: {
+      "~click": function($event) {
+        _vm.deletePayment($event)
       }
-    }, [_c('v-btn', {
-      staticClass: "red--text",
-      nativeOn: {
-        "~click": function($event) {
-          _vm.deletePayment(index)
-        }
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tDelete")])], 1)], 1)], 1)], 1)], 1)], 1)]
-  })], 2) : _c('div', [_c('v-card-text', [_c('v-alert', {
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tDelete")])], 1)], 2) : _c('div', [_c('v-card-text', [_c('v-alert', {
     staticClass: "green darken-1 text-xs-center",
     attrs: {
       "value": "true"

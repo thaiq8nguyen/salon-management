@@ -24,18 +24,23 @@ class TechnicianPaymentRepository implements TechnicianPaymentRepositoryInterfac
 
     }
 
-    public function deletePayment($paymentId, $payPeriodId, $technicianId)
+    public function deletePayment($technicianId, $payPeriodId)
     {
 
-        $wagePayment = WagePayment::find($paymentId);
+        $wagePayments = WagePayment::toTechnician($technicianId)->payPeriod($payPeriodId)->get();
 
-        $bookPayment = TechnicianBook::wages()->technician($technicianId)->payPeriod($payPeriodId)->first();
+        foreach($wagePayments as $wagePayment){
 
-        $bookPayment->payments = $bookPayment->payments - $wagePayment->amount;
+            $wagePayment->delete();
+        }
 
-        $bookPayment->save();
 
-        return WagePayment::destroy($paymentId);
+        $bookItems = TechnicianBook::technician($technicianId)->payPeriod($payPeriodId)->get();
+
+        foreach($bookItems as $bookItem){
+
+            $bookItem->delete();
+        }
 
     }
 }

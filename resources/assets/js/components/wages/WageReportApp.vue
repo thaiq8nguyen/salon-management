@@ -18,7 +18,7 @@
 						</v-flex>
 						<v-flex lg2>
 							<v-select :items="technicians" label="Select" single-line class = "select"
-							          v-model="selectTechnician" item-text="full_name" last item-value="id">
+							          v-model="selectTechnician" item-text="full_name" last item-value="id" autocomplete>
 
 							</v-select>
 						</v-flex>
@@ -58,17 +58,18 @@
 																	<v-flex lg3>
 																		<div class = "subheading">{{ payment.method}}</div>
 																	</v-flex>
-																	<v-flex lg3>
-																		<v-btn class = "red--text" @click.native.once="deletePayment(index)">
-																			Delete</v-btn>
-																	</v-flex>
 																</v-layout>
 															</v-container>
 														</v-card-text>
 													</v-card>
 												</v-card-text>
 											</template>
+											<v-card-text>
+												<v-btn class = "red--text" @click.native.once="deletePayment">
+													Delete</v-btn>
+											</v-card-text>
 										</div>
+
 										<div v-else>
 											<v-card-text>
 												<v-alert value="true" class = "green darken-1 text-xs-center"><p class = "subheading">
@@ -122,7 +123,7 @@
 	            payments:[],
 	            selectPayPeriodId:null,
 	            reportSrc: null,
-	            reportUpdated:null,
+	            reportUpdated: false,
 
             }
         },
@@ -142,12 +143,14 @@
 			    sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
 			    if(this.selectTechnician !== null){
 			        this.getReport();
+			        this.reportUpdated = false;
 			    }
 
 			},
 		    selectTechnician(){
 	            if(this.selectPayPeriodId !== null){
 	                this.getReport();
+                    this.reportUpdated = false;
 	            }
 		    }
 
@@ -204,14 +207,11 @@
 	            })
 	        },
 
-	        deletePayment(index){
-	            const payment = {paymentId:this.payments[index].id,
-		            payPeriodId:this.selectPayPeriodId,
-		            technicianId: this.selectTechnician
-	            };
+	        deletePayment(){
+	            const payment = { technicianId: this.selectTechnician,payPeriodId:this.selectPayPeriodId };
 	            this.$http.post('technician-payment/delete',payment).then(response => {
-	                    if(response.data === 1){
-                            this.payments.splice(index,1);
+	                    if(response.data.success){
+                            this.payments =[];
 	                    }
 		            });
 

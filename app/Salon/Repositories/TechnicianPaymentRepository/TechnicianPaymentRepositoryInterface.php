@@ -8,6 +8,6 @@ interface TechnicianPaymentRepositoryInterface{
 
     public function getPaymentsByDates($technicianId, $fromDate, $toDate);
 
-    public function deletePayment($paymentId, $payPeriodId, $technicianId);
+    public function deletePayment($technicianId, $payPeriodId);
 
 }

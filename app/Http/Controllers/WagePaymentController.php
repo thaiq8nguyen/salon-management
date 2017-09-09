@@ -30,9 +30,9 @@ class WagePaymentController extends Controller
 
     public function deletePayment(Request $request){
 
-        $deletedPayment = $this->payment->deletePayment($request->paymentId, $request->payPeriodId, $request->technicianId);
+        $this->payment->deletePayment($request->technicianId, $request->payPeriodId);
 
-        return response()->json($deletedPayment, 200);
+        return response()->json(['success' => true], 200);
 
     }
 
