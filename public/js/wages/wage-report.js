@@ -12011,14 +12011,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "lg8": ""
     }
-  }, [(_vm.reportSrc !== null) ? _c('div', [_c('iframe', {
+  }, [(_vm.reportSrc !== null) ? _c('div', [_c('object', {
     staticStyle: {
       "width": "100%",
       "height": "800px"
     },
     attrs: {
-      "src": _vm.reportSrc,
-      "frameborder": "0"
+      "data": _vm.reportSrc,
+      "type": "application/pdf"
     }
   })]) : _vm._e()])], 1)], 1)], 1)], 1)
 }

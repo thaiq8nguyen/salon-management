@@ -83,7 +83,7 @@
          <div class = "row">
              <div class = "balance-container">
                  <h4>Balances</h4>
-                 <p>Previous Balance: $ {{ number_format($previousBalance['period_balance'],2,'.',',') }}</p>
+                 <p>Previous Balance: $ {{ number_format($previousTotalBalance['total_balance'],2,'.',',') }}</p>
                  <p>( + )  Total Earning: $ {{ number_format($wage->totalSalesAndTips[0]->total,2,'.',',')}}</p>
                  <p>( - )  Total Payment: $ {{ number_format($totalPayment,2,'.',',') }}</p>
                  <p>Pay Period Balance: $ {{ number_format($periodBalance['period_balance'],2,'.',',') }}</p>

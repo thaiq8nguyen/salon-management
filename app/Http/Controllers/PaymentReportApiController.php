@@ -22,7 +22,7 @@ class PaymentReportApiController extends Controller
 
     public function update(Request $request){
 
-        return response()->json($this->report->update($request->technicianId, $request->payPeriodId),200);
+        return response()->json($this->report->update($request->technicianId, $request->payPeriodId),200)->header('Content-type','application/pdf');
 
     }
 }

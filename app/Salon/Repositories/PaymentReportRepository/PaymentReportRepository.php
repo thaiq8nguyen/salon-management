@@ -51,13 +51,13 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
         $technicianPayment = $this->payments->getPaymentsByPayPeriod($technicianId, $payPeriodId);
         $totalBalance = $this->sales->getTotalBalance($technicianId, $payPeriodId);
-        $previousBalance = $this->sales->getPayPeriodBalance($technicianId,$previousPayPeriod->id);
+        $previousTotalBalance = $this->sales->getTotalBalance($technicianId,$previousPayPeriod->id);
         $payPeriodBalance = $this->sales->getPayPeriodBalance($technicianId, $payPeriodId);
 
         $data = ['technician' => $technician, 'sales'=>$technicianSales,
             'wage'=>$technicianWage,'payments'=>$technicianPayment,
             'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
-            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousTotalBalance' => $previousTotalBalance];
 
         $this->report = PDF::loadView('pdf.payment', $data )
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);

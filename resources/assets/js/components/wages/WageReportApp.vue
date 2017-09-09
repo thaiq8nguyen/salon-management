@@ -97,7 +97,7 @@
 					</v-flex>
 					<v-flex lg8>
 						<div v-if="reportSrc !== null">
-							<iframe :src = "reportSrc" style="width:100%; height:800px;" frameborder="0" ></iframe>
+							<object :data = "reportSrc" style="width:100%; height:800px;" type="application/pdf" ></object>
 						</div>
 					</v-flex>
 				</v-layout>
