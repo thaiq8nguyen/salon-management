@@ -80,7 +80,15 @@
 								<v-flex lg12 mt-2>
 									<v-card>
 										<v-card-text>
-											<v-btn @click.native.once="updateReport">Update Report</v-btn>
+											<v-layout row wrap>
+												<v-flex lg6>
+													<v-btn @click.native.once="updateReport">Update Report</v-btn>
+												</v-flex>
+												<v-flex lg6>
+													<p class = "green--text text-xs-center" v-if="reportUpdated">Report is updated!</p>
+												</v-flex>
+											</v-layout>
+
 										</v-card-text>
 									</v-card>
 								</v-flex>
@@ -114,6 +122,7 @@
 	            payments:[],
 	            selectPayPeriodId:null,
 	            reportSrc: null,
+	            reportUpdated:null,
 
             }
         },
@@ -177,7 +186,6 @@
 				this.$http.get('technician-report/search/by-pay-period?technicianId='
 					+ this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId)
 					.then(response => {
-						console.log(response.data);
 						if(response.data.pay_period !== null){
                             this.reportSrc = response.data.pay_period.payment_report_url;
 						}
@@ -191,7 +199,7 @@
 
 	            this.$http.get('technician-wage/report/update?technicianId=' +  this.selectTechnician + '&payPeriodId='
 	            + this.selectPayPeriodId).then(response => {
-
+	                this.reportUpdated = true;
 	                this.reportSrc = response.data;
 	            })
 	        },

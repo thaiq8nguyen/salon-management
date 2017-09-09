@@ -11710,6 +11710,14 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -11724,7 +11732,8 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												currentPeriod: null,
 												payments: [],
 												selectPayPeriodId: null,
-												reportSrc: null
+												reportSrc: null,
+												reportUpdated: null
 
 								};
 				},
@@ -11778,7 +11787,6 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												var _this3 = this;
 
 												this.$http.get('technician-report/search/by-pay-period?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
-																console.log(response.data);
 																if (response.data.pay_period !== null) {
 																				_this3.reportSrc = response.data.pay_period.payment_report_url;
 																}
@@ -11790,7 +11798,7 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												var _this4 = this;
 
 												this.$http.get('technician-wage/report/update?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
-
+																_this4.reportUpdated = true;
 																_this4.reportSrc = response.data;
 												});
 								},
@@ -11978,13 +11986,28 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "lg12": "",
       "mt-2": ""
     }
-  }, [_c('v-card', [_c('v-card-text', [_c('v-btn', {
+  }, [_c('v-card', [_c('v-card-text', [_c('v-layout', {
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
+  }, [_c('v-btn', {
     nativeOn: {
       "~click": function($event) {
         _vm.updateReport($event)
       }
     }
-  }, [_vm._v("Update Report")])], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Update Report")])], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
+  }, [(_vm.reportUpdated) ? _c('p', {
+    staticClass: "green--text text-xs-center"
+  }, [_vm._v("Report is updated!")]) : _vm._e()])], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg8": ""
     }
