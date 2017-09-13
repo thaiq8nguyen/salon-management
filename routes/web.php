@@ -23,7 +23,7 @@
     Route::get('/technician-sale/add', 'TechnicianSaleController@create')
     ->name('technician-sale-add');
     Route::get('/technician-book', 'TechnicianBookController@index')->name('technician-book');
-    Route::get('/wages/report/','WageController@report')->name('wage-report');
+    Route::get('/pay-period/technician-report/','PayPeriodController@report')->name('technician-pay-period-report');
 
     /*TECHNICIAN ROUTES*/
     Route::get('/technician','TechnicianHomeController@home')->name('technician-home')->middleware('auth');

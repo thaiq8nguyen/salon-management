@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\PayPeriod;
+use App\Services\PayPeriodService\PayPeriodReporter as Reporter;
+use Salon\Repositories\PaymentReportRepository\PaymentReportRepositoryInterface as WageReport;
+
 
 class PayPeriodApiController extends Controller
 {
+    protected $reporter;
+    protected $report;
+
+    public function __construct(Reporter $reporter, WageReport $report)
+    {
+        $this->reporter = $reporter;
+        $this->report = $report;
+
+    }
 
 
     /**
@@ -37,5 +49,18 @@ class PayPeriodApiController extends Controller
             $list[] = ['id' => $period->id, 'periods' => $period->begin_date_mdy . ' - ' . $period->end_date_mdy, 'payDate' => $period->pay_date_mdy];
         }
         return response()->json($list,200);
+    }
+
+    public function report(Request $request)
+    {
+
+        return response()->json($this->reporter->getReport($request->technicianId, $request->payPeriodId),200);
+
+    }
+
+    public function update(Request $request){
+
+        return response()->json($this->report->update($request->technicianId, $request->payPeriodId),200);
+
     }
 }

@@ -7,14 +7,21 @@ use App\Technician;
 use Validator;
 use App\TechnicianSale;
 use App\PayPeriod;
-use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface;
+use Salon\Repositories\TechnicianSaleRepository\TechnicianSaleRepositoryInterface as Sale;
+use Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentRepositoryInterface as WagePayment;
+use Salon\Repositories\TechnicianWageRepository\TechnicianWageRepositoryInterface as Wage;
+
 class TechnicianSaleApiController extends Controller
 {
     protected $sale;
+    protected $wagePayment;
+    protected $wage;
 
-    public function __construct(TechnicianSaleRepositoryInterface $sale)
+    public function __construct(Sale $sale, WagePayment $wagePayment, Wage $wage)
     {
         $this->sale = $sale;
+        $this->wagePayment = $wagePayment;
+        $this->wage = $wage;
     }
 
     public function addSale(Request $request){
@@ -180,10 +187,21 @@ class TechnicianSaleApiController extends Controller
     }
 
     public function getBalance(Request $request){
+
+        $previousTotalBalance = $this->sale->getPreviousPayPeriodTotalBalance($request->technicianId, $request->payPeriodId);
         $totalBalance = $this->sale->getTotalBalance($request->technicianId, $request->payPeriodId);
         $payPeriodBalance = $this->sale->getPayPeriodBalance($request->technicianId, $request->payPeriodId);
+        $paymentSum = number_format($this->wagePayment->getPaymentSumByPayPeriod($request->technicianId, $request->payPeriodId),
+            2,'.',',');
+        $totalWage = $this->wage->getTotalWageByPayPeriod($request->technicianId, $request->payPeriodId)->totalWage;
 
-        return response()->json(['total_balance'=> $totalBalance, 'pay_period_balance' => $payPeriodBalance],200);
+
+        return response()->json([
+            ['value' => $previousTotalBalance['balance'],'label' => 'Previous Balance'],
+            ['value' => $totalWage[0]->total, 'label' => 'Wage'],
+            ['value' => $paymentSum, 'label' => 'Paid'],
+            ['value'=> $totalBalance['balance'], 'label' => 'Balance'],
+            ['value' => $payPeriodBalance['balance'], 'label' => 'Period Balance' ]],200);
 
     }
 

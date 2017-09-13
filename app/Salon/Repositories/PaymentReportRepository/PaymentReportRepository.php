@@ -140,16 +140,16 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
 
     }
 
-    public function listReports($technicianId, $months)
+    public function listReports($technicianId)
     {
-        $date = Carbon::now()->subMonth($months)->toDateTimeString();
+        $date = Carbon::now()->subMonth(2)->toDateTimeString();
 
         $this->report = Technician::with(['paymentReport' =>
             function($query) use($date){
                 $query->wherePivot('created_at','>',$date);
             }])
             ->orderBy('last_name','asc')->where('id','=',$technicianId)
-            ->get(['id', 'first_name', 'last_name']);
+            ->get(['id']);
 
         return $this->report;
 
@@ -159,7 +159,7 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
     {
         $technician = Technician::find($technicianId);
         $payPeriod = PayPeriod::find($payPeriodId);
-        $previousPayPeriod = PayPeriod::orderBy('pay_date','desc')->take(1)->skip(1)->first();
+        $previousPayPeriod = PayPeriod::where('id','<', $payPeriodId)->orderBy('id','desc')->limit(1)->first();
 
         $technicianSales = $this->sales->getSales($technician, $payPeriod);
         $technicianWage =  $this->wage->getWage($technician, $payPeriod);
@@ -171,12 +171,11 @@ class PaymentReportRepository implements PaymentReportRepositoryInterface{
         $data = ['technician' => $technician, 'sales'=>$technicianSales,
             'wage'=>$technicianWage,'payments' => $technicianPayment,
             'payPeriod' => $payPeriod->pay_period_mdy, 'payDate' => $payPeriod->pay_date_mdy,
-            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousBalance' => $previousBalance];
+            'totalBalance' => $totalBalance, 'periodBalance' => $payPeriodBalance, 'previousTotalBalance' => $previousBalance];
 
         $this->report = PDF::loadView('pdf.payment', $data )
             ->setPaper('letter','portrait')->setOptions(['dpi'=>96]);
 
-        //print_r($data);
 
         return $this->report->stream('payment-report.pdf');
     }

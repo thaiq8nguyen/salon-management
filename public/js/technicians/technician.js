@@ -11182,10 +11182,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Khula|Pacifico);", ""]);
 
 // module
-exports.push([module.i, "\n#technician-home-app{\n\tbackground-color: #2196F3;\n}\n", ""]);
+exports.push([module.i, "\n#technician-home-app{\n\tbackground-color: #2196F3;\n}\n#welcome-text{\n\tfont-size: 28px ;\n\ttext-align: center;\n\tcolor: white;\n\tfont-family: 'Pacifico', cursive;\n}\n#welcome-message{\n\tfont-size:18px;\n\tfont-family: 'Khula', sans-serif;\n}\n\n", ""]);
 
 // exports
 
@@ -11197,6 +11197,16 @@ exports.push([module.i, "\n#technician-home-app{\n\tbackground-color: #2196F3;\n
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TechnicianTopNavBar_vue__ = __webpack_require__(36);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11279,13 +11289,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "xs12": ""
     }
-  }, [_c('v-card', {
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "green"
+  }, [_c('p', {
     attrs: {
-      "flat": ""
+      "id": "welcome-text"
     }
-  }, [_c('v-card-title', [_c('p', {
-    staticClass: "title"
-  }, [_vm._v("Welcome " + _vm._s(_vm.formattedName) + "!")])])], 1)], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("Welcome " + _vm._s(_vm.formattedName) + "!")])]), _vm._v(" "), _c('v-card-text', {
+    attrs: {
+      "id": "welcome-message"
+    }
+  }, [_c('p', [_vm._v("Sugar Nails introduces a new web application to help every technician to:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("View sales, wages, and payments in recent pay periods")]), _vm._v(" "), _c('li', [_vm._v("View wage reports anytime ")]), _vm._v(" "), _c('li', [_vm._v("Track any balance remaining on account")]), _vm._v(" "), _c('li', [_vm._v("More features will be introduced in the near future")])]), _vm._v(" "), _c('p', {
+    staticClass: "deep-purple--text"
+  }, [_vm._v("Please click on the menu "), _c('v-icon', {
+    staticClass: "deep-purple--text"
+  }, [_vm._v("menu")]), _vm._v(" above to navigate to the pages")], 1)])], 1)], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

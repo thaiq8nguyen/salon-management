@@ -21,12 +21,7 @@ class WagePaymentController extends Controller
         $this->payment = $payment;
     }
 
-    public function report(Request $request)
-    {
 
-        return response()->json($this->reporter->report($request->technicianId, $request->payPeriodId),200);
-
-    }
 
     public function deletePayment(Request $request){
 

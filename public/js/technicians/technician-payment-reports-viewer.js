@@ -11682,7 +11682,8 @@ exports.push([module.i, "\n#technician-payment-report-viewer-app{\n\tbackground-
 								getReports: function getReports() {
 												var _this = this;
 
-												this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId + '&months=2').then(function (response) {
+												this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId).then(function (response) {
+
 																_this.reports = response.data[0].payment_report;
 												});
 								},
@@ -11724,7 +11725,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "label": ""
     }
-  }, [_vm._v(_vm._s(_vm.reports.length) + " reports savailable")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.reports.length > 0) ? _c('div', [_vm._l((_vm.reports), function(report) {
+  }, [_vm._v(_vm._s(_vm.reports.length) + " reports available")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.reports.length > 0) ? _c('div', [_vm._l((_vm.reports), function(report) {
     return [_c('v-card-text', {
       key: report.id
     }, [_c('v-layout', {

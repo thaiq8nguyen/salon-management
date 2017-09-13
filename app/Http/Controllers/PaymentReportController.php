@@ -43,12 +43,6 @@ class PaymentReportController extends Controller
 
     }
 
-    public function show(Request $request){
-
-
-    }
-
-
 
 
 

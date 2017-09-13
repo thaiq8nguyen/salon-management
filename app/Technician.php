@@ -19,6 +19,11 @@ class Technician extends Model
         return $this->hasMany(TechnicianSale::class);
 
     }
+
+    /**
+     * Return a relationship between a technician and a pay Period through a pivot table technician_pay_period
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function payPeriods(){
 
         return $this->belongsToMany(PayPeriod::class,'technician_pay_period')
@@ -26,12 +31,21 @@ class Technician extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Return technician_pay_period columns; payment_report_url and pay_date through technicianId
+     * @return $this
+     */
     public function paymentReport(){
 
-        return $this->payPeriods()->select('payment_report_url');
+        return $this->payPeriods()->select('payment_report_url','pay_date')->orderBy('pay_date', 'desc');
+
 
     }
 
+    /**
+     * Return one-to-many relationship technician to wage payments
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function payments(){
 
         return $this->hasMany(WagePayment::class);
@@ -83,7 +97,14 @@ class Technician extends Model
             ->groupBy('technician_id');
     }
 
+    public function totalWage(){
 
+        return $this->sales()
+            ->selectRaw('technician_sales.technician_id,ROUND(sum(sales) * salaries.commission_rate - sum(additional_sales) * salaries.tip_rate,2) as total')
+            ->join('salaries','technician_sales.technician_id','=','salaries.technician_id');
+
+
+    }
 
 
     public function salary(){

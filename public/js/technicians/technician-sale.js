@@ -28831,7 +28831,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;\n}\n\n\t/*IPHONE 5/5S*/\n@media only screen\n\tand (min-device-width: 320px)\n\tand (max-device-width: 568px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 330px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6/6S*/\n@media only screen\n    and (min-device-width: 375px)\n    and (max-device-width: 667px)\n    and (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 429px; /*429*/\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6+*/\n@media only screen\n\tand (min-device-width: 414px)\n\tand (max-device-width: 736px)\n\tand (-webkit-min-device-pixel-ratio: 3) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 498px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD*/\n@media only screen\n\tand (min-device-width: 768px)\n\tand (max-device-width: 1024px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\theight: 786px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD PRO*/\n@media only screen\n\tand (min-device-width: 1024px)\n\tand (max-device-width: 1366px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\theight: 1128px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n#technician-sale-app{\n\t\tbackground-color: #2196F3;\n}\n.card-mt{\n\t\tmargin-top: 5px;\n}\n\n\t/*IPHONE 5/5S*/\n@media only screen\n\tand (min-device-width: 320px)\n\tand (max-device-width: 568px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 330px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6/6S*/\n@media only screen\n    and (min-device-width: 375px)\n    and (max-device-width: 667px)\n    and (-webkit-min-device-pixel-ratio: 2) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 429px; /*429*/\n\t\t\toverflow-y: scroll;\n}\n}\n\n\t/*IPHONE 6+*/\n@media only screen\n\tand (min-device-width: 414px)\n\tand (max-device-width: 736px)\n\tand (-webkit-min-device-pixel-ratio: 3) {\nth, td{\n\n\t\t\tpadding:1px !important;\n}\n#content-container{\n\t\t\theight: 498px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD*/\n@media only screen\n\tand (min-device-width: 768px)\n\tand (max-device-width: 1024px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\theight: 786px;\n\t\t\toverflow-y: scroll;\n}\n}\n\t/*IPAD PRO*/\n@media only screen\n\tand (min-device-width: 1024px)\n\tand (max-device-width: 1366px)\n\tand (-webkit-min-device-pixel-ratio: 2) {\n#content-container{\n\t\t\theight: 1128px;\n\t\t\toverflow-y: scroll;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -29295,7 +29295,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -29324,25 +29324,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: ['payPeriodId', 'technicianId'],
 
     data: function data() {
         return {
-            payPeriodBalance: null,
-            totalBalance: null,
-            id: null,
-            name: null,
-            balances: false
+
+            balances: []
 
         };
     },
@@ -29355,7 +29344,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
     },
     computed: {
         showBalance: function showBalance() {
-            return this.payPeriodBalance !== null && this.totalBalance !== null;
+
+            return this.balances.length > 0;
         }
     },
     methods: {
@@ -29363,9 +29353,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
             var _this = this;
 
             this.$axios.get('/api/technician-sale/balance/?technicianId=' + this.technicianId + "&payPeriodId=" + this.payPeriodId).then(function (response) {
-
-                _this.payPeriodBalance = response.data.pay_period_balance;
-                _this.totalBalance = response.data.total_balance;
+                console.log(response.data);
+                _this.balances = response.data;
             });
         }
     }
@@ -29382,31 +29371,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "technician-balance-report"
     }
-  }, [(_vm.showBalance) ? _c('v-card', [_c('v-card-text', [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg8": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\tPeriod Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.payPeriodBalance.period_balance) + "\n\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg8": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\tTotal Balance:\n\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "lg4": ""
-    }
-  }, [_vm._v("\n\t\t\t\t\t$ " + _vm._s(_vm.totalBalance.total_balance) + "\n\t\t\t\t")])], 1)], 1)], 1) : _vm._e()], 1)
+  }, [(_vm.showBalance) ? _c('v-card', [_vm._l((_vm.balances), function(balance) {
+    return [_c('v-card-text', [_c('v-layout', {
+      attrs: {
+        "row": ""
+      }
+    }, [_c('v-flex', {
+      attrs: {
+        "lg8": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(balance.label) + "\n\t\t\t\t\t")]), _vm._v(" "), _c('v-flex', {
+      attrs: {
+        "lg4": ""
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t$ " + _vm._s(balance.value) + "\n\t\t\t\t\t")])], 1)], 1)]
+  })], 2) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -29508,6 +29487,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       value: (_vm.show.payment),
       expression: "show.payment"
     }],
+    staticClass: "card-mt",
     attrs: {
       "pay-period-id": _vm.selectPayPeriodId,
       "technician-id": _vm.technicianId

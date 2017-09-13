@@ -1,26 +1,18 @@
 <template>
 	<div id = "technician-balance-report">
 		<v-card v-if="showBalance">
-			<v-card-text>
-				<v-layout row>
-					<v-flex lg8>
-						Period Balance:
-					</v-flex>
-					<v-flex lg4>
-						$ {{ payPeriodBalance.period_balance}}
-					</v-flex>
-				</v-layout>
-			</v-card-text>
-			<v-card-text>
-				<v-layout row>
-					<v-flex lg8>
-						Total Balance:
-					</v-flex>
-					<v-flex lg4>
-						$ {{ totalBalance.total_balance}}
-					</v-flex>
-				</v-layout>
-			</v-card-text>
+			<template v-for = "balance in balances">
+				<v-card-text>
+					<v-layout row>
+						<v-flex lg8>
+							{{ balance.label }}
+						</v-flex>
+						<v-flex lg4>
+							$ {{ balance.value }}
+						</v-flex>
+					</v-layout>
+				</v-card-text>
+			</template>
 		</v-card>
 	</div>
 </template>
@@ -31,11 +23,8 @@
 
         data() {
             return {
-				payPeriodBalance:null,
-	            totalBalance:null,
-	            id:null,
-	            name:null,
-	            balances:false,
+
+	            balances: [],
 
             }
         },
@@ -49,18 +38,21 @@
 	    },
 	    computed:{
             showBalance(){
-                return this.payPeriodBalance !== null && this.totalBalance !== null
+
+	            return this.balances.length > 0;
             }
 	    },
         methods: {
             getBalance(){
+
                 this.$axios.get('/api/technician-sale/balance/?technicianId=' + this.technicianId + "&payPeriodId="
                     + this.payPeriodId).then(response => {
+						console.log(response.data);
+						this.balances =  response.data;
 
-                        this.payPeriodBalance = response.data.pay_period_balance;
-                        this.totalBalance = response.data.total_balance;
                 });
             },
+
         }
 
 

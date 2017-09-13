@@ -26,80 +26,108 @@
 				</v-card-text>
 			</v-card>
 			<v-container fluid>
-				<v-layout row>
-					<v-flex lg4>
-						<v-container fluid>
-							<v-layout row>
-								<v-flex lg12>
-									<v-card>
-										<v-card-title class = "green darken-1">
-											<v-flex lg6>
-												<h3 class = "headline white--text">
-													<strong>Payments</strong>
-												</h3>
-											</v-flex>
-											<v-flex lg2 xs2 offset-lg4 offset-xs4>
-												<v-icon class = "white--text">fa-money</v-icon>
-											</v-flex>
-										</v-card-title>
-										<div v-if="payments.length > 0">
-											<template v-for="(payment,index) in payments">
-												<v-card-text>
-													<v-card flat>
-														<v-card-text>
-															<v-container>
-																<v-layout row>
-																	<v-flex lg2>
-																		<div class = "subheading"># {{ index + 1}}</div>
-																	</v-flex>
-																	<v-flex lg3>
-																		<div class = "subheading">$ {{ payment.amount}}</div>
-																	</v-flex>
-																	<v-flex lg3>
-																		<div class = "subheading">{{ payment.method}}</div>
-																	</v-flex>
-																</v-layout>
-															</v-container>
-														</v-card-text>
-													</v-card>
-												</v-card-text>
-											</template>
-											<v-card-text>
-												<v-btn class = "red--text" @click.native="deletePayment">
-													Delete</v-btn>
-											</v-card-text>
-										</div>
-
-										<div v-else>
-											<v-card-text>
-												<v-alert value="true" class = "green darken-1 text-xs-center"><p class = "subheading">
-													No payments found at this time</p></v-alert>
-											</v-card-text>
-										</div>
-									</v-card>
-								</v-flex>
-								<v-flex lg12 mt-2>
-									<v-card>
-										<v-card-text>
-											<v-layout row wrap>
-												<v-flex lg6>
-													<v-btn @click.native="updateReport">Update Report</v-btn>
-												</v-flex>
-												<v-flex lg6>
-													<p class = "green--text text-xs-center" v-if="reportUpdated">Report is updated!</p>
-												</v-flex>
-											</v-layout>
-
-										</v-card-text>
-									</v-card>
-								</v-flex>
-							</v-layout>
-						</v-container>
+				<v-layout row v-if="report == null">
+					<v-flex lg6 offset-lg3>
+						<v-alert value="true" class = "green darken-1 text-xs-center">
+							<p class = "headline">Select a technician</p>
+						</v-alert>
 					</v-flex>
-					<v-flex lg8>
-						<div v-if="reportSrc !== null">
-							<object :data = "reportSrc" style="width:100%; height:800px;" type="application/pdf" ></object>
-						</div>
+				</v-layout>
+				<v-layout row v-else>
+					<v-flex lg4>
+						<v-card>
+							<v-card-title class = "green darken-1">
+								<v-flex lg6>
+									<h3 class = "headline white--text">
+										<strong>Payments</strong>
+									</h3>
+								</v-flex>
+								<v-flex lg2 offset-lg4>
+									<v-icon class = "white--text">fa-money</v-icon>
+								</v-flex>
+							</v-card-title>
+							<div v-if="payments.length > 0">
+								<template v-for="(payment,index) in payments">
+									<v-card-text>
+										<v-card flat>
+											<v-card-text>
+												<v-container>
+													<v-layout row>
+														<v-flex lg2>
+															<div class = "subheading"># {{ index + 1}}</div>
+														</v-flex>
+														<v-flex lg3>
+															<div class = "subheading">$ {{ payment.amount}}</div>
+														</v-flex>
+														<v-flex lg3>
+															<div class = "subheading">{{ payment.method}}</div>
+														</v-flex>
+													</v-layout>
+												</v-container>
+											</v-card-text>
+										</v-card>
+									</v-card-text>
+								</template>
+								<v-card-text>
+									<v-btn class = "red--text" @click.native="deletePayment">
+										Delete</v-btn>
+								</v-card-text>
+							</div>
+							<div v-else>
+								<v-card-text>
+									<v-alert value="true" class = "green darken-1 text-xs-center"><p class = "subheading">
+										No payments found at this pay period</p></v-alert>
+								</v-card-text>
+							</div>
+						</v-card>
+					</v-flex>
+					<v-flex lg4>
+						<v-card>
+							<v-card-title class = "indigo darken-1">
+								<v-flex lg6>
+									<h3 class = "headline white--text">
+										<strong>Wage Report</strong>
+									</h3>
+								</v-flex>
+								<v-flex lg2 offset-lg4>
+									<v-icon class = "white--text">fa-sticky-note-o</v-icon>
+								</v-flex>
+							</v-card-title>
+							<v-card-text v-if="existingReport">
+								<v-layout row wrap>
+									<v-flex lg6>
+										<v-btn @click.native = "openReport" primary>View Report</v-btn>
+									</v-flex>
+									<v-flex lg6>
+										<v-btn @click.native = "loader = updateReport()" :loading="updating" :disabled="updating">
+											Update Report <span slot = "loader">Updating...</span>
+										</v-btn>
+									</v-flex>
+								</v-layout>
+							</v-card-text>
+							<v-card-text v-else>
+								<v-alert value="true" class = "orange darken-1 text-xs-center"><p class = "subheading">
+									No wage report found at this pay period</p></v-alert>
+							</v-card-text>
+						</v-card>
+					</v-flex>
+					<v-flex lg4>
+						<v-card>
+							<v-card-title class = "amber darken-1">
+								<v-flex lg6>
+									<h3 class = "headline white--text">
+										<strong>Balances</strong>
+									</h3>
+								</v-flex>
+								<v-flex lg2 offset-lg4>
+									<v-icon class = "white--text">fa-dollar</v-icon>
+								</v-flex>
+							</v-card-title>
+							<v-card-text>
+								<p class = "subheading">Period Balance: <span>$ {{ payPeriodBalance }}</span></p>
+								<p class = "subheading">Total Balance: <span>$ {{ totalBalance }}</span></p>
+							</v-card-text>
+						</v-card>
 					</v-flex>
 				</v-layout>
 			</v-container>
@@ -108,7 +136,6 @@
 </template>
 
 <script>
-
 
     export default {
         props: [],
@@ -119,42 +146,49 @@
 	            selectTechnician: null,
 	            technicians: [],
 	            payPeriods:[],
+	            report: null,
 	            currentPeriod: null,
 	            payments:[],
 	            selectPayPeriodId:null,
-	            reportSrc: null,
-	            reportUpdated: false,
+	            reportUrl:null,
+	            updating:false,
+	            payPeriodBalance: null,
+	            totalBalance: null,
 
             }
         },
 
 	    mounted(){
+
             this.getPayPeriod();
             this.getTechnicians();
 
-
-
 	    },
 	    computed:{
-
+			existingReport(){
+			    return (this.report.wage_report_url !== null);
+			}
 	    },
-	    watch:{
-			selectPayPeriodId(){
-			    sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
-			    if(this.selectTechnician !== null){
-			        this.getReport();
-			        this.reportUpdated = false;
-			    }
 
-			},
-		    selectTechnician(){
-	            if(this.selectPayPeriodId !== null){
-	                this.getReport();
-                    this.reportUpdated = false;
-	            }
-		    }
+	    watch: {
 
-	    },
+            selectPayPeriodId() {
+                sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
+                if (this.selectTechnician !== null) {
+
+                    this.getReport();
+
+                }
+
+            },
+            selectTechnician() {
+                if (this.selectPayPeriodId !== null) {
+                    this.getReport();
+                }
+            }
+        },
+
+
 
         methods: {
 
@@ -186,24 +220,34 @@
 
 	        getReport(){
 
-				this.$http.get('technician-report/search/by-pay-period?technicianId='
+				this.$http.get('technician-pay-period/search?technicianId='
 					+ this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId)
 					.then(response => {
-						if(response.data.pay_period !== null){
-                            this.reportSrc = response.data.pay_period.payment_report_url;
-						}
+					    console.log(response.data);
+					    this.report = response.data;
+						this.payPeriodBalance = this.report.pay_period_balance === null?'0.00':this.report.pay_period_balance.balance;
+						this.totalBalance = this.report.total_balance === null?'0.00':this.report.total_balance.balance;
+				        this.payments = this.report.wage_payment;
+                        this.reportUrl = this.report.wage_report_url === null?null:this.report.wage_report_url.payment_report_url;
 
-				        this.payments = response.data.payments;
 				});
+
+	        },
+
+	        openReport(){
+
+	            window.open(this.reportUrl);
 
 	        },
 
 	        updateReport(){
 
-	            this.$http.get('technician-wage/report/update?technicianId=' +  this.selectTechnician + '&payPeriodId='
+				this.updating = true;
+	            this.$http.get('technician-pay-period/update?technicianId=' +  this.selectTechnician + '&payPeriodId='
 	            + this.selectPayPeriodId).then(response => {
-	                this.reportUpdated = true;
-	                this.reportSrc = response.data;
+
+	                this.updating = false;
+
 	            })
 	        },
 

@@ -7,4 +7,6 @@ interface TechnicianWageRepositoryInterface{
 
     public function getWage(Technician $technician, Payperiod $payPeriod);
 
+    public function getTotalWageByPayPeriod($technicianId, $payPeriodId);
+
 }

@@ -10,5 +10,10 @@ interface TechnicianSaleRepositoryInterface{
 
     public function getTotalBalance($technicianId, $payPeriodId);
 
+    public function getPreviousPayPeriodTotalBalance($technicianId, $payPeriodId);
+
+
+
+
 
 }

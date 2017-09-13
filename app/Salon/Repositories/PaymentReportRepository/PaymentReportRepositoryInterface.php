@@ -13,7 +13,7 @@ interface PaymentReportRepositoryInterface{
 
     public function url($technicianId, $payPeriodId);
 
-    public function listReports($technicianId, $months);
+    public function listReports($technicianId);
 
     public function delete($file);
 

@@ -10,12 +10,12 @@ class TechnicianBook extends Model
 
     public function scopeTotalBalance($query){
 
-        return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as total_balance');
+        return $query->selectRaw('(sum(sales) - sum(payments)) as balance');
     }
 
     public function scopePeriodBalance($query){
 
-        return $query->selectRaw('technician_id, (sum(sales) - sum(payments)) as period_balance');
+        return $query->selectRaw('(sum(sales) - sum(payments)) as balance');
     }
 
 

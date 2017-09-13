@@ -11719,6 +11719,34 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -11730,32 +11758,40 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 												selectTechnician: null,
 												technicians: [],
 												payPeriods: [],
+												report: null,
 												currentPeriod: null,
 												payments: [],
 												selectPayPeriodId: null,
-												reportSrc: null,
-												reportUpdated: false
+												reportUrl: null,
+												updating: false,
+												payPeriodBalance: null,
+												totalBalance: null
 
 								};
 				},
 				mounted: function mounted() {
+
 								this.getPayPeriod();
 								this.getTechnicians();
 				},
 
-				computed: {},
+				computed: {
+								existingReport: function existingReport() {
+												return this.report.wage_report_url !== null;
+								}
+				},
+
 				watch: {
 								selectPayPeriodId: function selectPayPeriodId() {
 												sessionStorage.setItem('selectedPayPeriodId', this.selectPayPeriodId);
 												if (this.selectTechnician !== null) {
+
 																this.getReport();
-																this.reportUpdated = false;
 												}
 								},
 								selectTechnician: function selectTechnician() {
 												if (this.selectPayPeriodId !== null) {
 																this.getReport();
-																this.reportUpdated = false;
 												}
 								}
 				},
@@ -11789,20 +11825,26 @@ exports.push([module.i, "\n#wage-report-app{\n\tbackground-color: #2196F3 !impor
 								getReport: function getReport() {
 												var _this3 = this;
 
-												this.$http.get('technician-report/search/by-pay-period?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
-																if (response.data.pay_period !== null) {
-																				_this3.reportSrc = response.data.pay_period.payment_report_url;
-																}
-
-																_this3.payments = response.data.payments;
+												this.$http.get('technician-pay-period/search?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
+																console.log(response.data);
+																_this3.report = response.data;
+																_this3.payPeriodBalance = _this3.report.pay_period_balance === null ? '0.00' : _this3.report.pay_period_balance.balance;
+																_this3.totalBalance = _this3.report.total_balance === null ? '0.00' : _this3.report.total_balance.balance;
+																_this3.payments = _this3.report.wage_payment;
+																_this3.reportUrl = _this3.report.wage_report_url === null ? null : _this3.report.wage_report_url.payment_report_url;
 												});
+								},
+								openReport: function openReport() {
+
+												window.open(this.reportUrl);
 								},
 								updateReport: function updateReport() {
 												var _this4 = this;
 
-												this.$http.get('technician-wage/report/update?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
-																_this4.reportUpdated = true;
-																_this4.reportSrc = response.data;
+												this.updating = true;
+												this.$http.get('technician-pay-period/update?technicianId=' + this.selectTechnician + '&payPeriodId=' + this.selectPayPeriodId).then(function (response) {
+
+																_this4.updating = false;
 												});
 								},
 								deletePayment: function deletePayment() {
@@ -11899,25 +11941,29 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "fluid": ""
     }
-  }, [_c('v-layout', {
+  }, [(_vm.report == null) ? _c('v-layout', {
+    attrs: {
+      "row": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "lg6": "",
+      "offset-lg3": ""
+    }
+  }, [_c('v-alert', {
+    staticClass: "green darken-1 text-xs-center",
+    attrs: {
+      "value": "true"
+    }
+  }, [_c('p', {
+    staticClass: "headline"
+  }, [_vm._v("Select a technician")])])], 1)], 1) : _c('v-layout', {
     attrs: {
       "row": ""
     }
   }, [_c('v-flex', {
     attrs: {
       "lg4": ""
-    }
-  }, [_c('v-container', {
-    attrs: {
-      "fluid": ""
-    }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "lg12": ""
     }
   }, [_c('v-card', [_c('v-card-title', {
     staticClass: "green darken-1"
@@ -11930,9 +11976,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('strong', [_vm._v("Payments")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg2": "",
-      "xs2": "",
-      "offset-lg4": "",
-      "offset-xs4": ""
+      "offset-lg4": ""
     }
   }, [_c('v-icon', {
     staticClass: "white--text"
@@ -11967,23 +12011,37 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }), _vm._v(" "), _c('v-card-text', [_c('v-btn', {
     staticClass: "red--text",
     nativeOn: {
-      "~click": function($event) {
+      "click": function($event) {
         _vm.deletePayment($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tDelete")])], 1)], 2) : _c('div', [_c('v-card-text', [_c('v-alert', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tDelete")])], 1)], 2) : _c('div', [_c('v-card-text', [_c('v-alert', {
     staticClass: "green darken-1 text-xs-center",
     attrs: {
       "value": "true"
     }
   }, [_c('p', {
     staticClass: "subheading"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\tNo payments found at this time")])])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tNo payments found at this pay period")])])], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "lg12": "",
-      "mt-2": ""
+      "lg4": ""
     }
-  }, [_c('v-card', [_c('v-card-text', [_c('v-layout', {
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "indigo darken-1"
+  }, [_c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
+  }, [_c('h3', {
+    staticClass: "headline white--text"
+  }, [_c('strong', [_vm._v("Wage Report")])])]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg2": "",
+      "offset-lg4": ""
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("fa-sticky-note-o")])], 1)], 1), _vm._v(" "), (_vm.existingReport) ? _c('v-card-text', [_c('v-layout', {
     attrs: {
       "row": "",
       "wrap": ""
@@ -11993,31 +12051,61 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "lg6": ""
     }
   }, [_c('v-btn', {
+    attrs: {
+      "primary": ""
+    },
     nativeOn: {
-      "~click": function($event) {
-        _vm.updateReport($event)
+      "click": function($event) {
+        _vm.openReport($event)
       }
     }
-  }, [_vm._v("Update Report")])], 1), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("View Report")])], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
       "lg6": ""
     }
-  }, [(_vm.reportUpdated) ? _c('p', {
-    staticClass: "green--text text-xs-center"
-  }, [_vm._v("Report is updated!")]) : _vm._e()])], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+  }, [_c('v-btn', {
     attrs: {
-      "lg8": ""
-    }
-  }, [(_vm.reportSrc !== null) ? _c('div', [_c('object', {
-    staticStyle: {
-      "width": "100%",
-      "height": "800px"
+      "loading": _vm.updating,
+      "disabled": _vm.updating
     },
-    attrs: {
-      "data": _vm.reportSrc,
-      "type": "application/pdf"
+    nativeOn: {
+      "click": function($event) {
+        _vm.loader = _vm.updateReport()
+      }
     }
-  })]) : _vm._e()])], 1)], 1)], 1)], 1)
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tUpdate Report "), _c('span', {
+    slot: "loader"
+  }, [_vm._v("Updating...")])])], 1)], 1)], 1) : _c('v-card-text', [_c('v-alert', {
+    staticClass: "orange darken-1 text-xs-center",
+    attrs: {
+      "value": "true"
+    }
+  }, [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("\n\t\t\t\t\t\t\t\tNo wage report found at this pay period")])])], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg4": ""
+    }
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "amber darken-1"
+  }, [_c('v-flex', {
+    attrs: {
+      "lg6": ""
+    }
+  }, [_c('h3', {
+    staticClass: "headline white--text"
+  }, [_c('strong', [_vm._v("Balances")])])]), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "lg2": "",
+      "offset-lg4": ""
+    }
+  }, [_c('v-icon', {
+    staticClass: "white--text"
+  }, [_vm._v("fa-dollar")])], 1)], 1), _vm._v(" "), _c('v-card-text', [_c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Period Balance: "), _c('span', [_vm._v("$ " + _vm._s(_vm.payPeriodBalance))])]), _vm._v(" "), _c('p', {
+    staticClass: "subheading"
+  }, [_vm._v("Total Balance: "), _c('span', [_vm._v("$ " + _vm._s(_vm.totalBalance))])])])], 1)], 1)], 1)], 1)], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -10,4 +10,6 @@ interface TechnicianPaymentRepositoryInterface{
 
     public function deletePayment($technicianId, $payPeriodId);
 
+    public function getPaymentSumByPayPeriod($technicianId, $payPeriodId);
+
 }

@@ -6,7 +6,9 @@ use App\PayPeriod;
 use App\TechnicianBook;
 
 
+
 class TechnicianSaleRepository implements TechnicianSaleRepositoryInterface {
+
 
 
     /**
@@ -57,8 +59,16 @@ class TechnicianSaleRepository implements TechnicianSaleRepositoryInterface {
 
     }
 
+    public function getPreviousPayPeriodTotalBalance($technicianId, $payPeriodId)
+    {
+        $previousPayPeriod = PayPeriod::where('id','<', $payPeriodId)
+            ->orderBy('id','desc')->limit(1)->first();
+
+        return $totalBalance = TechnicianBook::totalBalance()->
+        where('technician_id','=',$technicianId)->where('pay_period_id','<=',$previousPayPeriod->id)->first();
 
 
+    }
 
 
 }

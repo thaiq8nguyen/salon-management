@@ -1,9 +1,7 @@
 <?php
 namespace Salon\Repositories\TechnicianPaymentRepository;
 
-use App\Technician;
-use App\PayPeriod;
-use App\Wage;
+
 use App\WagePayment;
 use App\TechnicianBook;
 
@@ -21,6 +19,23 @@ class TechnicianPaymentRepository implements TechnicianPaymentRepositoryInterfac
     {
         return WagePayment::toTechnician($technicianId)->betweenDates([$fromDate,$toDate])->orderBy('pay_date')
             ->get(['id','technician_id','pay_period_id','amount','reference','method','pay_date','expense_account']);
+
+    }
+
+    public function getPaymentSumByPayPeriod($technicianId, $payPeriodId)
+    {
+        $wagePayments = $this->getPaymentsByPayPeriod($technicianId, $payPeriodId);
+
+        $paymentSum = 0.0;
+        if(count($wagePayments) > 0){
+            foreach($wagePayments as $wagePayment)
+            {
+                $paymentSum += $wagePayment->amount;
+            }
+        }
+
+
+        return $paymentSum;
 
     }
 

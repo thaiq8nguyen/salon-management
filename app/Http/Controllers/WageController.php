@@ -21,10 +21,6 @@ class WageController extends Controller
         return view('wages.payday',['pageTitle' => 'Payday']);
     }
 
-    public function report(){
-
-        return view('wages.report');
-    }
 
 
 }

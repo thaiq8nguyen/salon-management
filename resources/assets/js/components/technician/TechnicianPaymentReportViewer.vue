@@ -9,7 +9,7 @@
 							<v-card>
 								<v-card-title>
 									<h4>Recent Payment Reports</h4>
-									<v-chip label class = "green darken-1 white--text">{{reports.length}} reports savailable</v-chip>
+									<v-chip label class = "green darken-1 white--text">{{reports.length}} reports available</v-chip>
 								</v-card-title>
 								<hr>
 								<div v-if="reports.length > 0">
@@ -68,15 +68,19 @@
         methods: {
             getReports(){
 
-                this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId + '&months=2')
+                this.$http.get('technician-payment/report/by-technician?technicianId=' + this.technicianId)
+
 	                .then(response => {
+
                     this.reports = response.data[0].payment_report;
                 })
             },
+
 	        navigate(link){
 		        sessionStorage.setItem('reportUrl', link);
 		        location.href='/technician/reports/payment-report'
 	        },
+
 	        formatDate(date){
 	            return this.$moment(date,'YYYY-MM-DD').format('MM/DD/YY');
 	        }

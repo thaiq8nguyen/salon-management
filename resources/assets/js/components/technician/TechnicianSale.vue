@@ -16,7 +16,7 @@
 							<sale :daily-sales="dailySales" v-show="show.dailySales" class ="white"></sale>
 							<wage :total-sales="wage" v-show="show.wage"></wage>
 							<payment :payments="payments" v-show="show.payment"></payment>
-							<balance :pay-period-id="selectPayPeriodId" :technician-id="technicianId" v-show="show.payment"></balance>
+							<balance :pay-period-id="selectPayPeriodId" :technician-id="technicianId" v-show="show.payment" class = "card-mt"></balance>
 						</div>
 					</v-flex>
 				</v-layout>
@@ -170,6 +170,10 @@
 <style>
 	#technician-sale-app{
 		background-color: #2196F3;
+	}
+
+	.card-mt{
+		margin-top: 5px;
 	}
 
 	/*IPHONE 5/5S*/

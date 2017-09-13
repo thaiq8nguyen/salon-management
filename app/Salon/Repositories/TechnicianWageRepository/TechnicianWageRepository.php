@@ -24,6 +24,23 @@ class TechnicianWageRepository implements TechnicianWageRepositoryInterface {
 
     }
 
+    public function getTotalWageByPayPeriod($technicianId, $payPeriodId)
+    {
+        $payPeriod = PayPeriod::find($payPeriodId);
+
+        $dates= [$payPeriod->begin_date, $payPeriod->end_date];
+
+        return Technician::with(['totalWage' =>
+            function($query) use ($dates)
+            {
+                $query->whereBetween('sale_date', $dates);
+            }])
+            ->where('id','=', $technicianId)
+
+            ->first(['id']);
+    }
+
+
 }
 
 
