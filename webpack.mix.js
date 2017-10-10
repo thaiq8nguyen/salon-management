@@ -10,12 +10,17 @@ const webpack = require('webpack');
  | file for the application as well as bundling up all the JS files.
  |
  */
+
+    mix.browserSync('shop-management.dev:8888');
+
     mix.webpackConfig({
         plugins: [
         // reduce bundle size by ignoring moment js local files
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
     });
+
+
     mix.js(['resources/assets/js/home.js'], 'public/js')
         .js(['resources/assets/js/salon-sales.js'], 'public/js')
         .js(['resources/assets/js/create-sales.js'], 'public/js/technicians')
@@ -34,6 +39,6 @@ const webpack = require('webpack');
 
 
 
-    //mix.browserSync('shop-management.dev');
+
 
    /*.sass('resources/assets/sass/app.scss', 'public/css');*/

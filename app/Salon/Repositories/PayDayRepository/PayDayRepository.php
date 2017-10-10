@@ -155,7 +155,8 @@ class PayDayRepository implements PayDayRepositoryInterface{
                     $query->where('pay_period_id','=' , $payPeriodId);
                 },
             'salary'
-        ])->orderBy('last_name')->get(['id','first_name','last_name']);
+        ])->orderBy('last_name')->where('technician_category','=','employee')
+        ->orWhere('technician_category','=','contractor')->get(['id','first_name','last_name']);
 
         $results = [];
         $range = 1;
