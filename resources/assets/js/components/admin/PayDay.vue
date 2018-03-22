@@ -1,10 +1,12 @@
 <template>
 	<div>
 		<v-app class = "blue lighten-4">
-			<main >
+			<v-content>
+                <primary-nav-bar></primary-nav-bar>
 				<v-container fluid >
 					<v-layout row wrap>
 						<v-flex lg12>
+                            <pay-period-header></pay-period-header>
 							<template v-if="technicians.length > 0">
 								<v-card>
 									<v-card-text>
@@ -95,12 +97,14 @@
 						</v-flex>
 					</v-layout>
 				</v-container>
-			</main>
+			</v-content>
 		</v-app>
 	</div>
 </template>
 <script>
 
+    import PrimaryNavBar from './PrimaryNavBar';
+    import PayPeriodHeader from '../partials/PayPeriodHeader';
     import TechnicianPaymentPanelHeader from './TechnicianPaymentPanelHeader.vue';
     import MakePayment from './MakeTechnicianPayment.vue';
     import TechnicianDailySaleTable from '../common/TechnicianDailySaleTable.vue';
@@ -110,6 +114,8 @@
         components:
             {
 
+                PrimaryNavBar,
+                PayPeriodHeader,
                 'panel-header': TechnicianPaymentPanelHeader,
 	            'daily-sale-table': TechnicianDailySaleTable,
 	            'total-sale-table': TechnicianTotalSaleTable,

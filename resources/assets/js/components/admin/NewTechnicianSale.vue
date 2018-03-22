@@ -94,7 +94,7 @@
 										<div v-else>
 											<v-data-table :headers="technicianSale.headers"
 											              :items="onTechnician.sales" hide-actions>
-												<template slot = "items" scope="props">
+												<template slot = "items" slot-scope="props">
 													<td class = "text-xs-right">{{ readableDate(props.item.sale_date) }}</td>
 													<td class = "text-xs-right">$ {{ props.item.sales }}</td>
 													<td class = "text-xs-right">$ {{ props.item.additional_sales }}</td>

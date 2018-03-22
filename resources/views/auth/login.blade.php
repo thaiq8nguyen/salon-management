@@ -1,14 +1,18 @@
 @extends('layouts.main')
 @section('pageTitle','Login')
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel = "stylesheet" href = {{ asset('/css/login.css') }}>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 @endpush
 @push('scripts')
     <script src = "{{ asset('js/refresh.js') }}"></script>
+
 @endpush
 @section('content')
+
+
     <div class = "main-content" id = "root">
         <div class="container">
             <div class="row top-buffer">

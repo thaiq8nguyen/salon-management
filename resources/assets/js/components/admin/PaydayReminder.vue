@@ -55,7 +55,6 @@
 
                     }
 
-
                     this.addReminder();
 
                 }).catch(error =>{

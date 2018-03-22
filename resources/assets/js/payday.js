@@ -2,8 +2,8 @@ import Vue from 'vue';
 import axios from 'axios';
 import Vuetify from 'vuetify';
 import moment from 'moment';
-import PayPeriodHeader from './components/partials/PayPeriodHeader.vue';
-import PayDay from './components/admin/PayDay.vue';
+
+
 
 
 Vue.use(Vuetify);
@@ -16,7 +16,9 @@ axios.defaults.headers.common ={
     'X-Requested-With': 'XMLHttpRequest'
 };
 
-Vue.component('pay-period-header',PayPeriodHeader);
+
+import PayDay from './components/admin/PayDay.vue';
+
 Vue.component('pay-day',PayDay);
 
 

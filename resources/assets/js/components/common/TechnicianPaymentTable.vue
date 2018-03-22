@@ -3,12 +3,12 @@
 		<v-card class = "elevation-1 white" v-if="pays.length">
 			<v-card-text>
 				<v-data-table :headers="headers" :items="payments" hide-actions >
-					<template slot="headers" scope="props">
+					<template slot="headers" slot-scope="props">
 						<th v-for="header in props.headers" :key="header.text">
 							<p class = "subheading text-lg-center">{{ header.text }}</p>
 						</th>
 					</template>
-					<template slot="items" scope="props">
+					<template slot="items" slot-scope="props">
 						<td class = "text-xs-left subheading">$ {{ props.item.amount }}</td>
 						<td class = "text-xs-left subheading">{{ props.item.method }}</td>
 					</template>

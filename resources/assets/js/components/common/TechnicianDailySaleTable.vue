@@ -3,12 +3,12 @@
 		<v-card class = "elevation-1 white" v-if="sales.length">
 			<v-card-text >
 				<v-data-table :headers="headers" :items="sales" hide-actions >
-					<template slot="headers" scope="props">
+					<template slot="headers" slot-scope="props">
 						<th v-for="header in props.headers" :key="header.text">
 							<p class = "subheading text-xs-center">{{ header.text }}</p>
 						</th>
 					</template>
-					<template slot="items" scope="props">
+					<template slot="items" slot-scope="props">
 						<td class = "text-xs-center subheading">{{ readableDate(props.item.sale_date) }}</td>
 						<td class = "text-xs-center subheading">$ {{ props.item.sales }}</td>
 						<td class = "text-xs-center subheading">$ {{ props.item.additional_sales }}</td>

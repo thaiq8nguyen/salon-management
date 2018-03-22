@@ -172,7 +172,7 @@ class TechnicianSaleApiController extends Controller
 
         $technicians = Technician::with(['dailySales' => function($query) use ($saleDate){
             $query->where('sale_date', $saleDate);
-        }])->orderBy('last_name', 'asc')
+        }])->orderBy('first_name', 'asc')
             ->where('technician_category','=','employee')
             ->orWhere('technician_category','=','contractor')
             ->get();

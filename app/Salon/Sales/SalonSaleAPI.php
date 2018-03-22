@@ -86,7 +86,7 @@ class SalonSaleAPI{
 
 
 
-            $squareTotalCollected = $squareNetSales + $metrics['Gift Certificate'] + $sales->tips;
+            $squareTotalCollected = $squareNetSales + $sales->tips;
 
             $technicianTotalCollected = $techSales + $metrics['Gift Certificate'] - $metrics['Gift Certificate Redeemed'] + $metrics['Convenience Fee'] + $tipsOnCard;
 

@@ -1,3 +1,4 @@
+
 import Vue from 'vue';
 import axios from 'axios';
 import moment from 'moment';
@@ -13,8 +14,10 @@ axios.defaults.headers.common ={
     'X-Requested-With': 'XMLHttpRequest'
 };
 
+import PrimaryNavBar from './components/admin/PrimaryNavBar.vue';
 import Home from './components/admin/Home.vue';
 
+Vue.component('primary-nav-bar', PrimaryNavBar);
 Vue.component('home',Home);
 
 const app = new Vue({
