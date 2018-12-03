@@ -43,6 +43,7 @@ class PayPeriodApiController extends Controller
             ->get(['id','begin_date','end_date','pay_date'])->reverse();
 
 
+
         $list = [];
         //Format the collection
         foreach($periods as $period){

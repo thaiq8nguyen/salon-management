@@ -17,6 +17,7 @@ class AddNicknameAndCanBookOnlineToTechnicians extends Migration
 
             $table->string('nickname')->nullable()->after('mobile_number');
             $table->boolean('show_online')->default(true)->after('nickname');
+
         });
     }
 

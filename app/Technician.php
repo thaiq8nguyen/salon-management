@@ -20,6 +20,18 @@ class Technician extends Model
 
     }
 
+    public function dates(){
+
+        return $this->belongsToMany(Date::class,'technician_schedules')
+            ->withPivot('is_working')
+            ->withTimestamps();
+    }
+
+    public function scheduleTemplate(){
+
+        return $this->hasMany(TechnicianWeeklyScheduleTemplate::class);
+    }
+
     /**
      * Return a relationship between a technician and a pay Period through a pivot table technician_pay_period
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

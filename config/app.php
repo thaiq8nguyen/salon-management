@@ -175,6 +175,7 @@ return [
         Salon\Repositories\PaymentReportRepository\PaymentReportServiceProvider::class,
         Salon\Repositories\PayDayRepository\PaydayServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Salon\Date\DateServiceProvider::class,
 
         /*
          * Package Service Providers...

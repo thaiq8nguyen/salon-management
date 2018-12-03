@@ -35,12 +35,8 @@
     //Testing Only -- Route::get('/gift-certificate/search/date/{date}','GiftCertificateController@searchByDate');
     //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
     Route::get('/test/wage-report/preview/{technicianId}/{payPeriodId}','Test\PaymentReportTestController@preview');
-
+    Route::get('/dates/time-off','DateController@timeOff');
     Route::get('/mailable', function () {
-
-
-        return new App\Mail\Test();
-
     })->middleware('auth');
 
     Route::get('/s3',function(){

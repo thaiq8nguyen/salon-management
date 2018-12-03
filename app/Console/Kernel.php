@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UpdateSalonSales::class,
         Commands\UpdateGiftCertificate::class,
+        Commands\CreateDateEntries::class,
     ];
 
     /**
