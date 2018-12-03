@@ -8,7 +8,7 @@
 @push('scripts')
     <script src = "{{ asset('js/home.js') }}"></script>
 @endpush
-@include('partials.main-navbar')
+
 @section('content')
     <div class = "main-content" id = "root">
         <home></home>

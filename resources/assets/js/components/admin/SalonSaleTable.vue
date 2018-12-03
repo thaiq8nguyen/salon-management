@@ -14,13 +14,13 @@
 			<v-card-text>
 				<template v-if="squareData">
 					<v-data-table :headers="sales.headers" :items="sales.items" hide-actions class="text-md-center">
-						<template slot="headers" scope="props">
+						<template slot="headers" slot-scope="props">
 							<th v-for="header in props.headers" :key="header.name" class="text-lg-center">
 								<p class = "subheading blue--text">{{ header.name }}</p>
 							</th>
 						</template>
 
-						<template slot="items" scope="props">
+						<template slot="items" slot-scope="props">
 							<td class = "subheading">
 								<v-icon v-if="props.item.icon" :class = "props.item.style">{{props.item.icon}}</v-icon>
 								<strong>{{ props.item.name}}</strong></td>

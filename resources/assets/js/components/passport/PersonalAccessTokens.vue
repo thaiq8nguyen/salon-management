@@ -1,66 +1,117 @@
-<style scoped>
-    .action-link {
-        cursor: pointer;
-    }
-
-    .m-b-none {
-        margin-bottom: 0;
-    }
-</style>
 
 <template>
     <div>
-        <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>
-                            Personal Access Tokens
-                        </span>
+        <v-card>
+            <v-card-title>
+                <h3>Personal Access Token</h3>
+            </v-card-title>
+            <v-card-text>
+                <p v-if="items.length === 0"></p>
+                <v-data-table v-else
+                    :headers="headers"
+                    :items="items"
+                    hide-actions
+                >
+                    <template slot="items" slot-scope="props">
+                        <td class="text-xs-left">{{ props.item.name}}</td>
+                        <td><v-btn color="error" @click="revoke(props.item)">Delete</v-btn></td>
+                    </template>
+                </v-data-table>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn color="success" @click="createTokenDialog=true">Create New Token</v-btn>
+            </v-card-actions>
+        </v-card>
 
-                        <a class="action-link" @click="showCreateTokenForm">
-                            Create New Token
-                        </a>
-                    </div>
-                </div>
+        <!--<div class = "card">
+            <div class="card-body">
+                <h5 class = "card-title">Personal Access Token</h5>
+                <p class = "card-text" v-if="tokens.length === 0">
+                    You have not created any personal access token
+                </p>
+                <table class="table" v-if="tokens.length > 0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                    </thead>
 
-                <div class="panel-body">
-                    <!-- No Tokens Notice -->
-                    <p class="m-b-none" v-if="tokens.length === 0">
-                        You have not created any personal access tokens.
-                    </p>
+                    <tbody>
+                    <tr v-for="token in tokens">
+                        &lt;!&ndash; Client Name &ndash;&gt;
+                        <td style="vertical-align: middle;">
+                            {{ token.name }}
+                        </td>
 
-                    <!-- Personal Access Tokens -->
-                    <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                        &lt;!&ndash; Delete Button &ndash;&gt;
+                        <td style="vertical-align: middle;">
+                            <a href = "#" class="btn btn-danger " @click="revoke(token)">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href = "#" class="btn btn-primary" @click="showCreateTokenForm">
+                    Create New Token
+                </a>
 
-                        <tbody>
-                            <tr v-for="token in tokens">
-                                <!-- Client Name -->
-                                <td style="vertical-align: middle;">
-                                    {{ token.name }}
-                                </td>
-
-                                <!-- Delete Button -->
-                                <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-        </div>
+        </div>-->
+        <!-- Create Token Dialog -->
+        <v-dialog id="create-token-dialog" v-model="createTokenDialog" max-width="500px">
+            <v-card>
+                <v-card-title>Create Token</v-card-title>
+                <v-card-text>
+                    <v-alert type="error" :value="form.errors.length > 0">
+                        <p><strong>Whoops!</strong> Something went wrong!</p>
+                        <br>
+                        <ul>
+                            <li v-for="error in form.errors">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </v-alert>
+                    <v-form>
+                        <v-text-field
+                            label="Name"
+                            v-model="form.name"
+                            required
+                            ></v-text-field>
+                        <div v-if="scopes.length > 0">
+                            <v-checkbox
+                                label="Scopes"
+                                v-model="scope.id">
 
+                            </v-checkbox>
+                        </div>
+                    </v-form>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn color="success" @click="store">Create</v-btn>
+                    <v-btn @click="createTokenDialog=false">Close</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!-- Access Token Dialog -->
+        <v-dialog id = "access-token-dialog" v-model="accessTokenDialog" max-width="600px">
+            <v-card>
+                <v-card-title>Personal Access Token</v-card-title>
+                <v-card-text>
+                    <p>
+                        Here is your new personal access token. This is the only time it will be shown so don't lose it!
+                        You may now use this token to make API requests.
+                    </p>
+                    <pre style="overflow: auto;"><code style="display:block; word-wrap:normal; padding: 1rem;">{{ accessToken }}</code></pre>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn @click="accessTokenDialog=false">Close</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <!-- Create Token Modal -->
-        <div class="modal fade" id="modal-create-token" tabindex="-1" role="dialog">
+        <!--<div class="modal fade" id="modal-create-token" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,7 +123,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <!-- Form Errors -->
+                        &lt;!&ndash; Form Errors &ndash;&gt;
                         <div class="alert alert-danger" v-if="form.errors.length > 0">
                             <p><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
@@ -83,9 +134,9 @@
                             </ul>
                         </div>
 
-                        <!-- Create Token Form -->
+                        &lt;!&ndash; Create Token Form &ndash;&gt;
                         <form class="form-horizontal" role="form" @submit.prevent="store">
-                            <!-- Name -->
+                            &lt;!&ndash; Name &ndash;&gt;
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Name</label>
 
@@ -94,7 +145,7 @@
                                 </div>
                             </div>
 
-                            <!-- Scopes -->
+                            &lt;!&ndash; Scopes &ndash;&gt;
                             <div class="form-group" v-if="scopes.length > 0">
                                 <label class="col-md-4 control-label">Scopes</label>
 
@@ -115,7 +166,7 @@
                         </form>
                     </div>
 
-                    <!-- Modal Actions -->
+                    &lt;!&ndash; Modal Actions &ndash;&gt;
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -125,10 +176,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>-->
         <!-- Access Token Modal -->
-        <div class="modal fade" id="modal-access-token" tabindex="-1" role="dialog">
+        <!--<div class="modal fade" id="modal-access-token" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -148,13 +198,13 @@
                         <pre><code>{{ accessToken }}</code></pre>
                     </div>
 
-                    <!-- Modal Actions -->
+                    &lt;!&ndash; Modal Actions &ndash;&gt;
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -165,9 +215,15 @@
          */
         data() {
             return {
+                headers:[
+                    {text:'Name', sortable: false, value: 'name'},
+                    {sortable: false}
+                ],
                 accessToken: null,
+                createTokenDialog: false,
+                accessTokenDialog: false,
 
-                tokens: [],
+                items: [],
                 scopes: [],
 
                 form: {
@@ -200,18 +256,18 @@
                 this.getTokens();
                 this.getScopes();
 
-                $('#modal-create-token').on('shown.bs.modal', () => {
+                /*$('#modal-create-token').on('shown.bs.modal', () => {
                     $('#create-token-name').focus();
-                });
+                });*/
             },
 
             /**
              * Get all of the personal access tokens for the user.
              */
             getTokens() {
-                axios.get('/oauth/personal-access-tokens')
+                this.$axios.get('/oauth/personal-access-tokens')
                         .then(response => {
-                            this.tokens = response.data;
+                            this.items = response.data;
                         });
             },
 
@@ -219,17 +275,10 @@
              * Get all of the available scopes.
              */
             getScopes() {
-                axios.get('/oauth/scopes')
+                this.$axios.get('/oauth/scopes')
                         .then(response => {
                             this.scopes = response.data;
                         });
-            },
-
-            /**
-             * Show the form for creating new tokens.
-             */
-            showCreateTokenForm() {
-                $('#modal-create-token').modal('show');
             },
 
             /**
@@ -240,19 +289,20 @@
 
                 this.form.errors = [];
 
-                axios.post('/oauth/personal-access-tokens', this.form)
+                this.$axios.post('/oauth/personal-access-tokens', this.form)
                         .then(response => {
                             this.form.name = '';
                             this.form.scopes = [];
                             this.form.errors = [];
 
-                            this.tokens.push(response.data.token);
+                            this.items.push(response.data.token);
 
                             this.showAccessToken(response.data.accessToken);
                         })
                         .catch(error => {
+                            console.log(error.response.data);
                             if (typeof error.response.data === 'object') {
-                                this.form.errors = _.flatten(_.toArray(error.response.data));
+                                this.form.errors = this.$_.flatten(_.toArray(error.response.data));
                             } else {
                                 this.form.errors = ['Something went wrong. Please try again.'];
                             }
@@ -264,7 +314,7 @@
              */
             toggleScope(scope) {
                 if (this.scopeIsAssigned(scope)) {
-                    this.form.scopes = _.reject(this.form.scopes, s => s == scope);
+                    this.form.scopes = this.$_.reject(this.form.scopes, s => s == scope);
                 } else {
                     this.form.scopes.push(scope);
                 }
@@ -274,28 +324,29 @@
              * Determine if the given scope has been assigned to the token.
              */
             scopeIsAssigned(scope) {
-                return _.indexOf(this.form.scopes, scope) >= 0;
+                return this.$_.indexOf(this.form.scopes, scope) >= 0;
             },
 
             /**
              * Show the given access token to the user.
              */
             showAccessToken(accessToken) {
-                $('#modal-create-token').modal('hide');
 
+                this.createTokenDialog =  false;
+                this.accessTokenDialog = true;
                 this.accessToken = accessToken;
 
-                $('#modal-access-token').modal('show');
             },
 
             /**
              * Revoke the given token.
              */
             revoke(token) {
-                axios.delete('/oauth/personal-access-tokens/' + token.id)
+                this.$axios.delete('/oauth/personal-access-tokens/' + token.id)
                         .then(response => {
                             this.getTokens();
                         });
+
             }
         }
     }

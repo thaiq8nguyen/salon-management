@@ -1,229 +1,233 @@
 <template>
 	<div>
 		<v-app>
-		<v-container fluid class = "blue lighten-4">
-			<div label id = "sale-sticker" class ="sticker">
-				<p class = "subheading">Gross Sale</p>
-				<p class = "body-2">$ {{technicianSale}}</p>
-			</div>
-			<div label id = "tip-sticker" class ="sticker">
-				<p class = "subheading">Gross Tip</p>
-				<p class = "body-2">$ {{technicianCardTip}}</p>
-			</div>
-			<v-layout row wrap>
-				<v-flex lg12 xs12>
-					<v-alert success v-model="isAdded" transition="fade" class = "text-lg-center" dismissible>
-						<p class = "headline ">Technician Sale has been updated</p>
-					</v-alert>
-				</v-flex>
-				<v-flex lg12 xs12>
-					<v-card>
-						<v-card-text>
-							<v-layout row wrap>
-								<v-flex lg6 xs12>
-									<v-layout row wrap>
-										<v-flex lg11>
-											<v-layout row>
-												<v-flex lg3>
-													<v-btn primary @click.native="previousDate(date)">
-														<v-icon class = "white--text">keyboard_arrow_left</v-icon>Previous</v-btn>
+			<v-content>
+				<primary-nav-bar></primary-nav-bar>
+				<v-container fluid class = "blue lighten-4" grid-list-lg fill-height>
+					<v-layout>
+						<v-flex>
+							<v-card flat>
+								<v-card-text>
+									<v-layout row>
+										<v-flex lg4>
+											<v-layout row wrap>
+												<v-flex lg12><!--Calendar with date selection component-->
+													<calendar v-on:selectedDate="handleDate"></calendar><!--handleDate() assigned a date value returns from the component-->
+												</v-flex>
+												<v-flex lg6><!--Redeem certificate component-->
+													<redeem-certificate :date="chosenDate" v-on:redeemed="handleCertificateRedemption"></redeem-certificate>
 												</v-flex>
 												<v-flex lg6>
-													<v-menu
-															lazy
-															:close-on-content-click="true"
-															v-model="dateMenu"
-															transition="scale-transition"
-															offset-y
-															full-width
-															:nudge-left="40"
-															max-width="290px"
-													>
-														<v-text-field
-																slot="activator"
-																label="Select a sale date"
-																v-model="date"
-																prepend-icon="event"
-																readonly
-														></v-text-field>
-														<v-date-picker v-model="date" no-title scrollable actions ></v-date-picker>
-													</v-menu>
-												</v-flex>
-												<v-flex lg3>
-													<v-btn primary @click.native="nextDate(date)">Next<v-icon
-															class = "white--text">keyboard_arrow_right</v-icon></v-btn>
+													<v-card height="250">
+														<v-card-title class="purple white--text">
+															<h3 class="headline">Gross Sale & Tip</h3>
+														</v-card-title>
+														<v-card-text>
+                                                            <v-list>
+                                                                <v-list-tile>
+                                                                    <v-list-tile-content>
+                                                                        <v-list-tile-title>Gross Sale</v-list-tile-title>
+                                                                        <v-list-tile-sub-title class="subheading">$&nbsp{{ technicianSale }}</v-list-tile-sub-title>
+
+                                                                    </v-list-tile-content>
+                                                                </v-list-tile>
+                                                                <v-divider></v-divider>
+                                                                <v-list-tile>
+                                                                    <v-list-tile-content>
+                                                                        <v-list-tile-title>Gross Tip</v-list-tile-title>
+                                                                        <v-list-tile-sub-title class="subheading">$&nbsp{{ technicianCardTip }}</v-list-tile-sub-title>
+                                                                    </v-list-tile-content>
+                                                                </v-list-tile>
+                                                            </v-list>
+                                                        </v-card-text>
+
+													</v-card>
 												</v-flex>
 											</v-layout>
 										</v-flex>
-										<v-flex lg11 mt-2><!--Square Data-->
-											<template v-if="isSquareData">
-												<salon-sale-table :saleData="squareData"></salon-sale-table>
-											</template>
-											<template v-else>
-												<v-card>
-													<v-card-text class = "text-lg-center">
-														<v-icon large class = "red--text">info</v-icon>
-														<p class = "subheading">There is no data recorded for this date</p>
-													</v-card-text>
-												</v-card>
-											</template>
-										</v-flex>
-										<v-flex lg6 mt-2>
-											<v-btn class = "ma-3" primary @click.native.stop="openDialog" block >Verify</v-btn>
-										</v-flex>
+										<v-flex lg8 class="bordered">
+											<v-layout row wrap>
+												<v-flex lg12>
+													<salon-sale-metric :date="chosenDate" :refresh="refreshSalonSaleMetric" @complete="handleSalonSaleMetric"></salon-sale-metric>
+												</v-flex>
+												<v-flex lg12>
+													<v-card>
+														<v-card-text>Reserved for cash receivable</v-card-text>
+													</v-card>
+												</v-flex>
+											</v-layout>
 
+										</v-flex>
 									</v-layout>
-								</v-flex>
-								<v-flex lg6>
-									<v-layout row wrap>
-										<template v-for="(technician,index) in technicians">
-											<v-flex lg4 md4 mt-1>
-												<v-card @mouseover = "hover(index)" @mouseleave = "hover(null)"
-												        :class="[{'grey lighten-4':select(index)},
+									<v-layout row mt-3>
+                                        <v-flex lg12>
+                                            <v-card v-if="loadingData===false">
+                                                <v-card-text>
+                                                    <v-layout row wrap>
+                                                        <template v-for="(technician,index) in technicians">
+                                                            <v-flex lg2>
+                                                                <v-card height="170px"flat @mouseover = "hover(index)" @mouseleave = "hover(null)"
+                                                                        :class="[{active_technician_card:select(index)},
 											                     {'green--text text-darken-1':sales[index].sales !== 0},
 											                     {'red--text text-darken-1}': sales[index].toBeDeleted}]">
-													<v-card-title class = "subheading">
-														<strong>{{technician.technicianID}}. {{ technician.fullName }}</strong>
-													</v-card-title>
-													<v-card-text>
-														<v-layout row>
-															<v-flex lg6>
-																<v-text-field label = "Sale" prefix="$"
-																              v-model.number="sales[index].sales"
-																              :disabled = "sales[index].toBeDeleted"
-																              @focus="clearInput(index,'sale')"
-																              @blur="checkInput(index,'sale')" hint="SALE"
-																              @keypress="filtering">
+                                                                    <v-card-title class="blue white--text" >
+                                                                        <h3><strong>{{ technician.fullName }}</strong></h3>
+                                                                    </v-card-title>
+                                                                    <v-card-text>
+                                                                        <v-layout row wrap>
+                                                                            <v-flex lg4>
+                                                                                <v-text-field label = "Sale" prefix="$"
+                                                                                              v-model.number="sales[index].sales"
+                                                                                              :disabled = "sales[index].toBeDeleted"
+                                                                                              @focus="clearSaleInput(index)"
+                                                                                              @blur="verifySaleInput(index)"
+                                                                                              @keypress="filtering" >
+                                                                                </v-text-field>
+                                                                            </v-flex>
+                                                                            <v-flex lg4>
+                                                                                <v-text-field label = "Tip" prefix="$"
+                                                                                              v-model.number="sales[index].additional_sales"
+                                                                                              :disabled = "sales[index].toBeDeleted || sales[index].sales == null"
+                                                                                              max="6"
+                                                                                              @focus="clearAdditionalSaleInput(index)"
+                                                                                              @blur="verifyAdditionalSaleInput(index)"
+                                                                                              @keypress="filtering">
 
-																</v-text-field>
-															</v-flex>
-															<v-flex lg6>
-																<p v-if="technician.dailySales.length > 0" class = "blue--text body-2">
-																	$ {{ technician.dailySales[0].sales }}
-																</p>
-															</v-flex>
-														</v-layout>
-														<v-layout row wrap>
-															<v-flex lg6>
-																<v-text-field label = "Tip" prefix="$"
-																              v-model.number="sales[index].additional_sales"
-																              :disabled = "sales[index].toBeDeleted"
-																              max="6"
-																              @focus="clearInput(index,'tip')"
-																              @blur="checkInput(index,'tip')" hint="TIP"
-																              @keypress="filtering">
+                                                                                </v-text-field>
+                                                                            </v-flex>
+                                                                            <v-flex lg4>
+                                                                                <v-checkbox :label="`Delete`" v-model="sales[index].toBeDeleted"
+                                                                                            v-if="sales[index].existing_sale_id">
 
-																</v-text-field>
-															</v-flex>
-															<v-flex lg6>
-																<p v-if="technician.dailySales.length > 0" class = "blue--text body-2">
-																	$ {{ technician.dailySales[0].sales }}
-																</p>
+                                                                                </v-checkbox>
+                                                                            </v-flex>
+                                                                        </v-layout>
+                                                                    </v-card-text>
+                                                                </v-card>
+                                                            </v-flex>
+                                                        </template>
+                                                    </v-layout>
+                                                </v-card-text>
+                                                <v-card-actions>
+                                                    <v-btn color="success" @click="openDialog" :disabled="invalidSubmission">Submit</v-btn>
+                                                </v-card-actions>
+                                            </v-card>
+                                            <v-card v-else flat height="440px">
+                                                <v-card-text>
+                                                    <h2 class="text-lg-center">Loading technicians...</h2>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-flex>
 
-															</v-flex>
-															<v-flex lg6>
-																<v-checkbox :label="`Delete`" v-model="sales[index].toBeDeleted"
-																            v-if="sales[index].existing_sale_id && sales[index].sales == 0">
-
-																</v-checkbox>
-															</v-flex>
-														</v-layout>
-													</v-card-text>
-												</v-card>
-											</v-flex>
-										</template>
 									</v-layout>
-							</v-flex>
-						</v-layout>
-						</v-card-text>
-					</v-card>
-				</v-flex>
-			</v-layout>
-		</v-container>
-		<v-dialog v-model="dialog" width="600">
-			<v-card>
-				<v-card-title class = "text-lg-center blue darken-1">
-					<p class = "headline white--text">Confirm Sale for {{ formattedDate }} </p>
-				</v-card-title>
-				<v-card-text>
-					<v-layout row>
-						<v-flex lg6></v-flex>
-						<v-flex lg2>
-							<p class = "title">Sale</p>
+								</v-card-text>
+							</v-card>
 						</v-flex>
-						<v-flex lg2>
-							<p class = "title">Tip</p>
-						</v-flex>
-						<v-flex lg2></v-flex>
 					</v-layout>
-					<template v-for="(technician,index) in technicians">
-						<v-card flat>
-							<v-card-text>
-								<v-layout>
-									<v-flex lg6>
-										<p class = "title">{{ technician.fullName }}</p>
-									</v-flex>
-									<v-flex lg2 ml-1>
-										<p class = "title">$ {{ sales[index].sales }}</p>
-									</v-flex>
-									<v-flex lg2 ml-1>
-										<p class = "title">$ {{ sales[index].additional_sales }}</p>
-									</v-flex>
-									<v-flex lg2>
-										<v-chip label class = "subheading blue white--text"
-										        v-if="sales[index].existing_sale_id !== null && sales[index].sales > 0">
-											Update
-										</v-chip>
-										<v-chip label class = "subheading green white--text"
-										        v-if="sales[index].existing_sale_id == null && sales[index].sales > 0">
-											Add
-										</v-chip>
-										<v-chip label class = "subheading red white--text"
-										        v-if="sales[index].toBeDeleted">
-											Delete
-										</v-chip>
-									</v-flex>
-								</v-layout>
-							</v-card-text>
-						</v-card>
-					</template>
+				</v-container>
+				<v-dialog v-model="dialog" width="1000">
+					<v-card>
+						<v-card-title class = "blue darken-1">
+							<p class = "headline white--text">Confirming Sale for {{this.formattedDate}} </p>
+						</v-card-title>
+						<v-card-title class = "subheading purple white--text">
+							<v-layout>
+								<v-flex lg3>
+									Gross Sale: $&nbsp{{ this.technicianSale}}
+								</v-flex>
+								<v-flex lg3>
+									Gross Tip: $&nbsp{{ this.technicianCardTip}}
+								</v-flex>
+							</v-layout>
+						</v-card-title>
+						<v-card-text>
+							<v-layout row wrap>
+								<template v-for="(technician,index) in technicians">
+									<v-flex lg3>
+										<v-card flat class="bordered">
+											<v-card-title>
+												<h4>{{technician.fullName}}</h4>
+											</v-card-title>
+											<v-card-text>
+												<v-layout wrap>
+													<v-flex lg6><p>Sale: $&nbsp{{sales[index].sales}}</p></v-flex>
+													<v-flex lg6><p>Tip: $&nbsp{{sales[index].additional_sales}}</p></v-flex>
+													<v-flex lg6>
+														<v-chip label class = "blue white--text"
+																v-if="sales[index].toBeUpdated ">
+															Update
+														</v-chip>
+														<v-chip label class = "green white--text"
+																v-if="sales[index].toBeInserted">
+															Add
+														</v-chip>
+														<v-chip label class = "red white--text"
+																v-if="sales[index].toBeDeleted">
+															Delete
+														</v-chip>
 
-					<v-spacer></v-spacer>
-					<v-btn @click.native="addSale" primary v-show="newSales.length > 0"><v-icon class = "white--text">add</v-icon>Add</v-btn>
-					<v-btn @click.native="closeDialog">Close</v-btn>
-				</v-card-text>
-			</v-card>
-		</v-dialog>
+                                                        <v-chip label class = "grey white--text"
+                                                                v-if="!sales[index].toBeUpdated &&
+                                                                !sales[index].toBeInserted &&
+                                                                !sales[index].toBeDeleted">
+                                                            No Change
+                                                        </v-chip>
+													</v-flex>
+												</v-layout>
+											</v-card-text>
+										</v-card>
+									</v-flex>
+								</template>
+							</v-layout>
+
+							<v-spacer></v-spacer>
+
+						</v-card-text>
+						<v-card-actions>
+							<v-btn @click.native="addSale" class="success" :disabled="newSales.length === 0">Submit</v-btn>
+							<v-btn @click.native="closeDialog">Close</v-btn>
+						</v-card-actions>
+
+					</v-card>
+				</v-dialog>
+			</v-content>
 	</v-app>
 	</div>
 </template>
 <script>
 
-	import SalonSaleTable from './SalonSaleTable.vue';
+	import PrimaryNavBar from './PrimaryNavBar';
+	import Calendar from './Calendar';
+	import RedeemCertificate from './RedeemCertificate';
+	import SalonSaleMetric from './SalonSaleMetric';
     export default {
-        components: {SalonSaleTable},
+
+        components: {PrimaryNavBar, Calendar, RedeemCertificate, SalonSaleMetric},
         props: [],
 
-        data() {
+        data: function () {
             return {
-                date: this.$moment().format('YYYY-MM-DD'),
-	            dateMenu:false,
-	            squareData:[],
-	            isSquareData: false,
 
-				technician:{
-                    grossSale:null,
-					cardTip:null,
-				},
+                picker: null,
+                chosenDate: null,
+                dateMenu: false,
+                refreshSalonSaleMetric: false,
 
-	            technicians:[],
-	            sale:null,
-	            sales:[],
-	            newSales:[],
-	            isAdded: false,
-	            active: null,
-	            dialog: false,
-	            loadingData:false,
+                current: {
+                    grossSale: 0,
+                    grossTipByCreditCard: 0,
+                },
+
+                technicians: [],
+                sale: null,
+                sales: [],
+                newSales: [],
+                savedSales: null,
+                savedAdditionalSales: null,
+                isAdded: false,
+                active: null,
+                dialog: false,
+                loadingData: false,
 
             }
         },
@@ -232,101 +236,109 @@
             formattedDate(){
                 return this.$moment(this.date).format('dddd MM/DD/YYYY');
             },
+            /*Compute the total gross sale after each time a technician's sale is enter*/
             technicianSale(){
-                let grossSale = this.technician.grossSale;
+                let grossSale = this.current.grossSale;
+                let sale = 0;
                 for(let i = 0; i < this.sales.length; i++){
-                    grossSale += parseFloat(this.sales[i].sales);
+                    if(!this.sales[i].sales){ //if a technician's sale is blank or null, set the sale to zero
+                        sale = 0;
+                    }
+                    else{
+                        sale = parseFloat(this.sales[i].sales); //convert a sale from a string to a decimal
+                    }
+                    grossSale += sale;
                 }
-                if(isNaN(grossSale)){
-                    grossSale = 0;
-                }
-
                 return grossSale;
 			},
+
 			technicianCardTip(){
-                let cardTip = this.technician.cardTip;
+                let grossTipByCreditCard = this.current.grossTipByCreditCard;
+                let tip = 0;
                 for(let i = 0; i < this.sales.length; i++){
-                    cardTip += parseFloat(this.sales[i].additional_sales);
-                }
-                if(isNaN(cardTip)){
-                    cardTip = 0;
+                    if(!this.sales[i].additional_sales){
+                        tip = 0;
+                    }
+                    else{
+                        tip = parseFloat(this.sales[i].additional_sales);
+                    }
+                    grossTipByCreditCard += tip;
                 }
 
-                return cardTip;
+
+                return grossTipByCreditCard;
 			},
 
-
+            invalidSubmission(){
+                return this.technicianSale === 0;
+            }
 		},
 	    mounted(){
-            this.handleDate();
-            this.getSquareData();
+
             this.getAllTechnicians();
 
 	    },
 
 		watch:{
-	        date(){
-	            this.getSquareData();
+	        chosenDate(){
+
 	            this.getAllTechnicians();
-	            sessionStorage.setItem('saleDate',this.date);
 	            this.newSales = [];
 	        }
 		},
         methods: {
-	        handleDate(){
-				let saleDate = sessionStorage.getItem('saleDate');
-				if(saleDate === null){
-				    sessionStorage.setItem('saleDate', this.date);
-				}else{
-				    this.date = saleDate;
-				}
-	        },
-	        getSquareData(){
-	            this.loadingData = true;
 
-                this.$axios.get('/api/salon/daily-sale?date=' + this.date).then(response=>{
-                    this.loadingData = false;
-                    this.isSquareData = response.data.success;
-                    console.log(response.data);
-                    if(this.isSquareData){
-                        this.squareData = response.data;
-                        this.technician.grossSale = parseFloat(response.data.sales['Technician Sales']);
-                        this.technician.cardTip = parseFloat(response.data.tips['Technician Tips']);
+	        handleDate(selectedDate) {
 
-                    }
-                });
+	            this.chosenDate = selectedDate;
+
 	        },
+
+			handleCertificateRedemption(){
+                this.refreshSalonSaleMetric = true; //refresh the salon sale metric after a certificate redeem value is entered
+			},
+			handleSalonSaleMetric(){
+				this.refreshSalonSaleMetric = false; //the salon sale metric had been refreshed, set this variable to false
+			},
+
 
 			getAllTechnicians(){
-                this.$axios.get('/api/technician-sale/get?saleDate=' + this.date).then(response =>{
+	            this.loadingData = true;
+                this.$axios.get('/api/technician-sale/get?saleDate=' + this.chosenDate).then(response =>{
 
                     this.technicians = response.data.technicians;
                     this.sales = [];
 
                     for(let i = 0; i < this.technicians.length; i++){
+
                         if(this.technicians[i].dailySales.length > 0){
-                            this.sale = {technician_id:this.technicians[i].technicianID, sales:0,
-                                additional_sales:0,sale_date: this.date,
-	                            existing_sale_id: this.technicians[i].dailySales[0].id, toBeDeleted:false};
+                            this.sale = {technician_id:this.technicians[i].technicianID,
+                                sales:this.technicians[i].dailySales[0].sales,
+                                additional_sales:this.technicians[i].dailySales[0].additional_sales,sale_date: this.chosenDate,
+                                existing_sale_id: this.technicians[i].dailySales[0].id, toBeDeleted:false,
+                                toBeInserted: false, toBeUpdated: false};
                         }
                         else{
-                            this.sale = {technician_id:this.technicians[i].technicianID, sales:0,
-                                additional_sales:0,sale_date: this.date, existing_sale_id:null, toBeDeleted:false};
+                            this.sale = {technician_id:this.technicians[i].technicianID, sales:null,
+                                additional_sales:null,sale_date: this.chosenDate, existing_sale_id:null,
+                                toBeDeleted:false, toBeInserted: false, toBeUpdated: false};
                         }
 
-                        this.sales.push(this.sale);
+                        this.sales.push(this.sale); //create a sales array composes of all the technician info & sale data
 
                     }
                     this.sale = null;
+                    this.loadingData = false;
                 });
-
 			},
+            //submit all the sales
 	        addSale(){
 				this.$axios.post('/api/technician-sale/handle-quick-sale',{sales:this.newSales}).then(response =>{
 				    if(response.data.success){
 				        this.dialog = false;
 				        this.isAdded = true;
 				        this.newSales = [];
+				        this.refreshSalonSaleMetric = true; //refresh the salon sale metric
 				        this.reset();
 				    }
 
@@ -334,12 +346,24 @@
 	        },
 
 	        openDialog(){
+	            //if a technician has no sale or tip, set the sale and/or tip to zero
                 for(let i = 0; i < this.sales.length; i++){
-                    if(this.sales[i].sales !== 0 || this.sales[i].toBeDeleted === true){
+                    if(this.sales[i].sales == null){
+                        this.sales[i].sales = 0;
+                    }
+                    if(this.sales[i].additional_sales == null){
+                        this.sales[i].additional_sales = 0;
+                    }
+                }
+                //only push a sale to the newSales[] if it has the inserted, updated, or deleted status
+                for(let i = 0; i < this.sales.length; i++){
+                    if(this.sales[i].toBeInserted === true
+                        || this.sales[i].toBeDeleted === true
+                        || this.sales[i].toBeUpdated === true){
                         this.newSales.push(this.sales[i]);
                     }
                 }
-                this.dialog = true;
+                this.dialog = true; //open the confirmation dialog
 
 	        },
 
@@ -349,31 +373,64 @@
 	        },
 
 			reset(){
-	            this.getSquareData();
+
 	            this.getAllTechnicians();
 
 			},
-	        clearInput(index,input){
+            //this method is fired when a sale text field is being focused
+	        clearSaleInput(currentIndex){
 			    this.active = true;
-	            if(input === 'sale'){
-                    this.sales[index].sales ='';
-	            }else if(input === 'tip'){
-	                this.sales[index].additional_sales = ''
-	            }
-	        },
-	        checkInput(index, input){
-	            if(input === 'sale'){
-                    if(this.sales[index].sales === '') {
-                        this.sales[index].sales = 0;
-
+                let lastIndex = currentIndex;
+                if(lastIndex !== currentIndex){ //this performs when the user click on another technician
+                    this.sales[lastIndex].sales = this.savedSales; //set the previous technician sale the saved sale
+                }
+                else{ //this performs when the user click on a technician sale and stay there
+                    if(this.sales[currentIndex].sales >= 0){ //if a current sale is >=0
+                        this.savedSales = this.sales[currentIndex].sales; //save the sale
+                        this.sales[currentIndex].sales =''; //clear the sale
                     }
-	            }else if(input === 'tip'){
-                    if(this.sales[index].additional_sales === '') {
-                        this.sales[index].additional_sales = 0;
+                    //there is no need to perform the above actions if the sale is null
+                }
+	        },
+            clearAdditionalSaleInput(currentIndex){
+
+                this.active = true;
+                let lastIndex = currentIndex;
+                if(lastIndex !== currentIndex){
+                    this.sales[lastIndex].additional_sales = this.savedAdditionalSales;
+                }
+                else{
+                    if(this.sales[currentIndex].additional_sales >= 0){
+                        this.savedAdditionalSales = this.sales[currentIndex].additional_sales;
+                        this.sales[currentIndex].additional_sales ='';
                     }
-	            }
+                }
+            },
+            //this method is fired when a sale text field is out of focus or blur
+	        verifySaleInput(index){
+
+	            if(this.sales[index].sales === 0){ //when the user is enter a zero
+                    this.sales[index].sales = this.savedSales; //populate the sale text field with the saved sale
+                }
+                else if(this.sales[index].sales !== this.savedSales && this.sales[index].existing_sale_id !== null){
+	                this.sales[index].toBeUpdated = true; //if the current sale is !== to the saved sale and there is an existing sale id, update the sale
+                }
+                else if(this.sales[index].existing_sale_id === null && this.sales[index].sales > 0){
+                    this.sales[index].toBeInserted = true; // if there is an existing sale id and the current sale value is > 0 then insert the sale
+                }
 
 	        },
+            verifyAdditionalSaleInput(index){
+
+                if(this.sales[index].additional_sales === '' || this.sales[index].addtional_sales === 0){
+                    this.sales[index].additional_sales = this.savedAdditionalSales;
+                }
+                else if(this.sales[index].additional_sales !== this.savedAdditionalSales && this.sales[index].existing_sale_id !== null){
+                    this.sales[index].toBeUpdated = true;
+                }
+                
+            },
+
 	        hover(index){
 	            this.active = index;
 	        },
@@ -381,12 +438,7 @@
 	            return this.active === index;
 
 	        },
-	        previousDate(date){
-	            this.date = this.$moment(date).subtract(1,'days').format('YYYY-MM-DD');
-	        },
-	        nextDate(date){
-                this.date = this.$moment(date).add(1,'days').format('YYYY-MM-DD');
-	        },
+
 	        filtering(event){
                 let charCode = (typeof event.which == "number") ? event.which : event.keyCode;
                 if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46 && charCode !== 127) {
@@ -402,31 +454,18 @@
     }
 </script>
 
-<style>
-	.sticker{
-		position:fixed;
-		height:75px;
-		width: 95px;
-		background-color: #2e7d32;
-		top:23%;
-		right:0;
-		z-index:10000;
-		border-radius: 3px;
-		padding: 2px;
-		color:white;
-		opacity:0.8;
-		text-align:center;
+<style scoped>
+
+	.active_technician_card{
+		background-color: #E1F5FE;
 	}
-	#sale-sticker{
-
-		background-color: #2e7d32;
-		top:23%;
-
-
+	.bordered{
+		border: 3px dashed #E1F5FE;
 	}
-	#tip-sticker{
-		background-color: orange;
-		top:40%;
-
-	}
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
 </style>

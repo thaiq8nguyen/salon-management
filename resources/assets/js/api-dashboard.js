@@ -1,20 +1,19 @@
-/**
- * Created by discoverylight on 6/3/17.
- */
+import Vue from 'vue'
+import HttpPlugin from './http.js';
+import Vuetify from 'vuetify';
+import lodash from 'lodash';
+import ApiDashboard from './components/admin/ApiDashboard.vue'
 
-require('./bootstrap');
 
-import Client from './components/passport/Clients.vue';
-import AuthorizedClients from './components/passport/AuthorizedClients.vue';
-import PersonalAccessTokens from './components/passport/PersonalAccessTokens.vue';
+Vue.use(Vuetify);
+Vue.use(HttpPlugin);
 
-Vue.component('passport-clients',Client);
+Object.defineProperty(Vue.prototype, '$_', {value:lodash});
 
-Vue.component('passport-authorized-clients', AuthorizedClients);
 
-Vue.component('personal-access-tokens', PersonalAccessTokens);
 
 
 const app = new Vue({
-    el:'#root'
+    el:'#root',
+    components:{ApiDashboard}
 });

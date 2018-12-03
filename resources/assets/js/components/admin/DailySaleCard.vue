@@ -6,7 +6,7 @@
 					<v-data-table
 							:headers="headers"
 							:items="items" hide-actions>
-						<template slot="items" scope="props">
+						<template slot="items" slot-scope="props">
 							<td>{{ props.item.name}}</td>
 							<td class = "text-md-right">$ {{ props.item.square}}</td>
 							<td class = "text-md-right">$ {{ props.item.technician }}</td>

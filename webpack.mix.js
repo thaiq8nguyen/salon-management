@@ -11,7 +11,7 @@ const webpack = require('webpack');
  |
  */
 
-    mix.browserSync('shop-management.dev:8888');
+    mix.browserSync('shop-management.dev');
 
     mix.webpackConfig({
         plugins: [

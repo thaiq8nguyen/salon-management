@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<v-app>
-			<main>
+			<v-content>
+                <primary-nav-bar></primary-nav-bar>
 				<v-container fluid>
 					<v-layout row wrap>
 						<v-flex lg4 xs12>
@@ -53,7 +54,7 @@
 								</v-card-title>
 								<v-card-text>
 									<template v-for="shortcut in shortcuts">
-										<v-btn :class="shortcut.color" :href="shortcut.href" primary block>{{shortcut.name}}</v-btn>
+										<v-btn :class="shortcut.color" :href="shortcut.href" block>{{shortcut.name}}</v-btn>
 									</template>
 								</v-card-text>
 							</v-card>
@@ -77,29 +78,31 @@
 						</v-flex>
 					</v-layout>
 				</v-container>
-			</main>
+			</v-content>
 		</v-app>
 	</div>
 </template>
 
 <script>
 
+    import PrimaryNavBar from './PrimaryNavBar';
 	import PayDayReminder from './PaydayReminder.vue';
     export default {
         props: [],
 
 	    components:{
+            PrimaryNavBar,
             PayDayReminder
 	    },
 
         data() {
             return {
                 shortcuts:[
-	                {name:'Add Technician Sale', href:'/technician-sale/add', color:'blue darken-4'},
-	                {name:'Pay Technicians', href:'/wages/pay',color:'blue darken-4'},
-	                {name:'Salon Sale', href:'/salon-sales',color:'blue darken-4'},
-	                {name:'Quick Sale Entry', href:'/technician-sale/quick-sale-entry',color:'red darken-4'},
-	                {name:'Gift Certificate', href:'/gift-certificate',color:'blue darken-4'},
+	                {name:'Add Technician Sale', href:'/technician-sale/add', color:'primary'},
+	                {name:'Pay Technicians', href:'/wages/pay',color:'primary'},
+	                {name:'Salon Sale', href:'/salon-sales',color:'primary'},
+	                {name:'Quick Sale Entry', href:'/technician-sale/quick-sale-entry',color:'error '},
+	                {name:'Gift Certificate', href:'/gift-certificate',color:'primary'},
 
 
                 ]

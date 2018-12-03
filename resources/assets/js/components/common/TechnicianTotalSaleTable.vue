@@ -3,12 +3,12 @@
 		<v-card-text>
 			<v-data-table :headers="headers" :items="wage"
 			              hide-actions v-if="screenWidth > 768">
-				<template slot="headers" scope="props">
+				<template slot="headers" slot-scope="props">
 					<th v-for="header in props.headers" :key="header.text">
 						<p class = "subheading text-lg-center">{{ header.text }}</p>
 					</th>
 				</template>
-				<template slot="items" scope="props">
+				<template slot="items" slot-scope="props">
 					<td class = "text-xs-right subheading">$ {{ props.item.subTotal }}</td>
 					<td class = "text-xs-right subheading">$ {{ props.item.subTotalTip }}</td>
 					<td class = "text-xs-right subheading">$ {{ props.item.earnedTotal }}</td>
@@ -18,10 +18,10 @@
 			</v-data-table>
 			<v-data-table :headers="headers" :items="wage"
 			              hide-actions v-else>
-				<template slot="headers" scope="props">
+				<template slot="headers" slot-scope="props">
 					<tr id = "small-screen-size-table-header"></tr>
 				</template>
-				<template slot="items" scope="props">
+				<template slot="items" slot-scope="props">
 					<tr>
 						<th>Sub Total</th>
 						<td class = "text-xs-right subheading">$ {{ props.item.subTotal }}</td>

@@ -1,3 +1,4 @@
+
 @if(Auth::user())
     <nav class = "navbar navbar-expand-lg navbar-light bg-light">
         <a href = "{{ route('home') }}" class="navbar-brand"><i class = "fa fa-home"></i> Salon Management</a>
