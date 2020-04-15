@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 const webpack = require('webpack');
 /*
  |--------------------------------------------------------------------------
@@ -11,14 +11,14 @@ const webpack = require('webpack');
  |
  */
 
-    mix.browserSync('shop-management.dev');
+    
 
-    mix.webpackConfig({
-        plugins: [
-        // reduce bundle size by ignoring moment js local files
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ]
-    });
+    // mix.webpackConfig({
+    //     plugins: [
+    //     // reduce bundle size by ignoring moment js local files
+    //     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    // ]
+    // });
 
 
     mix.js(['resources/assets/js/home.js'], 'public/js')
@@ -33,7 +33,8 @@ const webpack = require('webpack');
         .js(['resources/assets/js/refresh.js'], 'public/js/')
         .js(['resources/assets/js/wages/wage-report.js'], 'public/js/wages')
         .js(['resources/assets/js/technician-payment-reports-viewer.js'], 'public/js/technicians')
-        .js(['resources/assets/js/technician-payment-report-viewer.js'], 'public/js/technicians');
+        .js(['resources/assets/js/technician-payment-report-viewer.js'], 'public/js/technicians')
+        .browserSync('http://127.0.0.1:8000');
 
 
 

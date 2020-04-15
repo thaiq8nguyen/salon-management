@@ -36,20 +36,20 @@
     //Testing Only -- Route::get('/gift/list','GiftCertificateController@index');
     Route::get('/test/wage-report/preview/{technicianId}/{payPeriodId}','Test\PaymentReportTestController@preview');
     Route::get('/dates/time-off','DateController@timeOff');
-    Route::get('/mailable', function () {
-    })->middleware('auth');
+    // Route::get('/mailable', function () {
+    // })->middleware('auth');
 
-    Route::get('/s3',function(){
+    // Route::get('/s3',function(){
 
-        Storage::disk('s3')->put('payment.text','world');
+    //     Storage::disk('s3')->put('payment.text','world');
 
-    });
+    // });
 
     /*Authentication routes*/
     Auth::routes();
-    Route::get('/', function () {
-        return view('auth.login');
-    });
+    // Route::get('/', function () {
+    //     return view('auth.login');
+    // });
     Route::get('/register','RegistrationController@index');
     Route::post('/register','RegistrationController@register')->name('register');
     Route::get('/post-register','RegistrationController@postRegister')->name('post-register');
