@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -13,8 +13,26 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+//Vue.component('example', require('./components/Example.vue'));
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 
+
+Vue.use(Vuetify);
+Vue.use(VueRouter);
+import Login from "./pages/Login.vue"
+
+const routes = [
+    {path: "/login", component: Login}
+]
+
+const router = new VueRouter({
+    mode: "history",
+    routes
+})
 const app = new Vue({
-    el: '#app'
-});
+    vuetify: new Vuetify(),
+    router
+}).$mount("#app")

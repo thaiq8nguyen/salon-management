@@ -1,15 +1,3 @@
 {
-    "/js/api-dashboard.js": "/js/api-dashboard.js",
-    "/js/home.js": "/js/home.js",
-    "/js/refresh.js": "/js/refresh.js",
-    "/js/salon-sales.js": "/js/salon-sales.js",
-    "/js/salon/gift-certificate.js": "/js/salon/gift-certificate.js",
-    "/js/salon/payday.js": "/js/salon/payday.js",
-    "/js/salon/quick-sale-entry.js": "/js/salon/quick-sale-entry.js",
-    "/js/technicians/create-sales.js": "/js/technicians/create-sales.js",
-    "/js/technicians/technician.js": "/js/technicians/technician.js",
-    "/js/technicians/technician-payment-report-viewer.js": "/js/technicians/technician-payment-report-viewer.js",
-    "/js/technicians/technician-payment-reports-viewer.js": "/js/technicians/technician-payment-reports-viewer.js",
-    "/js/technicians/technician-sale.js": "/js/technicians/technician-sale.js",
-    "/js/wages/wage-report.js": "/js/wages/wage-report.js"
+    "/js/app.js": "/js/app.js"
 }
