@@ -1,6 +1,6 @@
 import getters from "./getters";
 import actions from "./actions";
-import mutations from "./mutaions";
+import mutations from "./mutations";
 
 const state = {
   authentication: "",

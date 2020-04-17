@@ -1,5 +1,6 @@
 import axios from "axios";
-import state from "../state";
+import store from "Store";
+
 axios.defaults.baseURL = "/api/";
 
 const headers = {
@@ -28,14 +29,6 @@ authClient.interceptors.request.use(
 );
 
 export default {
-  install: function (Vue) {
-    Object.defineProperties(Vue.prototype, {
-      client: {
-        value: client
-      },
-      authClient: {
-        value: authClient
-      }
-    });
-  }
+  client,
+  authClient
 };

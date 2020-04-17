@@ -1,8 +1,8 @@
 import Vue from "vue";
-import apiClient from "Plugins/apiClient";
+import Plugins from "Plugins";
 
 let Service = new Vue();
-Vue.use(apiClient);
+Vue.use(Plugins);
 
 const login = (credential) => {
   return Service.client.post("/login", credential);

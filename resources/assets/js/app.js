@@ -17,6 +17,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
+import store from "./store";
 
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
@@ -39,5 +40,6 @@ const router = new VueRouter({
 });
 const app = new Vue({
   vuetify: new Vuetify(),
-  router
+  router,
+  store
 }).$mount("#app");
