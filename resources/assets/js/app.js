@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -19,20 +18,26 @@ import VueRouter from "vue-router";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 
+import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
+import { required, email } from "vee-validate/dist/rules";
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
-import Login from "./pages/Login.vue"
 
-const routes = [
-    {path: "/login", component: Login}
-]
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+extend("required", required);
+extend("email", email);
+
+import Login from "Pages/Login";
+
+const routes = [{ path: "/login", component: Login }];
 
 const router = new VueRouter({
-    mode: "history",
-    routes
-})
+  mode: "history",
+  routes
+});
 const app = new Vue({
-    vuetify: new Vuetify(),
-    router
-}).$mount("#app")
+  vuetify: new Vuetify(),
+  router
+}).$mount("#app");

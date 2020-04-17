@@ -8,26 +8,42 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    label="Username"
-                    name="username"
-                    type="text"
-                    v-model="credential.username"
-                  ></v-text-field>
-                  <v-text-field
-                    label="Password"
-                    name="password"
-                    type="password"
-                    v-model="credetial.password"
-                  ></v-text-field>
+              <ValidationObserver v-slot="{ handleSubmit }">
+                <v-form @submit.prevent="handleSubmit(login)">
+                  <v-card-text>
+                    <ValidationProvider
+                      name="email"
+                      rules="required|email"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        label="Email"
+                        name="email"
+                        type="email"
+                        v-model="credential.email"
+                      ></v-text-field>
+                      <span>{{ errors[0] }}</span>
+                    </ValidationProvider>
+                    <ValidationProvider
+                      name="password"
+                      rules="required"
+                      v-slot="{ errors }"
+                    >
+                      <v-text-field
+                        label="Password"
+                        name="password"
+                        type="password"
+                        v-model="credential.password"
+                      ></v-text-field>
+                      <span>{{ errors[0] }}</span>
+                    </ValidationProvider>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="info" type="submit">Login</v-btn>
+                  </v-card-actions>
                 </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn class="info" type="submit">Login</v-btn>
-              </v-card-actions>
+              </ValidationObserver>
             </v-card>
           </v-col>
         </v-row>
@@ -41,14 +57,26 @@ export default {
   name: "Login",
   data() {
     return {
-      greeting: "Hello"
+      credential: {
+        email: "",
+        password: ""
+      },
+      authenticationErrors: "",
+      isAuthenticating: ""
     };
   },
+  computed: {},
   mounted() {
     console.log("Loging is mounted");
+  },
+  methods: {
+    login() {
+      this.$store
+        .dispatch("Authentications/login", this.credential)
+        .then(() => {});
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
