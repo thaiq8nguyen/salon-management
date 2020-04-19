@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "logentries/logentries-monolog-handler": "^2.1",
-        "mashape/unirest-php": "^3.0"
+        "mashape/unirest-php": "^3.0",
+        "nesbot/carbon": "^2.32"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Salon\Square\Square;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +17,11 @@ use Salon\Square\Square;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+// Auth
+
+
+Route::post('/login', 'AuthenticationController@login');
 
 Route::post('/technician-sale/add', 'TechnicianSaleApiController@addSale')->middleware('auth:api');
 

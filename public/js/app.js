@@ -65211,7 +65211,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   login: function login(_ref, credential) {
     var commit = _ref.commit;
-    console.log(credential);
+    return new Promise(function (resolve, reject) {});
   }
 });
 

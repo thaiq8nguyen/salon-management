@@ -3,6 +3,6 @@ import AuthenticationService from "Services/authenticationServices";
 
 export default {
   login({ commit }, credential) {
-    console.log(credential);
+    return new Promise((resolve, reject) => {});
   }
 };

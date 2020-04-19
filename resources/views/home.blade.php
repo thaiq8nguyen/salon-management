@@ -11,7 +11,8 @@
 
 @section('content')
     <div class = "main-content" id = "root">
-        <home></home>
+        <h1>Hello</h1>
+{{--        <home></home>--}}
     </div>
 
 @endsection
