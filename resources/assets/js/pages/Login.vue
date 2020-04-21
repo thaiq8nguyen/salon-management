@@ -58,8 +58,8 @@ export default {
   data() {
     return {
       credential: {
-        email: "",
-        password: ""
+        email: "ale@me.com",
+        password: "ale"
       },
       authenticationErrors: "",
       isAuthenticating: ""
@@ -67,13 +67,17 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log("Loging is mounted");
+
   },
   methods: {
     login() {
+      console.log("logging")
       this.$store
         .dispatch("Authentications/login", this.credential)
-        .then(() => {});
+        .then(() => {
+          console.log("routing")
+          this.$router.push({name: "Dashboard"})
+      });
     }
   }
 };

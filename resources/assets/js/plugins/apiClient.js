@@ -28,7 +28,7 @@ authClient.interceptors.request.use(
   }
 );
 
-export default {
+export {
   client,
   authClient
 };

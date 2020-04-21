@@ -1,6 +1,11 @@
-import apiClient from "./apiClient";
+import {client, authClient} from "./apiClient";
 export default {
   install: function (Vue) {
-    Vue.prototype.$apiClient = apiClient;
+    Object.defineProperties(Vue.prototype, {
+      "client": {
+        value: client
+      }
+    })
+    //Vue.prototype.$client = client;
   }
 };
