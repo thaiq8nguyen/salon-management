@@ -7,7 +7,7 @@ export default {
       return AuthenticationServices.login(credential)
         .then(response => {
           console.log(response.data)
-          commit("SET_AUTHENTICATION", response.data);
+          commit("SET_AUTHENTICATION", response.data.user);
           resolve();
       })
         .catch(errors => {

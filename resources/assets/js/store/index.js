@@ -7,19 +7,18 @@ import mutations from "./mutations";
 
 import Authentications from "./modules/authentications";
 
-//import Persist from "Plugins/persistStates";
+import Plugins from "Plugins";
 
-// let Services = new Vue();
+let Services = new Vue();
 
-// Vue.use(Persist);
-
-// const persistStates = (store) => {
-//   store.subscribe((mutation, state) => {
-//     Services.saveState(state);
-//   });
-// };
-
+Vue.use(Plugins);
 Vue.use(Vuex);
+
+const persistStates = (store) => {
+  store.subscribe((mutation, state) => {
+    Services.saveState(state);
+  });
+};
 
 export default new Vuex.Store({
   modules: {
@@ -30,7 +29,7 @@ export default new Vuex.Store({
 
   getters,
   actions,
-  mutations
+  mutations,
 
-  //plugins: [persistStates]
+  plugins: [persistStates]
 });

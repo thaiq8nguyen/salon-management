@@ -31,18 +31,4 @@ const removeState = () => {
   }
 };
 
-export default {
-  install: function (Vue) {
-    Object.defineProperties(Vue.prototype, {
-      loadState: {
-        value: loadState
-      },
-      saveState: {
-        value: saveState
-      },
-      removeState: {
-        value: removeState
-      }
-    });
-  }
-};
+export { loadState, saveState, removeState };

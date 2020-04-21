@@ -13,36 +13,25 @@
  */
 
 //Vue.component('example', require('./components/Example.vue'));
-import Vue from "vue"
-import VueRouter from "vue-router"
-import Vuetify from "vuetify"
-import "vuetify/dist/vuetify.min.css"
-import store from "./store"
+import Vue from "vue";
 
-import { extend, ValidationObserver, ValidationProvider } from "vee-validate"
-import { required, email } from "vee-validate/dist/rules"
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+import store from "./store";
+import router from "./router";
 
-Vue.use(Vuetify)
-Vue.use(VueRouter)
+import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
+import { required, email } from "vee-validate/dist/rules";
 
-Vue.component("ValidationObserver", ValidationObserver)
-Vue.component("ValidationProvider", ValidationProvider)
-extend("required", required)
-extend("email", email)
+Vue.use(Vuetify);
 
-import Login from "Pages/Login"
-import Dashboard from "Pages/Dashboard"
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+extend("required", required);
+extend("email", email);
 
-const routes = [
-  { name: "Login", path: "/login", component: Login },
-  { name: "Dashboard", path: "/dashboard", component: Dashboard }]
-
-const router = new VueRouter({
-  mode: "history",
-  routes,
-})
 const app = new Vue({
   vuetify: new Vuetify(),
   router,
-  store,
-}).$mount("#app")
+  store
+}).$mount("#app");

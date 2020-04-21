@@ -1,5 +1,5 @@
 export default {
   isAuthenticated(state) {
-    return !!state.authentication.accessTolken;
+    return !!state.authentication.accessToken;
   }
 };

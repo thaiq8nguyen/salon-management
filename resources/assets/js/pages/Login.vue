@@ -66,18 +66,16 @@ export default {
     };
   },
   computed: {},
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     login() {
-      console.log("logging")
+      console.log("logging");
       this.$store
         .dispatch("Authentications/login", this.credential)
         .then(() => {
-          console.log("routing")
-          this.$router.push({name: "Dashboard"})
-      });
+          console.log("routing");
+          this.$router.push({ name: "Dashboard" });
+        });
     }
   }
 };

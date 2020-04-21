@@ -28,7 +28,4 @@ authClient.interceptors.request.use(
   }
 );
 
-export {
-  client,
-  authClient
-};
+export { client, authClient };
