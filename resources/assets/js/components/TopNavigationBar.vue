@@ -1,8 +1,10 @@
 <template>
 	<div id="top-navigation-bar">
-		<v-toolbar class="primary">
-
-		</v-toolbar>
+		<v-app-bar class="primary" >
+			<v-toolbar-title>Salon Management</v-toolbar-title>
+			<v-spacer></v-spacer>
+			<v-btn text>Logout</v-btn>
+		</v-app-bar>
 	</div>
 </template>
 
@@ -12,10 +14,18 @@
 	props: [],
 
 	data () {
-	  return {}
+	  return {
+	    items: [
+	      {name: "Logout"}
+	    ]
+	  }
 
 	},
-	methods: {},
+	methods: {
+      logout(){
+
+      }
+	},
 
   }
 </script>

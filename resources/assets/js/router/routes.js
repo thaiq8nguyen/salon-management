@@ -14,10 +14,8 @@ const routes = [
 ];
 
 async function requiresAuth(to, from, next) {
-  const isAuthenticated = await Store.getters[
-    "Authentications/isAuthenticated"
-  ];
-  if (isAuthenticated) {
+  await Store.getters["Authentications/isAuthenticated"];
+  if (Store.getters["Authentications/isAuthenticated"]) {
     next();
   } else {
     next({ name: "Login" });

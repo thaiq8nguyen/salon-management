@@ -19,6 +19,7 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import store from "./store";
 import router from "./router";
+import Main from "./Main";
 
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
@@ -30,8 +31,10 @@ Vue.component("ValidationProvider", ValidationProvider);
 extend("required", required);
 extend("email", email);
 
-const app = new Vue({
+new Vue({
   vuetify: new Vuetify(),
   router,
-  store
+  store,
+  components: { Main },
+  template: "<Main/>"
 }).$mount("#app");
