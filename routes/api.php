@@ -20,10 +20,13 @@ use Illuminate\Http\Request;
 
 // Begin Auth
 Route::post('/login', 'AuthenticationController@login');
-
-Route::post('/logout', 'AuthenticationController@logout');
-
 Route::post('/register', 'AuthenticationController@register');
+
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('/logout', 'AuthenticationController@logout');
+});
+
 
 // End Auth
 

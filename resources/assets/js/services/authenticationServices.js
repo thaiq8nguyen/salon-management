@@ -11,8 +11,12 @@ const login = (credential) => {
 const register = (user) => {
   return Service.client.post("/register", user);
 };
+const logout = () => {
+  return Service.authClient.post("/logout");
+};
 
 export default {
   login,
-  register
+  register,
+  logout
 };

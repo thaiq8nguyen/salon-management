@@ -3,7 +3,7 @@
 		<v-app-bar class="primary" >
 			<v-toolbar-title>Salon Management</v-toolbar-title>
 			<v-spacer></v-spacer>
-			<v-btn text>Logout</v-btn>
+			<v-btn text @click="logout">Logout</v-btn>
 		</v-app-bar>
 	</div>
 </template>
@@ -23,7 +23,7 @@
 	},
 	methods: {
       logout(){
-
+		this.$store.dispatch("Authentications/logout")
       }
 	},
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "Store";
+import Store from "Store";
 
 axios.defaults.baseURL = "/api/";
 
@@ -18,7 +18,7 @@ const authClient = axios.create({
 
 authClient.interceptors.request.use(
   function (config) {
-    const token = store.getters["Authentications/accessToken"];
+    const token = Store.getters["Authentications/accessToken"];
     config.headers["Authorization"] = `Bearer ${token}`;
 
     return config;

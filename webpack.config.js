@@ -8,7 +8,8 @@ module.exports = {
       Pages: path.resolve(__dirname, "resources/assets/js/pages"),
       Store: path.resolve(__dirname, "resources/assets/js/store"),
       Plugins: path.resolve(__dirname, "resources/assets/js/plugins"),
-      Services: path.resolve(__dirname, "resources/assets/js/services")
+      Services: path.resolve(__dirname, "resources/assets/js/services"),
+      Router: path.resolve(__dirname, "resources/assets/js/router")
     }
   }
 };

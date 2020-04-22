@@ -2710,7 +2710,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    logout: function logout() {}
+    logout: function logout() {
+      this.$store.dispatch("Authentications/logout");
+    }
   }
 });
 
@@ -7894,7 +7896,9 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("v-btn", { attrs: { text: "" } }, [_vm._v("Logout")])
+          _c("v-btn", { attrs: { text: "" }, on: { click: _vm.logout } }, [
+            _vm._v("Logout")
+          ])
         ],
         1
       )
@@ -66424,9 +66428,14 @@ var register = function register(user) {
   return Service.client.post("/register", user);
 };
 
+var logout = function logout() {
+  return Service.authClient.post("/logout");
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   login: login,
-  register: register
+  register: register,
+  logout: logout
 });
 
 /***/ }),
@@ -66523,8 +66532,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var Services_authenticationServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Services/authenticationServices */ "./resources/assets/js/services/authenticationServices.js");
+/* harmony import */ var Plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Plugins */ "./resources/assets/js/plugins/index.js");
+/* harmony import */ var Router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Router */ "./resources/assets/js/router/index.js");
 
 
+
+
+var Services = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   login: function login(_ref, credential) {
     var commit = _ref.commit;
@@ -66539,6 +66554,22 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     });
+  },
+  logout: function logout(_ref2) {
+    var dispatch = _ref2.dispatch;
+    return Services_authenticationServices__WEBPACK_IMPORTED_MODULE_1__["default"].logout().then(function () {
+      Router__WEBPACK_IMPORTED_MODULE_3__["default"].push({
+        name: "Login"
+      });
+      dispatch("resetAuthentications");
+    })["catch"](function (errors) {
+      console.log(errors);
+    });
+  },
+  resetAuthentications: function resetAuthentications(_ref3) {
+    var commit = _ref3.commit;
+    commit("SET_AUTHENTICATION", {});
+    Services.removeState();
   }
 });
 
@@ -66555,7 +66586,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   isAuthenticated: function isAuthenticated(state) {
-    return !!state.authentication.accessToken;
+    return !!state.user.accessToken;
+  },
+  user: function user(state) {
+    return state.user;
+  },
+  accessToken: function accessToken(state) {
+    return state.user.accessToken;
   }
 });
 
@@ -66577,7 +66614,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var state = {
-  authentication: "",
+  user: "",
   authenticationErrors: ""
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66601,7 +66638,7 @@ var state = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_AUTHENTICATION: function SET_AUTHENTICATION(state, authentication) {
-    state.authentication = authentication;
+    state.user = authentication;
   }
 });
 
