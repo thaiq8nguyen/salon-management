@@ -2699,6 +2699,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TopNavigationBar",
   props: [],
@@ -2710,6 +2717,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    addTechnician: function addTechnician() {},
     logout: function logout() {
       this.$store.dispatch("Authentications/logout");
     }
@@ -7895,6 +7903,10 @@ var render = function() {
           _c("v-toolbar-title", [_vm._v("Salon Management")]),
           _vm._v(" "),
           _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { text: "" }, on: { click: _vm.logout } }, [
+            _vm._v("Logout")
+          ]),
           _vm._v(" "),
           _c("v-btn", { attrs: { text: "" }, on: { click: _vm.logout } }, [
             _vm._v("Logout")
