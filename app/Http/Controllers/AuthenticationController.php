@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Salon\User\UserInterface;
+use App\Salon\Users\UserInterface;
 use Log;
 
 class AuthenticationController extends BaseController

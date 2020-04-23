@@ -2828,8 +2828,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       credential: {
-        email: "ale@me.com",
-        password: "ale"
+        email: "thai@thaiqnguyen.com",
+        password: "thai"
       },
       authenticationErrors: "",
       isAuthenticating: ""

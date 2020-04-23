@@ -36,6 +36,9 @@ const config = require("./webpack.config");
 mix.webpackConfig(config);
 mix
   .js("resources/assets/js/app.js", "public/js")
-  .browserSync("http://127.0.0.1:8000");
+  .browserSync({
+    proxy: "http://127.0.0.1:8000",
+    files: ["public/js/**/.js", "public/css/**/*.css"]
+  });
 
 /*.sass('resources/assets/sass/app.scss', 'public/css');*/

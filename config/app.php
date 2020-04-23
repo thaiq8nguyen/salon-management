@@ -163,20 +163,12 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Salon\Square\SquareServiceProvider::class,
-        Salon\Sales\SalonSaleServiceProvider::class,
-        Salon\GiftCertificates\GiftServiceProvider::class,
+
         Laravel\Passport\PassportServiceProvider::class,
-        Salon\LogEntries\LogEntriesServiceProvider::class,
-        Salon\Repositories\TechnicianSaleRepository\TechnicianSaleServiceProvider::class,
-        Salon\Repositories\TechnicianWageRepository\TechnicianWageServiceProvider::class,
-        Salon\Repositories\TechnicianPaymentRepository\TechnicianPaymentServiceProvider::class,
-        Salon\Repositories\TechnicianRepository\TechnicianServiceProvider::class,
-        Salon\Repositories\PaymentReportRepository\PaymentReportServiceProvider::class,
-        Salon\Repositories\PayDayRepository\PaydayServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Salon\Date\DateServiceProvider::class,
-        App\Salon\User\UserServiceProvider::class,
+
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//        Salon\Date\DateServiceProvider::class,
+        App\Salon\Users\UserServiceProvider::class,
+        App\Salon\Technicians\TechnicianServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -240,11 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Square' => Salon\Square\Square::class,
-        'Salon' => Salon\Sales\Salon::class,
-        'GiftCertificate' => Salon\GiftCertificates\Gift::class,
-        'LogEntries' => Salon\LogEntries\LogEntriesFacade::class,
+
+
 
     ],
 
