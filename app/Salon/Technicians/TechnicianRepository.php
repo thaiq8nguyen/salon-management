@@ -6,7 +6,8 @@ use App\User;
 
 class TechnicianRepository implements TechnicianInterface {
 
-    public function getAllTechnicians(){
+    public function getAllTechnicians()
+    {
 
 
     }
