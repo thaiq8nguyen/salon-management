@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Salon\Technicians\TechnicianInterface;
 
-class TechncianController extends Controller
+class TechnicianController extends BaseController
 {
-    //
+    protected $technician;
+
+    public function __construct(TechnicianInterface $technician)
+    {
+    }
 }

@@ -28,10 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    public function technician(){
-        return $this->belongsTo(Technician::class);
-    }
-    public function isAdmin(){
-        return $this->is_admin;
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
     }
 }

@@ -1,8 +1,14 @@
 <?php
 namespace App\Salon\Technicians;
 
-interface TechnicianRepositoryInterface{
+interface TechnicianInterface{
 
-    public function getAllTechnicians();
+    public function getTechnicians();
+
+    public function addTechnician();
+
+    public function editTechnician($technicianId);
+
+    public function deleteTechnician($technicianId);
 
 }
