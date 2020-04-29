@@ -7,7 +7,7 @@ interface TechnicianInterface{
 
     public function addTechnician($technician);
 
-    public function editTechnician($technicianId, $technician);
+    public function updateTechnician($technicianId, $technician);
 
     public function deleteTechnician($technicianId);
 

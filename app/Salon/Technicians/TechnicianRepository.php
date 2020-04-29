@@ -23,11 +23,14 @@ class TechnicianRepository implements TechnicianInterface
 
     public function addTechnician($technician)
     {
-        $technician = User::create(['first_name' => $technician['first_name'],
-            'last_name' => $technician['last_name'], 'email' => $technician['email'],
-            'password' => bcrypt($technician['password'])]);
+        $technician = User::create([
+            'first_name' => $technician['first_name'],
+            'last_name' => $technician['last_name'],
+            'email' => $technician['email'],
+            'password' => bcrypt($technician['password'])
+        ]);
 
-        $role = Role::where('name','technician')->first();
+        $role = Role::where('name', 'technician')->first();
 
         $technician->roles()->attach($role->id);
 
@@ -37,11 +40,15 @@ class TechnicianRepository implements TechnicianInterface
 
     }
 
-    public function editTechnician($technicianId, $technician)
+    public function updateTechnician($technicianId, $data)
     {
         $technician = User::find($technicianId);
 
-        $technician->update($technician);
+        if ($data['password']) {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        $technician->update($data);
 
         return User::find($technicianId);
 
@@ -54,8 +61,6 @@ class TechnicianRepository implements TechnicianInterface
         $row = $technician->delete();
 
         return $row;
-
-
     }
 
 

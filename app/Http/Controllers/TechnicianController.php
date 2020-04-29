@@ -27,13 +27,17 @@ class TechnicianController extends BaseController
         return $this->sendResponse(['name' => 'technician', 'value' => $technician]);
     }
 
-    public function update($technicianId,Request $request)
+    public function update($id,Request $request)
     {
+        $technician = $this->technician->updateTechnician($id, $request->all());
+        return $this->sendResponse(['name' => 'technician', 'value' => $technician]);
+
 
     }
 
-    public function delete($technicianId)
+    public function delete($id)
     {
-
+        $technician = $this->technician->deleteTechnician($id);
+        return $this->sendResponse(['name' => 'technician', 'value' => $technician]);
     }
 }

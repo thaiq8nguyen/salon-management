@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('/technicians','TechnicianController@get');
     Route::post('/technicians', 'TechnicianController@add');
+    Route::put('/technicians/{id}', 'TechnicianController@update');
+    Route::delete('/technicians/{id}', 'TechnicianController@delete');
 });
 
 
