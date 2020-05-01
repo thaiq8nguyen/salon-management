@@ -1,12 +1,18 @@
 <template>
 	<div id="index">
-		<router-view></router-view>
+		<v-app>
+			<top-navigation-bar></top-navigation-bar>
+			<router-view></router-view>
+		</v-app>
+
 	</div>
 </template>
 
 <script>
+	import TopNavigationBar from "Components/TopNavigationBar"
   export default {
     name: "Main",
+    components: {TopNavigationBar},
 	props: [],
 
 	data () {

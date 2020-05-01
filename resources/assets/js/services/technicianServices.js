@@ -4,8 +4,22 @@ import Plugins from "Plugins";
 let Services = new Vue();
 Vue.use(Plugins);
 
-const addTechnicians = (technician) => {
+const getTechnicians = (id) => {
+  return Services.authClient.get(`/technicians/${id}`);
+};
+const addTechnician = (technician) => {
   return Services.authClient.post("/technicians", technician);
 };
+const updateTechnician = (id, technician) => {
+  return Services.authClient.put(`/technicians/${id}`);
+};
+const deleteTechnician = (id) => {
+  return Services.authClient.delete(`/technicians/${id}`);
+};
 
-export { addTechnicians };
+export default {
+  getTechnicians,
+  addTechnician,
+  updateTechnician,
+  deleteTechnician
+};

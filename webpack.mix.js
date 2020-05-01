@@ -34,11 +34,9 @@ const config = require("./webpack.config");
 //     .js(['resources/assets/js/technician-payment-report-viewer.js'], 'public/js/technicians')
 //     .browserSync('http://127.0.0.1:8000');
 mix.webpackConfig(config);
-mix
-  .js("resources/assets/js/app.js", "public/js")
-  .browserSync({
-    proxy: "http://127.0.0.1:8000",
-    files: ["public/js/**/.js", "public/css/**/*.css"]
-  });
+mix.js("resources/assets/js/app.js", "public/js").browserSync({
+  proxy: "http://127.0.0.1:8000",
+  files: ["public/js/*.js", "public/css/*.css"]
+});
 
 /*.sass('resources/assets/sass/app.scss', 'public/css');*/

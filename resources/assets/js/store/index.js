@@ -6,6 +6,7 @@ import actions from "./actions";
 import mutations from "./mutations";
 
 import Authentications from "./modules/authentications";
+import Technicians from "./modules/technicians";
 
 import Plugins from "Plugins";
 
@@ -22,7 +23,8 @@ const persistStates = (store) => {
 
 export default new Vuex.Store({
   modules: {
-    Authentications
+    Authentications,
+    Technicians
   },
 
   state: {},

@@ -1,18 +1,20 @@
 <template>
-	<div id="dashboard">
-		<top-navigation-bar></top-navigation-bar>
-		<v-content>
-			<v-card></v-card>
-		</v-content>
+	<div id="dashboard-page">
+
+
+
+		<v-card></v-card>
+
+
 	</div>
 </template>
 
 <script>
-  import TopNavigationBar from "Components/TopNavigationBar"
+
 
   export default {
     name: "Dashboard",
-    components: { TopNavigationBar },
+    components: {  },
 	props: [],
 
 	data () {

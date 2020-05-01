@@ -2660,14 +2660,23 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Components_TopNavigationBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/TopNavigationBar */ "./resources/assets/js/components/TopNavigationBar.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
+  components: {
+    TopNavigationBar: Components_TopNavigationBar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: [],
   data: function data() {
     return {};
@@ -2712,12 +2721,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [{
-        name: "Logout"
+        name: "Technicians",
+        path: "technicians"
       }]
     };
   },
   methods: {
-    addTechnician: function addTechnician() {},
     logout: function logout() {
       this.$store.dispatch("Authentications/logout");
     }
@@ -2735,7 +2744,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var Components_TopNavigationBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/TopNavigationBar */ "./resources/assets/js/components/TopNavigationBar.vue");
 //
 //
 //
@@ -2745,12 +2753,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
-  components: {
-    TopNavigationBar: Components_TopNavigationBar__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+  components: {},
   props: [],
   data: function data() {
     return {};
@@ -2841,13 +2848,163 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
-      console.log("logging");
       this.$store.dispatch("Authentications/login", this.credential).then(function () {
         console.log("routing");
 
         _this.$router.push({
           name: "Dashboard"
         });
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Technicians",
+  components: {},
+  props: [],
+  data: function data() {
+    return {
+      defaultTechnician: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: ""
+      },
+      technician: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: ""
+      }
+    };
+  },
+  computed: {
+    technicians: function technicians() {
+      return this.$store.getters["Technicians/technicians"];
+    }
+  },
+  mounted: function mounted() {
+    this.$store.dispatch("Technicians/getTechnicians");
+  },
+  methods: {
+    add: function add() {
+      var _this = this;
+
+      this.$store.dispatch("Technicians/addTechnician", this.technician).then(function () {
+        _this.technician = Object.assign({}, _this.defaultTechnician);
       });
     }
   }
@@ -7868,7 +8025,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "index" } }, [_c("router-view")], 1)
+  return _c(
+    "div",
+    { attrs: { id: "index" } },
+    [
+      _c("v-app", [_c("top-navigation-bar"), _vm._v(" "), _c("router-view")], 1)
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -7898,15 +8062,22 @@ var render = function() {
     [
       _c(
         "v-app-bar",
-        { staticClass: "primary" },
         [
           _c("v-toolbar-title", [_vm._v("Salon Management")]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("v-btn", { attrs: { text: "" }, on: { click: _vm.logout } }, [
-            _vm._v("Logout")
-          ]),
+          _c(
+            "v-toolbar-items",
+            _vm._l(_vm.items, function(item, key) {
+              return _c(
+                "v-btn",
+                { key: key, attrs: { to: item.path, text: "" } },
+                [_vm._v("\n\t\t\t\t" + _vm._s(item.name) + "\n\t\t\t")]
+              )
+            }),
+            1
+          ),
           _vm._v(" "),
           _c("v-btn", { attrs: { text: "" }, on: { click: _vm.logout } }, [
             _vm._v("Logout")
@@ -7940,12 +8111,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "dashboard" } },
-    [_c("top-navigation-bar"), _vm._v(" "), _c("v-content", [_c("v-card")], 1)],
-    1
-  )
+  return _c("div", { attrs: { id: "dashboard-page" } }, [_c("v-card")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -8146,6 +8312,380 @@ var render = function() {
                               }
                             ])
                           })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "technician-page" } },
+    [
+      _c(
+        "v-content",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-card-title",
+                            { staticClass: "info white--text" },
+                            [_vm._v("Add New Technician")]
+                          ),
+                          _vm._v(" "),
+                          _c("ValidationObserver", {
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var handleSubmit = ref.handleSubmit
+                                  return [
+                                    _c(
+                                      "v-form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return handleSubmit(_vm.add)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "v-card-text",
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "First Name",
+                                                rules: "required"
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function(ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            label: "First Name",
+                                                            name: "first_name",
+                                                            type: "text"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.technician
+                                                                .first_name,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.technician,
+                                                                "first_name",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "technician.first_name"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(errors[0])
+                                                          )
+                                                        ])
+                                                      ]
+                                                    }
+                                                  }
+                                                ],
+                                                null,
+                                                true
+                                              )
+                                            }),
+                                            _vm._v(" "),
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Last Name",
+                                                rules: "required"
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function(ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            label: "Last Name",
+                                                            name: "last_name",
+                                                            type: "text"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.technician
+                                                                .last_name,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.technician,
+                                                                "last_name",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "technician.last_name"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(errors[0])
+                                                          )
+                                                        ])
+                                                      ]
+                                                    }
+                                                  }
+                                                ],
+                                                null,
+                                                true
+                                              )
+                                            }),
+                                            _vm._v(" "),
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Email",
+                                                rules: "required|email"
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function(ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            label: "Email",
+                                                            name: "email",
+                                                            type: "text"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.technician
+                                                                .email,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.technician,
+                                                                "email",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "technician.email"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(errors[0])
+                                                          )
+                                                        ])
+                                                      ]
+                                                    }
+                                                  }
+                                                ],
+                                                null,
+                                                true
+                                              )
+                                            }),
+                                            _vm._v(" "),
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Password",
+                                                rules: "required"
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function(ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            label: "Password",
+                                                            name: "password",
+                                                            type: "text"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.technician
+                                                                .password,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.technician,
+                                                                "password",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "technician.password"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(errors[0])
+                                                          )
+                                                        ])
+                                                      ]
+                                                    }
+                                                  }
+                                                ],
+                                                null,
+                                                true
+                                              )
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-card-actions",
+                                          [
+                                            _c("v-spacer"),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                staticClass: "info",
+                                                attrs: { type: "submit" }
+                                              },
+                                              [_vm._v("Add")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c("v-card-title", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tTechnicians\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-text",
+                            [
+                              _c(
+                                "v-list",
+                                _vm._l(_vm.technicians, function(technician) {
+                                  return _c(
+                                    "v-list-item",
+                                    { key: technician.id },
+                                    [
+                                      _c("v-list-item-content", [
+                                        _vm._v(
+                                          _vm._s(
+                                            technician.first_name +
+                                              " " +
+                                              technician.last_name
+                                          )
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { small: "" } },
+                                            [_vm._v("Update")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                }),
+                                1
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -66198,6 +66738,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/pages/Technicians.vue":
+/*!***************************************************!*\
+  !*** ./resources/assets/js/pages/Technicians.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Technicians.vue?vue&type=template&id=26bf73e2& */ "./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2&");
+/* harmony import */ var _Technicians_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Technicians.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Technicians_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/pages/Technicians.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Technicians_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Technicians.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Technicians.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Technicians_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2&":
+/*!**********************************************************************************!*\
+  !*** ./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Technicians.vue?vue&type=template&id=26bf73e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Technicians.vue?vue&type=template&id=26bf73e2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Technicians_vue_vue_type_template_id_26bf73e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/plugins/apiClient.js":
 /*!**************************************************!*\
   !*** ./resources/assets/js/plugins/apiClient.js ***!
@@ -66358,12 +66967,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var Pages_Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Pages/Login */ "./resources/assets/js/pages/Login.vue");
 /* harmony import */ var Pages_Dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Pages/Dashboard */ "./resources/assets/js/pages/Dashboard.vue");
-/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
+/* harmony import */ var Pages_Technicians__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Pages/Technicians */ "./resources/assets/js/pages/Technicians.vue");
+/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -66376,6 +66987,11 @@ var routes = [{
   name: "Dashboard",
   path: "/dashboard",
   component: Pages_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"],
+  beforeEnter: requiresAuth
+}, {
+  name: "Technicians",
+  path: "/technicians",
+  component: Pages_Technicians__WEBPACK_IMPORTED_MODULE_3__["default"],
   beforeEnter: requiresAuth
 }];
 
@@ -66390,10 +67006,10 @@ function _requiresAuth() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return Store__WEBPACK_IMPORTED_MODULE_3__["default"].getters["Authentications/isAuthenticated"];
+            return Store__WEBPACK_IMPORTED_MODULE_4__["default"].getters["Authentications/isAuthenticated"];
 
           case 2:
-            if (Store__WEBPACK_IMPORTED_MODULE_3__["default"].getters["Authentications/isAuthenticated"]) {
+            if (Store__WEBPACK_IMPORTED_MODULE_4__["default"].getters["Authentications/isAuthenticated"]) {
               next();
             } else {
               next({
@@ -66452,6 +67068,48 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./resources/assets/js/services/technicianServices.js":
+/*!************************************************************!*\
+  !*** ./resources/assets/js/services/technicianServices.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var Plugins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Plugins */ "./resources/assets/js/plugins/index.js");
+
+
+var Services = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+var getTechnicians = function getTechnicians(id) {
+  return Services.authClient.get("/technicians/".concat(id));
+};
+
+var addTechnician = function addTechnician(technician) {
+  return Services.authClient.post("/technicians", technician);
+};
+
+var updateTechnician = function updateTechnician(id, technician) {
+  return Services.authClient.put("/technicians/".concat(id));
+};
+
+var deleteTechnician = function deleteTechnician(id) {
+  return Services.authClient["delete"]("/technicians/".concat(id));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getTechnicians: getTechnicians,
+  addTechnician: addTechnician,
+  updateTechnician: updateTechnician,
+  deleteTechnician: deleteTechnician
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/store/actions.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/actions.js ***!
@@ -66474,10 +67132,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-var services = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -66500,7 +67154,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions */ "./resources/assets/js/store/actions.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./mutations */ "./resources/assets/js/store/mutations.js");
 /* harmony import */ var _modules_authentications__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/authentications */ "./resources/assets/js/store/modules/authentications/index.js");
-/* harmony import */ var Plugins__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! Plugins */ "./resources/assets/js/plugins/index.js");
+/* harmony import */ var _modules_technicians__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/technicians */ "./resources/assets/js/store/modules/technicians/index.js");
+/* harmony import */ var Plugins__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! Plugins */ "./resources/assets/js/plugins/index.js");
+
 
 
 
@@ -66510,7 +67166,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Services = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_8__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 var persistStates = function persistStates(store) {
@@ -66521,7 +67177,8 @@ var persistStates = function persistStates(store) {
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    Authentications: _modules_authentications__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Authentications: _modules_authentications__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Technicians: _modules_technicians__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   state: {},
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -66557,7 +67214,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
       return Services_authenticationServices__WEBPACK_IMPORTED_MODULE_1__["default"].login(credential).then(function (response) {
-        console.log(response.data);
         commit("SET_AUTHENTICATION", response.data.user);
         resolve();
       })["catch"](function (errors) {
@@ -66651,6 +67307,114 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_AUTHENTICATION: function SET_AUTHENTICATION(state, authentication) {
     state.user = authentication;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technicians/actions.js":
+/*!******************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technicians/actions.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Services_technicianServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/technicianServices */ "./resources/assets/js/services/technicianServices.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getTechnicians: function getTechnicians(_ref) {
+    var commit = _ref.commit;
+    var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    return new Promise(function (resolve, reject) {
+      return Services_technicianServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicians(id).then(function (response) {
+        commit("SET_TECHNICIANS", response.data.technicians);
+        resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  },
+  addTechnician: function addTechnician(_ref2, technician) {
+    var commit = _ref2.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_technicianServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnician(technician).then(function (response) {
+        commit("ADD_TECHNICIAN", response.data.technician);
+        resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technicians/getters.js":
+/*!******************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technicians/getters.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  technicians: function technicians(state) {
+    return state.technicians;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technicians/index.js":
+/*!****************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technicians/index.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/assets/js/store/modules/technicians/actions.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/assets/js/store/modules/technicians/getters.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/assets/js/store/modules/technicians/mutations.js");
+
+
+
+var state = {
+  technicians: []
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  getters: _getters__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technicians/mutations.js":
+/*!********************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technicians/mutations.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  SET_TECHNICIANS: function SET_TECHNICIANS(state, technicians) {
+    state.technicians = technicians;
+  },
+  ADD_TECHNICIAN: function ADD_TECHNICIAN(state, technician) {
+    state.technicians.push(technician);
   }
 });
 

@@ -69,7 +69,7 @@ export default {
   mounted() {},
   methods: {
     login() {
-      console.log("logging");
+
       this.$store
         .dispatch("Authentications/login", this.credential)
         .then(() => {

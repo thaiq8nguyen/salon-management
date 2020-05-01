@@ -11,7 +11,6 @@ export default {
     return new Promise((resolve, reject) => {
       return AuthenticationServices.login(credential)
         .then((response) => {
-          console.log(response.data);
           commit("SET_AUTHENTICATION", response.data.user);
           resolve();
         })

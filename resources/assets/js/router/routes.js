@@ -1,5 +1,6 @@
 import Login from "Pages/Login";
 import Dashboard from "Pages/Dashboard";
+import Technicians from "Pages/Technicians";
 
 import Store from "Store";
 
@@ -9,6 +10,12 @@ const routes = [
     name: "Dashboard",
     path: "/dashboard",
     component: Dashboard,
+    beforeEnter: requiresAuth
+  },
+  {
+    name: "Technicians",
+    path: "/technicians",
+    component: Technicians,
     beforeEnter: requiresAuth
   }
 ];
