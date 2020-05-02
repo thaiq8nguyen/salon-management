@@ -1,6 +1,6 @@
 <template>
   <div id="update-technician-modal">
-    <v-dialog v-model="open">
+    <v-dialog v-model="dialog">
       <v-card>
         <v-card-title>Update Technician</v-card-title>
         <ValidationObserver v-slot="{ handleSubmit }">
@@ -20,18 +20,19 @@
                   label="Last Name"
                   name="last_name"
                   type="text"
-                  v-model="technician.last_name"
+                  v-model="updating.last_name"
                 ></v-text-field>
                 <span>{{ errors[0] }}</span>
               </ValidationProvider>
               <ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
-                <v-text-field label="Email" name="email" type="text" v-model="technician.email"></v-text-field>
+                <v-text-field label="Email" name="email" type="text" v-model="updating.email"></v-text-field>
                 <span>{{ errors[0] }}</span>
               </ValidationProvider>
             </v-card-text>
             <v-card-actions>
               <v-btn @click="$emit('close')">Cancel</v-btn>
               <v-spacer></v-spacer>
+              <v-btn class="warning" type="button" @click="deleteTechnician">Delete</v-btn>
               <v-btn class="info" type="submit">Update</v-btn>
             </v-card-actions>
           </v-form>
@@ -54,15 +55,25 @@
 		  email: "",
 		  password: ""
 		},
+		dialog: false,
 		
-		updating: this.technician
 	  }
 
 	},
 	watch:{
 		technician: function() {
-			this.updating = this.technician;
+			this.updating = {...this.technician}
+		},
+		open: function() {
+			
+			this.dialog = this.open;
+		},
+		dialog: function(val){
+			if(!val){
+				this.$emit("close");
+			}
 		}
+		
 	},
 	methods: {
 		cancel(){
@@ -72,14 +83,22 @@
 			  
 			  this.$store.dispatch("Technicians/updateTechnician", this.updating)
 			  .then(response => {
-				  
-				  
+				  	  
 				  this.$emit("close");
 			  })
 			  .catch(errors => {
 
 			  })
-      	}
+		  },
+		deleteTechnician(){
+			this.$store.dispatch("Technicians/deleteTechnician", this.updating.id)
+			.then(response => {
+				this.$emit("close")
+			})
+			.catch(errors => {
+
+			})
+		}
 	},
 
   }

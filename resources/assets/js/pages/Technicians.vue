@@ -6,8 +6,8 @@
           <v-col>
             <v-card>
               <v-card-title class="info white--text">Add New Technician</v-card-title>
-              <ValidationObserver v-slot="{ handleSubmit }">
-                <v-form @submit.prevent="handleSubmit(add)">
+              <ValidationObserver ref="form">
+                <v-form @submit.prevent="validate">
                   <v-card-text>
                     <ValidationProvider name="First Name" rules="required" v-slot="{ errors }">
                       <v-text-field
@@ -97,7 +97,7 @@
 		  password: "",
 		},
 		technician: {
-		  first_name: "Thai",
+		  first_name: "",
 		  last_name: "",
 		  email: "",
 		  password: "",
@@ -109,6 +109,9 @@
 
 	  }
 
+	},
+	watch:{
+		
 	},
 	computed: {
 	  technicians () {
@@ -126,10 +129,24 @@
 		this.updateTechnicianModal = true;
 	  },
 
+	  validate(){
+		this.$refs.form.validate().then(success => {
+			if(success){
+				this.add();
+			}
+			
+		})  
+	  },
+
 	  add () {
 		this.$store.dispatch("Technicians/addTechnician", this.technician).then(() => {
 		  this.technician = Object.assign({}, this.defaultTechnician)
+		  this.$refs.form.reset()
 		})
+		.catch(errors => {
+
+		})
+		
 	  },
 	},
 

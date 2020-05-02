@@ -6,8 +6,13 @@ export default {
     state.technicians.push(technician);
   },
   UPDATE_TECHNICIAN(state, update) {
-    state.technicians.map((technician) =>
+    state.technicians = state.technicians.map((technician) =>
       technician.id === update.id ? update : technician
+    );
+  },
+  DELETE_TECHNICIAN(state, id) {
+    state.technicians = state.technicians.filter(
+      (technician) => technician.id !== id
     );
   }
 };

@@ -42,5 +42,19 @@ export default {
           }
         });
     });
+  },
+  deleteTechnician({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      return TechnicianServices.deleteTechnician(id)
+        .then((response) => {
+          commit("DELETE_TECHNICIAN", id);
+          resolve();
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
   }
 };

@@ -2744,6 +2744,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
 //
 //
 //
@@ -2798,12 +2805,20 @@ __webpack_require__.r(__webpack_exports__);
         email: "",
         password: ""
       },
-      updating: this.technician
+      dialog: false
     };
   },
   watch: {
     technician: function technician() {
-      this.updating = this.technician;
+      this.updating = _objectSpread({}, this.technician);
+    },
+    open: function open() {
+      this.dialog = this.open;
+    },
+    dialog: function dialog(val) {
+      if (!val) {
+        this.$emit("close");
+      }
     }
   },
   methods: {
@@ -2813,6 +2828,13 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$store.dispatch("Technicians/updateTechnician", this.updating).then(function (response) {
         _this.$emit("close");
+      })["catch"](function (errors) {});
+    },
+    deleteTechnician: function deleteTechnician() {
+      var _this2 = this;
+
+      this.$store.dispatch("Technicians/deleteTechnician", this.updating.id).then(function (response) {
+        _this2.$emit("close");
       })["catch"](function (errors) {});
     }
   }
@@ -3054,7 +3076,7 @@ __webpack_require__.r(__webpack_exports__);
         password: ""
       },
       technician: {
-        first_name: "Thai",
+        first_name: "",
         last_name: "",
         email: "",
         password: ""
@@ -3063,6 +3085,7 @@ __webpack_require__.r(__webpack_exports__);
       updateTechnicianModal: false
     };
   },
+  watch: {},
   computed: {
     technicians: function technicians() {
       return this.$store.getters["Technicians/technicians"];
@@ -3078,12 +3101,23 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.updateTechnicianModal = true;
     },
-    add: function add() {
+    validate: function validate() {
       var _this = this;
 
-      this.$store.dispatch("Technicians/addTechnician", this.technician).then(function () {
-        _this.technician = Object.assign({}, _this.defaultTechnician);
+      this.$refs.form.validate().then(function (success) {
+        if (success) {
+          _this.add();
+        }
       });
+    },
+    add: function add() {
+      var _this2 = this;
+
+      this.$store.dispatch("Technicians/addTechnician", this.technician).then(function () {
+        _this2.technician = Object.assign({}, _this2.defaultTechnician);
+
+        _this2.$refs.form.reset();
+      })["catch"](function (errors) {});
     }
   }
 });
@@ -8197,11 +8231,11 @@ var render = function() {
         "v-dialog",
         {
           model: {
-            value: _vm.open,
+            value: _vm.dialog,
             callback: function($$v) {
-              _vm.open = $$v
+              _vm.dialog = $$v
             },
-            expression: "open"
+            expression: "dialog"
           }
         },
         [
@@ -8294,16 +8328,15 @@ var render = function() {
                                                 type: "text"
                                               },
                                               model: {
-                                                value: _vm.technician.last_name,
+                                                value: _vm.updating.last_name,
                                                 callback: function($$v) {
                                                   _vm.$set(
-                                                    _vm.technician,
+                                                    _vm.updating,
                                                     "last_name",
                                                     $$v
                                                   )
                                                 },
-                                                expression:
-                                                  "technician.last_name"
+                                                expression: "updating.last_name"
                                               }
                                             }),
                                             _vm._v(" "),
@@ -8338,15 +8371,15 @@ var render = function() {
                                                 type: "text"
                                               },
                                               model: {
-                                                value: _vm.technician.email,
+                                                value: _vm.updating.email,
                                                 callback: function($$v) {
                                                   _vm.$set(
-                                                    _vm.technician,
+                                                    _vm.updating,
                                                     "email",
                                                     $$v
                                                   )
                                                 },
-                                                expression: "technician.email"
+                                                expression: "updating.email"
                                               }
                                             }),
                                             _vm._v(" "),
@@ -8381,6 +8414,16 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c("v-spacer"),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "warning",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.deleteTechnician }
+                                  },
+                                  [_vm._v("Delete")]
+                                ),
                                 _vm._v(" "),
                                 _c(
                                   "v-btn",
@@ -8701,254 +8744,212 @@ var render = function() {
                             [_vm._v("Add New Technician")]
                           ),
                           _vm._v(" "),
-                          _c("ValidationObserver", {
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function(ref) {
-                                  var handleSubmit = ref.handleSubmit
-                                  return [
-                                    _c(
-                                      "v-form",
-                                      {
-                                        on: {
-                                          submit: function($event) {
-                                            $event.preventDefault()
-                                            return handleSubmit(_vm.add)
+                          _c(
+                            "ValidationObserver",
+                            { ref: "form" },
+                            [
+                              _c(
+                                "v-form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.validate($event)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "First Name",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "First Name",
+                                                    name: "first_name",
+                                                    type: "text"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.technician.first_name,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.technician,
+                                                        "first_name",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "technician.first_name"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            }
                                           }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "v-card-text",
-                                          [
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "First Name",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label: "First Name",
-                                                            name: "first_name",
-                                                            type: "text"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.technician
-                                                                .first_name,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.technician,
-                                                                "first_name",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "technician.first_name"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c("span", [
-                                                          _vm._v(
-                                                            _vm._s(errors[0])
-                                                          )
-                                                        ])
-                                                      ]
-                                                    }
+                                        ])
+                                      }),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "Last Name",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "Last Name",
+                                                    name: "last_name",
+                                                    type: "text"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.technician.last_name,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.technician,
+                                                        "last_name",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "technician.last_name"
                                                   }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            }),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "Last Name",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label: "Last Name",
-                                                            name: "last_name",
-                                                            type: "text"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.technician
-                                                                .last_name,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.technician,
-                                                                "last_name",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "technician.last_name"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c("span", [
-                                                          _vm._v(
-                                                            _vm._s(errors[0])
-                                                          )
-                                                        ])
-                                                      ]
-                                                    }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            }
+                                          }
+                                        ])
+                                      }),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "Email",
+                                          rules: "required|email"
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "Email",
+                                                    name: "email",
+                                                    type: "text"
+                                                  },
+                                                  model: {
+                                                    value: _vm.technician.email,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.technician,
+                                                        "email",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "technician.email"
                                                   }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            }),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "Email",
-                                                rules: "required|email"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label: "Email",
-                                                            name: "email",
-                                                            type: "text"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.technician
-                                                                .email,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.technician,
-                                                                "email",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "technician.email"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c("span", [
-                                                          _vm._v(
-                                                            _vm._s(errors[0])
-                                                          )
-                                                        ])
-                                                      ]
-                                                    }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            }
+                                          }
+                                        ])
+                                      }),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "Password",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "Password",
+                                                    name: "password",
+                                                    type: "text"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.technician.password,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.technician,
+                                                        "password",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "technician.password"
                                                   }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            }),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "Password",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label: "Password",
-                                                            name: "password",
-                                                            type: "text"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.technician
-                                                                .password,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.technician,
-                                                                "password",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "technician.password"
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c("span", [
-                                                          _vm._v(
-                                                            _vm._s(errors[0])
-                                                          )
-                                                        ])
-                                                      ]
-                                                    }
-                                                  }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-card-actions",
-                                          [
-                                            _c("v-spacer"),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "info",
-                                                attrs: { type: "submit" }
-                                              },
-                                              [_vm._v("Add")]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                }
-                              }
-                            ])
-                          })
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            }
+                                          }
+                                        ])
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card-actions",
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass: "info",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Add")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -67771,6 +67772,19 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     });
+  },
+  deleteTechnician: function deleteTechnician(_ref4, id) {
+    var commit = _ref4.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_technicianServices__WEBPACK_IMPORTED_MODULE_0__["default"].deleteTechnician(id).then(function (response) {
+        commit("DELETE_TECHNICIAN", id);
+        resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
   }
 });
 
@@ -67838,8 +67852,13 @@ __webpack_require__.r(__webpack_exports__);
     state.technicians.push(technician);
   },
   UPDATE_TECHNICIAN: function UPDATE_TECHNICIAN(state, update) {
-    state.technicians.map(function (technician) {
+    state.technicians = state.technicians.map(function (technician) {
       return technician.id === update.id ? update : technician;
+    });
+  },
+  DELETE_TECHNICIAN: function DELETE_TECHNICIAN(state, id) {
+    state.technicians = state.technicians.filter(function (technician) {
+      return technician.id !== id;
     });
   }
 });
