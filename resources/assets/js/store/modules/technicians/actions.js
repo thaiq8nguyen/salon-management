@@ -28,5 +28,19 @@ export default {
           }
         });
     });
+  },
+  updateTechnician({ commit }, technician) {
+    return new Promise((resolve, reject) => {
+      return TechnicianServices.updateTechnician(technician.id, technician)
+        .then((response) => {
+          commit("UPDATE_TECHNICIAN", response.data.technician);
+          resolve();
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
   }
 };

@@ -11,7 +11,7 @@ const addTechnician = (technician) => {
   return Services.authClient.post("/technicians", technician);
 };
 const updateTechnician = (id, technician) => {
-  return Services.authClient.put(`/technicians/${id}`);
+  return Services.authClient.put(`/technicians/${id}`, technician);
 };
 const deleteTechnician = (id) => {
   return Services.authClient.delete(`/technicians/${id}`);

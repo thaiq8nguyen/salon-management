@@ -44,10 +44,6 @@ class TechnicianRepository implements TechnicianInterface
     {
         $technician = User::find($technicianId);
 
-        if ($data['password']) {
-            $data['password'] = bcrypt($data['password']);
-        }
-
         $technician->update($data);
 
         return User::find($technicianId);
