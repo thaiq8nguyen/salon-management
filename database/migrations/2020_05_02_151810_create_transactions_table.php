@@ -15,10 +15,18 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelele('cascade');
             $table->bigInteger('transaction_type_id')->unsigned();
             $table->foreign('transaction_type_id')->references('id')->on('transaction_types')
             ->onDelete('cascade')->onUpdate('cascade');
-            $table->decimal('amount', 8, 2)->default(0);
+            $table->bigInteger('debit_account_id')->unsigned();
+            $table->foreign('debit_account_id')->references('id')->on('accounts')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('credit_account_id')->unsigned();
+            $table->foreign('credit_account_id')->references('id')->on('accounts')
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->text('note')->nullable();
             $table->timestamps();
