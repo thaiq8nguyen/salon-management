@@ -169,7 +169,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//        Salon\Date\DateServiceProvider::class,
         App\Salon\Users\UserServiceProvider::class,
         App\Salon\Technicians\TechnicianServiceProvider::class,
-        App\Salon\Technicians\TechnicianSaleServiceProvider::class,
+        App\Salon\TechnicianSales\TechnicianSaleServiceProvider::class,
+        App\Salon\TransactionTypes\TransactionTypeServiceProvider::class,
 
         /*
          * Package Service Providers...

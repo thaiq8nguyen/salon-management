@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\TransactionType;
 
 class Transaction extends Model
 {
@@ -13,8 +13,8 @@ class Transaction extends Model
 
     protected $hidden = [];
 
-    public function users()
+    public function transactionType()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(TransactionType::class);
     }
 }

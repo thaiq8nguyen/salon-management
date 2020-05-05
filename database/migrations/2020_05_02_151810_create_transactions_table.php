@@ -21,12 +21,6 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('transaction_type_id')->unsigned();
             $table->foreign('transaction_type_id')->references('id')->on('transaction_types')
             ->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('debit_account_id')->unsigned();
-            $table->foreign('debit_account_id')->references('id')->on('accounts')
-            ->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('credit_account_id')->unsigned();
-            $table->foreign('credit_account_id')->references('id')->on('accounts')
-            ->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->text('note')->nullable();
             $table->timestamps();

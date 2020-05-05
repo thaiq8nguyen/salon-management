@@ -23,13 +23,17 @@ Route::post('/login', 'AuthenticationController@login');
 Route::post('/register', 'AuthenticationController@register');
 
 
-Route::group(['middleware' => 'auth:api'], function(){
+Route::group(['middleware' => 'auth:api'], function () {
+    // Auth
     Route::post('/logout', 'AuthenticationController@logout');
 
-    Route::get('/technicians','TechnicianController@get');
+    // Technician CRUD
+    Route::get('/technicians', 'TechnicianController@get');
     Route::post('/technicians', 'TechnicianController@add');
     Route::put('/technicians/{id}', 'TechnicianController@update');
     Route::delete('/technicians/{id}', 'TechnicianController@delete');
+
+    //Transaction Items
 });
 
 

@@ -18,8 +18,8 @@ class CreateTransactionDetailsTable extends Migration
             $table->bigInteger('transaction_id')->unsigned();
             $table->foreign('transaction_id')->references('id')->on('transactions')
             ->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('payment_method_id')->unsigned();
-            $table->foreign('payment_method_id')->references('id')->on('payment_methods')
+            $table->bigInteger('transaction_item_id')->unsigned();
+            $table->foreign('transaction_item_id')->references('id')->on('transaction_items')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
