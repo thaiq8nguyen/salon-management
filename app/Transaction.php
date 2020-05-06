@@ -3,18 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\TransactionType;
+use App\Account;
 
 class Transaction extends Model
 {
     protected $fillable = [
-        'role_user_id', 'transaction_type_id', 'amount', 'date',
+        
     ];
 
     protected $hidden = [];
 
-    public function transactionType()
+    public function account()
     {
-        return $this->belongsTo(TransactionType::class);
+        return $this->belongsTo(Account::class);
+    }
+
+    public function transactionable()
+    {
+        return $this->morphTo();
     }
 }

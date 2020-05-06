@@ -16,8 +16,6 @@ class CreateTransactionTypesTable extends Migration
         Schema::create('transaction_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
