@@ -170,7 +170,6 @@ return [
         App\Salon\Users\UserServiceProvider::class,
         App\Salon\Technicians\TechnicianServiceProvider::class,
         App\Salon\TechnicianSales\TechnicianSaleServiceProvider::class,
-        App\Salon\TransactionTypes\TransactionTypeServiceProvider::class,
 
         /*
          * Package Service Providers...

@@ -13,12 +13,17 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('account_type_id')->unsigned();
-            $table->foreign('account_type_id')->references('id')
-            ->on('account_types')->onUpdate('cascade')->onDelete('cascade');
+        Schema::create('accounts',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->bigInteger('account_type_id')->unsigned();
+                $table->foreign('account_type_id')->references('id')
+                    ->on('account_types')->onUpdate('cascade')->onDelete('cascade');
+                $table->bigInteger('role_user_id')->unsigned();
+                $table->foreign('role_user_id')
+                    ->references('id')->on('role_user')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+
             $table->timestamps();
         });
     }

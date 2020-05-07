@@ -12,7 +12,7 @@ class AccountTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('account_types')->insert([['name' => 'company',
+        DB::table('account_types')->insert([['name' => 'sales',
         'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         'updated_at' => Carbon::now()->format('Y-m-d H:i:s')],
         ['name' => 'technician',

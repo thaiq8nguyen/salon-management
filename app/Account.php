@@ -3,8 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 use App\Transaction;
 
+/**
+ * Account
+ * @mixin Eloquent
+ */
 class Account extends Model
 {
     public function transactions()

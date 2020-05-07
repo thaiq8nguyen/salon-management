@@ -12,20 +12,22 @@ class TransactionItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('transaction_items')
-        ->insert([
-            ['name' => 'credit card sales',
-            'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'cash sales',
-            'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'technician sales',
-            'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'technician tips',
-            'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')]
-            ]);
+        DB::table('transaction_items')->insert([
+            [
+                'name' => 'opening balance',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'technician sales',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'technician tips',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
+        ]);
     }
 }

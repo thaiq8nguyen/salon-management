@@ -1,8 +1,8 @@
 <?php
 namespace App\Salon\Technicians;
 
-interface TechnicianInterface{
-
+interface TechnicianInterface
+{
     public function getTechnicians();
 
     public function addTechnician($technician);
@@ -10,5 +10,4 @@ interface TechnicianInterface{
     public function updateTechnician($technicianId, $technician);
 
     public function deleteTechnician($technicianId);
-
 }

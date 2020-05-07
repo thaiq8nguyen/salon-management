@@ -13,8 +13,16 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            ['name' => 'admin', 'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'), 'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')],
-            ['name' => 'technician', 'created_at' =>  Carbon::now()->format('Y-m-d H:i:s'), 'updated_at' =>  Carbon::now()->format('Y-m-d H:i:s')]
-            ]);
+            [
+                'name' => 'admin',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'technician',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
+        ]);
     }
 }

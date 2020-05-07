@@ -18,12 +18,13 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('account_id')->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts')
             ->onDelete('cascade')->onUpdate('cascade');
-            $table->morphs('transactionable');
+            $table->bigInteger('transaction_item_id')->unsigned();
+            $table->foreign('transaction_item_id')->references('id')->on('transaction_items');
             $table->date('date');
             $table->text('note')->nullable();
             $table->decimal('debit', 10, 2)->nullable();
             $table->decimal('credit', 10, 2)->nullable();
-            $table->bigInteger('role_user_id')->nullable();
+            $table->decimal('running_balance',10,2)->default(0.00);
             $table->timestamps();
         });
     }

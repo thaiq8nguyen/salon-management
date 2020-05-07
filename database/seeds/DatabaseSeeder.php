@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RolesTableSeeder:: class,
             RoleUserTableSeeder::class,
-            TransactionTypesTableSeeder::class,
-            AccountTypesTableSeeder::class,
             PaymentMethodsTableSeeder::class,
+            AccountTypesTableSeeder::class,
             AccountsTableSeeder::class,
             TransactionItemsTableSeeder::class,
+            TransactionsTableSeeder::class,
         ]);
     }
 }
