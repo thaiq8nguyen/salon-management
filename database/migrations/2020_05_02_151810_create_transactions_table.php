@@ -21,9 +21,9 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('transaction_item_id')->unsigned();
             $table->foreign('transaction_item_id')->references('id')->on('transaction_items');
             $table->date('date');
-            $table->text('note')->nullable();
-            $table->decimal('debit', 10, 2)->nullable();
-            $table->decimal('credit', 10, 2)->nullable();
+            $table->text('description')->nullable();
+            $table->decimal('debit', 10, 2)->default(0.00);
+            $table->decimal('credit', 10, 2)->default(0.00);
             $table->decimal('running_balance',10,2)->default(0.00);
             $table->timestamps();
         });

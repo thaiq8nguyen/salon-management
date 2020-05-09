@@ -17,8 +17,7 @@ class TransactionsTableSeeder extends Seeder
             'transaction_item_id' => 1,
             'date' => Carbon::now()
                 ->format('Y-m-d'),
-            'credit' => 0.00,
-            'running_balance' => 0.00,
+            'description' => 'opening balance',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

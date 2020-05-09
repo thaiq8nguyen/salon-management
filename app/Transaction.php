@@ -18,7 +18,8 @@ class Transaction extends Model
         'date',
         'note',
         'debit',
-        'credit'
+        'credit',
+        'running_balance',
     ];
 
     protected $hidden = [];
