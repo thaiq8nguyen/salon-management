@@ -22,9 +22,5 @@ class Account extends Model
         return $this->hasOne(Transaction::class)->latest('id');
     }
 
-    public function runningBalance()
-    {
-        return $this->lastTransaction()->select('running_balance');
-    }
 
 }

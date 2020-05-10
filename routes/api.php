@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Technician Sales CRUD
     Route::post('/technician-sales', 'TechnicianSaleController@addTechnicianSale');
+    Route::put('/technician-sales/{saleId}', 'TechnicianSaleController@updateTechnicianSale');
+    Route::delete('/technician-sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');
+
 });
 
 

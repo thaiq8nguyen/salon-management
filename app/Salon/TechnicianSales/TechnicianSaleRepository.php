@@ -3,8 +3,6 @@
 namespace App\Salon\TechnicianSales;
 
 
-use Illuminate\Database\Eloquent\Builder;
-
 use App\Account;
 use App\Role;
 use App\Transaction;
@@ -47,23 +45,37 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 'transaction_item_id' => $tipItem->id,
                 'date' => $sale['date'],
                 'description' => $sale['description'] ? $sale['description'] : '',
-                'credit' => $sale['tips'] ,
+                'credit' => $sale['tips'],
                 'running_balance' => $sale['tips'] + $technicianAccount->lastTransaction->running_balance,
             ]);
         }
 
-        $created = ['running_balance' => $technicianAccount->lastTransaction->running_balance ];
+        $created = ['running_balance' => $technicianAccount->lastTransaction->running_balance];
 
 
         return $created;
-
     }
 
     public function updateTechnicianSale($saleId, $sale)
     {
+        $transaction = Transaction::find($saleId);
+        $previousTransactionId = Transaction::where('id','<', $transaction->id)->max('id');
+        $previousTransaction = Transaction::find($previousTransactionId);
+        $previousRunningBalance = $previousTransaction->running_balance;
+        $transaction->credit = $sale['credit'];
+
+        $transaction->running_balance = $previousRunningBalance + $sale['credit'];
+        $transaction->save();
+
+        return Transaction::find($saleId);
     }
 
     public function deleteTechnicianSale($saleId)
     {
+        $transaction = Transaction::find($saleId);
+        if(!$transaction->delete()){
+            return false;
+        }
+        return true;
     }
 }
