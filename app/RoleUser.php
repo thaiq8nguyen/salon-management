@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Transaction;
+use App\Account;
 
 class RoleUser extends Model
 {
     protected $table = 'role_user';
 
-    public function transactions()
+    public function accounts()
     {
-        return $this->morphMany(Transaction::class, 'transactionable');
+        return $this->hasMany(Account::class);
     }
 }

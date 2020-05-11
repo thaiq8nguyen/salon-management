@@ -1,16 +1,44 @@
 <?php
 
 namespace App\Salon\TechnicianSales;
-
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Account;
 use App\Role;
+use App\RoleUser;
 use App\Transaction;
 use App\TransactionItem;
 use App\User;
 
 class TechnicianSaleRepository implements TechnicianSaleInterface
 {
+    public function getTechnicianSales($date)
+    {
+        // TODO: Implement getTechnicianSales() method.
+//        $technicians = User::with(['roles' => function($query)
+//        {
+//            $query->where('role_id', 2);
+//        }])->get();
+        $technicianRole = Role::with('users')->where('id',2)->first();
+        $technicians = $technicianRole->users;
+        $roleTechnicianIds = [];
+        foreach ($technicians as $technician){
+            array_push($roleTechnicianIds, $technician['pivot']['role_id']);
+        }
+
+        //$accounts = RoleUser::with('accounts')->whereIn('user_id',$roleTechnicianIds)->get();
+        //$accountOnly = $accounts->pluck('accounts');
+
+        $accounts = Account::with(['transactions' => function($query) use ($date){
+            $query->where('date', $date);
+        }])->get();
+
+
+
+        return $accounts;
+
+    }
+
     public function addTechnicianSale($sale)
     {
         // find the technician account using the technician Id

@@ -15,6 +15,14 @@ class TechnicianSaleController extends BaseController
         $this->technicianSale = $technicianSale;
     }
 
+    public function getTechnicianSales($date)
+    {
+        $technicianSales = $this->technicianSale->getTechnicianSales($date);
+
+        return $this->sendResponse(['name' => 'technician sales', 'value' => $technicianSales]);
+    }
+
+
     public function addTechnicianSale(Request $request)
     {
         $newTechnicianSale = $this->technicianSale->addTechnicianSale($request->all());

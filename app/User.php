@@ -40,5 +40,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\Role')->withPivot('id');
     }
 
+    public function technician()
+    {
+
+    }
+
 
 }
