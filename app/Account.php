@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Eloquent;
-use App\Transaction;
+
 
 /**
  * Account
@@ -20,6 +20,11 @@ class Account extends Model
     public function lastTransaction()
     {
         return $this->hasOne(Transaction::class)->latest('id');
+    }
+
+    public function technician()
+    {
+        return $this->belongsTo(RoleUser::class);
     }
 
 

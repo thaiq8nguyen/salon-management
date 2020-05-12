@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function technician()
     {
-
+        return $this->belongsToMany(Role::class)->wherePivot('role_id',2);
     }
 
 

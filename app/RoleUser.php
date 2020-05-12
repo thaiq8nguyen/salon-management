@@ -2,15 +2,15 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Account;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class RoleUser extends Model
+
+class RoleUser extends Pivot
 {
-    protected $table = 'role_user';
 
     public function accounts()
     {
         return $this->hasMany(Account::class);
     }
+
 }

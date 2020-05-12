@@ -31,11 +31,16 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
         $accounts = Account::with(['transactions' => function($query) use ($date){
             $query->where('date', $date);
-        }])->get();
+        }])->whereIn('role_user_id',$roleTechnicianIds)->get();
+
+        $technicians = User::has('technician')->get();
 
 
 
-        return $accounts;
+
+
+
+        return $technicians;
 
     }
 
