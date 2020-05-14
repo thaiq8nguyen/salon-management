@@ -42,7 +42,7 @@ class TechnicianSaleController extends BaseController
     {
         $deletedSale = $this->technicianSale->deleteTechnicianSale($saleId);
 
-        return $this->sendResponse(['name' => 'delete technician sale', 'value' => true]);
+        return $this->sendResponse(['name' => 'delete technician sale', 'value' => $deletedSale]);
     }
 
 }

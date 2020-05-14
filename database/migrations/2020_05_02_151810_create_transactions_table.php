@@ -24,7 +24,6 @@ class CreateTransactionsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('debit', 10, 2)->default(0.00);
             $table->decimal('credit', 10, 2)->default(0.00);
-            $table->decimal('running_balance',10,2)->default(0.00);
             $table->timestamps();
         });
     }

@@ -19,15 +19,17 @@ class Transaction extends Model
         'note',
         'debit',
         'credit',
-        'running_balance',
     ];
+    protected $hidden = ['laravel_through_key'];
 
-    protected $hidden = [];
+
 
     public function account()
     {
         return $this->belongsTo(Account::class);
     }
+
+
 
 
 }

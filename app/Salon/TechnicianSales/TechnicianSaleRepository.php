@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Salon\TechnicianSales;
+
+use App\Technician;
 use Illuminate\Database\Eloquent\Builder;
 
 use App\Account;
@@ -14,90 +16,58 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 {
     public function getTechnicianSales($date)
     {
-        // TODO: Implement getTechnicianSales() method.
-//        $technicians = User::with(['roles' => function($query)
-//        {
-//            $query->where('role_id', 2);
-//        }])->get();
-        $technicianRole = Role::with('users')->where('id',2)->first();
-        $technicians = $technicianRole->users;
-        $roleTechnicianIds = [];
-        foreach ($technicians as $technician){
-            array_push($roleTechnicianIds, $technician['pivot']['role_id']);
-        }
 
-        //$accounts = RoleUser::with('accounts')->whereIn('user_id',$roleTechnicianIds)->get();
-        //$accountOnly = $accounts->pluck('accounts');
+        $sales = Technician::with(['sales' => function($query) use ($date){
+            $query->where('date', '2020-05-12');
+        }])->get(['id','first_name','last_name']);
 
-        $accounts = Account::with(['transactions' => function($query) use ($date){
-            $query->where('date', $date);
-        }])->whereIn('role_user_id',$roleTechnicianIds)->get();
+        return $sales;
 
-        $technicians = User::has('technician')->get();
-
-
-
-
-
-
-        return $technicians;
 
     }
 
     public function addTechnicianSale($sale)
     {
-        // find the technician account using the technician Id
-        $user = User::find($sale['technician_id']);
 
-        // find the technician role user Id
-        $technicianRole = Role::where('name', 'technician')->first();
-        $technicianRoleUserId = $user->roles()->wherePivot('role_id', $technicianRole->id)->first();
+        $saleAccount = Account::where([['technician_id', $sale['technician_id']], ['name', 'sales']])->first();
+        $tipAccount = Account::where([
+            ['technician_id', $sale['technician_id']],
+            ['name', 'tips']
+        ])->first();
 
-        // find the technician book account in the accounts table
-        $technicianAccount = Account::where('role_user_id', $technicianRoleUserId->pivot->id)->first();
-
-        // insert technician sale and technician tip (if any) into as transactions under the technician account
         $saleTransaction = '';
         if ($sale['sales']) {
             $saleItem = TransactionItem::item('technician sales')->first();
 
             $saleTransaction = Transaction::create([
-                'account_id' => $technicianAccount->id,
+                'account_id' => $saleAccount->id,
                 'transaction_item_id' => $saleItem->id,
                 'date' => $sale['date'],
                 'description' => $sale['description'] ? $sale['description'] : '',
                 'credit' => $sale['sales'],
-                'running_balance' => $sale['sales'] + $technicianAccount->lastTransaction->running_balance,
             ]);
         }
+
         $tipTransaction = '';
         if ($sale['tips']) {
             $tipItem = TransactionItem::item('technician tips')->first();
             $tipTransaction = Transaction::create([
-                'account_id' => $technicianAccount->id,
+                'account_id' => $tipAccount->id,
                 'transaction_item_id' => $tipItem->id,
                 'date' => $sale['date'],
                 'description' => $sale['description'] ? $sale['description'] : '',
                 'credit' => $sale['tips'],
-                'running_balance' => $sale['tips'] + $technicianAccount->lastTransaction->running_balance,
             ]);
         }
 
-        $created = ['running_balance' => $technicianAccount->lastTransaction->running_balance];
+        return ['sale' => $saleTransaction, 'tip' => $tipTransaction];
 
-
-        return $created;
     }
 
     public function updateTechnicianSale($saleId, $sale)
     {
         $transaction = Transaction::find($saleId);
-        $previousTransactionId = Transaction::where('id','<', $transaction->id)->max('id');
-        $previousTransaction = Transaction::find($previousTransactionId);
-        $previousRunningBalance = $previousTransaction->running_balance;
-        $transaction->credit = $sale['credit'];
-
-        $transaction->running_balance = $previousRunningBalance + $sale['credit'];
+        $transaction->credit = $sale;
         $transaction->save();
 
         return Transaction::find($saleId);
@@ -105,10 +75,15 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
     public function deleteTechnicianSale($saleId)
     {
+        // find the deleting sale transaction
         $transaction = Transaction::find($saleId);
-        if(!$transaction->delete()){
+
+        // delete the sale transaction
+        if (!$transaction->delete()) {
             return false;
         }
         return true;
+
+
     }
 }

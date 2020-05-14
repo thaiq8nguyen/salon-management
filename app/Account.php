@@ -17,14 +17,20 @@ class Account extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function technician()
+    {
+        return $this->belongsTo(Technician::class);
+    }
+
+    public function balance()
+    {
+        return $this->transactions()->selectRaw('SUM(credit) - SUM(debit) as balance')->groupBy('account_id')
+            ->limit(1);
+    }
+
     public function lastTransaction()
     {
         return $this->hasOne(Transaction::class)->latest('id');
-    }
-
-    public function technician()
-    {
-        return $this->belongsTo(RoleUser::class);
     }
 
 
