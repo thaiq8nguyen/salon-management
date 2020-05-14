@@ -3,14 +3,11 @@
 namespace App\Salon\TechnicianSales;
 
 use App\Technician;
-use Illuminate\Database\Eloquent\Builder;
 
 use App\Account;
-use App\Role;
-use App\RoleUser;
 use App\Transaction;
 use App\TransactionItem;
-use App\User;
+
 
 class TechnicianSaleRepository implements TechnicianSaleInterface
 {

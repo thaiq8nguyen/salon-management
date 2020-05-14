@@ -5,7 +5,7 @@ namespace App\Salon\Technicians;
 use App\Role;
 use Illuminate\Database\Eloquent\Builder;
 
-use App\User;
+use App\Technician;
 
 
 class TechnicianRepository implements TechnicianInterface
@@ -13,9 +13,7 @@ class TechnicianRepository implements TechnicianInterface
 
     public function getTechnicians()
     {
-        $technicians = User::whereHas('roles', function (Builder $query) {
-            $query->where('name', 'technician');
-        })->get();
+        $technicians = Technician::where('is_active',1)->get();
 
         return $technicians;
 
@@ -23,16 +21,11 @@ class TechnicianRepository implements TechnicianInterface
 
     public function addTechnician($technician)
     {
-        $technician = User::create([
+        $technician = Technician::create([
             'first_name' => $technician['first_name'],
             'last_name' => $technician['last_name'],
-            'email' => $technician['email'],
-            'password' => bcrypt($technician['password'])
+            'email' => $technician['email']
         ]);
-
-        $role = Role::where('name', 'technician')->first();
-
-        $technician->roles()->attach($role->id);
 
 
         return $technician;
@@ -42,17 +35,17 @@ class TechnicianRepository implements TechnicianInterface
 
     public function updateTechnician($technicianId, $data)
     {
-        $technician = User::find($technicianId);
+        $technician = Technician::find($technicianId);
 
         $technician->update($data);
 
-        return User::find($technicianId);
+        return Technician::find($technicianId);
 
     }
 
     public function deleteTechnician($technicianId)
     {
-        $technician = User::find($technicianId);
+        $technician = Technician::find($technicianId);
 
         $row = $technician->delete();
 
