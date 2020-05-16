@@ -10,7 +10,7 @@ use Eloquent;
  * Account
  * @mixin Eloquent
  */
-class Account extends Model
+class TechnicianAccount extends Model
 {
     public function transactions()
     {

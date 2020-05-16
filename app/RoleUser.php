@@ -10,7 +10,7 @@ class RoleUser extends Pivot
 
     public function accounts()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(TechnicianAccount::class);
     }
 
 }

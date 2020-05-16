@@ -16,12 +16,12 @@ class Technician extends Model
 
     public function accounts()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(TechnicianAccount::class);
     }
 
     public function transactions()
     {
-        return $this->hasManyThrough(Transaction::class, Account::class);
+        return $this->hasManyThrough(Transaction::class, TechnicianAccount::class);
     }
 
     public function sales()

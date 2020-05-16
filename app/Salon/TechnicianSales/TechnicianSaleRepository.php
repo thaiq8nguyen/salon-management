@@ -4,7 +4,7 @@ namespace App\Salon\TechnicianSales;
 
 use App\Technician;
 
-use App\Account;
+use App\TechnicianAccount;
 use App\Transaction;
 use App\TransactionItem;
 
@@ -26,8 +26,8 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     public function addTechnicianSale($sale)
     {
 
-        $saleAccount = Account::where([['technician_id', $sale['technician_id']], ['name', 'sales']])->first();
-        $tipAccount = Account::where([
+        $saleAccount = TechnicianAccount::where([['technician_id', $sale['technician_id']], ['name', 'sales']])->first();
+        $tipAccount = TechnicianAccount::where([
             ['technician_id', $sale['technician_id']],
             ['name', 'tips']
         ])->first();

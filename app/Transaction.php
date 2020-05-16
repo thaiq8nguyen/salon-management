@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Account;
+use App\TechnicianAccount;
 use Eloquent;
 
 /**
@@ -26,7 +26,7 @@ class Transaction extends Model
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(TechnicianAccount::class);
     }
 
 

@@ -15,9 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('account_id')->unsigned();
-            $table->foreign('account_id')->references('id')->on('accounts')
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->morphs('transactionable');
             $table->bigInteger('transaction_item_id')->unsigned();
             $table->foreign('transaction_item_id')->references('id')->on('transaction_items');
             $table->date('date');
