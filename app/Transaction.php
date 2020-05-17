@@ -24,9 +24,9 @@ class Transaction extends Model
 
 
 
-    public function account()
+    public function transactionable()
     {
-        return $this->belongsTo(TechnicianAccount::class);
+        return $this->morphTo();
     }
 
 

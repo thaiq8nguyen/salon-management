@@ -14,7 +14,7 @@ class TechnicianAccount extends Model
 {
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
 
     public function technician()

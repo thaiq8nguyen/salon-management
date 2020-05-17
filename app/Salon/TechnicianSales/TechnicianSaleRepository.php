@@ -36,8 +36,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
         if ($sale['sales']) {
             $saleItem = TransactionItem::item('technician sales')->first();
 
-            $saleTransaction = Transaction::create([
-                'account_id' => $saleAccount->id,
+            $saleTransaction = $saleAccount->transactions()->create([
                 'transaction_item_id' => $saleItem->id,
                 'date' => $sale['date'],
                 'description' => $sale['description'] ? $sale['description'] : '',
@@ -48,8 +47,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
         $tipTransaction = '';
         if ($sale['tips']) {
             $tipItem = TransactionItem::item('technician tips')->first();
-            $tipTransaction = Transaction::create([
-                'account_id' => $tipAccount->id,
+            $tipTransaction = $tipAccount->transactions()->create([
                 'transaction_item_id' => $tipItem->id,
                 'date' => $sale['date'],
                 'description' => $sale['description'] ? $sale['description'] : '',
@@ -64,10 +62,11 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     public function updateTechnicianSale($saleId, $sale)
     {
         $transaction = Transaction::find($saleId);
-        $transaction->credit = $sale;
+        $transaction->credit = $sale['credit'];
         $transaction->save();
 
         return Transaction::find($saleId);
+
     }
 
     public function deleteTechnicianSale($saleId)
