@@ -15,4 +15,10 @@ class PayPeriod extends Model
     {
         return $this->hasMany(PaymentReport::class);
     }
+
+    public function technicians()
+    {
+        return $this->belongsToMany(Technician::class, 'payment_reports')->withPivot('url');
+    }
+
 }

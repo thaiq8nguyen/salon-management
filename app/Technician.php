@@ -31,4 +31,9 @@ class Technician extends Model
             ->join('transaction_items', 'transactions.transaction_item_id', '=', 'transaction_items.id');
     }
 
+    public function payPeriods()
+    {
+        return $this->belongsToMany(Technician::class, 'payment_reports')->withPivot('url');
+    }
+
 }
