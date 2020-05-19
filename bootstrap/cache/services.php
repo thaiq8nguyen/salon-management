@@ -34,11 +34,12 @@
     30 => 'App\\Salon\\Users\\UserServiceProvider',
     31 => 'App\\Salon\\Technicians\\TechnicianServiceProvider',
     32 => 'App\\Salon\\TechnicianSales\\TechnicianSaleServiceProvider',
-    33 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    34 => 'App\\Providers\\AppServiceProvider',
-    35 => 'App\\Providers\\AuthServiceProvider',
-    36 => 'App\\Providers\\EventServiceProvider',
-    37 => 'App\\Providers\\RouteServiceProvider',
+    33 => 'App\\Salon\\PayPeriods\\PayPeriodServiceProvider',
+    34 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    35 => 'App\\Providers\\AppServiceProvider',
+    36 => 'App\\Providers\\AuthServiceProvider',
+    37 => 'App\\Providers\\EventServiceProvider',
+    38 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -62,10 +63,11 @@
     17 => 'App\\Salon\\Users\\UserServiceProvider',
     18 => 'App\\Salon\\Technicians\\TechnicianServiceProvider',
     19 => 'App\\Salon\\TechnicianSales\\TechnicianSaleServiceProvider',
-    20 => 'App\\Providers\\AppServiceProvider',
-    21 => 'App\\Providers\\AuthServiceProvider',
-    22 => 'App\\Providers\\EventServiceProvider',
-    23 => 'App\\Providers\\RouteServiceProvider',
+    20 => 'App\\Salon\\PayPeriods\\PayPeriodServiceProvider',
+    21 => 'App\\Providers\\AppServiceProvider',
+    22 => 'App\\Providers\\AuthServiceProvider',
+    23 => 'App\\Providers\\EventServiceProvider',
+    24 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (

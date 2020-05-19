@@ -4,4 +4,6 @@ interface PayPeriodInterface
 {
     public function getCurrentPayPeriod();
 
+    public function getFuturePayPeriods();
+
 }
