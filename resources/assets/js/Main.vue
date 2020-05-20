@@ -1,7 +1,7 @@
 <template>
 	<div id="index">
 		<v-app>
-			<top-navigation-bar></top-navigation-bar>
+			<top-navigation-bar v-if="currentRouteName !== 'Login'"></top-navigation-bar>
 			<router-view></router-view>
 		</v-app>
 
@@ -19,6 +19,12 @@
 	  return {}
 
 	},
+    computed:{
+      currentRouteName(){
+			return this.$route.name;
+      }
+
+    },
 	methods: {},
     created(){
       this.$store.commit("INITIALIZE_STATE")

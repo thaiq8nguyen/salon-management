@@ -1,6 +1,7 @@
 import Login from "Pages/Login";
 import Dashboard from "Pages/Dashboard";
 import Technicians from "Pages/Technicians";
+import Sales from "Pages/Sales";
 
 import Store from "Store";
 
@@ -16,6 +17,12 @@ const routes = [
     name: "Technicians",
     path: "/technicians",
     component: Technicians,
+    beforeEnter: requiresAuth
+  },
+  {
+    name: "Sales",
+    path: "/sales",
+    component: Sales,
     beforeEnter: requiresAuth
   }
 ];

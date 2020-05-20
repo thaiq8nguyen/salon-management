@@ -24,6 +24,7 @@
 	  return {
 		items: [
 		  { name: "Technicians", path: "technicians" },
+		  { name: "Sales", path: "sales"}
 		],
 	  }
 
