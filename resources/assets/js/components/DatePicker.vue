@@ -12,7 +12,7 @@
 					<v-col>
 						<v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
 						        transition="scale-transition" offset-y max-width="290px">
-							<template v-slot:activator="{on}" >
+							<template v-slot:activator="{on}">
 								<v-text-field v-model="date" label="Date" readonly v-on="on"></v-text-field>
 							</template>
 							<v-date-picker v-model="date" no title scrollable actions>
@@ -24,7 +24,7 @@
 					</v-col>
 
 					<v-col>
-						<v-btn>Next</v-btn>
+						<v-btn @click="goToNextDate">Next</v-btn>
 					</v-col>
 				</v-row>
 			</v-card-text>
@@ -39,17 +39,26 @@
 
 	data () {
 	  return {
-	    date: new Date().toISOString().substr(0,10),
-	    menu: false,
+		date: new Date().toISOString().substr(0, 10),
+		menu: false,
 	  }
 
 	},
-    watch:{
-	  date: function(val) {
-	    this.$emit("date", val);
-	  }
-    },
-	methods: {},
+	watch: {
+	  date: function (val) {
+		this.$emit("date", val)
+	  },
+	},
+	methods: {
+	  goToNextDate () {
+		this.date = this.$moment(this.date).add(1, "days");
+	    //console.log(this.$moment);
+	  },
+	  goToPreviousDate () {
+
+	  },
+
+	},
 
   }
 </script>

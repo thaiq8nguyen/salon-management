@@ -17,14 +17,18 @@ import Vue from "vue";
 
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
+import customPlugins from "Plugins";
+
 import store from "./store";
 import router from "./router";
+
 import Main from "./Main";
 
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 
 Vue.use(Vuetify);
+Vue.use(customPlugins);
 
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);

@@ -1,10 +1,6 @@
-import Vue from "vue";
 import AuthenticationServices from "Services/authenticationServices";
-import Plugins from "Plugins";
-import router from "Router";
 
-const Services = new Vue();
-Vue.use(Plugins);
+import router from "Router";
 
 export default {
   login({ commit }, credential) {
@@ -33,6 +29,6 @@ export default {
   },
   resetAuthentications({ commit }) {
     commit("SET_AUTHENTICATION", {});
-    Services.removeState();
+    this.removeState();
   }
 };

@@ -28,6 +28,7 @@
 	methods: {},
     created(){
       this.$store.commit("INITIALIZE_STATE")
+
     }
 
   }

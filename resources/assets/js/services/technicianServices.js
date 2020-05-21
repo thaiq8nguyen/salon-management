@@ -1,20 +1,16 @@
-import Vue from "vue";
-import Plugins from "Plugins";
-
-let Services = new Vue();
-Vue.use(Plugins);
+import { authClient } from "Plugins/apiClient";
 
 const getTechnicians = (id) => {
-  return Services.authClient.get(`/technicians/${id}`);
+  return authClient.get(`/technicians/${id}`);
 };
 const addTechnician = (technician) => {
-  return Services.authClient.post("/technicians", technician);
+  return authClient.post("/technicians", technician);
 };
 const updateTechnician = (id, technician) => {
-  return Services.authClient.put(`/technicians/${id}`, technician);
+  return authClient.put(`/technicians/${id}`, technician);
 };
 const deleteTechnician = (id) => {
-  return Services.authClient.delete(`/technicians/${id}`);
+  return authClient.delete(`/technicians/${id}`);
 };
 
 export default {

@@ -1,18 +1,14 @@
-import Vue from "vue";
-import Plugins from "Plugins";
-
-let Service = new Vue();
-Vue.use(Plugins);
+import { client, authClient } from "Plugins/apiClient";
 
 const login = (credential) => {
-  return Service.client.post("/login", credential);
+  return client.post("/login", credential);
 };
 
 const register = (user) => {
-  return Service.client.post("/register", user);
+  return client.post("/register", user);
 };
 const logout = () => {
-  return Service.authClient.post("/logout");
+  return authClient.post("/logout");
 };
 
 export default {

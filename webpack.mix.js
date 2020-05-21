@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const mix = require("laravel-mix");
 const config = require("./webpack.config");
 
@@ -12,12 +13,12 @@ const config = require("./webpack.config");
  |
  */
 
-// mix.webpackConfig({
-//     plugins: [
-//     // reduce bundle size by ignoring moment js local files
-//     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-// ]
-// });
+mix.webpackConfig({
+  plugins: [
+    // reduce bundle size by ignoring moment js local files
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  ]
+});
 
 // mix.js(['resources/assets/js/home.js'], 'public/js')
 //     .js(['resources/assets/js/salon-sales.js'], 'public/js')
