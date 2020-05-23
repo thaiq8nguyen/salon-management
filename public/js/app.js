@@ -2687,9 +2687,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {},
-  created: function created() {
-    this.$store.commit("INITIALIZE_STATE");
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -2746,6 +2744,11 @@ __webpack_require__.r(__webpack_exports__);
       menu: false
     };
   },
+  computed: {
+    formattedDate: function formattedDate() {
+      return this.$moment(this.date).format("ddd, MM/DD/YYYY");
+    }
+  },
   watch: {
     date: function date(val) {
       this.$emit("date", val);
@@ -2753,9 +2756,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     goToNextDate: function goToNextDate() {
-      this.date = this.$moment(this.date).add(1, "days"); //console.log(this.$moment);
+      this.date = this.$moment(this.date).add(1, "days");
     },
-    goToPreviousDate: function goToPreviousDate() {}
+    goToPreviousDate: function goToPreviousDate() {
+      this.date = this.$moment(this.date).subtract(1, "days");
+    }
   }
 });
 
@@ -3079,6 +3084,14 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {};
+  },
+  computed: {
+    technicians: function technicians() {
+      return this.$store.getters["Technicians/technicians"];
+    }
+  },
+  created: function created() {
+    this.$store.dispatch("Technicians/getTechnicians");
   },
   methods: {
     setDate: function setDate(date) {
@@ -25919,7 +25932,15 @@ var render = function() {
               _c(
                 "v-row",
                 [
-                  _c("v-col", [_c("v-btn", [_vm._v("Previous")])], 1),
+                  _c(
+                    "v-col",
+                    [
+                      _c("v-btn", { on: { click: _vm.goToPreviousDate } }, [
+                        _vm._v("Previous")
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "v-col",
@@ -25955,11 +25976,11 @@ var render = function() {
                                       {
                                         attrs: { label: "Date", readonly: "" },
                                         model: {
-                                          value: _vm.date,
+                                          value: _vm.formattedDate,
                                           callback: function($$v) {
-                                            _vm.date = $$v
+                                            _vm.formattedDate = $$v
                                           },
-                                          expression: "date"
+                                          expression: "formattedDate"
                                         }
                                       },
                                       on
@@ -85368,44 +85389,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/plugins/apiClient.js":
-/*!**************************************************!*\
-  !*** ./resources/assets/js/plugins/apiClient.js ***!
-  \**************************************************/
-/*! exports provided: client, authClient */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "client", function() { return client; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authClient", function() { return authClient; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
-
-
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = "/api/";
-var headers = {
-  accept: "application/json",
-  "Content-Type": "application/json"
-};
-var client = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  headers: headers
-});
-var authClient = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  headers: headers
-});
-authClient.interceptors.request.use(function (config) {
-  var token = Store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["Authentications/accessToken"];
-  config.headers["Authorization"] = "Bearer ".concat(token);
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
-
-
-/***/ }),
-
 /***/ "./resources/assets/js/plugins/index.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/plugins/index.js ***!
@@ -85534,6 +85517,44 @@ function _requiresAuth() {
 
 /***/ }),
 
+/***/ "./resources/assets/js/services/apiClient.js":
+/*!***************************************************!*\
+  !*** ./resources/assets/js/services/apiClient.js ***!
+  \***************************************************/
+/*! exports provided: client, authClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "client", function() { return client; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authClient", function() { return authClient; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
+
+
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = "/api/";
+var headers = {
+  accept: "application/json",
+  "Content-Type": "application/json"
+};
+var client = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  headers: headers
+});
+var authClient = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  headers: headers
+});
+authClient.interceptors.request.use(function (config) {
+  var token = Store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["Authentications/accessToken"];
+  config.headers["Authorization"] = "Bearer ".concat(token);
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/services/authenticationServices.js":
 /*!****************************************************************!*\
   !*** ./resources/assets/js/services/authenticationServices.js ***!
@@ -85543,19 +85564,19 @@ function _requiresAuth() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Plugins/apiClient */ "./resources/assets/js/plugins/apiClient.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiClient */ "./resources/assets/js/services/apiClient.js");
 
 
 var login = function login(credential) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["client"].post("/login", credential);
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["client"].post("/login", credential);
 };
 
 var register = function register(user) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["client"].post("/register", user);
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["client"].post("/register", user);
 };
 
 var logout = function logout() {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/logout");
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/logout");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -85575,23 +85596,23 @@ var logout = function logout() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Plugins/apiClient */ "./resources/assets/js/plugins/apiClient.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiClient */ "./resources/assets/js/services/apiClient.js");
 
 
 var getTechnicians = function getTechnicians(id) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/technicians/".concat(id));
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/technicians/".concat(id));
 };
 
 var addTechnician = function addTechnician(technician) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/technicians", technician);
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/technicians", technician);
 };
 
 var updateTechnician = function updateTechnician(id, technician) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].put("/technicians/".concat(id), technician);
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].put("/technicians/".concat(id), technician);
 };
 
 var deleteTechnician = function deleteTechnician(id) {
-  return Plugins_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"]["delete"]("/technicians/".concat(id));
+  return _apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"]["delete"]("/technicians/".concat(id));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -85942,12 +85963,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  INITIALIZE_STATE: function INITIALIZE_STATE(state) {// if (this.loadState) {
-    //   this.replaceState(Object.assign(state, this.loadState));
-    // }
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 

@@ -1,4 +1,4 @@
-import { authClient } from "Plugins/apiClient";
+import { authClient } from "./apiClient";
 
 const getTechnicians = (id) => {
   return authClient.get(`/technicians/${id}`);

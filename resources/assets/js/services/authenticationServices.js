@@ -1,4 +1,4 @@
-import { client, authClient } from "Plugins/apiClient";
+import { client, authClient } from "./apiClient";
 
 const login = (credential) => {
   return client.post("/login", credential);

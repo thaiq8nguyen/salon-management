@@ -26,6 +26,14 @@
 	        return {}
 
 		},
+      computed:{
+		technicians(){
+		  return this.$store.getters["Technicians/technicians"];
+		}
+      },
+        created(){
+          this.$store.dispatch("Technicians/getTechnicians")
+        },
 		methods: {
           setDate(date){
             console.log(date)
