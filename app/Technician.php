@@ -21,7 +21,8 @@ class Technician extends Model
 
     public function transactions()
     {
-        return $this->hasManyThrough(Transaction::class, TechnicianAccount::class);
+        return $this->hasManyThrough(Transaction::class, TechnicianAccount::class,
+            'technician_id', 'transactionable_id', 'id', 'id');
     }
 
     public function sales()

@@ -15,7 +15,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     {
 
         $sales = Technician::with(['sales' => function($query) use ($date){
-            $query->where('date', '2020-05-12');
+            $query->where('date', $date);
         }])->get(['id','first_name','last_name']);
 
         return $sales;
@@ -39,7 +39,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             $saleTransaction = $saleAccount->transactions()->create([
                 'transaction_item_id' => $saleItem->id,
                 'date' => $sale['date'],
-                'description' => $sale['description'] ? $sale['description'] : '',
+                'description' =>  $sale['description'],
                 'credit' => $sale['sales'],
             ]);
         }
@@ -50,7 +50,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             $tipTransaction = $tipAccount->transactions()->create([
                 'transaction_item_id' => $tipItem->id,
                 'date' => $sale['date'],
-                'description' => $sale['description'] ? $sale['description'] : '',
+                'description' => $sale['description'],
                 'credit' => $sale['tips'],
             ]);
         }

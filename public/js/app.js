@@ -85670,6 +85670,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mutations */ "./resources/assets/js/store/mutations.js");
 /* harmony import */ var _modules_authentications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/authentications */ "./resources/assets/js/store/modules/authentications/index.js");
 /* harmony import */ var _modules_technicians__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/technicians */ "./resources/assets/js/store/modules/technicians/index.js");
+/* harmony import */ var _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/technician-sales */ "./resources/assets/js/store/modules/technician-sales/index.js");
+
 
 
 
@@ -85683,7 +85685,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     Authentications: _modules_authentications__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Technicians: _modules_technicians__WEBPACK_IMPORTED_MODULE_8__["default"]
+    Technicians: _modules_technicians__WEBPACK_IMPORTED_MODULE_8__["default"],
+    TechnicianSales: _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   state: {},
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -85807,6 +85810,70 @@ __webpack_require__.r(__webpack_exports__);
     state.user = authentication;
   }
 });
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technician-sales/actions.js":
+/*!***********************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technician-sales/actions.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technician-sales/getters.js":
+/*!***********************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technician-sales/getters.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technician-sales/index.js":
+/*!*********************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technician-sales/index.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/assets/js/store/modules/technician-sales/actions.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/assets/js/store/modules/technician-sales/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/assets/js/store/modules/technician-sales/mutations.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mutations__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var state = {
+  sales: []
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0___default.a,
+  getters: _getters__WEBPACK_IMPORTED_MODULE_1___default.a,
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2___default.a
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/technician-sales/mutations.js":
+/*!*************************************************************************!*\
+  !*** ./resources/assets/js/store/modules/technician-sales/mutations.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

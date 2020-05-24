@@ -7,13 +7,15 @@ import actions from "./actions";
 import mutations from "./mutations";
 import Authentications from "./modules/authentications";
 import Technicians from "./modules/technicians";
+import TechnicianSales from "./modules/technician-sales";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     Authentications,
-    Technicians
+    Technicians,
+    TechnicianSales
   },
 
   state: {},

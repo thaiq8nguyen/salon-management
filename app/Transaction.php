@@ -16,7 +16,7 @@ class Transaction extends Model
         'account_id',
         'transaction_item_id',
         'date',
-        'note',
+        'description',
         'debit',
         'credit',
     ];

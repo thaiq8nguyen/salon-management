@@ -15,11 +15,11 @@ class TechnicianSaleController extends BaseController
         $this->technicianSale = $technicianSale;
     }
 
-    public function getTechnicianSales($date)
+    public function getTechnicianSales(Request $request)
     {
-        $technicianSales = $this->technicianSale->getTechnicianSales($date);
+        $technicianSales = $this->technicianSale->getTechnicianSales($request->query('date'));
 
-        return $this->sendResponse(['name' => 'technician sales', 'value' => $technicianSales]);
+        return $this->sendResponse(['name' => 'technician_sales', 'value' => $technicianSales]);
     }
 
 
@@ -27,7 +27,7 @@ class TechnicianSaleController extends BaseController
     {
         $newTechnicianSale = $this->technicianSale->addTechnicianSale($request->all());
 
-        return $this->sendResponse(['name' => 'new technician sale', 'value' => $newTechnicianSale]);
+        return $this->sendResponse(['name' => 'new_technician_sale', 'value' => $newTechnicianSale]);
         //return $this->sendResponse(['name' => 'hello', 'value' => 'world']);
     }
 
@@ -35,14 +35,14 @@ class TechnicianSaleController extends BaseController
     {
         $updatedSale = $this->technicianSale->updateTechnicianSale( $saleId, $request->all());
 
-        return $this->sendResponse(['name' => 'update technician sale', 'value' =>$updatedSale]);
+        return $this->sendResponse(['name' => 'update_technician_sale', 'value' =>$updatedSale]);
     }
 
     public function deleteTechnicianSale($saleId)
     {
         $deletedSale = $this->technicianSale->deleteTechnicianSale($saleId);
 
-        return $this->sendResponse(['name' => 'delete technician sale', 'value' => $deletedSale]);
+        return $this->sendResponse(['name' => 'delete_technician_sale', 'value' => $deletedSale]);
     }
 
 }
