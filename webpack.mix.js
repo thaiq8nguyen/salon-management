@@ -40,4 +40,4 @@ mix.js("resources/assets/js/app.js", "public/js").browserSync({
   files: ["public/js/*.js", "public/css/*.css"]
 });
 
-/*.sass('resources/assets/sass/app.scss', 'public/css');*/
+mix.sass("resources/assets/sass/app.scss", "public/css");

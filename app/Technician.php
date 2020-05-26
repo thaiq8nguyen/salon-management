@@ -14,6 +14,7 @@ class Technician extends Model
     protected $fillable = ['user_id', 'first_name', 'last_name', 'email', 'is_active'];
     protected $hidden = ['laravel_through_key'];
 
+
     public function accounts()
     {
         return $this->hasMany(TechnicianAccount::class);
@@ -36,5 +37,12 @@ class Technician extends Model
     {
         return $this->belongsToMany(Technician::class, 'payment_reports')->withPivot('url');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name. " " .$this->last_name;
+    }
+
+
 
 }

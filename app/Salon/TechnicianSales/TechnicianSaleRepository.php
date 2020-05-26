@@ -14,19 +14,44 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     public function getTechnicianSales($date)
     {
 
-        $sales = Technician::with(['sales' => function($query) use ($date){
-            $query->where('date', $date);
-        }])->get(['id','first_name','last_name']);
+        $technicians = Technician::with([
+            'sales' => function ($query) use ($date) {
+                $query->where('date', $date);
+            }
+        ])->get();
 
-        return $sales;
+        $sales = $technicians->map(function($technician){
+            $sale = $technician->sales->filter(function($transaction){
+                return $transaction->name == 'technician sales';
+            })->first();
 
+            $tip = $technician->sales->filter(function($transaction){
+                return $transaction->name == 'technician tips';
+            })->first();
+            return [
+                'technicianId' => $technician->id,
+                'firstName' => $technician->first_name,
+                'lastName' => $technician->last_name,
+                'fullName' => $technician->full_name,
+                'sale' => $sale ? $sale->credit : 0,
+                'tip' => $tip ? $tip->credit : 0,
+
+            ];
+        });
+
+        //return $technicianWithSales;
+
+        return ['date' => $date, 'sales' => $sales];
 
     }
 
     public function addTechnicianSale($sale)
     {
 
-        $saleAccount = TechnicianAccount::where([['technician_id', $sale['technician_id']], ['name', 'sales']])->first();
+        $saleAccount = TechnicianAccount::where([
+            ['technician_id', $sale['technician_id']],
+            ['name', 'sales']
+        ])->first();
         $tipAccount = TechnicianAccount::where([
             ['technician_id', $sale['technician_id']],
             ['name', 'tips']
@@ -39,7 +64,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             $saleTransaction = $saleAccount->transactions()->create([
                 'transaction_item_id' => $saleItem->id,
                 'date' => $sale['date'],
-                'description' =>  $sale['description'],
+                'description' => $sale['description'],
                 'credit' => $sale['sales'],
             ]);
         }
@@ -79,7 +104,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             return false;
         }
         return true;
-
 
     }
 }

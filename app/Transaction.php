@@ -21,7 +21,7 @@ class Transaction extends Model
         'credit',
     ];
     protected $hidden = ['laravel_through_key'];
-
+    protected $casts = ['credit' => 'double'];
 
 
     public function transactionable()

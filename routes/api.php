@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/technicians/{id}', 'TechnicianController@delete');
 
     // Technician Sales CRUD
-    Route::get('/technician-sales/', 'TechnicianSaleController@getTechnicianSales');
+    Route::get('/sales/technicians', 'TechnicianSaleController@getTechnicianSales');
     Route::post('/technician-sales', 'TechnicianSaleController@addTechnicianSale');
     Route::put('/technician-sales/{saleId}', 'TechnicianSaleController@updateTechnicianSale');
     Route::delete('/technician-sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');

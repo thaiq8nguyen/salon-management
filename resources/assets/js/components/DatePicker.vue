@@ -52,7 +52,7 @@
 
 	watch: {
 	  date: function (val) {
-		this.$emit("date", val)
+		this.$emit("date", this.$moment(val).format("YYYY-MM-DD"))
 	  },
 	},
 	methods: {

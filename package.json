@@ -9,6 +9,7 @@
     "build": "webpack"
   },
   "devDependencies": {
+    "@mdi/font": "^5.3.45",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
@@ -21,6 +22,8 @@
     "laravel-mix": "^5.0.4",
     "lodash": "^4.17.15",
     "prettier": "^2.0.4",
+    "resolve-url-loader": "^3.1.0",
+    "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1"
   },
