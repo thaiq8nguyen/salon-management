@@ -12,7 +12,7 @@
 				</v-row>
 				<v-row>
 					<v-col>
-						<technician-sales :technicians="technicianSales"></technician-sales>
+						<technician-sales :technicians="allTechnicianSales" :date="date"></technician-sales>
 					</v-col>
 				</v-row>
 			</v-container>
@@ -37,16 +37,16 @@
 
 	},
 	computed: {
-	  technicianSales () {
-		return this.$store.getters["TechnicianSales/technicianSales"]
+	  allTechnicianSales () {
+		return this.$store.getters["TechnicianSales/allTechnicianSales"]
 	  },
 	},
 	created () {
-	  this.$store.dispatch("TechnicianSales/getTechnicianSales", this.date)
+	  this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date)
 	},
 	watch: {
-	  date: function (val) {
-		this.$store.dispatch("TechnicianSales/getTechnicianSales", val)
+	  date: function (date) {
+		this.$store.dispatch("TechnicianSales/getAllTechnicianSales", date)
 	  },
 	},
 	methods: {

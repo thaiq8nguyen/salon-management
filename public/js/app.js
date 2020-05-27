@@ -2902,14 +2902,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
-  props: ["technicians"],
+  props: ["technicians", "date"],
   data: function data() {
-    return {};
+    return {
+      technicianSale: {
+        sale: "",
+        tip: ""
+      },
+      saleDate: this.date
+    };
   },
   computed: {},
-  methods: {}
+  watch: {
+    date: function date(newDate) {
+      this.saleDate = newDate;
+    }
+  },
+  methods: {
+    add: function add(technicianId) {
+      this.$store.dispatch("TechnicianSales/addTechnicianSale", {
+        technicianId: technicianId,
+        transactions: this.technicianSale,
+        date: this.date
+      }).then(function () {});
+    }
+  }
 });
 
 /***/ }),
@@ -3245,16 +3277,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    technicianSales: function technicianSales() {
-      return this.$store.getters["TechnicianSales/technicianSales"];
+    allTechnicianSales: function allTechnicianSales() {
+      return this.$store.getters["TechnicianSales/allTechnicianSales"];
     }
   },
   created: function created() {
-    this.$store.dispatch("TechnicianSales/getTechnicianSales", this.date);
+    this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date);
   },
   watch: {
-    date: function date(val) {
-      this.$store.dispatch("TechnicianSales/getTechnicianSales", val);
+    date: function date(_date) {
+      this.$store.dispatch("TechnicianSales/getAllTechnicianSales", _date);
     }
   },
   methods: {
@@ -13369,66 +13401,78 @@ var render = function() {
                     [
                       _c("span", [_vm._v(_vm._s(technician.fullName))]),
                       _vm._v(" "),
-                      _c(
-                        "span",
-                        [
-                          _c("v-icon", [_vm._v("mdi-plus")]),
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("mdi-pencil")]),
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("mdi-delete")])
-                        ],
-                        1
-                      )
+                      technician.sale > 0
+                        ? _c(
+                            "span",
+                            [
+                              _c("v-icon", [_vm._v("mdi-pencil")]),
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("mdi-delete")])
+                            ],
+                            1
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
                   _c(
                     "v-card-text",
                     [
-                      _c(
-                        "v-row",
-                        [
-                          _c(
-                            "v-col",
+                      technician.sale > 0
+                        ? _c(
+                            "v-row",
                             [
                               _c(
-                                "v-list-item",
-                                { attrs: { "two-line": "" } },
+                                "v-col",
                                 [
                                   _c(
-                                    "v-list-item-content",
+                                    "v-list-item",
+                                    { attrs: { "two-line": "" } },
                                     [
-                                      _c("v-list-item-title", [_vm._v("Sale")]),
-                                      _vm._v(" "),
-                                      _c("v-list-item-subtitle", [
-                                        _vm._v("$ " + _vm._s(technician.sale))
-                                      ])
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v("Sale")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-list-item-subtitle", [
+                                            _vm._v(
+                                              "$ " + _vm._s(technician.sale)
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
                                 ],
                                 1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            [
+                              ),
+                              _vm._v(" "),
                               _c(
-                                "v-list-item",
-                                { attrs: { "two-line": "" } },
+                                "v-col",
                                 [
                                   _c(
-                                    "v-list-item-content",
+                                    "v-list-item",
+                                    { attrs: { "two-line": "" } },
                                     [
-                                      _c("v-list-item-title", [_vm._v("Tip")]),
-                                      _vm._v(" "),
-                                      _c("v-list-item-subtitle", [
-                                        _vm._v("$ " + _vm._s(technician.tip))
-                                      ])
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v("Tip")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-list-item-subtitle", [
+                                            _vm._v(
+                                              "$ " + _vm._s(technician.tip)
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -13438,9 +13482,77 @@ var render = function() {
                             ],
                             1
                           )
-                        ],
-                        1
-                      )
+                        : _c(
+                            "v-row",
+                            [
+                              _c(
+                                "v-col",
+                                [
+                                  _c(
+                                    "v-form",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "New Sale" },
+                                        model: {
+                                          value: _vm.technicianSale.sale,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.technicianSale,
+                                              "sale",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "technicianSale.sale"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-text-field", {
+                                        attrs: { label: "New Tip" },
+                                        model: {
+                                          value: _vm.technicianSale.tip,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.technicianSale,
+                                              "tip",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "technicianSale.tip"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass: "d-flex flex-row-reverse"
+                                        },
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.add(
+                                                    technician.technicianId
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Submit")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                     ],
                     1
                   )
@@ -14060,7 +14172,10 @@ var render = function() {
                     "v-col",
                     [
                       _c("technician-sales", {
-                        attrs: { technicians: _vm.technicianSales }
+                        attrs: {
+                          technicians: _vm.allTechnicianSales,
+                          date: _vm.date
+                        }
                       })
                     ],
                     1
@@ -73069,12 +73184,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Services_apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/apiClient */ "./resources/assets/js/services/apiClient.js");
 
 
-var getTechnicianSales = function getTechnicianSales(date) {
+var getAllTechnicianSales = function getAllTechnicianSales(date) {
   return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/sales/technicians?date=".concat(date));
 };
 
+var addTechnicianSale = function addTechnicianSale(sale) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/sales/technicians", sale);
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  getTechnicianSales: getTechnicianSales
+  getAllTechnicianSales: getAllTechnicianSales,
+  addTechnicianSale: addTechnicianSale
 });
 
 /***/ }),
@@ -73317,13 +73437,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/technicianSaleServices */ "./resources/assets/js/services/technicianSaleServices.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  getTechnicianSales: function getTechnicianSales(_ref, date) {
+  getAllTechnicianSales: function getAllTechnicianSales(_ref, date) {
     var commit = _ref.commit;
-    console.log(date);
     return new Promise(function (resolve, reject) {
-      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianSales(date).then(function (response) {
-        commit("SET_TECHNICIAN_SALES", response.data.technicianSales);
+      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].getAllTechnicianSales(date).then(function (response) {
+        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
         resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  },
+  addTechnicianSale: function addTechnicianSale(_ref2, sale) {
+    var commit = _ref2.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnicianSale(sale).then(function (response) {
+        //commit("SET_TECHNICIAN_SALES", response.data.technicianSale);
+        console.log(response);
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -73345,8 +73477,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  technicianSales: function technicianSales(state) {
-    return state.technicianSales;
+  allTechnicianSales: function allTechnicianSales(state) {
+    return state.allTechnicianSales;
   }
 });
 
@@ -73368,7 +73500,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var state = {
-  technicianSales: []
+  allTechnicianSales: [],
+  technicianSale: null
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
@@ -73390,8 +73523,11 @@ var state = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSales) {
-    state.technicianSales = technicianSales;
+  SET_ALL_TECHNICIAN_SALES: function SET_ALL_TECHNICIAN_SALES(state, allTechnicianSales) {
+    state.allTechnicianSales = allTechnicianSales;
+  },
+  SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSale) {
+    state.technicianSale = technicianSale;
   }
 });
 

@@ -48,39 +48,40 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     public function addTechnicianSale($sale)
     {
 
-        $saleAccount = TechnicianAccount::where([
-            ['technician_id', $sale['technician_id']],
-            ['name', 'sales']
-        ])->first();
-        $tipAccount = TechnicianAccount::where([
-            ['technician_id', $sale['technician_id']],
-            ['name', 'tips']
-        ])->first();
-
-        $saleTransaction = '';
-        if ($sale['sales']) {
-            $saleItem = TransactionItem::item('technician sales')->first();
-
-            $saleTransaction = $saleAccount->transactions()->create([
-                'transaction_item_id' => $saleItem->id,
-                'date' => $sale['date'],
-                'description' => $sale['description'],
-                'credit' => $sale['sales'],
-            ]);
-        }
-
-        $tipTransaction = '';
-        if ($sale['tips']) {
-            $tipItem = TransactionItem::item('technician tips')->first();
-            $tipTransaction = $tipAccount->transactions()->create([
-                'transaction_item_id' => $tipItem->id,
-                'date' => $sale['date'],
-                'description' => $sale['description'],
-                'credit' => $sale['tips'],
-            ]);
-        }
-
-        return ['sale' => $saleTransaction, 'tip' => $tipTransaction];
+//        $saleAccount = TechnicianAccount::where([
+//            ['technician_id', $sale['technician_id']],
+//            ['name', 'sales']
+//        ])->first();
+//        $tipAccount = TechnicianAccount::where([
+//            ['technician_id', $sale['technician_id']],
+//            ['name', 'tips']
+//        ])->first();
+//
+//        $saleTransaction = '';
+//        if ($sale['sales']) {
+//            $saleItem = TransactionItem::item('technician sales')->first();
+//
+//            $saleTransaction = $saleAccount->transactions()->create([
+//                'transaction_item_id' => $saleItem->id,
+//                'date' => $sale['date'],
+//                'description' => $sale['description'],
+//                'credit' => $sale['sales'],
+//            ]);
+//        }
+//
+//        $tipTransaction = '';
+//        if ($sale['tips']) {
+//            $tipItem = TransactionItem::item('technician tips')->first();
+//            $tipTransaction = $tipAccount->transactions()->create([
+//                'transaction_item_id' => $tipItem->id,
+//                'date' => $sale['date'],
+//                'description' => $sale['description'],
+//                'credit' => $sale['tips'],
+//            ]);
+//        }
+//
+//        return ['sale' => $saleTransaction, 'tip' => $tipTransaction];
+        return $sale;
 
     }
 

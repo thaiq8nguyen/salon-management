@@ -1,5 +1,5 @@
 export default {
-  technicianSales(state) {
-    return state.technicianSales;
+  allTechnicianSales(state) {
+    return state.allTechnicianSales;
   }
 };

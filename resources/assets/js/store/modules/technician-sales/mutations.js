@@ -1,5 +1,9 @@
 export default {
-  SET_TECHNICIAN_SALES(state, technicianSales) {
-    state.technicianSales = technicianSales;
+  SET_ALL_TECHNICIAN_SALES(state, allTechnicianSales) {
+    state.allTechnicianSales = allTechnicianSales;
+  },
+
+  SET_TECHNICIAN_SALES(state, technicianSale) {
+    state.technicianSale = technicianSale;
   }
 };

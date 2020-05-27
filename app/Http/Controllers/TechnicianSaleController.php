@@ -19,7 +19,7 @@ class TechnicianSaleController extends BaseController
     {
         $technicianSales = $this->technicianSale->getTechnicianSales($request->query('date'));
 
-        return $this->sendResponse(['name' => 'technicianSales', 'value' => $technicianSales]);
+        return $this->sendResponse(['name' => 'allTechnicianSales', 'value' => $technicianSales]);
     }
 
 
@@ -27,7 +27,7 @@ class TechnicianSaleController extends BaseController
     {
         $newTechnicianSale = $this->technicianSale->addTechnicianSale($request->all());
 
-        return $this->sendResponse(['name' => 'new_technician_sale', 'value' => $newTechnicianSale]);
+        return $this->sendResponse(['name' => 'newTechnicianSale', 'value' => $newTechnicianSale]);
         //return $this->sendResponse(['name' => 'hello', 'value' => 'world']);
     }
 
