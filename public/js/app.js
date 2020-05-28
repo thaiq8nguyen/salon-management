@@ -2912,18 +2912,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
   props: ["technicians", "date"],
   data: function data() {
     return {
-      technicianSale: {
-        sale: "",
-        tip: ""
-      },
+      stagingSales: [],
       saleDate: this.date
     };
   },
@@ -2931,15 +2925,31 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     date: function date(newDate) {
       this.saleDate = newDate;
+    },
+    technicians: function technicians(_technicians) {
+      this.stagingSales = _technicians.sales.map(function (technician) {
+        return {
+          technicianId: technician.technicianId,
+          saleAmount: technician.sale,
+          tipAmount: technician.tip
+        };
+      });
     }
   },
   methods: {
-    add: function add(technicianId) {
-      this.$store.dispatch("TechnicianSales/addTechnicianSale", {
-        technicianId: technicianId,
-        transactions: this.technicianSale,
-        date: this.date
-      }).then(function () {});
+    submit: function submit() {
+      var _this = this;
+
+      var finalSales = this.stagingSales.filter(function (stagingSale) {
+        return !_this.technicians.sales.some(function (sale) {
+          return sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount && sale.tip === stagingSale.tipAmount;
+        });
+      });
+      console.log(finalSales); // this.$store.dispatch("TechnicianSales/addTechnicianSale",
+      //   { transactions: finalSales, date: this.date }).
+      //   then(() => {
+      //
+      //   })
     }
   }
 });
@@ -13375,171 +13385,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "technician-sales" } },
-    [
-      _c(
-        "v-container",
-        { attrs: { fluid: "" } },
+  return _vm.stagingSales.length > 0
+    ? _c(
+        "div",
+        { attrs: { id: "technician-sales" } },
         [
           _c(
-            "v-row",
-            { attrs: { justify: "start" } },
-            _vm._l(_vm.technicians.sales, function(technician) {
-              return _c(
-                "v-card",
-                {
-                  key: technician.technicianId,
-                  staticClass: "mr-3 mb-3",
-                  attrs: { width: "344" }
-                },
-                [
-                  _c(
-                    "v-card-title",
-                    { staticClass: "d-flex justify-space-between" },
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c(
+                "v-row",
+                { attrs: { justify: "start" } },
+                _vm._l(_vm.technicians.sales, function(technician, index) {
+                  return _c(
+                    "v-col",
+                    { key: technician.technicianId, attrs: { cols: "3" } },
                     [
-                      _c("span", [_vm._v(_vm._s(technician.fullName))]),
-                      _vm._v(" "),
-                      technician.sale > 0
-                        ? _c(
-                            "span",
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-card-title",
+                            { staticClass: "d-flex justify-space-between" },
                             [
-                              _c("v-icon", [_vm._v("mdi-pencil")]),
+                              _c("span", [_vm._v(_vm._s(technician.fullName))]),
                               _vm._v(" "),
-                              _c("v-icon", [_vm._v("mdi-delete")])
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      technician.sale > 0
-                        ? _c(
-                            "v-row",
-                            [
-                              _c(
-                                "v-col",
-                                [
-                                  _c(
-                                    "v-list-item",
-                                    { attrs: { "two-line": "" } },
+                              technician.sale > 0
+                                ? _c(
+                                    "span",
                                     [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-list-item-title", [
-                                            _vm._v("Sale")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "$ " + _vm._s(technician.sale)
-                                            )
-                                          ])
-                                        ],
-                                        1
-                                      )
+                                      _c("v-icon", [_vm._v("mdi-pencil")]),
+                                      _vm._v(" "),
+                                      _c("v-icon", [_vm._v("mdi-delete")])
                                     ],
                                     1
                                   )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
-                                [
-                                  _c(
-                                    "v-list-item",
-                                    { attrs: { "two-line": "" } },
-                                    [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-list-item-title", [
-                                            _vm._v("Tip")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "$ " + _vm._s(technician.tip)
-                                            )
-                                          ])
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _c(
-                            "v-row",
+                                : _vm._e()
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-text",
                             [
-                              _c(
-                                "v-col",
-                                [
-                                  _c(
-                                    "v-form",
+                              technician.sale > 0
+                                ? _c(
+                                    "v-row",
                                     [
-                                      _c("v-text-field", {
-                                        attrs: { label: "New Sale" },
-                                        model: {
-                                          value: _vm.technicianSale.sale,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.technicianSale,
-                                              "sale",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "technicianSale.sale"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: { label: "New Tip" },
-                                        model: {
-                                          value: _vm.technicianSale.tip,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.technicianSale,
-                                              "tip",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "technicianSale.tip"
-                                        }
-                                      }),
-                                      _vm._v(" "),
                                       _c(
-                                        "span",
-                                        {
-                                          staticClass: "d-flex flex-row-reverse"
-                                        },
+                                        "v-col",
                                         [
                                           _c(
-                                            "v-btn",
-                                            {
-                                              attrs: { small: "" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.add(
-                                                    technician.technicianId
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Submit")]
+                                            "v-list-item",
+                                            [
+                                              _c("v-list-item-title", [
+                                                _vm._v("Sale")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("v-list-item-subtitle", [
+                                                _vm._v(
+                                                  "$ " +
+                                                    _vm._s(
+                                                      _vm.stagingSales[index]
+                                                        .saleAmount
+                                                    ) +
+                                                    "\n\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-item",
+                                            [
+                                              _c("v-list-item-title", [
+                                                _vm._v("Tip")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("v-list-item-subtitle", [
+                                                _vm._v(
+                                                  "$ " +
+                                                    _vm._s(
+                                                      _vm.stagingSales[index]
+                                                        .tipAmount
+                                                    )
+                                                )
+                                              ])
+                                            ],
+                                            1
                                           )
                                         ],
                                         1
@@ -13547,27 +13481,85 @@ var render = function() {
                                     ],
                                     1
                                   )
-                                ],
-                                1
-                              )
+                                : _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        [
+                                          _c(
+                                            "v-form",
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: { label: "New Sale" },
+                                                model: {
+                                                  value:
+                                                    _vm.stagingSales[index]
+                                                      .saleAmount,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.stagingSales[index],
+                                                      "saleAmount",
+                                                      _vm._n($$v)
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "stagingSales[index].saleAmount"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-text-field", {
+                                                attrs: { label: "New Tip" },
+                                                model: {
+                                                  value:
+                                                    _vm.stagingSales[index]
+                                                      .tipAmount,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.stagingSales[index],
+                                                      "tipAmount",
+                                                      _vm._n($$v)
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "stagingSales[index].tipAmount"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                             ],
                             1
                           )
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                ],
+                }),
                 1
               )
-            }),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-toolbar",
+            { staticClass: "d-flex justify-center", attrs: { flat: "" } },
+            [_c("v-btn", { on: { click: _vm.submit } }, [_vm._v("Submit")])],
             1
           )
         ],
         1
       )
-    ],
-    1
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
