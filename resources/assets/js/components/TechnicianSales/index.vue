@@ -3,13 +3,12 @@
 		<v-container fluid>
 			<v-row :justify="'start'">
 				<v-col cols="3" v-for="(technician, index) in technicians.sales" :key="technician.technicianId">
-
 					<v-card>
 						<v-card-title class="d-flex justify-space-between">
 							<span>{{technician.fullName}}</span>
 							<span v-if="technician.sale > 0">
 
-							<v-icon>mdi-pencil</v-icon>
+							<v-icon @click="updateDialog = true">mdi-pencil</v-icon>
 							<v-icon>mdi-delete</v-icon>
 						</span>
 
@@ -42,22 +41,28 @@
 					</v-card>
 				</v-col>
 			</v-row>
-
 		</v-container>
 		<v-toolbar flat class="d-flex justify-center">
 			<v-btn @click="submit">Submit</v-btn>
 		</v-toolbar>
+		<update-technician-sale-dialog :open="updateDialog" :sale="updatingSale"></update-technician-sale-dialog>
 	</div>
 </template>
 
 <script>
+  import UpdateTechnicianSaleDialog from "Components/TechnicianSales/UpdateTechnicianSaleDialog"
+
   export default {
 	name: "TechnicianSales",
 	props: ["technicians", "date"],
+    components: {UpdateTechnicianSaleDialog},
 	data () {
 	  return {
 		stagingSales: [],
 		saleDate: this.date,
+	    updatingSale: "",
+		updateDialog: false,
+		deleteDialog: false,
 	  }
 	},
 	computed: {},
@@ -82,12 +87,12 @@
 			sale => (sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount &&
 			  sale.tip === stagingSale.tipAmount))
 		})
-		console.log(finalSales)
-		// this.$store.dispatch("TechnicianSales/addTechnicianSale",
-		//   { transactions: finalSales, date: this.date }).
-		//   then(() => {
-		//
-		//   })
+		//console.log(finalSales)
+		this.$store.dispatch("TechnicianSales/addTechnicianSale",
+		  { transactions: finalSales, date: this.date }).
+		  then(() => {
+
+		  })
 	  },
 	},
   }

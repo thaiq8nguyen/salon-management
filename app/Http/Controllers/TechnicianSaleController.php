@@ -25,10 +25,10 @@ class TechnicianSaleController extends BaseController
 
     public function addTechnicianSale(Request $request)
     {
-        $newTechnicianSale = $this->technicianSale->addTechnicianSale($request->all());
+        $technicianSales = $this->technicianSale->addTechnicianSale($request->all());
 
-        return $this->sendResponse(['name' => 'newTechnicianSale', 'value' => $newTechnicianSale]);
-        //return $this->sendResponse(['name' => 'hello', 'value' => 'world']);
+        return $this->sendResponse(['name' => 'allTechnicianSales', 'value' => $technicianSales]);
+
     }
 
     public function updateTechnicianSale($saleId, Request $request)

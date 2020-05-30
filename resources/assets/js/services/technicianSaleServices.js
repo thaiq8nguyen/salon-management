@@ -1,14 +1,24 @@
 import { authClient } from "Services/apiClient";
 
 const getAllTechnicianSales = (date) => {
-  return authClient.get(`/sales/technicians?date=${date}`);
+  return authClient.get(`/technicians/sales?date=${date}`);
 };
 
-const addTechnicianSale = (sale) => {
-  return authClient.post("/sales/technicians", sale);
+const addTechnicianSales = (sales) => {
+  return authClient.post("/technicians/sales", sales);
+};
+
+const updateTechnicianSale = (saleId, sale) => {
+  return authClient.put(`/technicians/sales/${saleId}`, sale);
+};
+
+const deleteTechnicianSale = (saleId) => {
+  return authClient.delete(`/technicians/sales/${saleId}`);
 };
 
 export default {
   getAllTechnicianSales,
-  addTechnicianSale
+  addTechnicianSales,
+  updateTechnicianSale,
+  deleteTechnicianSale
 };

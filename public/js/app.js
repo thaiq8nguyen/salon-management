@@ -2851,10 +2851,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2894,6 +2894,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UpdateTechnicianSaleDialog",
+  props: ['open'],
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Components_TechnicianSales_UpdateTechnicianSaleDialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/TechnicianSales/UpdateTechnicianSaleDialog */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue");
 //
 //
 //
@@ -2912,13 +2934,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
   props: ["technicians", "date"],
+  components: {
+    UpdateTechnicianSaleDialog: Components_TechnicianSales_UpdateTechnicianSaleDialog__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       stagingSales: [],
-      saleDate: this.date
+      saleDate: this.date,
+      updatingSale: "",
+      updateDialog: false,
+      deleteDialog: false
     };
   },
   computed: {},
@@ -2944,12 +3006,12 @@ __webpack_require__.r(__webpack_exports__);
         return !_this.technicians.sales.some(function (sale) {
           return sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount && sale.tip === stagingSale.tipAmount;
         });
-      });
-      console.log(finalSales); // this.$store.dispatch("TechnicianSales/addTechnicianSale",
-      //   { transactions: finalSales, date: this.date }).
-      //   then(() => {
-      //
-      //   })
+      }); //console.log(finalSales)
+
+      this.$store.dispatch("TechnicianSales/addTechnicianSale", {
+        transactions: finalSales,
+        date: this.date
+      }).then(function () {});
     }
   }
 });
@@ -3248,7 +3310,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Components_DatePicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/DatePicker */ "./resources/assets/js/components/DatePicker.vue");
-/* harmony import */ var Components_TechnicianSales__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Components/TechnicianSales */ "./resources/assets/js/components/TechnicianSales.vue");
+/* harmony import */ var Components_TechnicianSales_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Components/TechnicianSales/index */ "./resources/assets/js/components/TechnicianSales/index.vue");
 //
 //
 //
@@ -3276,14 +3338,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Sales",
   components: {
-    TechnicianSales: Components_TechnicianSales__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TechnicianSales: Components_TechnicianSales_index__WEBPACK_IMPORTED_MODULE_1__["default"],
     DatePicker: Components_DatePicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: [],
   data: function data() {
     return {
-      date: "2020-05-24" //this.$moment().format("YYYY-MM-DD"),
-
+      date: this.$moment().format("YYYY-MM-DD")
     };
   },
   computed: {
@@ -13370,10 +13431,119 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "update-technician-sale-dialog" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.open,
+            callback: function($$v) {
+              _vm.open = $$v
+            },
+            expression: "open"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [_vm._v("Update")]),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            [
+                              _c(
+                                "v-list-item",
+                                [
+                                  _c("v-list-item-title", [_vm._v("Sale")]),
+                                  _vm._v(" "),
+                                  _c("v-list-item-subtitle")
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item",
+                                [
+                                  _c("v-list-item-title", [_vm._v("Tip")]),
+                                  _vm._v(" "),
+                                  _c("v-list-item-subtitle")
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            [
+                              _c("v-text-field", { attrs: { label: "Sale" } }),
+                              _vm._v(" "),
+                              _c("v-text-field", { attrs: { label: "Tip" } })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-card-actions", [_c("v-btn", [_vm._v("Update")])], 1)
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13415,7 +13585,17 @@ var render = function() {
                                 ? _c(
                                     "span",
                                     [
-                                      _c("v-icon", [_vm._v("mdi-pencil")]),
+                                      _c(
+                                        "v-icon",
+                                        {
+                                          on: {
+                                            click: function($event) {
+                                              _vm.updateDialog = true
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("mdi-pencil")]
+                                      ),
                                       _vm._v(" "),
                                       _c("v-icon", [_vm._v("mdi-delete")])
                                     ],
@@ -13555,7 +13735,11 @@ var render = function() {
             { staticClass: "d-flex justify-center", attrs: { flat: "" } },
             [_c("v-btn", { on: { click: _vm.submit } }, [_vm._v("Submit")])],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("update-technician-sale-dialog", {
+            attrs: { open: _vm.updateDialog, sale: _vm.updatingSale }
+          })
         ],
         1
       )
@@ -72483,18 +72667,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales.vue":
-/*!************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales.vue ***!
-  \************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue":
+/*!***************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true& */ "./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true&");
-/* harmony import */ var _TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TechnicianSales.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&");
+/* harmony import */ var _UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -72503,50 +72687,119 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "6114d5be",
+  "81cf784c",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/assets/js/components/TechnicianSales.vue"
+component.options.__file = "resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnicianSales.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true& ***!
-  \*******************************************************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& ***!
+  \**********************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales.vue?vue&type=template&id=6114d5be&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_6114d5be_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/TechnicianSales/index.vue":
+/*!******************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/index.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=eca80238&scoped=true& */ "./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "eca80238",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/TechnicianSales/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=eca80238&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/index.vue?vue&type=template&id=eca80238&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_eca80238_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -73177,16 +73430,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var getAllTechnicianSales = function getAllTechnicianSales(date) {
-  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/sales/technicians?date=".concat(date));
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/technicians/sales?date=".concat(date));
 };
 
-var addTechnicianSale = function addTechnicianSale(sale) {
-  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/sales/technicians", sale);
+var addTechnicianSales = function addTechnicianSales(sales) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/technicians/sales", sales);
+};
+
+var updateTechnicianSale = function updateTechnicianSale(saleId, sale) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].put("/technicians/sales/".concat(saleId), sale);
+};
+
+var deleteTechnicianSale = function deleteTechnicianSale(saleId) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"]["delete"]("/technicians/sales/".concat(saleId));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   getAllTechnicianSales: getAllTechnicianSales,
-  addTechnicianSale: addTechnicianSale
+  addTechnicianSales: addTechnicianSales,
+  updateTechnicianSale: updateTechnicianSale,
+  deleteTechnicianSale: deleteTechnicianSale
 });
 
 /***/ }),
@@ -73445,9 +73708,8 @@ __webpack_require__.r(__webpack_exports__);
   addTechnicianSale: function addTechnicianSale(_ref2, sale) {
     var commit = _ref2.commit;
     return new Promise(function (resolve, reject) {
-      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnicianSale(sale).then(function (response) {
-        //commit("SET_TECHNICIAN_SALES", response.data.technicianSale);
-        console.log(response);
+      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnicianSales(sale).then(function (response) {
+        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -73518,7 +73780,7 @@ __webpack_require__.r(__webpack_exports__);
   SET_ALL_TECHNICIAN_SALES: function SET_ALL_TECHNICIAN_SALES(state, allTechnicianSales) {
     state.allTechnicianSales = allTechnicianSales;
   },
-  SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSale) {
+  SET_TECHNICIAN_SALE: function SET_TECHNICIAN_SALE(state, technicianSale) {
     state.technicianSale = technicianSale;
   }
 });

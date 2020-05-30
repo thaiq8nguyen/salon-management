@@ -22,7 +22,7 @@
 
 <script>
   import DatePicker from "Components/DatePicker"
-  import TechnicianSales from "Components/TechnicianSales"
+  import TechnicianSales from "Components/TechnicianSales/index"
 
 
   export default {
@@ -32,7 +32,7 @@
 
 	data () {
 	  return {
-		date: "2020-05-24"//this.$moment().format("YYYY-MM-DD"),
+		date: this.$moment().format("YYYY-MM-DD"),
 	  }
 
 	},

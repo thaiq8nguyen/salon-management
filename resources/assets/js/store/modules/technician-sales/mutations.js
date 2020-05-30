@@ -3,7 +3,7 @@ export default {
     state.allTechnicianSales = allTechnicianSales;
   },
 
-  SET_TECHNICIAN_SALES(state, technicianSale) {
+  SET_TECHNICIAN_SALE(state, technicianSale) {
     state.technicianSale = technicianSale;
   }
 };

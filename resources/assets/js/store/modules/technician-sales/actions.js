@@ -18,10 +18,9 @@ export default {
 
   addTechnicianSale({ commit }, sale) {
     return new Promise((resolve, reject) => {
-      return TechnicianSaleServices.addTechnicianSale(sale)
+      return TechnicianSaleServices.addTechnicianSales(sale)
         .then((response) => {
-          //commit("SET_TECHNICIAN_SALES", response.data.technicianSale);
-          console.log(response);
+          commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
         })
         .catch((errors) => {
           if (errors.response) {

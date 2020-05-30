@@ -34,10 +34,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/technicians/{id}', 'TechnicianController@delete');
 
     // Technician Sales CRUD
-    Route::get('/sales/technicians', 'TechnicianSaleController@getTechnicianSales');
-    Route::post('/sales/technicians', 'TechnicianSaleController@addTechnicianSale');
-    Route::put('/technician-sales/{saleId}', 'TechnicianSaleController@updateTechnicianSale');
-    Route::delete('/technician-sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');
+    Route::get('/technicians/sales', 'TechnicianSaleController@getTechnicianSales');
+    Route::post('/technicians/sales', 'TechnicianSaleController@addTechnicianSale');
+    Route::put('/technicians/sales/{saleId}', 'TechnicianSaleController@updateTechnicianSale');
+    Route::delete('/technicians/sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');
 
     // PayPeriod CRUD
     Route::get('/pay-periods/', 'PayPeriodController@getPayPeriod');
