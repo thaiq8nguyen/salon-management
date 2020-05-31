@@ -8,7 +8,7 @@
 							<span>{{technician.fullName}}</span>
 							<span v-if="technician.sale > 0">
 
-							<v-icon @click="updateDialog = true">mdi-pencil</v-icon>
+							<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
 							<v-icon>mdi-delete</v-icon>
 						</span>
 
@@ -74,6 +74,7 @@
 		this.stagingSales = technicians.sales.map(technician => {
 		  return {
 			technicianId: technician.technicianId,
+		    saleId: technician.saleId,
 			saleAmount: technician.sale,
 			tipAmount: technician.tip,
 		  }
@@ -81,6 +82,10 @@
 	  },
 	},
 	methods: {
+	  setUpdatingSale (index){
+		this.updatingSale =  this.stagingSales[index];
+		this.updateDialog = true;
+	  },
 	  submit () {
 		const finalSales = this.stagingSales.filter(stagingSale => {
 		  return !this.technicians.sales.some(

@@ -20,12 +20,12 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             }
         ])->get();
 
-        $sales = $technicians->map(function($technician){
-            $sale = $technician->sales->filter(function($transaction){
+        $sales = $technicians->map(function ($technician) {
+            $sale = $technician->sales->filter(function ($transaction) {
                 return $transaction->name == 'technician sales';
             })->first();
 
-            $tip = $technician->sales->filter(function($transaction){
+            $tip = $technician->sales->filter(function ($transaction) {
                 return $transaction->name == 'technician tips';
             })->first();
             return [
@@ -33,6 +33,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 'firstName' => $technician->first_name,
                 'lastName' => $technician->last_name,
                 'fullName' => $technician->full_name,
+                'saleId' => $sale ? $sale->id : null,
                 'sale' => $sale ? $sale->credit : 0,
                 'tip' => $tip ? $tip->credit : 0,
 
@@ -46,8 +47,8 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
     public function addTechnicianSale($sale)
     {
 
-        foreach ($sale['transactions'] as $transaction){
-            if($transaction['saleAmount']){
+        foreach ($sale['transactions'] as $transaction) {
+            if ($transaction['saleAmount']) {
                 $saleAccount = TechnicianAccount::where([
                     ['technician_id', $transaction['technicianId']],
                     ['name', 'sales']
@@ -61,7 +62,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 ]);
             }
 
-            if($transaction['tipAmount']){
+            if ($transaction['tipAmount']) {
 
                 $tipAccount = TechnicianAccount::where([
                     ['technician_id', $transaction['technicianId']],
@@ -74,8 +75,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                     'credit' => $transaction['tipAmount'],
                 ]);
             }
-
-
 
         }
 

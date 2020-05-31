@@ -2894,14 +2894,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UpdateTechnicianSaleDialog",
-  props: ['open'],
+  props: ["open", "sale"],
   data: function data() {
-    return {};
+    return {
+      saleId: "",
+      updating: {
+        saleAmount: "",
+        tipAmount: ""
+      }
+    };
   },
   computed: {},
-  methods: {}
+  watch: {
+    sale: function sale(_sale) {
+      this.saleId = _sale.saleId;
+    }
+  },
+  methods: {
+    update: function update() {
+      this.$store.dispatch("Technicians/updateTechnician", {
+        saleId: this.saleId,
+        sale: this.updating
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2992,6 +3030,7 @@ __webpack_require__.r(__webpack_exports__);
       this.stagingSales = _technicians.sales.map(function (technician) {
         return {
           technicianId: technician.technicianId,
+          saleId: technician.saleId,
           saleAmount: technician.sale,
           tipAmount: technician.tip
         };
@@ -2999,6 +3038,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    setUpdatingSale: function setUpdatingSale(index) {
+      this.updatingSale = this.stagingSales[index];
+      this.updateDialog = true;
+    },
     submit: function submit() {
       var _this = this;
 
@@ -13480,12 +13523,16 @@ var render = function() {
                           _c(
                             "v-col",
                             [
+                              _c("h3", [_vm._v("Current Sale & Tip")]),
+                              _vm._v(" "),
                               _c(
                                 "v-list-item",
                                 [
                                   _c("v-list-item-title", [_vm._v("Sale")]),
                                   _vm._v(" "),
-                                  _c("v-list-item-subtitle")
+                                  _c("v-list-item-subtitle", [
+                                    _vm._v("$ " + _vm._s(_vm.sale.saleAmount))
+                                  ])
                                 ],
                                 1
                               ),
@@ -13495,7 +13542,9 @@ var render = function() {
                                 [
                                   _c("v-list-item-title", [_vm._v("Tip")]),
                                   _vm._v(" "),
-                                  _c("v-list-item-subtitle")
+                                  _c("v-list-item-subtitle", [
+                                    _vm._v("$ " + _vm._s(_vm.sale.tipAmount))
+                                  ])
                                 ],
                                 1
                               )
@@ -13506,9 +13555,91 @@ var render = function() {
                           _c(
                             "v-col",
                             [
-                              _c("v-text-field", { attrs: { label: "Sale" } }),
+                              _c("h3", [_vm._v("New Sale & Tip")]),
                               _vm._v(" "),
-                              _c("v-text-field", { attrs: { label: "Tip" } })
+                              _c(
+                                "v-list",
+                                [
+                                  _c(
+                                    "v-list-item",
+                                    [
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: { label: "Sale" },
+                                            model: {
+                                              value: _vm.updating.saleAmount,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.updating,
+                                                  "saleAmount",
+                                                  _vm._n($$v)
+                                                )
+                                              },
+                                              expression: "updating.saleAmount"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { small: "" } },
+                                            [_vm._v("Update")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list-item",
+                                    [
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: { label: "Tip" },
+                                            model: {
+                                              value: _vm.updating.tipAmount,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.updating,
+                                                  "tipAmount",
+                                                  _vm._n($$v)
+                                                )
+                                              },
+                                              expression: "updating.tipAmount"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { small: "" } },
+                                            [_vm._v("Update")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
@@ -13517,9 +13648,7 @@ var render = function() {
                       )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("v-card-actions", [_c("v-btn", [_vm._v("Update")])], 1)
+                  )
                 ],
                 1
               )
@@ -13590,7 +13719,7 @@ var render = function() {
                                         {
                                           on: {
                                             click: function($event) {
-                                              _vm.updateDialog = true
+                                              return _vm.setUpdatingSale(index)
                                             }
                                           }
                                         },
