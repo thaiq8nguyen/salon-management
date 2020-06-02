@@ -6,7 +6,7 @@
 					<v-card>
 						<v-card-title class="d-flex justify-space-between">
 							<span>{{technician.fullName}}</span>
-							<span v-if="technician.sale > 0">
+							<span v-if="technician.sale">
 
 							<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
 							<v-icon>mdi-delete</v-icon>
@@ -14,7 +14,7 @@
 
 						</v-card-title>
 						<v-card-text>
-							<v-row v-if="technician.sale > 0">
+							<v-row v-if="technician.sale">
 								<v-col>
 									<v-list-item>
 										<v-list-item-title>Sale</v-list-item-title>
@@ -45,7 +45,7 @@
 		<v-toolbar flat class="d-flex justify-center">
 			<v-btn @click="submit">Submit</v-btn>
 		</v-toolbar>
-		<update-technician-sale-dialog :open="updateDialog" :sale="updatingSale"></update-technician-sale-dialog>
+		<update-technician-sale-dialog :open="updateDialog" :transaction="updatingSale" @close="updateDialog = false"></update-technician-sale-dialog>
 	</div>
 </template>
 
@@ -74,9 +74,10 @@
 		this.stagingSales = technicians.sales.map(technician => {
 		  return {
 			technicianId: technician.technicianId,
-		    saleId: technician.saleId,
-			saleAmount: technician.sale,
-			tipAmount: technician.tip,
+		    saleId: technician.sale ? technician.sale.id : null,
+		    tipId: technician.tip ? technician.tip.id : null,
+			saleAmount: technician.sale ? technician.sale.amount : 0,
+			tipAmount: technician.tip ? technician.tip.amount : 0,
 		  }
 		})
 	  },

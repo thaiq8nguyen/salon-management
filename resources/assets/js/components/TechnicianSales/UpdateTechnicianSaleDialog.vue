@@ -2,49 +2,52 @@
 	<div id="update-technician-sale-dialog">
 		<v-dialog v-model="open" width="500">
 			<v-card>
-				<v-card-title>Update</v-card-title>
+				<v-card-title>Update Sale & Tip</v-card-title>
 				<v-form>
 					<v-card-text>
 						<v-row>
-							<v-col>
-								<h3>Current Sale & Tip</h3>
+							<v-col cols="4">
+								<h3>Current</h3>
 								<v-list-item>
 									<v-list-item-title>Sale</v-list-item-title>
-									<v-list-item-subtitle>$ {{sale.saleAmount}}</v-list-item-subtitle>
+									<v-list-item-subtitle>$ {{transaction.saleAmount}}</v-list-item-subtitle>
 								</v-list-item>
 								<v-list-item>
 									<v-list-item-title>Tip</v-list-item-title>
-									<v-list-item-subtitle>$ {{sale.tipAmount}}</v-list-item-subtitle>
+									<v-list-item-subtitle>$ {{transaction.tipAmount}}</v-list-item-subtitle>
 								</v-list-item>
 							</v-col>
+						</v-row>
+						<v-row>
 							<v-col>
-								<h3>New Sale & Tip</h3>
+								<h3>New</h3>
 								<v-list>
 									<v-list-item>
 										<v-list-item-content>
-											<v-text-field label="Sale"
-											              v-model.number="updating.saleAmount"></v-text-field>
+											<v-text-field label="Sale" v-model="saleAmount"></v-text-field>
 										</v-list-item-content>
 										<v-list-item-action>
-											<v-btn small>Update</v-btn>
+											<v-list-item-group>
+												<v-btn small style="margin-right: 5px" @click="update('sale')">Update</v-btn>
+												<v-btn small>Delete</v-btn>
+											</v-list-item-group>
 										</v-list-item-action>
 									</v-list-item>
 									<v-list-item>
 										<v-list-item-content>
-											<v-text-field label="Tip"
-											              v-model.number="updating.tipAmount"></v-text-field>
+											<v-text-field label="Tip" v-model="tipAmount"></v-text-field>
 										</v-list-item-content>
 										<v-list-item-action>
-											<v-btn small>Update</v-btn>
+											<v-list-item-group>
+												<v-btn small style="margin-right: 5px" @click="update('tip')">Update</v-btn>
+												<v-btn small>Delete</v-btn>
+											</v-list-item-group>
 										</v-list-item-action>
 									</v-list-item>
 								</v-list>
-
-
 							</v-col>
 						</v-row>
 					</v-card-text>
-
 				</v-form>
 
 			</v-card>
@@ -55,28 +58,46 @@
 <script>
   export default {
 	name: "UpdateTechnicianSaleDialog",
-	props: ["open", "sale"],
+	props: ["open", "transaction"],
 	data () {
 	  return {
-		saleId: "",
-		updating: {
 
-		  saleAmount: "",
-		  tipAmount: "",
-		},
+		saleAmount: "",
+		tipAmount: "",
 
 	  }
 	},
-	computed: {},
-	watch: {
-	  sale (sale) {
-		this.saleId = sale.saleId
+	computed: {
+	  saleTransaction () {
+		let result = null
+		if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
+		  result = { transactionId: this.transaction.saleId, amount: this.saleAmount }
+		}
+
+		return result
+
+	  },
+	  tipTransaction () {
+		let result = null
+		if (this.tipAmount > 0 && this.tipAmount !== this.transaction.tipAmount) {
+		  result = { transactionId: this.transaction.tipId, amount: this.tipAmount }
+		}
+
+		return result
+
 	  },
 
 	},
 	methods: {
-	  update () {
-		this.$store.dispatch("Technicians/updateTechnician", { saleId: this.saleId, sale: this.updating })
+	  update (transaction) {
+		let updateTransaction = this.saleTransaction;
+		if(transaction === "tip"){
+		  updateTransaction = this.tipTransaction
+		}
+		//console.log(transactions);
+		this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(() => {
+		  this.$emit("close")
+		})
 
 	  },
 

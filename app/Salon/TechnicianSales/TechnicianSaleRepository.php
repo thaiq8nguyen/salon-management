@@ -11,14 +11,25 @@ use App\TransactionItem;
 
 class TechnicianSaleRepository implements TechnicianSaleInterface
 {
-    public function getTechnicianSales($date)
+    public function getTechnicianSales($technicianId = null ,$date)
     {
+        $technicians = null;
 
         $technicians = Technician::with([
             'sales' => function ($query) use ($date) {
                 $query->where('date', $date);
             }
         ])->get();
+
+        if(!empty($technicianId)){
+            $technicians = Technician::with([
+                'sales' => function ($query) use ($date) {
+                    $query->where('date', $date);
+                }
+            ])->where('id', $technicianId)->get();
+        }
+
+
 
         $sales = $technicians->map(function ($technician) {
             $sale = $technician->sales->filter(function ($transaction) {
@@ -33,9 +44,8 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 'firstName' => $technician->first_name,
                 'lastName' => $technician->last_name,
                 'fullName' => $technician->full_name,
-                'saleId' => $sale ? $sale->id : null,
-                'sale' => $sale ? $sale->credit : 0,
-                'tip' => $tip ? $tip->credit : 0,
+                'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit]:null,
+                'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit]:null,
 
             ];
         });
@@ -78,17 +88,19 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
         }
 
-        return $this->getTechnicianSales($sale['date']);
+        return $this->getTechnicianSales(null, $sale['date']);
 
     }
 
-    public function updateTechnicianSale($saleId, $sale)
+    public function updateTechnicianSale($saleId, $amount)
     {
         $transaction = Transaction::find($saleId);
-        $transaction->credit = $sale['credit'];
+        $transaction->credit = $amount;
         $transaction->save();
 
-        return Transaction::find($saleId);
+        $technicianAccount = TechnicianAccount::find($transaction->transactionable_id);
+
+        return $this->getTechnicianSales($technicianAccount->technician_id, $transaction->date);
 
     }
 
@@ -104,4 +116,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
         return true;
 
     }
+
+
 }

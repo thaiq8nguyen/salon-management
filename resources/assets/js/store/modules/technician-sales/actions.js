@@ -28,5 +28,22 @@ export default {
           }
         });
     });
+  },
+
+  updateTechnicianSale({ commit }, sale) {
+    return new Promise((resolve, reject) => {
+      return TechnicianSaleServices.updateTechnicianSale(
+        sale.transactionId,
+        sale.amount
+      )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
   }
 };

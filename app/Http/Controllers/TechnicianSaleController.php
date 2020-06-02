@@ -17,7 +17,7 @@ class TechnicianSaleController extends BaseController
 
     public function getTechnicianSales(Request $request)
     {
-        $technicianSales = $this->technicianSale->getTechnicianSales($request->query('date'));
+        $technicianSales = $this->technicianSale->getTechnicianSales(null,$request->query('date'));
 
         return $this->sendResponse(['name' => 'allTechnicianSales', 'value' => $technicianSales]);
     }
@@ -33,9 +33,9 @@ class TechnicianSaleController extends BaseController
 
     public function updateTechnicianSale($saleId, Request $request)
     {
-        $updatedSale = $this->technicianSale->updateTechnicianSale( $saleId, $request->all());
+        $updatedSale = $this->technicianSale->updateTechnicianSale($saleId, $request->input('amount'));
 
-        return $this->sendResponse(['name' => 'update_technician_sale', 'value' =>$updatedSale]);
+        return $this->sendResponse(['name' => 'updateTechnicianSale', 'value' =>$updatedSale]);
     }
 
     public function deleteTechnicianSale($saleId)
