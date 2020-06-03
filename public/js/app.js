@@ -2851,15 +2851,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2918,7 +2929,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "UpdateTechnicianSaleDialog",
+  name: "UpdateTechnicianSaleModal",
   props: ["open", "transaction"],
   data: function data() {
     return {
@@ -2953,18 +2964,30 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    update: function update(transaction) {
+    updateTransaction: function updateTransaction(transaction) {
       var _this = this;
 
       var updateTransaction = this.saleTransaction;
 
       if (transaction === "tip") {
         updateTransaction = this.tipTransaction;
-      } //console.log(transactions);
-
+      }
 
       this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(function () {
         _this.$emit("close");
+      });
+    },
+    deleteTransaction: function deleteTransaction(transaction) {
+      var _this2 = this;
+
+      var deleteTransactionId = this.transaction.saleId;
+
+      if (transaction === "tip") {
+        deleteTransactionId = this.transaction.tipId;
+      }
+
+      this.$store.dispatch("TechnicianSales/deleteTechnicianSale", deleteTransactionId).then(function () {
+        _this2.$emit("close");
       });
     }
   }
@@ -2981,7 +3004,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var Components_TechnicianSales_UpdateTechnicianSaleDialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/TechnicianSales/UpdateTechnicianSaleDialog */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue");
+/* harmony import */ var Components_TechnicianSales_UpdateTechnicianSaleModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/TechnicianSales/UpdateTechnicianSaleModal */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue");
 //
 //
 //
@@ -3038,24 +3061,17 @@ __webpack_require__.r(__webpack_exports__);
   name: "TechnicianSales",
   props: ["technicians", "date"],
   components: {
-    UpdateTechnicianSaleDialog: Components_TechnicianSales_UpdateTechnicianSaleDialog__WEBPACK_IMPORTED_MODULE_0__["default"]
+    UpdateTechnicianSaleModal: Components_TechnicianSales_UpdateTechnicianSaleModal__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      stagingSales: [],
-      saleDate: this.date,
       updatingSale: "",
-      updateDialog: false,
-      deleteDialog: false
+      updateDialog: false
     };
   },
-  computed: {},
-  watch: {
-    date: function date(newDate) {
-      this.saleDate = newDate;
-    },
-    technicians: function technicians(_technicians) {
-      this.stagingSales = _technicians.sales.map(function (technician) {
+  computed: {
+    stagingSales: function stagingSales() {
+      return this.technicians.sales.map(function (technician) {
         return {
           technicianId: technician.technicianId,
           saleId: technician.sale ? technician.sale.id : null,
@@ -3064,24 +3080,26 @@ __webpack_require__.r(__webpack_exports__);
           tipAmount: technician.tip ? technician.tip.amount : 0
         };
       });
+    },
+    newSales: function newSales() {
+      var _this = this;
+
+      return this.stagingSales.filter(function (stagingSale) {
+        return !_this.technicians.sales.some(function (sale) {
+          return sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount && sale.tip === stagingSale.tipAmount;
+        });
+      });
     }
   },
+  watch: {},
   methods: {
     setUpdatingSale: function setUpdatingSale(index) {
       this.updatingSale = this.stagingSales[index];
       this.updateDialog = true;
     },
     submit: function submit() {
-      var _this = this;
-
-      var finalSales = this.stagingSales.filter(function (stagingSale) {
-        return !_this.technicians.sales.some(function (sale) {
-          return sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount && sale.tip === stagingSale.tipAmount;
-        });
-      }); //console.log(finalSales)
-
       this.$store.dispatch("TechnicianSales/addTechnicianSale", {
-        transactions: finalSales,
+        transactions: this.newSales,
         date: this.date
       }).then(function () {});
     }
@@ -13503,10 +13521,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13551,34 +13569,104 @@ var render = function() {
                         [
                           _c(
                             "v-col",
-                            { attrs: { cols: "4" } },
                             [
                               _c("h3", [_vm._v("Current")]),
                               _vm._v(" "),
                               _c(
-                                "v-list-item",
+                                "v-list",
                                 [
-                                  _c("v-list-item-title", [_vm._v("Sale")]),
+                                  _c(
+                                    "v-list-item",
+                                    [
+                                      _c(
+                                        "v-list-item-content",
+                                        { staticClass: "d-flex" },
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v("Sale")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-list-item-subtitle", [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  _vm.transaction.saleAmount
+                                                )
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteTransaction(
+                                                    "sale"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Delete")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
                                   _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "$ " + _vm._s(_vm.transaction.saleAmount)
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item",
-                                [
-                                  _c("v-list-item-title", [_vm._v("Tip")]),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "$ " + _vm._s(_vm.transaction.tipAmount)
-                                    )
-                                  ])
+                                  _c(
+                                    "v-list-item",
+                                    [
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v("Tip")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-list-item-subtitle", [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  _vm.transaction.tipAmount
+                                                )
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteTransaction(
+                                                    "tip"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Delete")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
@@ -13624,31 +13712,22 @@ var render = function() {
                                         "v-list-item-action",
                                         [
                                           _c(
-                                            "v-list-item-group",
+                                            "v-btn",
+                                            {
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.updateTransaction(
+                                                    "sale"
+                                                  )
+                                                }
+                                              }
+                                            },
                                             [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticStyle: {
-                                                    "margin-right": "5px"
-                                                  },
-                                                  attrs: { small: "" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.update("sale")
-                                                    }
-                                                  }
-                                                },
-                                                [_vm._v("Update")]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                { attrs: { small: "" } },
-                                                [_vm._v("Delete")]
+                                              _vm._v(
+                                                "Update\n\t\t\t\t\t\t\t\t\t\t"
                                               )
-                                            ],
-                                            1
+                                            ]
                                           )
                                         ],
                                         1
@@ -13681,31 +13760,22 @@ var render = function() {
                                         "v-list-item-action",
                                         [
                                           _c(
-                                            "v-list-item-group",
+                                            "v-btn",
+                                            {
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.updateTransaction(
+                                                    "tip"
+                                                  )
+                                                }
+                                              }
+                                            },
                                             [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticStyle: {
-                                                    "margin-right": "5px"
-                                                  },
-                                                  attrs: { small: "" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.update("tip")
-                                                    }
-                                                  }
-                                                },
-                                                [_vm._v("Update")]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                { attrs: { small: "" } },
-                                                [_vm._v("Delete")]
+                                              _vm._v(
+                                                "Update\n\t\t\t\t\t\t\t\t\t\t"
                                               )
-                                            ],
-                                            1
+                                            ]
                                           )
                                         ],
                                         1
@@ -13800,9 +13870,7 @@ var render = function() {
                                           }
                                         },
                                         [_vm._v("mdi-pencil")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("v-icon", [_vm._v("mdi-delete")])
+                                      )
                                     ],
                                     1
                                   )
@@ -13942,7 +14010,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("update-technician-sale-dialog", {
+          _c("update-technician-sale-modal", {
             attrs: { open: _vm.updateDialog, transaction: _vm.updatingSale },
             on: {
               close: function($event) {
@@ -71524,6 +71592,118 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/vuetify/lib/util/console.js":
+/*!**************************************************!*\
+  !*** ./node_modules/vuetify/lib/util/console.js ***!
+  \**************************************************/
+/*! exports provided: consoleInfo, consoleWarn, consoleError, deprecate, breaking, removed */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleInfo", function() { return consoleInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleWarn", function() { return consoleWarn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleError", function() { return consoleError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deprecate", function() { return deprecate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "breaking", function() { return breaking; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removed", function() { return removed; });
+function createMessage(message, vm, parent) {
+  if (parent) {
+    vm = {
+      _isVue: true,
+      $parent: parent,
+      $options: vm
+    };
+  }
+
+  if (vm) {
+    // Only show each message once per instance
+    vm.$_alreadyWarned = vm.$_alreadyWarned || [];
+    if (vm.$_alreadyWarned.includes(message)) return;
+    vm.$_alreadyWarned.push(message);
+  }
+
+  return `[Vuetify] ${message}` + (vm ? generateComponentTrace(vm) : '');
+}
+
+function consoleInfo(message, vm, parent) {
+  const newMessage = createMessage(message, vm, parent);
+  newMessage != null && console.info(newMessage);
+}
+function consoleWarn(message, vm, parent) {
+  const newMessage = createMessage(message, vm, parent);
+  newMessage != null && console.warn(newMessage);
+}
+function consoleError(message, vm, parent) {
+  const newMessage = createMessage(message, vm, parent);
+  newMessage != null && console.error(newMessage);
+}
+function deprecate(original, replacement, vm, parent) {
+  consoleWarn(`[UPGRADE] '${original}' is deprecated, use '${replacement}' instead.`, vm, parent);
+}
+function breaking(original, replacement, vm, parent) {
+  consoleError(`[BREAKING] '${original}' has been removed, use '${replacement}' instead. For more information, see the upgrade guide https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide`, vm, parent);
+}
+function removed(original, vm, parent) {
+  consoleWarn(`[REMOVED] '${original}' has been removed. You can safely omit it.`, vm, parent);
+}
+/**
+ * Shamelessly stolen from vuejs/vue/blob/dev/src/core/util/debug.js
+ */
+
+const classifyRE = /(?:^|[-_])(\w)/g;
+
+const classify = str => str.replace(classifyRE, c => c.toUpperCase()).replace(/[-_]/g, '');
+
+function formatComponentName(vm, includeFile) {
+  if (vm.$root === vm) {
+    return '<Root>';
+  }
+
+  const options = typeof vm === 'function' && vm.cid != null ? vm.options : vm._isVue ? vm.$options || vm.constructor.options : vm || {};
+  let name = options.name || options._componentTag;
+  const file = options.__file;
+
+  if (!name && file) {
+    const match = file.match(/([^/\\]+)\.vue$/);
+    name = match && match[1];
+  }
+
+  return (name ? `<${classify(name)}>` : `<Anonymous>`) + (file && includeFile !== false ? ` at ${file}` : '');
+}
+
+function generateComponentTrace(vm) {
+  if (vm._isVue && vm.$parent) {
+    const tree = [];
+    let currentRecursiveSequence = 0;
+
+    while (vm) {
+      if (tree.length > 0) {
+        const last = tree[tree.length - 1];
+
+        if (last.constructor === vm.constructor) {
+          currentRecursiveSequence++;
+          vm = vm.$parent;
+          continue;
+        } else if (currentRecursiveSequence > 0) {
+          tree[tree.length - 1] = [last, currentRecursiveSequence];
+          currentRecursiveSequence = 0;
+        }
+      }
+
+      tree.push(vm);
+      vm = vm.$parent;
+    }
+
+    return '\n\nfound in\n\n' + tree.map((vm, i) => `${i === 0 ? '---> ' : ' '.repeat(5 + i * 2)}${Array.isArray(vm) ? `${formatComponentName(vm[0])}... (${vm[1]} recursive calls)` : formatComponentName(vm)}`).join('\n');
+  } else {
+    return `\n\n(found in ${formatComponentName(vm)})`;
+  }
+}
+//# sourceMappingURL=console.js.map
+
+/***/ }),
+
 /***/ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":
 /*!*************************************************************************!*\
   !*** ./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
@@ -72877,17 +73057,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue":
-/*!***************************************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue ***!
-  \***************************************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue ***!
+  \**************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&");
-/* harmony import */ var _UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true&");
+/* harmony import */ var _UpdateTechnicianSaleModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateTechnicianSaleModal.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -72897,50 +73077,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _UpdateTechnicianSaleModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "81cf784c",
+  "a9bfa0ea",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue"
+component.options.__file = "resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&":
-/*!**********************************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& ***!
-  \**********************************************************************************************************************************/
+/***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true& ***!
+  \*********************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleDialog.vue?vue&type=template&id=81cf784c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleDialog_vue_vue_type_template_id_81cf784c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateTechnicianSaleModal_vue_vue_type_template_id_a9bfa0ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -73647,8 +73827,10 @@ var addTechnicianSales = function addTechnicianSales(sales) {
   return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/technicians/sales", sales);
 };
 
-var updateTechnicianSale = function updateTechnicianSale(saleId, sale) {
-  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].put("/technicians/sales/".concat(saleId), sale);
+var updateTechnicianSale = function updateTechnicianSale(saleId, amount) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].put("/technicians/sales/".concat(saleId), {
+    amount: amount
+  });
 };
 
 var deleteTechnicianSale = function deleteTechnicianSale(saleId) {
@@ -73900,6 +74082,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/technicianSaleServices */ "./resources/assets/js/services/technicianSaleServices.js");
+/* harmony import */ var vuetify_lib_util_console__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuetify/lib/util/console */ "./node_modules/vuetify/lib/util/console.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   getAllTechnicianSales: function getAllTechnicianSales(_ref, date) {
@@ -73920,6 +74104,7 @@ __webpack_require__.r(__webpack_exports__);
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnicianSales(sale).then(function (response) {
         commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
+        resolve();
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -73931,7 +74116,22 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].updateTechnicianSale(sale.transactionId, sale.amount).then(function (response) {
-        console.log(response);
+        commit("UPDATE_TECHNICIAN_SALES", response.data.updateTechnicianSale);
+        resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  },
+  deleteTechnicianSale: function deleteTechnicianSale(_ref4, saleId) {
+    var commit = _ref4.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].deleteTechnicianSale(saleId).then(function (response) {
+        commit("UPDATE_TECHNICIAN_SALES", response.data.deleteTechnicianSale);
+        console.log(response.data);
+        resolve();
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -74002,8 +74202,11 @@ __webpack_require__.r(__webpack_exports__);
   SET_ALL_TECHNICIAN_SALES: function SET_ALL_TECHNICIAN_SALES(state, allTechnicianSales) {
     state.allTechnicianSales = allTechnicianSales;
   },
-  SET_TECHNICIAN_SALE: function SET_TECHNICIAN_SALE(state, technicianSale) {
-    state.technicianSale = technicianSale;
+  UPDATE_TECHNICIAN_SALES: function UPDATE_TECHNICIAN_SALES(state, technicianSale) {
+    var sale = technicianSale.sales[0];
+    state.allTechnicianSales.sales = state.allTechnicianSales.sales.map(function (technician) {
+      return technician.technicianId === sale.technicianId ? sale : technician;
+    });
   }
 });
 

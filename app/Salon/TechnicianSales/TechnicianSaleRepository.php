@@ -29,8 +29,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             ])->where('id', $technicianId)->get();
         }
 
-
-
         $sales = $technicians->map(function ($technician) {
             $sale = $technician->sales->filter(function ($transaction) {
                 return $transaction->name == 'technician sales';
@@ -39,6 +37,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             $tip = $technician->sales->filter(function ($transaction) {
                 return $transaction->name == 'technician tips';
             })->first();
+
             return [
                 'technicianId' => $technician->id,
                 'firstName' => $technician->first_name,
@@ -109,11 +108,15 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
         // find the deleting sale transaction
         $transaction = Transaction::find($saleId);
 
+        $technicianAccount = TechnicianAccount::find($transaction->transactionable_id);
+
         // delete the sale transaction
         if (!$transaction->delete()) {
             return false;
         }
-        return true;
+
+        return $this->getTechnicianSales($technicianAccount->technician_id, $transaction->date);
+
 
     }
 

@@ -8,8 +8,8 @@ const addTechnicianSales = (sales) => {
   return authClient.post("/technicians/sales", sales);
 };
 
-const updateTechnicianSale = (saleId, sale) => {
-  return authClient.put(`/technicians/sales/${saleId}`, sale);
+const updateTechnicianSale = (saleId, amount) => {
+  return authClient.put(`/technicians/sales/${saleId}`, { amount });
 };
 
 const deleteTechnicianSale = (saleId) => {

@@ -6,16 +6,31 @@
 				<v-form>
 					<v-card-text>
 						<v-row>
-							<v-col cols="4">
+							<v-col>
 								<h3>Current</h3>
-								<v-list-item>
-									<v-list-item-title>Sale</v-list-item-title>
-									<v-list-item-subtitle>$ {{transaction.saleAmount}}</v-list-item-subtitle>
-								</v-list-item>
-								<v-list-item>
-									<v-list-item-title>Tip</v-list-item-title>
-									<v-list-item-subtitle>$ {{transaction.tipAmount}}</v-list-item-subtitle>
-								</v-list-item>
+								<v-list>
+									<v-list-item>
+										<v-list-item-content class="d-flex">
+											<v-list-item-title>Sale</v-list-item-title>
+											<v-list-item-subtitle>$ {{transaction.saleAmount}}</v-list-item-subtitle>
+										</v-list-item-content>
+										<v-list-item-action>
+											<v-btn small @click="deleteTransaction('sale')">Delete</v-btn>
+										</v-list-item-action>
+
+									</v-list-item>
+									<v-list-item>
+										<v-list-item-content>
+											<v-list-item-title>Tip</v-list-item-title>
+											<v-list-item-subtitle>$ {{transaction.tipAmount}}</v-list-item-subtitle>
+
+										</v-list-item-content>
+										<v-list-item-action>
+											<v-btn small @click="deleteTransaction('tip')">Delete</v-btn>
+										</v-list-item-action>
+
+									</v-list-item>
+								</v-list>
 							</v-col>
 						</v-row>
 						<v-row>
@@ -27,10 +42,8 @@
 											<v-text-field label="Sale" v-model="saleAmount"></v-text-field>
 										</v-list-item-content>
 										<v-list-item-action>
-											<v-list-item-group>
-												<v-btn small style="margin-right: 5px" @click="update('sale')">Update</v-btn>
-												<v-btn small>Delete</v-btn>
-											</v-list-item-group>
+											<v-btn small @click="updateTransaction('sale')">Update
+											</v-btn>
 										</v-list-item-action>
 									</v-list-item>
 									<v-list-item>
@@ -38,10 +51,8 @@
 											<v-text-field label="Tip" v-model="tipAmount"></v-text-field>
 										</v-list-item-content>
 										<v-list-item-action>
-											<v-list-item-group>
-												<v-btn small style="margin-right: 5px" @click="update('tip')">Update</v-btn>
-												<v-btn small>Delete</v-btn>
-											</v-list-item-group>
+											<v-btn small @click="updateTransaction('tip')">Update
+											</v-btn>
 										</v-list-item-action>
 									</v-list-item>
 								</v-list>
@@ -57,7 +68,7 @@
 
 <script>
   export default {
-	name: "UpdateTechnicianSaleDialog",
+	name: "UpdateTechnicianSaleModal",
 	props: ["open", "transaction"],
 	data () {
 	  return {
@@ -89,13 +100,23 @@
 
 	},
 	methods: {
-	  update (transaction) {
-		let updateTransaction = this.saleTransaction;
-		if(transaction === "tip"){
+	  updateTransaction (transaction) {
+		let updateTransaction = this.saleTransaction
+		if (transaction === "tip") {
 		  updateTransaction = this.tipTransaction
 		}
-		//console.log(transactions);
 		this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(() => {
+		  this.$emit("close")
+		})
+
+	  },
+
+	  deleteTransaction (transaction) {
+		let deleteTransactionId = this.transaction.saleId
+		if (transaction === "tip") {
+		  deleteTransactionId = this.transaction.tipId
+		}
+		this.$store.dispatch("TechnicianSales/deleteTechnicianSale", deleteTransactionId).then(() => {
 		  this.$emit("close")
 		})
 

@@ -7,9 +7,8 @@
 						<v-card-title class="d-flex justify-space-between">
 							<span>{{technician.fullName}}</span>
 							<span v-if="technician.sale">
-
 							<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
-							<v-icon>mdi-delete</v-icon>
+
 						</span>
 
 						</v-card-title>
@@ -45,57 +44,53 @@
 		<v-toolbar flat class="d-flex justify-center">
 			<v-btn @click="submit">Submit</v-btn>
 		</v-toolbar>
-		<update-technician-sale-dialog :open="updateDialog" :transaction="updatingSale" @close="updateDialog = false"></update-technician-sale-dialog>
+		<update-technician-sale-modal :open="updateDialog" :transaction="updatingSale"
+		                              @close="updateDialog = false"></update-technician-sale-modal>
 	</div>
 </template>
 
 <script>
-  import UpdateTechnicianSaleDialog from "Components/TechnicianSales/UpdateTechnicianSaleDialog"
+  import UpdateTechnicianSaleModal from "Components/TechnicianSales/UpdateTechnicianSaleModal"
 
   export default {
 	name: "TechnicianSales",
 	props: ["technicians", "date"],
-    components: {UpdateTechnicianSaleDialog},
+	components: { UpdateTechnicianSaleModal },
 	data () {
 	  return {
-		stagingSales: [],
-		saleDate: this.date,
-	    updatingSale: "",
+		updatingSale: "",
 		updateDialog: false,
-		deleteDialog: false,
 	  }
 	},
-	computed: {},
-	watch: {
-	  date (newDate) {
-		this.saleDate = newDate
+	computed: {
+
+	  stagingSales () {
+		return (this.technicians.sales.map(technician => ({
+		  technicianId: technician.technicianId,
+		  saleId: technician.sale ? technician.sale.id : null,
+		  tipId: technician.tip ? technician.tip.id : null,
+		  saleAmount: technician.sale ? technician.sale.amount : 0,
+		  tipAmount: technician.tip ? technician.tip.amount : 0,
+		})))
 	  },
-	  technicians (technicians) {
-		this.stagingSales = technicians.sales.map(technician => {
-		  return {
-			technicianId: technician.technicianId,
-		    saleId: technician.sale ? technician.sale.id : null,
-		    tipId: technician.tip ? technician.tip.id : null,
-			saleAmount: technician.sale ? technician.sale.amount : 0,
-			tipAmount: technician.tip ? technician.tip.amount : 0,
-		  }
-		})
+	  newSales () {
+		return (this.stagingSales.filter(
+		  stagingSale => (!this.technicians.sales.some(
+			sale => (sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount &&
+			  sale.tip === stagingSale.tipAmount)))))
 	  },
-	},
+	}
+	,
+	watch: {},
 	methods: {
-	  setUpdatingSale (index){
-		this.updatingSale =  this.stagingSales[index];
-		this.updateDialog = true;
+	  setUpdatingSale (index) {
+		this.updatingSale = this.stagingSales[index]
+		this.updateDialog = true
 	  },
 	  submit () {
-		const finalSales = this.stagingSales.filter(stagingSale => {
-		  return !this.technicians.sales.some(
-			sale => (sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount &&
-			  sale.tip === stagingSale.tipAmount))
-		})
-		//console.log(finalSales)
+
 		this.$store.dispatch("TechnicianSales/addTechnicianSale",
-		  { transactions: finalSales, date: this.date }).
+		  { transactions: this.newSales, date: this.date }).
 		  then(() => {
 
 		  })

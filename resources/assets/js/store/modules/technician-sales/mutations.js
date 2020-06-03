@@ -3,7 +3,11 @@ export default {
     state.allTechnicianSales = allTechnicianSales;
   },
 
-  SET_TECHNICIAN_SALE(state, technicianSale) {
-    state.technicianSale = technicianSale;
+  UPDATE_TECHNICIAN_SALES(state, technicianSale) {
+    const sale = technicianSale.sales[0];
+    state.allTechnicianSales.sales = state.allTechnicianSales.sales.map(
+      (technician) =>
+        technician.technicianId === sale.technicianId ? sale : technician
+    );
   }
 };
