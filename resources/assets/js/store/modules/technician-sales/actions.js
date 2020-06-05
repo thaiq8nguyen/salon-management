@@ -1,5 +1,4 @@
 import TechnicianSaleServices from "Services/technicianSaleServices";
-import { consoleInfo } from "vuetify/lib/util/console";
 
 export default {
   getAllTechnicianSales({ commit }, date) {

@@ -3056,6 +3056,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3066,21 +3068,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       updatingSale: "",
-      updateDialog: false
+      updateDialog: false,
+      activeSaleEntry: false,
+      stagingSales: []
     };
   },
   computed: {
-    stagingSales: function stagingSales() {
-      return this.technicians.sales.map(function (technician) {
-        return {
-          technicianId: technician.technicianId,
-          saleId: technician.sale ? technician.sale.id : null,
-          tipId: technician.tip ? technician.tip.id : null,
-          saleAmount: technician.sale ? technician.sale.amount : 0,
-          tipAmount: technician.tip ? technician.tip.amount : 0
-        };
-      });
-    },
     newSales: function newSales() {
       var _this = this;
 
@@ -3091,7 +3084,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  watch: {},
+  watch: {
+    technicians: function technicians(_technicians) {
+      this.stagingSales = _technicians.sales.map(function (technician) {
+        return {
+          technicianId: technician.technicianId,
+          saleId: technician.sale ? technician.sale.id : null,
+          tipId: technician.tip ? technician.tip.id : null,
+          saleAmount: technician.sale ? technician.sale.amount : 0,
+          tipAmount: technician.tip ? technician.tip.amount : 0
+        };
+      });
+    }
+  },
   methods: {
     setUpdatingSale: function setUpdatingSale(index) {
       this.updatingSale = this.stagingSales[index];
@@ -3102,7 +3107,15 @@ __webpack_require__.r(__webpack_exports__);
         transactions: this.newSales,
         date: this.date
       }).then(function () {});
-    }
+    },
+    clearSaleAmount: function clearSaleAmount(currentEntryIndex) {
+      this.activeSaleEntry = true; //let lastEntryIndex = currentEntryIndex;
+
+      console.log(currentEntryIndex);
+      this.stagingSales[currentEntryIndex].saleAmount = "";
+      console.log("hey");
+    },
+    verifySaleAmount: function verifySaleAmount(currentEntryIndex) {}
   }
 });
 
@@ -13944,7 +13957,17 @@ var render = function() {
                                             "v-form",
                                             [
                                               _c("v-text-field", {
-                                                attrs: { label: "New Sale" },
+                                                attrs: {
+                                                  label: "New Sale",
+                                                  prefix: "$"
+                                                },
+                                                on: {
+                                                  focus: function($event) {
+                                                    return _vm.clearSaleAmount(
+                                                      index
+                                                    )
+                                                  }
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.stagingSales[index]
@@ -13962,7 +13985,10 @@ var render = function() {
                                               }),
                                               _vm._v(" "),
                                               _c("v-text-field", {
-                                                attrs: { label: "New Tip" },
+                                                attrs: {
+                                                  label: "New Tip",
+                                                  prefix: "$"
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.stagingSales[index]
@@ -71592,118 +71618,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vuetify/lib/util/console.js":
-/*!**************************************************!*\
-  !*** ./node_modules/vuetify/lib/util/console.js ***!
-  \**************************************************/
-/*! exports provided: consoleInfo, consoleWarn, consoleError, deprecate, breaking, removed */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleInfo", function() { return consoleInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleWarn", function() { return consoleWarn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "consoleError", function() { return consoleError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deprecate", function() { return deprecate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "breaking", function() { return breaking; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removed", function() { return removed; });
-function createMessage(message, vm, parent) {
-  if (parent) {
-    vm = {
-      _isVue: true,
-      $parent: parent,
-      $options: vm
-    };
-  }
-
-  if (vm) {
-    // Only show each message once per instance
-    vm.$_alreadyWarned = vm.$_alreadyWarned || [];
-    if (vm.$_alreadyWarned.includes(message)) return;
-    vm.$_alreadyWarned.push(message);
-  }
-
-  return `[Vuetify] ${message}` + (vm ? generateComponentTrace(vm) : '');
-}
-
-function consoleInfo(message, vm, parent) {
-  const newMessage = createMessage(message, vm, parent);
-  newMessage != null && console.info(newMessage);
-}
-function consoleWarn(message, vm, parent) {
-  const newMessage = createMessage(message, vm, parent);
-  newMessage != null && console.warn(newMessage);
-}
-function consoleError(message, vm, parent) {
-  const newMessage = createMessage(message, vm, parent);
-  newMessage != null && console.error(newMessage);
-}
-function deprecate(original, replacement, vm, parent) {
-  consoleWarn(`[UPGRADE] '${original}' is deprecated, use '${replacement}' instead.`, vm, parent);
-}
-function breaking(original, replacement, vm, parent) {
-  consoleError(`[BREAKING] '${original}' has been removed, use '${replacement}' instead. For more information, see the upgrade guide https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide`, vm, parent);
-}
-function removed(original, vm, parent) {
-  consoleWarn(`[REMOVED] '${original}' has been removed. You can safely omit it.`, vm, parent);
-}
-/**
- * Shamelessly stolen from vuejs/vue/blob/dev/src/core/util/debug.js
- */
-
-const classifyRE = /(?:^|[-_])(\w)/g;
-
-const classify = str => str.replace(classifyRE, c => c.toUpperCase()).replace(/[-_]/g, '');
-
-function formatComponentName(vm, includeFile) {
-  if (vm.$root === vm) {
-    return '<Root>';
-  }
-
-  const options = typeof vm === 'function' && vm.cid != null ? vm.options : vm._isVue ? vm.$options || vm.constructor.options : vm || {};
-  let name = options.name || options._componentTag;
-  const file = options.__file;
-
-  if (!name && file) {
-    const match = file.match(/([^/\\]+)\.vue$/);
-    name = match && match[1];
-  }
-
-  return (name ? `<${classify(name)}>` : `<Anonymous>`) + (file && includeFile !== false ? ` at ${file}` : '');
-}
-
-function generateComponentTrace(vm) {
-  if (vm._isVue && vm.$parent) {
-    const tree = [];
-    let currentRecursiveSequence = 0;
-
-    while (vm) {
-      if (tree.length > 0) {
-        const last = tree[tree.length - 1];
-
-        if (last.constructor === vm.constructor) {
-          currentRecursiveSequence++;
-          vm = vm.$parent;
-          continue;
-        } else if (currentRecursiveSequence > 0) {
-          tree[tree.length - 1] = [last, currentRecursiveSequence];
-          currentRecursiveSequence = 0;
-        }
-      }
-
-      tree.push(vm);
-      vm = vm.$parent;
-    }
-
-    return '\n\nfound in\n\n' + tree.map((vm, i) => `${i === 0 ? '---> ' : ' '.repeat(5 + i * 2)}${Array.isArray(vm) ? `${formatComponentName(vm[0])}... (${vm[1]} recursive calls)` : formatComponentName(vm)}`).join('\n');
-  } else {
-    return `\n\n(found in ${formatComponentName(vm)})`;
-  }
-}
-//# sourceMappingURL=console.js.map
-
-/***/ }),
-
 /***/ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":
 /*!*************************************************************************!*\
   !*** ./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
@@ -74082,8 +73996,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/technicianSaleServices */ "./resources/assets/js/services/technicianSaleServices.js");
-/* harmony import */ var vuetify_lib_util_console__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuetify/lib/util/console */ "./node_modules/vuetify/lib/util/console.js");
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   getAllTechnicianSales: function getAllTechnicianSales(_ref, date) {

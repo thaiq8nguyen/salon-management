@@ -29,9 +29,11 @@
 							<v-row v-else>
 								<v-col>
 									<v-form>
-										<v-text-field label="New Sale"
-										              v-model.number="stagingSales[index].saleAmount"></v-text-field>
-										<v-text-field label="New Tip"
+										<v-text-field label="New Sale" prefix="$"
+										              v-model.number="stagingSales[index].saleAmount"
+										              @focus="clearSaleAmount(index)"
+										></v-text-field>
+										<v-text-field label="New Tip" prefix="$"
 										              v-model.number="stagingSales[index].tipAmount"></v-text-field>
 									</v-form>
 								</v-col>
@@ -60,19 +62,13 @@
 	  return {
 		updatingSale: "",
 		updateDialog: false,
+		activeSaleEntry: false,
+	    stagingSales: [],
 	  }
 	},
 	computed: {
 
-	  stagingSales () {
-		return (this.technicians.sales.map(technician => ({
-		  technicianId: technician.technicianId,
-		  saleId: technician.sale ? technician.sale.id : null,
-		  tipId: technician.tip ? technician.tip.id : null,
-		  saleAmount: technician.sale ? technician.sale.amount : 0,
-		  tipAmount: technician.tip ? technician.tip.amount : 0,
-		})))
-	  },
+
 	  newSales () {
 		return (this.stagingSales.filter(
 		  stagingSale => (!this.technicians.sales.some(
@@ -81,7 +77,18 @@
 	  },
 	}
 	,
-	watch: {},
+	watch: {
+	  technicians (technicians) {
+		this.stagingSales = technicians.sales.map(technician => ({
+		  technicianId: technician.technicianId,
+		  saleId: technician.sale ? technician.sale.id : null,
+		  tipId: technician.tip ? technician.tip.id : null,
+		  saleAmount: technician.sale ? technician.sale.amount : 0,
+		  tipAmount: technician.tip ? technician.tip.amount : 0
+		}))
+	  }
+
+	},
 	methods: {
 	  setUpdatingSale (index) {
 		this.updatingSale = this.stagingSales[index]
@@ -95,6 +102,17 @@
 
 		  })
 	  },
+	  clearSaleAmount (currentEntryIndex) {
+		this.activeSaleEntry = true
+		//let lastEntryIndex = currentEntryIndex;
+		console.log(currentEntryIndex)
+		this.stagingSales[currentEntryIndex].saleAmount = ""
+
+		console.log("hey")
+	  },
+	  verifySaleAmount(currentEntryIndex){
+
+	  }
 	},
   }
 
