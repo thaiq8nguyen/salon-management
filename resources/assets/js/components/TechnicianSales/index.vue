@@ -29,10 +29,14 @@
 							<v-row v-else>
 								<v-col>
 									<v-form>
-										<v-text-field label="New Sale" prefix="$"
-										              v-model.number="stagingSales[index].saleAmount"
-										              @focus="clearSaleAmount(index)"
-										></v-text-field>
+										<ValidationProvider name="Sale" rules="" v-slot="{errors}">
+											<v-text-field label="New Sale" prefix="$"
+											              v-model.number="stagingSales[index].saleAmount"
+											              @focus="clearSaleAmount(index)"
+											              @blur="validateSaleAmount(index)"
+											></v-text-field>
+										</ValidationProvider>
+
 										<v-text-field label="New Tip" prefix="$"
 										              v-model.number="stagingSales[index].tipAmount"></v-text-field>
 									</v-form>
@@ -63,11 +67,10 @@
 		updatingSale: "",
 		updateDialog: false,
 		activeSaleEntry: false,
-	    stagingSales: [],
+		stagingSales: [],
 	  }
 	},
 	computed: {
-
 
 	  newSales () {
 		return (this.stagingSales.filter(
@@ -84,9 +87,9 @@
 		  saleId: technician.sale ? technician.sale.id : null,
 		  tipId: technician.tip ? technician.tip.id : null,
 		  saleAmount: technician.sale ? technician.sale.amount : 0,
-		  tipAmount: technician.tip ? technician.tip.amount : 0
+		  tipAmount: technician.tip ? technician.tip.amount : 0,
 		}))
-	  }
+	  },
 
 	},
 	methods: {
@@ -110,9 +113,11 @@
 
 		console.log("hey")
 	  },
-	  verifySaleAmount(currentEntryIndex){
-
-	  }
+	  validateSaleAmount (currentEntryIndex) {
+		if (this.stagingSales[currentEntryIndex].saleAmount === 0) {
+		  console.log("Zero!!")
+		}
+	  },
 	},
   }
 

@@ -3058,6 +3058,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3115,7 +3119,11 @@ __webpack_require__.r(__webpack_exports__);
       this.stagingSales[currentEntryIndex].saleAmount = "";
       console.log("hey");
     },
-    verifySaleAmount: function verifySaleAmount(currentEntryIndex) {}
+    validateSaleAmount: function validateSaleAmount(currentEntryIndex) {
+      if (this.stagingSales[currentEntryIndex].saleAmount === 0) {
+        console.log("Zero!!");
+      }
+    }
   }
 });
 
@@ -13956,32 +13964,68 @@ var render = function() {
                                           _c(
                                             "v-form",
                                             [
-                                              _c("v-text-field", {
+                                              _c("ValidationProvider", {
                                                 attrs: {
-                                                  label: "New Sale",
-                                                  prefix: "$"
+                                                  name: "Sale",
+                                                  rules: ""
                                                 },
-                                                on: {
-                                                  focus: function($event) {
-                                                    return _vm.clearSaleAmount(
-                                                      index
-                                                    )
-                                                  }
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.stagingSales[index]
-                                                      .saleAmount,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.stagingSales[index],
-                                                      "saleAmount",
-                                                      _vm._n($$v)
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "stagingSales[index].saleAmount"
-                                                }
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "default",
+                                                      fn: function(ref) {
+                                                        var errors = ref.errors
+                                                        return [
+                                                          _c("v-text-field", {
+                                                            attrs: {
+                                                              label: "New Sale",
+                                                              prefix: "$"
+                                                            },
+                                                            on: {
+                                                              focus: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.clearSaleAmount(
+                                                                  index
+                                                                )
+                                                              },
+                                                              blur: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.validateSaleAmount(
+                                                                  index
+                                                                )
+                                                              }
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm
+                                                                  .stagingSales[
+                                                                  index
+                                                                ].saleAmount,
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  _vm
+                                                                    .stagingSales[
+                                                                    index
+                                                                  ],
+                                                                  "saleAmount",
+                                                                  _vm._n($$v)
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "stagingSales[index].saleAmount"
+                                                            }
+                                                          })
+                                                        ]
+                                                      }
+                                                    }
+                                                  ],
+                                                  null,
+                                                  true
+                                                )
                                               }),
                                               _vm._v(" "),
                                               _c("v-text-field", {
