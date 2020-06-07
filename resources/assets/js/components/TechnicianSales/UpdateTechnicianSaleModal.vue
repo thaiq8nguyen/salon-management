@@ -1,6 +1,6 @@
 <template>
 	<div id="update-technician-sale-dialog">
-		<v-dialog v-model="open" width="500">
+		<v-dialog v-model="dialog" width="500">
 			<v-card>
 				<v-card-title>Update Sale & Tip</v-card-title>
 				<v-form>
@@ -75,6 +75,7 @@
 
 		saleAmount: "",
 		tipAmount: "",
+	    dialog: false,
 
 	  }
 	},
@@ -99,6 +100,17 @@
 	  },
 
 	},
+    watch:{
+	  open: function() {
+
+		this.dialog = this.open;
+	  },
+	  dialog: function(val){
+		if(!val){
+		  this.$emit("close");
+		}
+	  }
+    },
 	methods: {
 	  updateTransaction (transaction) {
 		let updateTransaction = this.saleTransaction

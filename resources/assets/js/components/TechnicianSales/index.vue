@@ -29,16 +29,23 @@
 							<v-row v-else>
 								<v-col>
 									<v-form>
-										<ValidationProvider name="Sale" rules="" v-slot="{errors}">
-											<v-text-field label="New Sale" prefix="$"
+										<ValidationProvider name="Sale amount" :rules="{regex:/^\d*\.?\d*$/,min_value:1}"
+										                    v-slot="{errors}">
+											<v-text-field :error="errors.length > 0" :error-messages="errors[0]"
+											              label="New Sale" prefix="$"
 											              v-model.number="stagingSales[index].saleAmount"
-											              @focus="clearSaleAmount(index)"
-											              @blur="validateSaleAmount(index)"
+											              @keypress="filteringKey"
+
+
 											></v-text-field>
 										</ValidationProvider>
+										<ValidationProvider name="Tip amount" :rules="{regex:/^\d*\.?\d*$/,min_value:1}"
+										                    v-slot="{errors}">
+											<v-text-field :error="errors.length > 0" :error-messages="errors[0]"
+											              label="New Tip" prefix="$"
+											              v-model.number="stagingSales[index].tipAmount"></v-text-field>
+										</ValidationProvider>
 
-										<v-text-field label="New Tip" prefix="$"
-										              v-model.number="stagingSales[index].tipAmount"></v-text-field>
 									</v-form>
 								</v-col>
 							</v-row>
@@ -48,7 +55,7 @@
 			</v-row>
 		</v-container>
 		<v-toolbar flat class="d-flex justify-center">
-			<v-btn @click="submit">Submit</v-btn>
+			<v-btn @click="submit" :disabled="newSales.length === 0">Submit</v-btn>
 		</v-toolbar>
 		<update-technician-sale-modal :open="updateDialog" :transaction="updatingSale"
 		                              @close="updateDialog = false"></update-technician-sale-modal>
@@ -86,8 +93,8 @@
 		  technicianId: technician.technicianId,
 		  saleId: technician.sale ? technician.sale.id : null,
 		  tipId: technician.tip ? technician.tip.id : null,
-		  saleAmount: technician.sale ? technician.sale.amount : 0,
-		  tipAmount: technician.tip ? technician.tip.amount : 0,
+		  saleAmount: technician.sale ? technician.sale.amount : null,
+		  tipAmount: technician.tip ? technician.tip.amount : null,
 		}))
 	  },
 
@@ -105,17 +112,13 @@
 
 		  })
 	  },
-	  clearSaleAmount (currentEntryIndex) {
-		this.activeSaleEntry = true
-		//let lastEntryIndex = currentEntryIndex;
-		console.log(currentEntryIndex)
-		this.stagingSales[currentEntryIndex].saleAmount = ""
+	  filteringKey (event) {
+		let charCode = (typeof event.which == "number") ? event.which : event.keyCode
+		if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46 && charCode !== 127) {
+		  event.preventDefault()
+		} else {
+		  return true
 
-		console.log("hey")
-	  },
-	  validateSaleAmount (currentEntryIndex) {
-		if (this.stagingSales[currentEntryIndex].saleAmount === 0) {
-		  console.log("Zero!!")
 		}
 	  },
 	},

@@ -2934,7 +2934,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       saleAmount: "",
-      tipAmount: ""
+      tipAmount: "",
+      dialog: false
     };
   },
   computed: {
@@ -2961,6 +2962,16 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return result;
+    }
+  },
+  watch: {
+    open: function open() {
+      this.dialog = this.open;
+    },
+    dialog: function dialog(val) {
+      if (!val) {
+        this.$emit("close");
+      }
     }
   },
   methods: {
@@ -3062,6 +3073,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3095,8 +3113,8 @@ __webpack_require__.r(__webpack_exports__);
           technicianId: technician.technicianId,
           saleId: technician.sale ? technician.sale.id : null,
           tipId: technician.tip ? technician.tip.id : null,
-          saleAmount: technician.sale ? technician.sale.amount : 0,
-          tipAmount: technician.tip ? technician.tip.amount : 0
+          saleAmount: technician.sale ? technician.sale.amount : null,
+          tipAmount: technician.tip ? technician.tip.amount : null
         };
       });
     }
@@ -3112,16 +3130,13 @@ __webpack_require__.r(__webpack_exports__);
         date: this.date
       }).then(function () {});
     },
-    clearSaleAmount: function clearSaleAmount(currentEntryIndex) {
-      this.activeSaleEntry = true; //let lastEntryIndex = currentEntryIndex;
+    filteringKey: function filteringKey(event) {
+      var charCode = typeof event.which == "number" ? event.which : event.keyCode;
 
-      console.log(currentEntryIndex);
-      this.stagingSales[currentEntryIndex].saleAmount = "";
-      console.log("hey");
-    },
-    validateSaleAmount: function validateSaleAmount(currentEntryIndex) {
-      if (this.stagingSales[currentEntryIndex].saleAmount === 0) {
-        console.log("Zero!!");
+      if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46 && charCode !== 127) {
+        event.preventDefault();
+      } else {
+        return true;
       }
     }
   }
@@ -13566,11 +13581,11 @@ var render = function() {
         {
           attrs: { width: "500" },
           model: {
-            value: _vm.open,
+            value: _vm.dialog,
             callback: function($$v) {
-              _vm.open = $$v
+              _vm.dialog = $$v
             },
-            expression: "open"
+            expression: "dialog"
           }
         },
         [
@@ -13966,8 +13981,11 @@ var render = function() {
                                             [
                                               _c("ValidationProvider", {
                                                 attrs: {
-                                                  name: "Sale",
-                                                  rules: ""
+                                                  name: "Sale amount",
+                                                  rules: {
+                                                    regex: /^\d*\.?\d*$/,
+                                                    min_value: 1
+                                                  }
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -13978,24 +13996,17 @@ var render = function() {
                                                         return [
                                                           _c("v-text-field", {
                                                             attrs: {
+                                                              error:
+                                                                errors.length >
+                                                                0,
+                                                              "error-messages":
+                                                                errors[0],
                                                               label: "New Sale",
                                                               prefix: "$"
                                                             },
                                                             on: {
-                                                              focus: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.clearSaleAmount(
-                                                                  index
-                                                                )
-                                                              },
-                                                              blur: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.validateSaleAmount(
-                                                                  index
-                                                                )
-                                                              }
+                                                              keypress:
+                                                                _vm.filteringKey
                                                             },
                                                             model: {
                                                               value:
@@ -14028,25 +14039,60 @@ var render = function() {
                                                 )
                                               }),
                                               _vm._v(" "),
-                                              _c("v-text-field", {
+                                              _c("ValidationProvider", {
                                                 attrs: {
-                                                  label: "New Tip",
-                                                  prefix: "$"
+                                                  name: "Tip amount",
+                                                  rules: {
+                                                    regex: /^\d*\.?\d*$/,
+                                                    min_value: 1
+                                                  }
                                                 },
-                                                model: {
-                                                  value:
-                                                    _vm.stagingSales[index]
-                                                      .tipAmount,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.stagingSales[index],
-                                                      "tipAmount",
-                                                      _vm._n($$v)
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "stagingSales[index].tipAmount"
-                                                }
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "default",
+                                                      fn: function(ref) {
+                                                        var errors = ref.errors
+                                                        return [
+                                                          _c("v-text-field", {
+                                                            attrs: {
+                                                              error:
+                                                                errors.length >
+                                                                0,
+                                                              "error-messages":
+                                                                errors[0],
+                                                              label: "New Tip",
+                                                              prefix: "$"
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm
+                                                                  .stagingSales[
+                                                                  index
+                                                                ].tipAmount,
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  _vm
+                                                                    .stagingSales[
+                                                                    index
+                                                                  ],
+                                                                  "tipAmount",
+                                                                  _vm._n($$v)
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "stagingSales[index].tipAmount"
+                                                            }
+                                                          })
+                                                        ]
+                                                      }
+                                                    }
+                                                  ],
+                                                  null,
+                                                  true
+                                                )
                                               })
                                             ],
                                             1
@@ -14076,7 +14122,16 @@ var render = function() {
           _c(
             "v-toolbar",
             { staticClass: "d-flex justify-center", attrs: { flat: "" } },
-            [_c("v-btn", { on: { click: _vm.submit } }, [_vm._v("Submit")])],
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { disabled: _vm.newSales.length === 0 },
+                  on: { click: _vm.submit }
+                },
+                [_vm._v("Submit")]
+              )
+            ],
             1
           ),
           _vm._v(" "),
@@ -72905,6 +72960,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Main */ "./resources/assets/js/Main.vue");
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 /* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -72932,8 +72993,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(Plugins__WEBPACK_IMPORTED_MODULE_4__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("ValidationObserver", vee_validate__WEBPACK_IMPORTED_MODULE_8__["ValidationObserver"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("ValidationProvider", vee_validate__WEBPACK_IMPORTED_MODULE_8__["ValidationProvider"]);
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_8__["extend"])("required", vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__["required"]);
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_8__["extend"])("email", vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__["email"]);
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_8__["extend"])("min_value", _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__["min_value"], {
+  message: "The amount must be greater than 0"
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_8__["extend"])("regex", _objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__["regex"], {
+  message: "The amount must be a number"
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_8__["extend"])("required", vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__["required"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a(),
   router: _router__WEBPACK_IMPORTED_MODULE_6__["default"],

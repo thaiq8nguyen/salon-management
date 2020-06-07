@@ -26,15 +26,24 @@ import router from "./router";
 import Main from "./Main";
 
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
+import { email, min_value, required, regex } from "vee-validate/dist/rules";
 
 Vue.use(Vuetify);
 Vue.use(customPlugins);
 
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);
-extend("required", required);
+
 extend("email", email);
+extend("min_value", {
+  ...min_value,
+  message: "The amount must be greater than 0"
+});
+extend("regex", {
+  ...regex,
+  message: "The amount must be a number"
+});
+extend("required", required);
 
 new Vue({
   vuetify: new Vuetify(),
