@@ -2,7 +2,7 @@
   <div id="update-technician-modal">
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>Update Technician</v-card-title>
+        <v-card-title class="headline grey lighten-2" primary-title>Update Technician</v-card-title>
         <ValidationObserver v-slot="{ handleSubmit }">
           <v-form @submit.prevent="handleSubmit(update)">
             <v-card-text>
@@ -56,7 +56,7 @@
 		  password: ""
 		},
 		dialog: false,
-		
+
 	  }
 
 	},
@@ -65,7 +65,7 @@
 			this.updating = {...this.technician}
 		},
 		open: function() {
-			
+
 			this.dialog = this.open;
 		},
 		dialog: function(val){
@@ -73,17 +73,17 @@
 				this.$emit("close");
 			}
 		}
-		
+
 	},
 	methods: {
 		cancel(){
-			
+
 		},
       	update(){
-			  
+
 			  this.$store.dispatch("Technicians/updateTechnician", this.updating)
 			  .then(response => {
-				  	  
+
 				  this.$emit("close");
 			  })
 			  .catch(errors => {

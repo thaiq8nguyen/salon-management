@@ -39,6 +39,7 @@ export default {
       )
         .then((response) => {
           commit("UPDATE_TECHNICIAN_SALES", response.data.updateTechnicianSale);
+          console.log(response.data.updateTechnicianSale);
           resolve();
         })
         .catch((errors) => {
@@ -63,5 +64,8 @@ export default {
           }
         });
     });
+  },
+  setDate({ commit }, date) {
+    commit("SET_DATE", date);
   }
 };

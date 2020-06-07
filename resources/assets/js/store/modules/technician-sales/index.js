@@ -4,7 +4,7 @@ import mutations from "./mutations";
 
 const state = {
   allTechnicianSales: [],
-  technicianSale: null
+  date: new Date()
 };
 
 export default {

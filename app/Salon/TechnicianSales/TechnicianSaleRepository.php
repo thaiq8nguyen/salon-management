@@ -11,7 +11,7 @@ use App\TransactionItem;
 
 class TechnicianSaleRepository implements TechnicianSaleInterface
 {
-    public function getTechnicianSales($technicianId = null ,$date)
+    public function getTechnicianSales($technicianId = null, $date)
     {
         $technicians = null;
 
@@ -21,7 +21,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             }
         ])->get();
 
-        if(!empty($technicianId)){
+        if (!empty($technicianId)) {
             $technicians = Technician::with([
                 'sales' => function ($query) use ($date) {
                     $query->where('date', $date);
@@ -43,8 +43,8 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 'firstName' => $technician->first_name,
                 'lastName' => $technician->last_name,
                 'fullName' => $technician->full_name,
-                'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit]:null,
-                'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit]:null,
+                'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit] : null,
+                'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit] : null,
 
             ];
         });
@@ -53,41 +53,62 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
     }
 
-    public function addTechnicianSale($sale)
+    public function addTechnicianSale($date, $transactions)
     {
 
-        foreach ($sale['transactions'] as $transaction) {
-            if ($transaction['saleAmount']) {
-                $saleAccount = TechnicianAccount::where([
+        foreach ($transactions as $transaction) {
+            if (isset($transaction['saleAmount'])) {
+
+                $technicianSaleAccount = TechnicianAccount::where([
                     ['technician_id', $transaction['technicianId']],
                     ['name', 'sales']
                 ])->first();
-                $saleItem = TransactionItem::item('technician sales')->first();
 
-                $saleAccount->transactions()->create([
-                    'transaction_item_id' => $saleItem->id,
-                    'date' => $sale['date'],
-                    'credit' => $transaction['saleAmount'],
-                ]);
+                $transactionSaleItem = TransactionItem::item('technician sales')->first();
+
+                $existingSaleTransaction = Transaction::where([
+                    ['transactionable_id', $technicianSaleAccount->id],
+                    ['date', $date]
+                ])->first();
+
+                if (!$existingSaleTransaction) {
+                    $technicianSaleAccount->transactions()->create([
+                        'transaction_item_id' => $transactionSaleItem->id,
+                        'date' => $date,
+                        'credit' => $transaction['saleAmount'],
+                    ]);
+                }
+
             }
 
-            if ($transaction['tipAmount']) {
+            if (isset($transaction['tipAmount'])) {
 
-                $tipAccount = TechnicianAccount::where([
+                $technicianTipAccount = TechnicianAccount::where([
                     ['technician_id', $transaction['technicianId']],
                     ['name', 'tips']
                 ])->first();
-                $tipItem = TransactionItem::item('technician tips')->first();
-                $tipAccount->transactions()->create([
-                    'transaction_item_id' => $tipItem->id,
-                    'date' => $sale['date'],
-                    'credit' => $transaction['tipAmount'],
-                ]);
+
+                $transactionTipItem = TransactionItem::item('technician tips')->first();
+
+                $existingTipAccount = Transaction::where([
+                    ['transactionable_id', $technicianTipAccount->id],
+                    ['date', $date]
+                ])->first();
+
+                if (!$existingTipAccount) {
+                    $technicianTipAccount->transactions()->create([
+                        'transaction_item_id' => $transactionTipItem->id,
+                        'date' => $date,
+                        'credit' => $transaction['tipAmount'],
+                    ]);
+                }
+
             }
 
         }
 
-        return $this->getTechnicianSales(null, $sale['date']);
+
+        return $this->getTechnicianSales(null, $date);
 
     }
 
@@ -116,7 +137,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
         }
 
         return $this->getTechnicianSales($technicianAccount->technician_id, $transaction->date);
-
 
     }
 

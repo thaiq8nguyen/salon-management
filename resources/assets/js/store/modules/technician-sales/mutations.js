@@ -3,11 +3,17 @@ export default {
     state.allTechnicianSales = allTechnicianSales;
   },
 
-  UPDATE_TECHNICIAN_SALES(state, technicianSale) {
-    const sale = technicianSale.sales[0];
+  UPDATE_TECHNICIAN_SALES(state, technicianSales) {
+    const technicianSale = technicianSales.sales[0];
     state.allTechnicianSales.sales = state.allTechnicianSales.sales.map(
       (technician) =>
-        technician.technicianId === sale.technicianId ? sale : technician
+        technician.technicianId === technicianSale.technicianId
+          ? technicianSale
+          : technician
     );
+  },
+
+  SET_DATE(state, date) {
+    state.date = date;
   }
 };

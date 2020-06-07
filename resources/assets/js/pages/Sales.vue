@@ -12,7 +12,7 @@
 				</v-row>
 				<v-row>
 					<v-col>
-						<technician-sales :technicians="allTechnicianSales" :date="date"></technician-sales>
+						<technician-sales></technician-sales>
 					</v-col>
 				</v-row>
 			</v-container>
@@ -24,34 +24,23 @@
   import DatePicker from "Components/DatePicker"
   import TechnicianSales from "Components/TechnicianSales/index"
 
-
   export default {
 	name: "Sales",
 	components: { TechnicianSales, DatePicker },
-	props: [],
+
 
 	data () {
-	  return {
-		date: this.$moment().format("YYYY-MM-DD"),
-	  }
+	  return {}
 
 	},
-	computed: {
-	  allTechnicianSales () {
-		return this.$store.getters["TechnicianSales/allTechnicianSales"]
-	  },
-	},
+
 	created () {
-	  this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date)
+	  this.$store.dispatch("TechnicianSales/setDate", this.$moment().format("YYYY-MM-DD"))
 	},
-	watch: {
-	  date: function (date) {
-		this.$store.dispatch("TechnicianSales/getAllTechnicianSales", date)
-	  },
-	},
+
 	methods: {
 	  setDate (date) {
-		this.date = date
+		this.$store.dispatch("TechnicianSales/setDate", date)
 	  },
 	},
 

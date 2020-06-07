@@ -29,7 +29,8 @@
 							<v-row v-else>
 								<v-col>
 									<v-form>
-										<ValidationProvider name="Sale amount" :rules="{regex:/^\d*\.?\d*$/,min_value:1}"
+										<ValidationProvider name="Sale amount"
+										                    :rules="{regex:/^\d*\.?\d*$/,min_value:1}"
 										                    v-slot="{errors}">
 											<v-text-field :error="errors.length > 0" :error-messages="errors[0]"
 											              label="New Sale" prefix="$"
@@ -55,9 +56,9 @@
 			</v-row>
 		</v-container>
 		<v-toolbar flat class="d-flex justify-center">
-			<v-btn @click="submit" :disabled="newSales.length === 0">Submit</v-btn>
+			<v-btn color="primary" @click="submit" :disabled="newSales.length === 0">Submit</v-btn>
 		</v-toolbar>
-		<update-technician-sale-modal :open="updateDialog" :transaction="updatingSale"
+		<update-technician-sale-modal :date="date" :open="updateDialog" :transaction="updatingSale"
 		                              @close="updateDialog = false"></update-technician-sale-modal>
 	</div>
 </template>
@@ -67,7 +68,7 @@
 
   export default {
 	name: "TechnicianSales",
-	props: ["technicians", "date"],
+
 	components: { UpdateTechnicianSaleModal },
 	data () {
 	  return {
@@ -75,9 +76,17 @@
 		updateDialog: false,
 		activeSaleEntry: false,
 		stagingSales: [],
+
 	  }
 	},
 	computed: {
+	  date () {
+		return this.$store.getters["TechnicianSales/date"]
+	  },
+	  technicians () {
+		return this.$store.getters["TechnicianSales/allTechnicianSales"]
+	  },
+
 
 	  newSales () {
 		return (this.stagingSales.filter(
@@ -87,17 +96,22 @@
 	  },
 	}
 	,
+	created () {
+	  this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date)
+	},
 	watch: {
-	  technicians (technicians) {
-		this.stagingSales = technicians.sales.map(technician => ({
-		  technicianId: technician.technicianId,
-		  saleId: technician.sale ? technician.sale.id : null,
-		  tipId: technician.tip ? technician.tip.id : null,
-		  saleAmount: technician.sale ? technician.sale.amount : null,
-		  tipAmount: technician.tip ? technician.tip.amount : null,
-		}))
-	  },
-
+	  technicians:{
+	    handler(technicians){
+		  this.stagingSales = technicians.sales.map(technician => ({
+			technicianId: technician.technicianId,
+			saleId: technician.sale ? technician.sale.id : null,
+			tipId: technician.tip ? technician.tip.id : null,
+			saleAmount: technician.sale ? technician.sale.amount : null,
+			tipAmount: technician.tip ? technician.tip.amount : null,
+		  }))
+	    },
+	    deep: true
+	  }
 	},
 	methods: {
 	  setUpdatingSale (index) {
