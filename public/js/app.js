@@ -2951,14 +2951,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UpdateTechnicianSaleModal",
   props: ["date", "open", "transaction"],
@@ -2971,12 +2963,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    saleTransaction: function saleTransaction() {
+    updateSaleTransaction: function updateSaleTransaction() {
       var result = null;
 
       if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
         result = {
-          transactionId: this.transaction.saleId,
+          transactionId: this.transaction.sale.id,
           amount: this.saleAmount
         };
       }
@@ -2988,7 +2980,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.tipAmount) {
         result = {
-          transactionId: this.transaction.tipId,
+          transactionId: this.transaction.tip.id,
           amount: this.updateTipAmount
         };
       }
@@ -3029,7 +3021,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       console.log(transaction);
-      var updateTransaction = this.saleTransaction;
+      var updateTransaction = this.updateSaleTransaction;
 
       if (transaction === "tip") {
         updateTransaction = this.updateTipTransaction;
@@ -3134,6 +3126,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3152,51 +3152,63 @@ __webpack_require__.r(__webpack_exports__);
     date: function date() {
       return this.$store.getters["TechnicianSales/date"];
     },
-    technicians: function technicians() {
-      return this.$store.getters["TechnicianSales/allTechnicianSales"];
+    allTechnicianSales: function allTechnicianSales() {
+      var technicians = this.$store.getters["TechnicianSales/allTechnicianSales"];
+      return technicians.sales;
     },
-    newSales: function newSales() {
-      var _this = this;
-
-      return this.stagingSales.filter(function (stagingSale) {
-        return !_this.technicians.sales.some(function (sale) {
-          return sale.technicianId === stagingSale.technicianId && sale.sale === stagingSale.saleAmount && sale.tip === stagingSale.tipAmount;
-        });
+    techniciansWithSale: function techniciansWithSale() {
+      return this.allTechnicianSales.filter(function (technician) {
+        return technician.sale !== null;
       });
-    }
+    },
+    techniciansWithoutSale: function techniciansWithoutSale() {
+      if (this.allTechnicianSales.length) {
+        return this.allTechnicianSales.filter(function (technician) {
+          return technician.sale === null;
+        });
+      }
+    },
+    haveNewTechnicianSales: function haveNewTechnicianSales() {
+      return this.stagingSales.some(function (technician) {
+        return technician.saleAmount;
+      });
+    } // newSales () {
+    // return (this.stagingSales.filter(
+    //   stagingSale => (!this.technicians.sales.some(
+    // 	sale => (sale.technicianId === stagingSale.technicianId)))))
+    // },
+
   },
   created: function created() {
     this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date);
   },
   watch: {
-    technicians: {
-      handler: function handler(technicians) {
-        this.stagingSales = technicians.sales.map(function (technician) {
+    techniciansWithoutSale: function techniciansWithoutSale(technicians) {
+      if (technicians.length > 0) {
+        this.stagingSales = technicians.map(function (technician) {
           return {
+            fullName: technician.fullName,
             technicianId: technician.technicianId,
-            saleId: technician.sale ? technician.sale.id : null,
-            tipId: technician.tip ? technician.tip.id : null,
-            saleAmount: technician.sale ? technician.sale.amount : null,
-            tipAmount: technician.tip ? technician.tip.amount : null
+            saleAmount: "",
+            tipAmount: ""
           };
         });
-      },
-      deep: true
+      }
     }
   },
   methods: {
     setUpdatingSale: function setUpdatingSale(index) {
-      this.updatingSale = this.stagingSales[index];
+      this.updatingSale = this.techniciansWithSale[index];
       this.updateDialog = true;
     },
     submit: function submit() {
       this.$store.dispatch("TechnicianSales/addTechnicianSale", {
-        transactions: this.newSales,
+        transactions: this.stagingSales,
         date: this.date
       }).then(function () {});
     },
     filteringKey: function filteringKey(event) {
-      var charCode = typeof event.which == "number" ? event.which : event.keyCode;
+      var charCode = event.keyCode;
 
       if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46 && charCode !== 127) {
         event.preventDefault();
@@ -13647,7 +13659,7 @@ var render = function() {
               _c(
                 "v-card-title",
                 {
-                  staticClass: "headline grey lighten-2",
+                  staticClass: "display-1 grey lighten-2",
                   attrs: { "primary-title": "" }
                 },
                 [_vm._v("Update Sale & Tip")]
@@ -13660,123 +13672,84 @@ var render = function() {
                     "v-card-text",
                     [
                       _c(
-                        "v-row",
+                        "v-container",
                         [
+                          _c("p", { staticClass: "headline" }, [
+                            _vm._v("Current Amount")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-col",
+                            "v-row",
                             [
-                              _c("h3", [_vm._v("Current")]),
+                              _c("v-col", [_c("p", [_vm._v("Sale")])]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _c("p", [
+                                  _vm._v(
+                                    "$ " + _vm._s(_vm.transaction.sale.amount)
+                                  )
+                                ])
+                              ]),
                               _vm._v(" "),
                               _c(
-                                "v-list",
+                                "v-col",
                                 [
                                   _c(
-                                    "v-list-item",
-                                    [
-                                      _c(
-                                        "v-list-item-content",
-                                        { staticClass: "d-flex" },
-                                        [
-                                          _c("v-list-item-title", [
-                                            _vm._v("Sale")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "$ " +
-                                                _vm._s(
-                                                  _vm.transaction.saleAmount
-                                                )
-                                            )
-                                          ])
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-item-action",
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                color: "error",
-                                                small: ""
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.deleteTransaction(
-                                                    "sale"
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Delete")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-item",
+                                    "v-btn",
                                     {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: _vm.transaction.tipAmount,
-                                          expression: "transaction.tipAmount"
+                                      attrs: { color: "error", small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteTransaction("sale")
                                         }
-                                      ]
+                                      }
                                     },
-                                    [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-list-item-title", [
-                                            _vm._v("Tip")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "$ " +
-                                                _vm._s(
-                                                  _vm.transaction.tipAmount
-                                                )
-                                            )
-                                          ])
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-item-action",
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                color: "error",
-                                                small: ""
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.deleteTransaction(
-                                                    "tip"
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Delete")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
+                                    [_vm._v("Delete")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.transaction.tip,
+                                  expression: "transaction.tip"
+                                }
+                              ]
+                            },
+                            [
+                              _c("v-col", [_c("p", [_vm._v("Tip")])]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _c("p", [
+                                  _vm._v(
+                                    "$ " + _vm._s(_vm.transaction.tip.amount)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "error", small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteTransaction("tip")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
                                   )
                                 ],
                                 1
@@ -13791,128 +13764,100 @@ var render = function() {
                       _c("v-divider"),
                       _vm._v(" "),
                       _c(
-                        "v-row",
+                        "v-container",
                         [
+                          _c("p", { staticClass: "headline" }, [
+                            _vm._v("Update existing sale & tip")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-col",
+                            "v-row",
+                            { attrs: { align: "center" } },
                             [
-                              _c("h3", [_vm._v("Update existing sale & tip")]),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Sale", prefix: "$" },
+                                    model: {
+                                      value: _vm.saleAmount,
+                                      callback: function($$v) {
+                                        _vm.saleAmount = $$v
+                                      },
+                                      expression: "saleAmount"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c(
-                                "v-list",
+                                "v-col",
+                                {
+                                  staticClass: "d-flex justify-start",
+                                  attrs: { cols: "8" }
+                                },
                                 [
                                   _c(
-                                    "v-list-item",
-                                    [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: { label: "Sale" },
-                                            model: {
-                                              value: _vm.saleAmount,
-                                              callback: function($$v) {
-                                                _vm.saleAmount = $$v
-                                              },
-                                              expression: "saleAmount"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-item-action",
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                color: "primary",
-                                                small: ""
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.updateTransaction(
-                                                    "sale"
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "Update\n\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-item",
+                                    "v-btn",
                                     {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: _vm.transaction.tipId,
-                                          expression: "transaction.tipId"
+                                      attrs: { color: "primary", small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.updateTransaction("sale")
                                         }
-                                      ]
+                                      }
                                     },
-                                    [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: { label: "Tip" },
-                                            model: {
-                                              value: _vm.updateTipAmount,
-                                              callback: function($$v) {
-                                                _vm.updateTipAmount = _vm._n(
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "updateTipAmount"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-item-action",
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                color: "primary",
-                                                small: ""
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.updateTransaction(
-                                                    "tip"
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "Update\n\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
+                                    [_vm._v("Update\n\t\t\t\t\t\t\t\t")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            { attrs: { align: "center" } },
+                            [
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Tip", prefix: "$" },
+                                    model: {
+                                      value: _vm.updateTipAmount,
+                                      callback: function($$v) {
+                                        _vm.updateTipAmount = _vm._n($$v)
+                                      },
+                                      expression: "updateTipAmount"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                {
+                                  staticClass: "d-flex justify-start",
+                                  attrs: { cols: "8" }
+                                },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "primary", small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.updateTransaction("tip")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Update\n\t\t\t\t\t\t\t\t")]
                                   )
                                 ],
                                 1
@@ -13931,8 +13876,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: !_vm.transaction.tipId,
-                              expression: "!transaction.tipId"
+                              value: !_vm.transaction.tip,
+                              expression: "!transaction.tip"
                             }
                           ]
                         },
@@ -14085,111 +14030,124 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.stagingSales.length > 0
-    ? _c(
-        "div",
-        { attrs: { id: "technician-sales" } },
+  return _c(
+    "div",
+    { attrs: { id: "technician-sales" } },
+    [
+      _c(
+        "v-container",
+        { attrs: { fluid: "" } },
         [
           _c(
-            "v-container",
-            { attrs: { fluid: "" } },
+            "v-row",
             [
               _c(
-                "v-row",
-                { attrs: { justify: "start" } },
-                _vm._l(_vm.technicians.sales, function(technician, index) {
-                  return _c(
-                    "v-col",
-                    { key: technician.technicianId, attrs: { cols: "3" } },
+                "v-col",
+                { attrs: { cols: "3" } },
+                [
+                  _c(
+                    "v-list",
                     [
-                      _c(
-                        "v-card",
+                      _c("v-subheader", [_vm._v("Technicians With Sale")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.techniciansWithSale, function(
+                        technician,
+                        index
+                      ) {
+                        return _c(
+                          "v-list-item",
+                          { key: index },
+                          [
+                            _c(
+                              "v-list-item",
+                              { attrs: { "three-line": "" } },
+                              [
+                                _c(
+                                  "v-list-item-content",
+                                  [
+                                    _c("v-list-item-title", [
+                                      _vm._v(_vm._s(technician.fullName))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-item-subtitle", [
+                                      _vm._v(
+                                        "Sale: $ " +
+                                          _vm._s(technician.sale.amount)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-item-subtitle", [
+                                      _vm._v(
+                                        "Tip: $ " +
+                                          _vm._s(technician.tip.amount)
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item-action",
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.setUpdatingSale(index)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("mdi-pencil")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "9" } },
+                [
+                  _c(
+                    "v-row",
+                    _vm._l(_vm.stagingSales, function(technician, index) {
+                      return _c(
+                        "v-col",
+                        { key: index, attrs: { cols: "4" } },
                         [
                           _c(
-                            "v-card-title",
-                            { staticClass: "d-flex justify-space-between" },
+                            "v-card",
                             [
-                              _c("span", [_vm._v(_vm._s(technician.fullName))]),
+                              _c(
+                                "v-card-title",
+                                {
+                                  staticClass: "headline grey lighten-2",
+                                  attrs: { "primary-title": "" }
+                                },
+                                [
+                                  _c("span", [
+                                    _vm._v(_vm._s(technician.fullName))
+                                  ])
+                                ]
+                              ),
                               _vm._v(" "),
-                              technician.sale
-                                ? _c(
-                                    "span",
-                                    [
-                                      _c(
-                                        "v-icon",
-                                        {
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.setUpdatingSale(index)
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("mdi-pencil")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-card-text",
-                            [
-                              technician.sale
-                                ? _c(
-                                    "v-row",
-                                    [
-                                      _c(
-                                        "v-col",
-                                        [
-                                          _c(
-                                            "v-list-item",
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("Sale")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("v-list-item-subtitle", [
-                                                _vm._v(
-                                                  "$ " +
-                                                    _vm._s(
-                                                      _vm.stagingSales[index]
-                                                        .saleAmount
-                                                    ) +
-                                                    "\n\t\t\t\t\t\t\t\t\t"
-                                                )
-                                              ])
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-item",
-                                            [
-                                              _c("v-list-item-title", [
-                                                _vm._v("Tip")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("v-list-item-subtitle", [
-                                                _vm._v(
-                                                  "$ " +
-                                                    _vm._s(
-                                                      _vm.stagingSales[index]
-                                                        .tipAmount
-                                                    )
-                                                )
-                                              ])
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _c(
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c(
                                     "v-row",
                                     [
                                       _c(
@@ -14322,57 +14280,65 @@ var render = function() {
                                     ],
                                     1
                                   )
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
                         ],
                         1
                       )
+                    }),
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-toolbar",
+                    {
+                      staticClass: "d-flex justify-center",
+                      attrs: { flat: "" }
+                    },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "primary",
+                            disabled: !_vm.haveNewTechnicianSales
+                          },
+                          on: { click: _vm.submit }
+                        },
+                        [_vm._v("Submit")]
+                      )
                     ],
                     1
                   )
-                }),
+                ],
                 1
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-toolbar",
-            { staticClass: "d-flex justify-center", attrs: { flat: "" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: {
-                    color: "primary",
-                    disabled: _vm.newSales.length === 0
-                  },
-                  on: { click: _vm.submit }
-                },
-                [_vm._v("Submit")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("update-technician-sale-modal", {
-            attrs: {
-              date: _vm.date,
-              open: _vm.updateDialog,
-              transaction: _vm.updatingSale
-            },
-            on: {
-              close: function($event) {
-                _vm.updateDialog = false
-              }
-            }
-          })
+          )
         ],
         1
-      )
-    : _vm._e()
+      ),
+      _vm._v(" "),
+      _c("update-technician-sale-modal", {
+        attrs: {
+          date: _vm.date,
+          open: _vm.updateDialog,
+          transaction: _vm.updatingSale
+        },
+        on: {
+          close: function($event) {
+            _vm.updateDialog = false
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
