@@ -4,8 +4,8 @@ import mutations from "./mutations";
 
 const state = {
   payPeriods: [],
-  selectedPayPeriod: null,
-  payPeriodSales: []
+  currentPayPeriod: null,
+  technicianSalesInPayPeriod: []
 };
 
 export default {

@@ -2871,24 +2871,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PayPeriodSelect",
   data: function data() {
-    return {
-      periods: [],
-      selectPeriodId: null
-    };
+    return {};
   },
   computed: {
     payPeriods: function payPeriods() {
       return this.$store.getters["Payday/payPeriods"];
+    },
+    selectedPayPeriod: function selectedPayPeriod() {
+      return this.$store.getters["Payday/selectedPayPeriod"];
+    },
+    selectedPayPeriodId: {
+      get: function get() {
+        return this.selectedPayPeriod.id;
+      },
+      set: function set(newPayPeriodId) {
+        this.$store.commit("Payday/SET_PAY_PERIOD", newPayPeriodId);
+      }
     }
   },
   created: function created() {
     this.$store.dispatch("Payday/getPayPeriods");
   },
+  watch: {},
   methods: {
-    setPayPeriod: function setPayPeriod() {}
+    setPayPeriod: function setPayPeriod() {//console.log(this.selectedPayPeriodId)
+    }
   }
 });
 
@@ -13754,25 +13772,47 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("v-select", {
-                staticClass: "blue--text",
-                attrs: {
-                  items: _vm.payPeriods,
-                  label: "Pay Periods",
-                  "single-line": "",
-                  "item-text": "periodName",
-                  "item-value": "id",
-                  bottom: ""
-                },
-                on: { input: _vm.setPayPeriod },
-                model: {
-                  value: _vm.selectPeriodId,
-                  callback: function($$v) {
-                    _vm.selectPeriodId = $$v
-                  },
-                  expression: "selectPeriodId"
-                }
-              })
+              _c(
+                "v-row",
+                { attrs: { align: "center" } },
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "3" } },
+                    [
+                      _c("v-select", {
+                        staticClass: "blue--text",
+                        attrs: {
+                          items: _vm.payPeriods,
+                          label: "Pay Periods",
+                          "single-line": "",
+                          "item-text": "periodName",
+                          "item-value": "id",
+                          bottom: ""
+                        },
+                        model: {
+                          value: _vm.selectedPayPeriodId,
+                          callback: function($$v) {
+                            _vm.selectedPayPeriodId = $$v
+                          },
+                          expression: "selectedPayPeriodId"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-col", { staticClass: "d-flex justify-center" }, [
+                    _c("p", { staticClass: "subtitle-1" }, [
+                      _vm._v("Pay Date: "),
+                      _c("span", [
+                        _vm._v(_vm._s(_vm.selectedPayPeriod.payDate))
+                      ])
+                    ])
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -74702,6 +74742,7 @@ __webpack_require__.r(__webpack_exports__);
     return new Promise(function (resolve, reject) {
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getStandardPayPeriods().then(function (response) {
         commit("SET_PAY_PERIODS", response.data.payPeriods);
+        commit("SET_CURRENT_PAY_PERIOD");
         resolve();
       })["catch"](function (errors) {
         if (errors.response) {
@@ -74730,7 +74771,10 @@ __webpack_require__.r(__webpack_exports__);
         id: payPeriod.id,
         periodName: payPeriod.beginDate + " - " + payPeriod.endDate
       };
-    }); //return payPeriods;
+    });
+  },
+  selectedPayPeriod: function selectedPayPeriod(state) {
+    return state.selectedPayPeriod;
   }
 });
 
@@ -74753,8 +74797,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   payPeriods: [],
-  selectedPayPeriod: null,
-  payPeriodSales: []
+  currentPayPeriod: null,
+  technicianSalesInPayPeriod: []
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
@@ -74775,6 +74819,9 @@ var state = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_PAY_PERIODS: function SET_PAY_PERIODS(state, payPeriods) {
     state.payPeriods = payPeriods;
@@ -74784,6 +74831,14 @@ __webpack_require__.r(__webpack_exports__);
       return payPeriod.id === payPeriodId;
     });
     state.selectedPayPeriod = state.payPeriods[selectedIndex];
+  },
+  SET_CURRENT_PAY_PERIOD: function SET_CURRENT_PAY_PERIOD(state) {
+    var today = moment__WEBPACK_IMPORTED_MODULE_0___default()();
+    state.selectedPayPeriod = state.payPeriods.filter(function (payPeriod) {
+      var beginDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(payPeriod.beginDate);
+      var payDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(payPeriod.payDate);
+      return beginDate.isSameOrBefore(today) && payDate.isSameOrAfter(today);
+    })[0];
   }
 });
 

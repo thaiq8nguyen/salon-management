@@ -40,9 +40,9 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
             return [
                 'technicianId' => $technician->id,
-                'firstName' => $technician->first_name,
-                'lastName' => $technician->last_name,
-                'fullName' => $technician->full_name,
+                'firstName' => $technician->firstName,
+                'lastName' => $technician->lastName,
+                'fullName' => $technician->fullName,
                 'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit] : null,
                 'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit] : null,
 

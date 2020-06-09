@@ -6,6 +6,8 @@ export default {
         periodName: payPeriod.beginDate + " - " + payPeriod.endDate
       };
     });
-    //return payPeriods;
+  },
+  selectedPayPeriod(state) {
+    return state.selectedPayPeriod;
   }
 };

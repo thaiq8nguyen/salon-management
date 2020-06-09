@@ -31,4 +31,11 @@ class PayPeriodController extends BaseController
 
         return $this->sendResponse(['name' => 'payPeriods', 'value' => $payPeriods]);
     }
+
+    public function getTechnicianSales($payPeriodId)
+    {
+        $technicianSales = $this->payPeriod->getTechnicianSales($payPeriodId);
+
+        return $this->sendResponse(['name' => 'technicianSalesInPayPeriod', 'value' => $technicianSales]);
+    }
 }

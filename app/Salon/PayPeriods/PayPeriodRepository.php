@@ -4,6 +4,10 @@ namespace App\Salon\PayPeriods;
 
 
 use App\PayPeriod;
+use App\Technician;
+use App\Transaction;
+
+
 use Carbon\Carbon;
 
 class PayPeriodRepository implements PayPeriodInterface
@@ -26,10 +30,7 @@ class PayPeriodRepository implements PayPeriodInterface
                 'pay_date AS payDate'
             ])->get()->reverse()->values();
 
-
-
         return $previousPayPeriods;
-
     }
 
     public function getPayPeriod($payPeriodId = null)
@@ -50,6 +51,21 @@ class PayPeriodRepository implements PayPeriodInterface
         }
 
         return $payPeriod;
+    }
+
+    public function getTechnicianSales($payPeriodId)
+    {
+        $payPeriod =  $this->getPayPeriod($payPeriodId);
+
+        $technicianSales = Technician::with(['sales' => function($query) use($payPeriod){
+            $query->whereBetween('date', [$payPeriod->beginDate, $payPeriod->endDate]);
+        }])->get();
+
+        return $technicianSales;
+
+
+
+
     }
 
 

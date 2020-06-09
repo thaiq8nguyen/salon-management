@@ -6,6 +6,8 @@ interface PayPeriodInterface
 
     public function getPayPeriod($payPeriodId);
 
+    public function getTechnicianSales($payPeriodId);
+
 
 
 }
