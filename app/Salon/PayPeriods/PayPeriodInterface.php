@@ -2,8 +2,10 @@
 namespace App\Salon\PayPeriods;
 interface PayPeriodInterface
 {
-    public function getCurrentPayPeriod();
+    public function getStandardPayPeriods();
 
-    public function getFuturePayPeriods();
+    public function getPayPeriod($payPeriodId);
+
+
 
 }

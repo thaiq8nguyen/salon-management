@@ -11,6 +11,9 @@ use Eloquent;
  */
 class PayPeriod extends Model
 {
+    protected $fillable = ['begin_date', 'end_date', 'pay_date'];
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function paymentReports()
     {
         return $this->hasMany(PaymentReport::class);

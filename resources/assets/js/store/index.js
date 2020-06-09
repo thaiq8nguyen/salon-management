@@ -8,6 +8,7 @@ import mutations from "./mutations";
 import Authentications from "./modules/authentications";
 import Technicians from "./modules/technicians";
 import TechnicianSales from "./modules/technician-sales";
+import Payday from "./modules/payday";
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
   modules: {
     Authentications,
     Technicians,
-    TechnicianSales
+    TechnicianSales,
+    Payday
   },
 
   state: {},

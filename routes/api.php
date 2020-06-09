@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/technicians/sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');
 
     // PayPeriod CRUD
-    Route::get('/pay-periods/', 'PayPeriodController@getPayPeriod');
+    Route::get('/pay-periods', 'PayPeriodController@getPayPeriods');
 
 });
 

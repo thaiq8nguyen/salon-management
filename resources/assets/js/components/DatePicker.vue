@@ -1,15 +1,14 @@
 <template>
 	<div id="date-picker">
+
 		<v-card>
-			<v-card-title>
-				Date Picker
-			</v-card-title>
+
 			<v-card-text>
-				<v-row>
-					<v-col>
-						<v-btn @click="goToPreviousDate">Previous</v-btn>
+				<v-row align="center">
+					<v-col class="d-flex justify-start" md="3">
+						<v-icon @click="goToPreviousDate">mdi-arrow-left</v-icon>
 					</v-col>
-					<v-col>
+					<v-col class="d-flex justify-center" md="6">
 						<v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
 						        transition="scale-transition" offset-y max-width="290px">
 							<template v-slot:activator="{on}">
@@ -23,8 +22,8 @@
 						</v-menu>
 					</v-col>
 
-					<v-col>
-						<v-btn @click="goToNextDate">Next</v-btn>
+					<v-col class="d-flex justify-end" md="3">
+						<v-icon @click="goToNextDate">mdi-arrow-right</v-icon>
 					</v-col>
 				</v-row>
 			</v-card-text>

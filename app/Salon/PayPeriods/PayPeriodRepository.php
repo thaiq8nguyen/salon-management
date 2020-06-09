@@ -8,20 +8,49 @@ use Carbon\Carbon;
 
 class PayPeriodRepository implements PayPeriodInterface
 {
-    public function getCurrentPayPeriod()
+    protected $payPeriod;
+
+    public function __construct(PayPeriod $payPeriod)
     {
-        $today = Carbon::now()->toDateString();
-        return PayPeriod::where([['begin_date','<=',$today],['end_date', '>=', $today]])->first(['id', 'begin_date', 'end_date']);
+        $this->payPeriod = $payPeriod;
     }
 
-    public function getFuturePayPeriods()
+    public function getStandardPayPeriods()
+    {
+        $currentPayPeriod = $this->getPayPeriod();
+        $previousPayPeriods = PayPeriod::where('pay_date', '<=', $currentPayPeriod->payDate)
+            ->limit(3)->orderBy('pay_date','desc')->select([
+                'id',
+                'begin_date AS beginDate',
+                'end_date AS endDate',
+                'pay_date AS payDate'
+            ])->get()->reverse()->values();
+
+
+
+        return $previousPayPeriods;
+
+    }
+
+    public function getPayPeriod($payPeriodId = null)
     {
         $today = Carbon::now()->toDateString();
-        $current = PayPeriod::where([['begin_date','<=',$today],['end_date', '>=', $today]])->first();
 
-        $future = PayPeriod::where('pay_date', '>=', $current->pay_date)->orderBy('pay_date', 'asc')->limit(3)
-            ->get(['id', 'begin_date', 'end_date', 'pay_date']);
+        $payPeriod = PayPeriod::where('id', $payPeriodId)->select([
+            'id',
+            'begin_date AS beginDate',
+            'end_date AS endDate',
+            'pay_date AS payDate'
+        ])->first();
 
-        return $future;
+
+        if (is_null($payPeriodId)) {
+            $payPeriod = PayPeriod::where([['begin_date', '<=', $today], ['end_date', '>=', $today]])
+                ->select(['id', 'begin_date AS beginDate', 'end_date AS endDate', 'pay_date AS payDate'])->first();
+        }
+
+        return $payPeriod;
     }
+
+
 }

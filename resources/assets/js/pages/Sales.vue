@@ -1,9 +1,9 @@
 <template>
 	<div id="sales">
 		<v-content>
-			<v-container>
-				<v-row>
-					<v-col>
+			<v-container fluid>
+				<v-row justify="center">
+					<v-col md="3">
 						<date-picker v-on:date="setDate"></date-picker>
 					</v-col>
 					<v-col>

@@ -5,7 +5,6 @@
 				<v-col cols="3">
 					<v-list>
 						<v-subheader>Technicians With Sale</v-subheader>
-
 						<v-list-item v-for="(technician, index) in techniciansWithSale" :key="index">
 							<v-list-item three-line>
 								<v-list-item-content>
@@ -25,10 +24,8 @@
 					<v-row>
 						<v-col cols="4" v-for="(technician, index) in stagingSales" :key="index">
 							<v-card>
-								<v-card-title primary-title class="headline grey lighten-2">
+								<v-card-title primary-title class="subtitle-1 grey lighten-2">
 									<span>{{technician.fullName}}</span>
-
-
 								</v-card-title>
 								<v-card-text>
 									<v-row>
@@ -66,7 +63,7 @@
 			</v-row>
 		</v-container>
 
-		<update-technician-sale-modal :date="date" :open="updateDialog"  :transaction="updatingSale"
+		<update-technician-sale-modal :date="date" :open="updateDialog" :transaction="updatingSale"
 		                              @close="updateDialog = false"></update-technician-sale-modal>
 	</div>
 </template>
@@ -80,7 +77,7 @@
 	components: { UpdateTechnicianSaleModal },
 	data () {
 	  return {
-		updatingSale: "",
+		updatingSale: {},
 		updateDialog: false,
 		activeSaleEntry: false,
 		stagingSales: [],
@@ -104,21 +101,19 @@
 		}
 
 	  },
-	  haveNewTechnicianSales(){
-	    return this.stagingSales.some(technician => technician.saleAmount)
-	  }
+	  haveNewTechnicianSales () {
+		return this.stagingSales.some(technician => technician.saleAmount)
+	  },
 
-	  // newSales () {
-	  // return (this.stagingSales.filter(
-	  //   stagingSale => (!this.technicians.sales.some(
-	  // 	sale => (sale.technicianId === stagingSale.technicianId)))))
-	  // },
 	}
 	,
 	created () {
 	  this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date)
 	},
 	watch: {
+	  date(newDate){
+		this.$store.dispatch("TechnicianSales/getAllTechnicianSales", newDate)
+	  },
 	  techniciansWithoutSale (technicians) {
 		if (technicians.length > 0) {
 		  this.stagingSales = technicians.map(technician => ({
@@ -133,7 +128,14 @@
 	},
 	methods: {
 	  setUpdatingSale (index) {
-		this.updatingSale = this.techniciansWithSale[index]
+		this.updatingSale = {
+		  technicianId: this.techniciansWithSale[index].technicianId,
+		  saleId: this.techniciansWithSale[index].sale.id,
+		  saleAmount: this.techniciansWithSale[index].sale.amount,
+		  tipId: this.techniciansWithSale[index].tip.id,
+		  tipAmount: this.techniciansWithSale[index].tip.amount,
+		  fullName: this.techniciansWithSale[index].fullName
+		}
 		this.updateDialog = true
 	  },
 	  submit () {

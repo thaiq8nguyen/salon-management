@@ -1,6 +1,5 @@
 <template>
 	<div id="update-technician-sale-dialog">
-
 		<v-dialog v-model="dialog" width="500">
 			<v-card>
 				<v-card-title class="display-1 grey lighten-2" primary-title>Update Sale & Tip</v-card-title>
@@ -13,18 +12,18 @@
 									<p>Sale</p>
 								</v-col>
 								<v-col>
-									<p>$ {{ transaction.sale.amount }}</p>
+									<p>$ {{ transaction.saleAmount }}</p>
 								</v-col>
 								<v-col>
 									<v-btn color="error" small @click="deleteTransaction('sale')">Delete</v-btn>
 								</v-col>
 							</v-row>
-							<v-row v-show="transaction.tip">
+							<v-row v-show="transaction.tipId">
 								<v-col>
 									<p>Tip</p>
 								</v-col>
 								<v-col>
-									<p>$ {{transaction.tip.amount}}</p>
+									<p>$ {{transaction.tipAmount}}</p>
 								</v-col>
 								<v-col>
 									<v-btn color="error" small @click="deleteTransaction('tip')">Delete</v-btn>
@@ -36,7 +35,7 @@
 							<p class="headline">Update existing sale & tip</p>
 							<v-row align="center">
 								<v-col cols="4">
-									<v-text-field label="Sale"  prefix="$" v-model="saleAmount"></v-text-field>
+									<v-text-field label="Sale" prefix="$" v-model="saleAmount"></v-text-field>
 								</v-col>
 								<v-col cols="8" class="d-flex justify-start">
 									<v-btn color="primary" small @click="updateTransaction('sale')">Update
@@ -45,7 +44,8 @@
 							</v-row>
 							<v-row align="center">
 								<v-col cols="4">
-									<v-text-field label="Tip" prefix="$" v-model.number="updateTipAmount"></v-text-field>
+									<v-text-field label="Tip" prefix="$"
+									              v-model.number="updateTipAmount"></v-text-field>
 								</v-col>
 								<v-col cols="8" class="d-flex justify-start">
 									<v-btn color="primary" small @click="updateTransaction('tip')">Update
@@ -92,7 +92,19 @@
 <script>
   export default {
 	name: "UpdateTechnicianSaleModal",
-	props: ["date", "open", "transaction"],
+	//props: ["date", "open", "transaction"],
+	props: {
+	  open:{
+	    type: Boolean,
+	    default: false
+	  },
+	  transaction: {
+	    type: Object,
+	    required: true,
+
+	  }
+
+	},
 	data () {
 	  return {
 
@@ -104,10 +116,13 @@
 	  }
 	},
 	computed: {
+	  date () {
+		return this.$store.getters["TechnicianSales/date"]
+	  },
 	  updateSaleTransaction () {
 		let result = null
 		if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
-		  result = { transactionId: this.transaction.sale.id, amount: this.saleAmount }
+		  result = { transactionId: this.transaction.saleId, amount: this.saleAmount }
 		}
 
 		return result
@@ -116,7 +131,7 @@
 	  updateTipTransaction () {
 		let result = null
 		if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.tipAmount) {
-		  result = { transactionId: this.transaction.tip.id, amount: this.updateTipAmount }
+		  result = { transactionId: this.transaction.tipId, amount: this.updateTipAmount }
 		}
 
 		return result
@@ -152,7 +167,7 @@
 		})
 	  },
 	  updateTransaction (transaction) {
-		console.log(transaction)
+
 		let updateTransaction = this.updateSaleTransaction
 		if (transaction === "tip") {
 		  updateTransaction = this.updateTipTransaction

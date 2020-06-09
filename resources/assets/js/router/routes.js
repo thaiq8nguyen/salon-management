@@ -2,6 +2,7 @@ import Login from "Pages/Login";
 import Dashboard from "Pages/Dashboard";
 import Technicians from "Pages/Technicians";
 import Sales from "Pages/Sales";
+import Payday from "Pages/Payday";
 
 import Store from "Store";
 
@@ -23,6 +24,12 @@ const routes = [
     name: "Sales",
     path: "/sales",
     component: Sales,
+    beforeEnter: requiresAuth
+  },
+  {
+    name: "Payday",
+    path: "/payday",
+    component: Payday,
     beforeEnter: requiresAuth
   }
 ];

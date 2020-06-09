@@ -14,20 +14,21 @@ class PayPeriodController extends BaseController
         $this->payPeriod = $payPeriod;
     }
 
-    public function getPayPeriod(Request $request)
+    public function getPayPeriods(Request $request)
     {
-        $hasQuery = $request->query('query');
+        $query = $request->query('query');
 
         $payPeriods = '';
-        if($hasQuery){
-            if($hasQuery == 'current'){
-                $payPeriods = $this->payPeriod->getCurrentPayPeriod();
+        if($query){
+            if($query == 'current'){
+                $payPeriods = $this->payPeriod->getPayPeriod(null);
             }
-            else if($hasQuery == 'future'){
-                $payPeriods = $this->payPeriod->getFuturePayPeriods();
+            if($query == 'standard'){
+                $payPeriods = $this->payPeriod->getStandardPayPeriods();
             }
+
         }
 
-        return $this->sendResponse(['name' => 'pay periods', 'value' => $payPeriods]);
+        return $this->sendResponse(['name' => 'payPeriods', 'value' => $payPeriods]);
     }
 }

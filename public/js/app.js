@@ -2819,7 +2819,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DatePicker",
   props: [],
@@ -2846,6 +2845,50 @@ __webpack_require__.r(__webpack_exports__);
     goToPreviousDate: function goToPreviousDate() {
       this.date = this.$moment(this.date).subtract(1, "days");
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PayPeriodSelect",
+  data: function data() {
+    return {
+      periods: [],
+      selectPeriodId: null
+    };
+  },
+  computed: {
+    payPeriods: function payPeriods() {
+      return this.$store.getters["Payday/payPeriods"];
+    }
+  },
+  created: function created() {
+    this.$store.dispatch("Payday/getPayPeriods");
+  },
+  methods: {
+    setPayPeriod: function setPayPeriod() {}
   }
 });
 
@@ -2953,7 +2996,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UpdateTechnicianSaleModal",
-  props: ["date", "open", "transaction"],
+  //props: ["date", "open", "transaction"],
+  props: {
+    open: {
+      type: Boolean,
+      "default": false
+    },
+    transaction: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       saleAmount: "",
@@ -2963,12 +3016,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    date: function date() {
+      return this.$store.getters["TechnicianSales/date"];
+    },
     updateSaleTransaction: function updateSaleTransaction() {
       var result = null;
 
       if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
         result = {
-          transactionId: this.transaction.sale.id,
+          transactionId: this.transaction.saleId,
           amount: this.saleAmount
         };
       }
@@ -2980,7 +3036,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.tipAmount) {
         result = {
-          transactionId: this.transaction.tip.id,
+          transactionId: this.transaction.tipId,
           amount: this.updateTipAmount
         };
       }
@@ -3020,7 +3076,6 @@ __webpack_require__.r(__webpack_exports__);
     updateTransaction: function updateTransaction(transaction) {
       var _this2 = this;
 
-      console.log(transaction);
       var updateTransaction = this.updateSaleTransaction;
 
       if (transaction === "tip") {
@@ -3131,9 +3186,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3142,7 +3194,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      updatingSale: "",
+      updatingSale: {},
       updateDialog: false,
       activeSaleEntry: false,
       stagingSales: []
@@ -3172,17 +3224,15 @@ __webpack_require__.r(__webpack_exports__);
       return this.stagingSales.some(function (technician) {
         return technician.saleAmount;
       });
-    } // newSales () {
-    // return (this.stagingSales.filter(
-    //   stagingSale => (!this.technicians.sales.some(
-    // 	sale => (sale.technicianId === stagingSale.technicianId)))))
-    // },
-
+    }
   },
   created: function created() {
     this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date);
   },
   watch: {
+    date: function date(newDate) {
+      this.$store.dispatch("TechnicianSales/getAllTechnicianSales", newDate);
+    },
     techniciansWithoutSale: function techniciansWithoutSale(technicians) {
       if (technicians.length > 0) {
         this.stagingSales = technicians.map(function (technician) {
@@ -3198,7 +3248,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setUpdatingSale: function setUpdatingSale(index) {
-      this.updatingSale = this.techniciansWithSale[index];
+      this.updatingSale = {
+        technicianId: this.techniciansWithSale[index].technicianId,
+        saleId: this.techniciansWithSale[index].sale.id,
+        saleAmount: this.techniciansWithSale[index].sale.amount,
+        tipId: this.techniciansWithSale[index].tip.id,
+        tipAmount: this.techniciansWithSale[index].tip.amount,
+        fullName: this.techniciansWithSale[index].fullName
+      };
       this.updateDialog = true;
     },
     submit: function submit() {
@@ -3258,6 +3315,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: "Sales",
         path: "sales"
+      }, {
+        name: "Payday",
+        path: "payday"
       }]
     };
   },
@@ -3499,6 +3559,49 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/Payday/PayPeriodSelect */ "./resources/assets/js/components/Payday/PayPeriodSelect.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Payday",
+  components: {
+    PayPeriodSelect: Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  methods: {}
 });
 
 /***/ }),
@@ -13463,19 +13566,19 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c("v-card-title", [_vm._v("\n\t\t\tDate Picker\n\t\t")]),
-          _vm._v(" "),
           _c(
             "v-card-text",
             [
               _c(
                 "v-row",
+                { attrs: { align: "center" } },
                 [
                   _c(
                     "v-col",
+                    { staticClass: "d-flex justify-start", attrs: { md: "3" } },
                     [
-                      _c("v-btn", { on: { click: _vm.goToPreviousDate } }, [
-                        _vm._v("Previous")
+                      _c("v-icon", { on: { click: _vm.goToPreviousDate } }, [
+                        _vm._v("mdi-arrow-left")
                       ])
                     ],
                     1
@@ -13483,6 +13586,10 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
+                    {
+                      staticClass: "d-flex justify-center",
+                      attrs: { md: "6" }
+                    },
                     [
                       _c(
                         "v-menu",
@@ -13594,9 +13701,10 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
+                    { staticClass: "d-flex justify-end", attrs: { md: "3" } },
                     [
-                      _c("v-btn", { on: { click: _vm.goToNextDate } }, [
-                        _vm._v("Next")
+                      _c("v-icon", { on: { click: _vm.goToNextDate } }, [
+                        _vm._v("mdi-arrow-right")
                       ])
                     ],
                     1
@@ -13604,6 +13712,67 @@ var render = function() {
                 ],
                 1
               )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "pay-period-select" } },
+    [
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-text",
+            [
+              _c("v-select", {
+                staticClass: "blue--text",
+                attrs: {
+                  items: _vm.payPeriods,
+                  label: "Pay Periods",
+                  "single-line": "",
+                  "item-text": "periodName",
+                  "item-value": "id",
+                  bottom: ""
+                },
+                on: { input: _vm.setPayPeriod },
+                model: {
+                  value: _vm.selectPeriodId,
+                  callback: function($$v) {
+                    _vm.selectPeriodId = $$v
+                  },
+                  expression: "selectPeriodId"
+                }
+              })
             ],
             1
           )
@@ -13686,7 +13855,7 @@ var render = function() {
                               _c("v-col", [
                                 _c("p", [
                                   _vm._v(
-                                    "$ " + _vm._s(_vm.transaction.sale.amount)
+                                    "$ " + _vm._s(_vm.transaction.saleAmount)
                                   )
                                 ])
                               ]),
@@ -13720,8 +13889,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.transaction.tip,
-                                  expression: "transaction.tip"
+                                  value: _vm.transaction.tipId,
+                                  expression: "transaction.tipId"
                                 }
                               ]
                             },
@@ -13731,7 +13900,7 @@ var render = function() {
                               _c("v-col", [
                                 _c("p", [
                                   _vm._v(
-                                    "$ " + _vm._s(_vm.transaction.tip.amount)
+                                    "$ " + _vm._s(_vm.transaction.tipAmount)
                                   )
                                 ])
                               ]),
@@ -14134,7 +14303,7 @@ var render = function() {
                               _c(
                                 "v-card-title",
                                 {
-                                  staticClass: "headline grey lighten-2",
+                                  staticClass: "subtitle-1 grey lighten-2",
                                   attrs: { "primary-title": "" }
                                 },
                                 [
@@ -14904,6 +15073,60 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "payday" } },
+    [
+      _c(
+        "v-content",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c("v-row", [_c("v-col", [_c("pay-period-select")], 1)], 1),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                [
+                  _c("v-col", [_vm._v("Technician Sales Details")]),
+                  _vm._v(" "),
+                  _c("v-col", [_vm._v("List of Technicians")])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Sales.vue?vue&type=template&id=85d0c9c2&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/Sales.vue?vue&type=template&id=85d0c9c2& ***!
@@ -14928,12 +15151,15 @@ var render = function() {
         [
           _c(
             "v-container",
+            { attrs: { fluid: "" } },
             [
               _c(
                 "v-row",
+                { attrs: { justify: "center" } },
                 [
                   _c(
                     "v-col",
+                    { attrs: { md: "3" } },
                     [_c("date-picker", { on: { date: _vm.setDate } })],
                     1
                   ),
@@ -73264,6 +73490,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Payday/PayPeriodSelect.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/PayPeriodSelect.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true& */ "./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true&");
+/* harmony import */ var _PayPeriodSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PayPeriodSelect.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PayPeriodSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7952cabe",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Payday/PayPeriodSelect.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PayPeriodSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PayPeriodSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PayPeriodSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PayPeriodSelect_vue_vue_type_template_id_7952cabe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue":
 /*!**************************************************************************************!*\
   !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue ***!
@@ -73678,6 +73973,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/pages/Payday.vue":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/pages/Payday.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payday.vue?vue&type=template&id=005d171e&scoped=true& */ "./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true&");
+/* harmony import */ var _Payday_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Payday.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Payday_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "005d171e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/pages/Payday.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payday_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Payday.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Payday.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payday_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Payday.vue?vue&type=template&id=005d171e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Payday.vue?vue&type=template&id=005d171e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payday_vue_vue_type_template_id_005d171e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/pages/Sales.vue":
 /*!*********************************************!*\
   !*** ./resources/assets/js/pages/Sales.vue ***!
@@ -73875,12 +74239,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Pages_Dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Pages/Dashboard */ "./resources/assets/js/pages/Dashboard.vue");
 /* harmony import */ var Pages_Technicians__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Pages/Technicians */ "./resources/assets/js/pages/Technicians.vue");
 /* harmony import */ var Pages_Sales__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! Pages/Sales */ "./resources/assets/js/pages/Sales.vue");
-/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
+/* harmony import */ var Pages_Payday__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! Pages/Payday */ "./resources/assets/js/pages/Payday.vue");
+/* harmony import */ var Store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! Store */ "./resources/assets/js/store/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -73906,6 +74272,11 @@ var routes = [{
   path: "/sales",
   component: Pages_Sales__WEBPACK_IMPORTED_MODULE_4__["default"],
   beforeEnter: requiresAuth
+}, {
+  name: "Payday",
+  path: "/payday",
+  component: Pages_Payday__WEBPACK_IMPORTED_MODULE_5__["default"],
+  beforeEnter: requiresAuth
 }];
 
 function requiresAuth(_x, _x2, _x3) {
@@ -73919,10 +74290,10 @@ function _requiresAuth() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return Store__WEBPACK_IMPORTED_MODULE_5__["default"].getters["Authentications/isAuthenticated"];
+            return Store__WEBPACK_IMPORTED_MODULE_6__["default"].getters["Authentications/isAuthenticated"];
 
           case 2:
-            if (Store__WEBPACK_IMPORTED_MODULE_5__["default"].getters["Authentications/isAuthenticated"]) {
+            if (Store__WEBPACK_IMPORTED_MODULE_6__["default"].getters["Authentications/isAuthenticated"]) {
               next();
             } else {
               next({
@@ -74010,6 +74381,38 @@ var logout = function logout() {
   login: login,
   register: register,
   logout: logout
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/services/paydayServices.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/services/paydayServices.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Services_apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/apiClient */ "./resources/assets/js/services/apiClient.js");
+
+
+var getStandardPayPeriods = function getStandardPayPeriods() {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/pay-periods?query=standard");
+};
+
+var getCurrentPayPeriod = function getCurrentPayPeriod() {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/pay-periods?query=current");
+};
+
+var getTechnicianSales = function getTechnicianSales(payPeriodId) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/pay-periods/".concat(payPeriodId, "/technician-sales"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getStandardPayPeriods: getStandardPayPeriods,
+  getCurrentPayPeriod: getCurrentPayPeriod,
+  getTechnicianSales: getTechnicianSales
 });
 
 /***/ }),
@@ -74137,6 +74540,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_authentications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/authentications */ "./resources/assets/js/store/modules/authentications/index.js");
 /* harmony import */ var _modules_technicians__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/technicians */ "./resources/assets/js/store/modules/technicians/index.js");
 /* harmony import */ var _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/technician-sales */ "./resources/assets/js/store/modules/technician-sales/index.js");
+/* harmony import */ var _modules_payday__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/payday */ "./resources/assets/js/store/modules/payday/index.js");
+
 
 
 
@@ -74152,7 +74557,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   modules: {
     Authentications: _modules_authentications__WEBPACK_IMPORTED_MODULE_7__["default"],
     Technicians: _modules_technicians__WEBPACK_IMPORTED_MODULE_8__["default"],
-    TechnicianSales: _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__["default"]
+    TechnicianSales: _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__["default"],
+    Payday: _modules_payday__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
   state: {},
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -74274,6 +74680,110 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_AUTHENTICATION: function SET_AUTHENTICATION(state, authentication) {
     state.user = authentication;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/payday/actions.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/store/modules/payday/actions.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/paydayServices */ "./resources/assets/js/services/paydayServices.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getPayPeriods: function getPayPeriods(_ref) {
+    var commit = _ref.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getStandardPayPeriods().then(function (response) {
+        commit("SET_PAY_PERIODS", response.data.payPeriods);
+        resolve();
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/payday/getters.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/store/modules/payday/getters.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  payPeriods: function payPeriods(state) {
+    return state.payPeriods.map(function (payPeriod) {
+      return {
+        id: payPeriod.id,
+        periodName: payPeriod.beginDate + " - " + payPeriod.endDate
+      };
+    }); //return payPeriods;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/payday/index.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/store/modules/payday/index.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getters */ "./resources/assets/js/store/modules/payday/getters.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./resources/assets/js/store/modules/payday/actions.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/assets/js/store/modules/payday/mutations.js");
+
+
+
+var state = {
+  payPeriods: [],
+  selectedPayPeriod: null,
+  payPeriodSales: []
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  getters: _getters__WEBPACK_IMPORTED_MODULE_0__["default"],
+  actions: _actions__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/payday/mutations.js":
+/*!***************************************************************!*\
+  !*** ./resources/assets/js/store/modules/payday/mutations.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  SET_PAY_PERIODS: function SET_PAY_PERIODS(state, payPeriods) {
+    state.payPeriods = payPeriods;
+  },
+  SET_PAY_PERIOD: function SET_PAY_PERIOD(state, payPeriodId) {
+    var selectedIndex = state.payPeriods.findIndex(function (payPeriod) {
+      return payPeriod.id === payPeriodId;
+    });
+    state.selectedPayPeriod = state.payPeriods[selectedIndex];
   }
 });
 
