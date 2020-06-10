@@ -10,7 +10,7 @@
 								<v-list-item-content>
 									<v-list-item-title>{{technician.fullName}}</v-list-item-title>
 									<v-list-item-subtitle>Sale: $ {{technician.sale.amount}}</v-list-item-subtitle>
-									<v-list-item-subtitle>Tip: $ {{technician.tip.amount}}</v-list-item-subtitle>
+									<v-list-item-subtitle>Tip: $ {{technician.tip ? technician.tip.amount: "None"}}</v-list-item-subtitle>
 								</v-list-item-content>
 								<v-list-item-action>
 									<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
@@ -132,8 +132,8 @@
 		  technicianId: this.techniciansWithSale[index].technicianId,
 		  saleId: this.techniciansWithSale[index].sale.id,
 		  saleAmount: this.techniciansWithSale[index].sale.amount,
-		  tipId: this.techniciansWithSale[index].tip.id,
-		  tipAmount: this.techniciansWithSale[index].tip.amount,
+		  tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null ,
+		  tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
 		  fullName: this.techniciansWithSale[index].fullName
 		}
 		this.updateDialog = true

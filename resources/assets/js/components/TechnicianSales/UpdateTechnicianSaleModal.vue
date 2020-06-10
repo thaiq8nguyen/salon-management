@@ -53,7 +53,7 @@
 								</v-col>
 							</v-row>
 						</v-container>
-						<div v-show="!transaction.tip">
+						<div v-show="!transaction.tipId">
 							<v-divider></v-divider>
 							<v-container>
 								<p>There is no existing tip, you can add it below</p>

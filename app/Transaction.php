@@ -20,13 +20,25 @@ class Transaction extends Model
         'debit',
         'credit',
     ];
-    protected $hidden = ['laravel_through_key'];
-    protected $casts = ['credit' => 'double'];
+    protected $hidden = ['laravel_through_key', 'credit', 'id'];
+    protected $casts = ['creditAmount' => 'double'];
+    protected $maps = ['credit' => 'creditAmount', 'id' => 'transactionId'];
+    protected $appends = ['creditAmount', 'transactionId'];
 
 
     public function transactionable()
     {
         return $this->morphTo();
+    }
+
+    public function getCreditAmountAttribute()
+    {
+        return $this->attributes['credit'];
+    }
+
+    public function getTransactionIdAttribute()
+    {
+        return $this->attributes['id'];
     }
 
 

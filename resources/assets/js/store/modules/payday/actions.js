@@ -15,5 +15,21 @@ export default {
           }
         });
     });
+  },
+  getTechnicianSales({ commit }, payPeriodId) {
+    return new Promise((resolve, reject) => {
+      return PaydayServices.getTechnicianSales(payPeriodId)
+        .then((response) => {
+          commit(
+            "SET_TECHNICIAN_SALES",
+            response.data.technicianSalesInPayPeriod
+          );
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
   }
 };

@@ -2878,7 +2878,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PayPeriodSelect",
   data: function data() {
@@ -2906,6 +2905,108 @@ __webpack_require__.r(__webpack_exports__);
   watch: {},
   methods: {
     setPayPeriod: function setPayPeriod() {//console.log(this.selectedPayPeriodId)
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TechnicianSales",
+  data: function data() {
+    return {};
+  },
+  computed: {
+    selectedPayPeriodId: function selectedPayPeriodId() {
+      var payPeriod = this.$store.getters["Payday/selectedPayPeriod"];
+      return payPeriod.id;
+    },
+    technicianSales: function technicianSales() {
+      var _this = this;
+
+      var sales = this.$store.getters["Payday/technicianSales"];
+      return sales.map(function (technician) {
+        return {
+          fullName: technician.fullName,
+          sales: _this.groupBy(technician.sales, "date")
+        };
+      });
+    }
+  },
+  watch: {
+    selectedPayPeriodId: function selectedPayPeriodId(payPeriodId) {
+      this.$store.dispatch("Payday/getTechnicianSales", payPeriodId);
+    }
+  },
+  methods: {
+    groupBy: function groupBy(array, key) {
+      var _this2 = this;
+
+      var dates = array.reduce(function (result, currentValue) {
+        if (!result[currentValue[key]]) {
+          result[currentValue[key]] = [];
+        }
+
+        result[currentValue[key]].push({
+          amount: currentValue.creditAmount,
+          name: currentValue.name,
+          transactionId: currentValue.transactionId
+        });
+        return result;
+      }, {});
+      return Object.keys(dates).map(function (key) {
+        return {
+          date: _this2.$moment(key).format("ddd MM/DD/YYYY"),
+          transactions: dates[key]
+        };
+      });
     }
   }
 });
@@ -3270,8 +3371,8 @@ __webpack_require__.r(__webpack_exports__);
         technicianId: this.techniciansWithSale[index].technicianId,
         saleId: this.techniciansWithSale[index].sale.id,
         saleAmount: this.techniciansWithSale[index].sale.amount,
-        tipId: this.techniciansWithSale[index].tip.id,
-        tipAmount: this.techniciansWithSale[index].tip.amount,
+        tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null,
+        tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
         fullName: this.techniciansWithSale[index].fullName
       };
       this.updateDialog = true;
@@ -3591,6 +3692,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/Payday/PayPeriodSelect */ "./resources/assets/js/components/Payday/PayPeriodSelect.vue");
+/* harmony import */ var Components_Payday_TechnicianSales__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Components/Payday/TechnicianSales */ "./resources/assets/js/components/Payday/TechnicianSales.vue");
+//
+//
 //
 //
 //
@@ -3610,10 +3714,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Payday",
   components: {
-    PayPeriodSelect: Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PayPeriodSelect: Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TechnicianSales: Components_Payday_TechnicianSales__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {};
@@ -13830,6 +13936,112 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "technician-sales" } },
+    [
+      _c(
+        "v-row",
+        _vm._l(_vm.technicianSales, function(technician, index) {
+          return _c(
+            "v-col",
+            { key: index, attrs: { cols: "4" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [_vm._v(_vm._s(technician.fullName))]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c("v-simple-table", { attrs: { dense: "" } }, [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", [_vm._v("Date")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Sale")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Tip")])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(technician.sales, function(sale) {
+                            return _c(
+                              "tr",
+                              { key: sale.transactionId },
+                              [
+                                _c("td", [_vm._v(_vm._s(sale.date))]),
+                                _vm._v(" "),
+                                _vm._l(sale.transactions, function(
+                                  transaction
+                                ) {
+                                  return _c(
+                                    "td",
+                                    { key: transaction.transactionId },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t$ " +
+                                          _vm._s(transaction.amount) +
+                                          "\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    { staticClass: "d-flex justify-center" },
+                    [_c("v-btn", { staticClass: "success" }, [_vm._v("Pay")])],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        }),
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue?vue&type=template&id=a9bfa0ea&scoped=true& ***!
@@ -14085,8 +14297,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: !_vm.transaction.tip,
-                              expression: "!transaction.tip"
+                              value: !_vm.transaction.tipId,
+                              expression: "!transaction.tipId"
                             }
                           ]
                         },
@@ -14288,7 +14500,11 @@ var render = function() {
                                     _c("v-list-item-subtitle", [
                                       _vm._v(
                                         "Tip: $ " +
-                                          _vm._s(technician.tip.amount)
+                                          _vm._s(
+                                            technician.tip
+                                              ? technician.tip.amount
+                                              : "None"
+                                          )
                                       )
                                     ])
                                   ],
@@ -15141,15 +15357,7 @@ var render = function() {
             [
               _c("v-row", [_c("v-col", [_c("pay-period-select")], 1)], 1),
               _vm._v(" "),
-              _c(
-                "v-row",
-                [
-                  _c("v-col", [_vm._v("Technician Sales Details")]),
-                  _vm._v(" "),
-                  _c("v-col", [_vm._v("List of Technicians")])
-                ],
-                1
-              )
+              _c("v-row", [_c("v-col", [_c("technician-sales")], 1)], 1)
             ],
             1
           )
@@ -15500,13 +15708,7 @@ var render = function() {
                                     { key: technician.id },
                                     [
                                       _c("v-list-item-content", [
-                                        _vm._v(
-                                          _vm._s(
-                                            technician.first_name +
-                                              " " +
-                                              technician.last_name
-                                          )
-                                        )
+                                        _vm._v(_vm._s(technician.fullName))
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -73599,6 +73801,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Payday/TechnicianSales.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/TechnicianSales.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true& */ "./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true&");
+/* harmony import */ var _TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TechnicianSales.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4d455444",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Payday/TechnicianSales.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnicianSales.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/TechnicianSales.vue?vue&type=template&id=4d455444&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnicianSales_vue_vue_type_template_id_4d455444_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue":
 /*!**************************************************************************************!*\
   !*** ./resources/assets/js/components/TechnicianSales/UpdateTechnicianSaleModal.vue ***!
@@ -74750,6 +75021,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     });
+  },
+  getTechnicianSales: function getTechnicianSales(_ref2, payPeriodId) {
+    var commit = _ref2.commit;
+    return new Promise(function (resolve, reject) {
+      return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianSales(payPeriodId).then(function (response) {
+        commit("SET_TECHNICIAN_SALES", response.data.technicianSalesInPayPeriod);
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
   }
 });
 
@@ -74775,6 +75058,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   selectedPayPeriod: function selectedPayPeriod(state) {
     return state.selectedPayPeriod;
+  },
+  technicianSales: function technicianSales(state) {
+    return state.technicianSales;
   }
 });
 
@@ -74798,7 +75084,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = {
   payPeriods: [],
   currentPayPeriod: null,
-  technicianSalesInPayPeriod: []
+  technicianSales: []
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
@@ -74839,6 +75125,9 @@ __webpack_require__.r(__webpack_exports__);
       var payDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(payPeriod.payDate);
       return beginDate.isSameOrBefore(today) && payDate.isSameOrAfter(today);
     })[0];
+  },
+  SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSales) {
+    state.technicianSales = technicianSales;
   }
 });
 

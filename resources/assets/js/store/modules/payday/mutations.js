@@ -17,5 +17,8 @@ export default {
       const payDate = moment(payPeriod.payDate);
       return beginDate.isSameOrBefore(today) && payDate.isSameOrAfter(today);
     })[0];
+  },
+  SET_TECHNICIAN_SALES(state, technicianSales) {
+    state.technicianSales = technicianSales;
   }
 };

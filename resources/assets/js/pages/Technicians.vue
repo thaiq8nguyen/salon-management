@@ -60,7 +60,7 @@
               <v-card-text>
                 <v-list>
                   <v-list-item v-for="technician in technicians" :key="technician.id">
-                    <v-list-item-content>{{`${technician.first_name} ${technician.last_name}`}}</v-list-item-content>
+                    <v-list-item-content>{{ technician.fullName }}</v-list-item-content>
                     <v-list-item-action>
                       <v-btn small @click="handleUpdateTechnicianModal(technician.id)">Update</v-btn>
                     </v-list-item-action>
@@ -111,7 +111,7 @@
 
 	},
 	watch:{
-		
+
 	},
 	computed: {
 	  technicians () {
@@ -134,8 +134,8 @@
 			if(success){
 				this.add();
 			}
-			
-		})  
+
+		})
 	  },
 
 	  add () {
@@ -146,7 +146,7 @@
 		.catch(errors => {
 
 		})
-		
+
 	  },
 	},
 

@@ -8,8 +8,10 @@
 					</v-col>
 				</v-row>
 				<v-row>
-					<v-col>Technician Sales Details</v-col>
-					<v-col>List of Technicians</v-col>
+
+					<v-col>
+						<technician-sales></technician-sales>
+					</v-col>
 				</v-row>
 			</v-container>
 		</v-content>
@@ -18,9 +20,11 @@
 
 <script>
 	import PayPeriodSelect from "Components/Payday/PayPeriodSelect"
+	import TechnicianSales from "Components/Payday/TechnicianSales"
+
   export default {
 	name: "Payday",
-    components: { PayPeriodSelect },
+    components: {  PayPeriodSelect, TechnicianSales },
 	data () {
 	  return {}
 	},

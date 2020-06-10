@@ -23,7 +23,7 @@ class PayPeriodRepository implements PayPeriodInterface
     {
         $currentPayPeriod = $this->getPayPeriod();
         $previousPayPeriods = PayPeriod::where('pay_date', '<=', $currentPayPeriod->payDate)
-            ->limit(3)->orderBy('pay_date','desc')->select([
+            ->limit(3)->orderBy('pay_date', 'desc')->select([
                 'id',
                 'begin_date AS beginDate',
                 'end_date AS endDate',
@@ -55,16 +55,23 @@ class PayPeriodRepository implements PayPeriodInterface
 
     public function getTechnicianSales($payPeriodId)
     {
-        $payPeriod =  $this->getPayPeriod($payPeriodId);
+        $payPeriod = $this->getPayPeriod($payPeriodId);
 
-        $technicianSales = Technician::with(['sales' => function($query) use($payPeriod){
-            $query->whereBetween('date', [$payPeriod->beginDate, $payPeriod->endDate]);
-        }])->get();
+        $dateFilter = function($query) use ($payPeriod){
+            $query->whereBetween('date', [$payPeriod->beginDate, $payPeriod->endDate])->orderBy('date', 'asc')
+                ->groupBy(['date','transactionable_id']) ;
+        };
 
-        return $technicianSales;
+        $technicians = Technician::with([
+            'sales' => $dateFilter
+        ])->whereHas('sales', $dateFilter)->get();
 
 
 
+
+
+
+        return $technicians;
 
     }
 

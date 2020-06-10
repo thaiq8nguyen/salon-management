@@ -9,5 +9,8 @@ export default {
   },
   selectedPayPeriod(state) {
     return state.selectedPayPeriod;
+  },
+  technicianSales(state) {
+    return state.technicianSales;
   }
 };
