@@ -69,7 +69,7 @@
 </template>
 
 <script>
-  import UpdateTechnicianSaleModal from "Components/TechnicianSales/UpdateTechnicianSaleModal"
+  import UpdateTechnicianSaleModal from "Components/Sales/UpdateTechnicianSaleModal"
 
   export default {
 	name: "TechnicianSales",

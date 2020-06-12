@@ -21,7 +21,7 @@ class Transaction extends Model
         'credit',
     ];
     protected $hidden = ['laravel_through_key', 'credit', 'id'];
-    protected $casts = ['creditAmount' => 'double'];
+    protected $casts = ['creditAmount' => 'double', 'date' => 'date:m/d/y'];
     protected $maps = ['credit' => 'creditAmount', 'id' => 'transactionId'];
     protected $appends = ['creditAmount', 'transactionId'];
 

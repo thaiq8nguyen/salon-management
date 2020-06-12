@@ -1,43 +1,26 @@
 <template>
-	<div id="technician-sales">
-		<v-row>
-			<v-col cols="4" v-for="(technician, index) in technicianSales" :key="index">
-				<v-card>
-					<v-card-title>{{technician.fullName}}</v-card-title>
-					<v-card-text>
-						<v-simple-table dense>
-							<thead>
-							<tr>
-								<th>Date</th>
-								<th>Sale</th>
-								<th>Tip</th>
-							</tr>
-
-							</thead>
-							<tbody>
-							<tr v-for="sale in technician.sales" :key="sale.transactionId">
-								<td>{{ sale.date }}</td>
-
-								<td v-for="transaction in sale.transactions" :key="transaction.transactionId">
-									$ {{transaction.amount}}
-								</td>
-							</tr>
-							</tbody>
-						</v-simple-table>
-					</v-card-text>
-					<v-card-actions class="d-flex justify-center">
-						<v-btn class="success">Make Payment</v-btn>
-					</v-card-actions>
-				</v-card>
-			</v-col>
-		</v-row>
-
+	<div id="technicians">
+		<p>Technicians</p>
+		<v-card>
+			<v-card-text>
+				<v-list>
+					<v-list-item v-for="(technician, index) in technicians" :key="index">
+						<v-list-item-content>
+							<v-list-item-title>{{technician.fullName}}</v-list-item-title>
+						</v-list-item-content>
+						<v-list-item-action>
+							<v-btn small>Detail</v-btn>
+						</v-list-item-action>
+					</v-list-item>
+				</v-list>
+			</v-card-text>
+		</v-card>
 	</div>
 </template>
 
 <script>
   export default {
-	name: "TechnicianSales",
+	name: "Technicians",
 	data () {
 	  return {}
 	},
@@ -47,7 +30,7 @@
 		return payPeriod.id
 	  },
 
-	  technicianSales () {
+	  technicians () {
 		let sales = this.$store.getters["Payday/technicianSales"]
 		return sales.map(technician => {
 		  return {

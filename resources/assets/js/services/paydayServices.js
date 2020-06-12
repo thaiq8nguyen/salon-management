@@ -7,12 +7,18 @@ const getStandardPayPeriods = () => {
 const getCurrentPayPeriod = () => {
   return authClient.get("/pay-periods?query=current");
 };
+
 const getTechnicianSales = (payPeriodId) => {
-  return authClient.get(`/pay-periods/${payPeriodId}/technician-sales`);
+  return authClient.get(`/pay-periods/${payPeriodId}/technicians/sales`);
+};
+
+const getTechnicianEarnings = (payPeriodId) => {
+  return authClient.get(`/pay-periods/${payPeriodId}/technicians/earnings`);
 };
 
 export default {
   getStandardPayPeriods,
   getCurrentPayPeriod,
-  getTechnicianSales
+  getTechnicianSales,
+  getTechnicianEarnings
 };

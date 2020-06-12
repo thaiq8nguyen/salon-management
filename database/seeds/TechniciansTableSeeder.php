@@ -11,8 +11,9 @@ class TechniciansTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Technician::class,11)->create()->each(function($t){
-            $t->salary()->save(factory(App\Salary::class)->make());
-        });
+        DB::table('technicians')->insert([
+            ['first_name' => 'Annie', 'last_name' => "Le"],
+            ['first_name' => 'Nguyen', 'last_name' => "Le"]
+        ]);
     }
 }

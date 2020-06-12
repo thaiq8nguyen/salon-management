@@ -22,7 +22,7 @@
 
 <script>
   import DatePicker from "Components/DatePicker"
-  import TechnicianSales from "Components/TechnicianSales/index"
+  import TechnicianSales from "Components/Sales/TechnicianSales"
 
   export default {
 	name: "Sales",

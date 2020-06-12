@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PaymentMethodsTableSeeder::class,
             AccountTypesTableSeeder::class,
             CompanyAccountsTableSeeder::class,
+            TechniciansTableSeeder::class,
+            TechnicianDetailsTableSeeder::class,
             TechnicianAccountsTableSeeder::class,
             TransactionItemsTableSeeder::class,
         ]);

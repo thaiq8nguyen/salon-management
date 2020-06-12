@@ -22,11 +22,18 @@ class Technician extends Model
         'is_contractor',
         'email',
         'user_id',
-        'id'
+        'id',
+        'firstName',
+        'lastName',
+        'fullName',
     ];
     protected $maps = ['first_name' => 'firstName', 'last_name' => 'lastName', 'id' => 'technicianId'];
     protected $appends = ['firstName', 'lastName', 'fullName', 'technicianId'];
 
+    public function detail()
+    {
+        return $this->hasOne(TechnicianDetail::class);
+    }
 
     public function accounts()
     {

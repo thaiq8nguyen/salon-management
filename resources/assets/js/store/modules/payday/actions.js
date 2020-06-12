@@ -16,6 +16,7 @@ export default {
         });
     });
   },
+
   getTechnicianSales({ commit }, payPeriodId) {
     return new Promise((resolve, reject) => {
       return PaydayServices.getTechnicianSales(payPeriodId)
@@ -24,6 +25,20 @@ export default {
             "SET_TECHNICIAN_SALES",
             response.data.technicianSalesInPayPeriod
           );
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
+  },
+
+  getTechnicianEarnings({ commit }, payPeriodId) {
+    return new Promise((resolve, reject) => {
+      return PaydayServices.getTechnicianEarnings(payPeriodId)
+        .then((response) => {
+          commit("SET_TECHNICIAN_EARNINGS", response.data.technicianEarnings);
         })
         .catch((errors) => {
           if (errors.response) {

@@ -7,10 +7,16 @@ export default {
       };
     });
   },
+
   selectedPayPeriod(state) {
     return state.selectedPayPeriod;
   },
+
   technicianSales(state) {
     return state.technicianSales;
+  },
+
+  technicianEarnings(state) {
+    return state.technicianEarnings;
   }
 };

@@ -5,7 +5,8 @@ import mutations from "./mutations";
 const state = {
   payPeriods: [],
   currentPayPeriod: null,
-  technicianSales: []
+  technicianSales: [],
+  technicianEarnings: []
 };
 
 export default {
