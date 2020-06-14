@@ -5,7 +5,7 @@
 				<v-row align="center">
 					<v-col cols="3">
 						<v-select :items="payPeriods" label="Pay Periods" single-line class = "blue--text"
-						          v-model="selectedPayPeriodId" item-text="periodName" item-value="id" bottom>
+						          v-model="selectedPayPeriodId" item-text="name" item-value="id" bottom>
 						</v-select>
 					</v-col>
 					<v-col class="d-flex justify-center">

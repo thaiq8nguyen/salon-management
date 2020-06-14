@@ -54,6 +54,11 @@ class Technician extends Model
                 'transaction_items.id');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
     public function payPeriods()
     {
         return $this->belongsToMany(Technician::class, 'payment_reports')->withPivot('url');

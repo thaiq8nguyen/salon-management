@@ -24,7 +24,11 @@ export default {
     state.technicianSales = technicianSales;
   },
 
-  SET_TECHNICIAN_EARNINGS(state, technicianEarnings) {
-    state.technicianEarnings = technicianEarnings;
+  SET_ALL_TECHNICIAN_EARNINGS(state, allTechnicianEarnings) {
+    state.technicianEarnings = allTechnicianEarnings;
+  },
+
+  SET_SELECTED_TECHNICIAN(state, technicianId) {
+    state.selectedTechnicianId = technicianId;
   }
 };

@@ -73,7 +73,7 @@ export default {
       this.$store
         .dispatch("Authentications/login", this.credential)
         .then(() => {
-          console.log("routing");
+          this.$store.dispatch("Technicians/getTechnicians")
           this.$router.push({ name: "Dashboard" });
         });
     }

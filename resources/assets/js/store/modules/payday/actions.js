@@ -38,7 +38,10 @@ export default {
     return new Promise((resolve, reject) => {
       return PaydayServices.getTechnicianEarnings(payPeriodId)
         .then((response) => {
-          commit("SET_TECHNICIAN_EARNINGS", response.data.technicianEarnings);
+          commit(
+            "SET_ALL_TECHNICIAN_EARNINGS",
+            response.data.technicianEarnings.technicians
+          );
         })
         .catch((errors) => {
           if (errors.response) {

@@ -2850,6 +2850,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "EarningDetails",
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  methods: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=script&lang=js& ***!
@@ -2951,25 +2980,27 @@ __webpack_require__.r(__webpack_exports__);
       return payPeriod.id;
     },
     technicians: function technicians() {
-      var _this = this;
+      var sales = this.$store.getters["Payday/technicianEarnings"]; // return sales.map(technician => {
+      //   return {
+      // 	fullName: technician.fullName,
+      // 	sales: this.groupBy(technician.sales, "date"),
+      //   }
+      // })
 
-      var sales = this.$store.getters["Payday/technicianSales"];
-      return sales.map(function (technician) {
-        return {
-          fullName: technician.fullName,
-          sales: _this.groupBy(technician.sales, "date")
-        };
-      });
+      return sales;
     }
   },
   watch: {
     selectedPayPeriodId: function selectedPayPeriodId(payPeriodId) {
-      this.$store.dispatch("Payday/getTechnicianSales", payPeriodId);
+      this.$store.dispatch("Payday/getTechnicianEarnings", payPeriodId);
     }
+  },
+  created: function created() {
+    this.$store.dispatch("Payday/getTechnicianEarnings", this.selectedPayPeriodId);
   },
   methods: {
     groupBy: function groupBy(array, key) {
-      var _this2 = this;
+      var _this = this;
 
       var dates = array.reduce(function (result, currentValue) {
         if (!result[currentValue[key]]) {
@@ -2985,7 +3016,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {});
       return Object.keys(dates).map(function (key) {
         return {
-          date: _this2.$moment(key).format("ddd MM/DD/YYYY"),
+          date: _this.$moment(key).format("ddd MM/DD/YYYY"),
           transactions: dates[key]
         };
       });
@@ -3074,7 +3105,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3094,18 +3124,17 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["TechnicianSales/date"];
     },
     allTechnicianSales: function allTechnicianSales() {
-      var technicians = this.$store.getters["TechnicianSales/allTechnicianSales"];
-      return technicians.sales;
+      return this.$store.getters["TechnicianSales/allTechnicianSales"];
     },
     techniciansWithSale: function techniciansWithSale() {
       return this.allTechnicianSales.filter(function (technician) {
-        return technician.sale !== null;
+        return technician.sales !== null;
       });
     },
     techniciansWithoutSale: function techniciansWithoutSale() {
       if (this.allTechnicianSales.length) {
         return this.allTechnicianSales.filter(function (technician) {
-          return technician.sale === null;
+          return technician.sales === null;
         });
       }
     },
@@ -3652,7 +3681,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.dispatch("Authentications/login", this.credential).then(function () {
-        console.log("routing");
+        _this.$store.dispatch("Technicians/getTechnicians");
 
         _this.$router.push({
           name: "Dashboard"
@@ -3675,6 +3704,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Components/Payday/PayPeriodSelect */ "./resources/assets/js/components/Payday/PayPeriodSelect.vue");
 /* harmony import */ var Components_Payday_Technicians__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Components/Payday/Technicians */ "./resources/assets/js/components/Payday/Technicians.vue");
+/* harmony import */ var Components_Payday_EarningDetails__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Components/Payday/EarningDetails */ "./resources/assets/js/components/Payday/EarningDetails.vue");
 //
 //
 //
@@ -3694,12 +3724,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
- //import TechnicianSales from "Components/Payday/TechnicianSales"
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Payday",
   components: {
+    EarningDetails: Components_Payday_EarningDetails__WEBPACK_IMPORTED_MODULE_2__["default"],
     PayPeriodSelect: Components_Payday_PayPeriodSelect__WEBPACK_IMPORTED_MODULE_0__["default"],
     Technicians: Components_Payday_Technicians__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -3891,8 +3925,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["Technicians/technicians"];
     }
   },
-  mounted: function mounted() {
-    this.$store.dispatch("Technicians/getTechnicians");
+  mounted: function mounted() {// this.$store.dispatch("Technicians/getTechnicians")
   },
   methods: {
     handleUpdateTechnicianModal: function handleUpdateTechnicianModal(id) {
@@ -13835,6 +13868,39 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "earning-details" } },
+    [
+      _c("p", [_vm._v("Earning Details")]),
+      _vm._v(" "),
+      _c("v-card", [_c("v-card-title")], 1)
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/PayPeriodSelect.vue?vue&type=template&id=7952cabe&scoped=true& ***!
@@ -13874,7 +13940,7 @@ var render = function() {
                           items: _vm.payPeriods,
                           label: "Pay Periods",
                           "single-line": "",
-                          "item-text": "periodName",
+                          "item-text": "name",
                           "item-value": "id",
                           bottom: ""
                         },
@@ -14020,68 +14086,74 @@ var render = function() {
           _c(
             "v-row",
             [
-              _c(
-                "v-col",
-                { attrs: { cols: "3" } },
-                [
-                  _c(
-                    "v-list",
+              _vm.techniciansWithSale.length > 0
+                ? _c(
+                    "v-col",
+                    { attrs: { cols: "3" } },
                     [
-                      _c("v-subheader", [_vm._v("Technicians With Sale")]),
-                      _vm._v(" "),
-                      _vm._l(_vm.techniciansWithSale, function(
-                        technician,
-                        index
-                      ) {
-                        return _c(
-                          "v-list-item",
-                          { key: index },
-                          [
-                            _c(
+                      _c(
+                        "v-list",
+                        [
+                          _c("v-subheader", [_vm._v("Technicians With Sale")]),
+                          _vm._v(" "),
+                          _vm._l(_vm.techniciansWithSale, function(
+                            technician,
+                            index
+                          ) {
+                            return _c(
                               "v-list-item",
-                              { attrs: { "three-line": "" } },
+                              { key: index },
                               [
                                 _c(
-                                  "v-list-item-content",
-                                  [
-                                    _c("v-list-item-title", [
-                                      _vm._v(_vm._s(technician.fullName))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-item-subtitle", [
-                                      _vm._v(
-                                        "Sale: $ " +
-                                          _vm._s(technician.sale.amount)
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-item-subtitle", [
-                                      _vm._v(
-                                        "Tip: $ " +
-                                          _vm._s(
-                                            technician.tip
-                                              ? technician.tip.amount
-                                              : "None"
-                                          )
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item-action",
+                                  "v-list-item",
+                                  { attrs: { "three-line": "" } },
                                   [
                                     _c(
-                                      "v-icon",
-                                      {
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.setUpdatingSale(index)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("mdi-pencil")]
+                                      "v-list-item-content",
+                                      [
+                                        _c("v-list-item-title", [
+                                          _vm._v(_vm._s(technician.fullName))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("v-list-item-subtitle", [
+                                          _vm._v(
+                                            "Sale: $ " +
+                                              _vm._s(technician.sale.amount)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("v-list-item-subtitle", [
+                                          _vm._v(
+                                            "Tip: $ " +
+                                              _vm._s(
+                                                technician.tip
+                                                  ? technician.tip.amount
+                                                  : "None"
+                                              )
+                                          )
+                                        ])
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-list-item-action",
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.setUpdatingSale(
+                                                  index
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("mdi-pencil")]
+                                        )
+                                      ],
+                                      1
                                     )
                                   ],
                                   1
@@ -14089,27 +14161,24 @@ var render = function() {
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      })
+                          })
+                        ],
+                        2
+                      )
                     ],
-                    2
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "9" } },
                 [
                   _c(
                     "v-row",
                     _vm._l(_vm.stagingSales, function(technician, index) {
                       return _c(
                         "v-col",
-                        { key: index, attrs: { cols: "4" } },
+                        { key: index, attrs: { cols: "3" } },
                         [
                           _c(
                             "v-card",
@@ -15311,7 +15380,11 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-row",
-                [_c("v-col", { attrs: { cols: "3" } }, [_c("technicians")], 1)],
+                [
+                  _c("v-col", { attrs: { cols: "3" } }, [_c("technicians")], 1),
+                  _vm._v(" "),
+                  _c("v-col", [_c("earning-details")], 1)
+                ],
                 1
               )
             ],
@@ -73688,6 +73761,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Payday/EarningDetails.vue":
+/*!******************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/EarningDetails.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true& */ "./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true&");
+/* harmony import */ var _EarningDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EarningDetails.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EarningDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d78adf68",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Payday/EarningDetails.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EarningDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EarningDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EarningDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/EarningDetails.vue?vue&type=template&id=d78adf68&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EarningDetails_vue_vue_type_template_id_d78adf68_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Payday/PayPeriodSelect.vue":
 /*!*******************************************************************!*\
   !*** ./resources/assets/js/components/Payday/PayPeriodSelect.vue ***!
@@ -74999,7 +75141,7 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianEarnings(payPeriodId).then(function (response) {
-        commit("SET_TECHNICIAN_EARNINGS", response.data.technicianEarnings);
+        commit("SET_ALL_TECHNICIAN_EARNINGS", response.data.technicianEarnings.technicians);
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -75022,12 +75164,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   payPeriods: function payPeriods(state) {
-    return state.payPeriods.map(function (payPeriod) {
-      return {
-        id: payPeriod.id,
-        periodName: payPeriod.beginDate + " - " + payPeriod.endDate
-      };
-    });
+    return state.payPeriods;
   },
   selectedPayPeriod: function selectedPayPeriod(state) {
     return state.selectedPayPeriod;
@@ -75035,8 +75172,19 @@ __webpack_require__.r(__webpack_exports__);
   technicianSales: function technicianSales(state) {
     return state.technicianSales;
   },
-  technicianEarnings: function technicianEarnings(state) {
-    return state.technicianEarnings;
+  technicianEarnings: function technicianEarnings(state, getters, rootState, rootGetters) {
+    var allTechnicians = rootGetters["Technicians/technicians"];
+    return state.technicianEarnings.map(function (technicianEarning) {
+      var technicianWithEarning = allTechnicians.find(function (technician) {
+        return technician.technicianId === technicianEarning.technicianId;
+      });
+      return {
+        firstName: technicianWithEarning.firstName,
+        lastName: technicianWithEarning.lastName,
+        fullName: technicianWithEarning.fullName,
+        earning: technicianEarning
+      };
+    });
   }
 });
 
@@ -75061,7 +75209,8 @@ var state = {
   payPeriods: [],
   currentPayPeriod: null,
   technicianSales: [],
-  technicianEarnings: []
+  technicianEarnings: [],
+  selectedTechnicianId: ""
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
@@ -75106,8 +75255,11 @@ __webpack_require__.r(__webpack_exports__);
   SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSales) {
     state.technicianSales = technicianSales;
   },
-  SET_TECHNICIAN_EARNINGS: function SET_TECHNICIAN_EARNINGS(state, technicianEarnings) {
-    state.technicianEarnings = technicianEarnings;
+  SET_ALL_TECHNICIAN_EARNINGS: function SET_ALL_TECHNICIAN_EARNINGS(state, allTechnicianEarnings) {
+    state.technicianEarnings = allTechnicianEarnings;
+  },
+  SET_SELECTED_TECHNICIAN: function SET_SELECTED_TECHNICIAN(state, technicianId) {
+    state.selectedTechnicianId = technicianId;
   }
 });
 
@@ -75129,7 +75281,8 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref.commit;
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].getAllTechnicianSales(date).then(function (response) {
-        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
+        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales.sales);
+        commit("SET_DATE", response.data.allTechnicianSales.date);
         resolve();
       })["catch"](function (errors) {
         if (errors.response) {
@@ -75197,8 +75350,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  allTechnicianSales: function allTechnicianSales(state) {
-    return state.allTechnicianSales;
+  allTechnicianSales: function allTechnicianSales(state, getters, rootState, rootGetters) {
+    var allTechnicians = rootGetters["Technicians/technicians"];
+    return allTechnicians.map(function (technician) {
+      var technicianSale = state.allTechnicianSales.find(function (technicianSale) {
+        return technicianSale.technicianId === technician.technicianId;
+      });
+      return {
+        technicianId: technician.technicianId,
+        fullName: technician.fullName,
+        firstName: technician.firstName,
+        lastName: technician.lastName,
+        sales: technician.sale ? {
+          sale: technicianSale.sale,
+          tip: technicianSale.tip
+        } : null
+      };
+    }); //console.log(state.allTechnicianSales.sales);
   },
   date: function date(state) {
     return state.date;

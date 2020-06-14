@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/technicians/{id}', 'TechnicianController@delete');
 
     // Technician Sales CRUD
-    Route::get('/technicians/sales', 'TechnicianSaleController@getTechnicianSales');
+    Route::get('/technicians/sales', 'TechnicianSaleController@getAllTechnicianSales');
     Route::post('/technicians/sales', 'TechnicianSaleController@addTechnicianSale');
     Route::put('/technicians/sales/{saleId}', 'TechnicianSaleController@updateTechnicianSale');
     Route::delete('/technicians/sales/{saleId}', 'TechnicianSaleController@deleteTechnicianSale');
@@ -45,7 +45,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Payday
     Route::get('/pay-periods/{payPeriodId}/technicians/{technicianId}/sales', 'PayPeriodController@getTechnicianSales');
     Route::get('/pay-periods/{payPeriodId}/technicians/sales', 'PayPeriodController@getAllTechnicianSales');
-    Route::get('/pay-periods/{payPeriodId}/technicians/earnings', 'PayPeriodController@getTechnicianEarnings');
+    Route::get('/pay-periods/{payPeriodId}/technicians/{technicianId}/earnings', 'PayPeriodController@getTechnicianEarning');
+    Route::get('/pay-periods/{payPeriodId}/technicians/earnings', 'PayPeriodController@getAllTechnicianEarnings');
+
 
 });
 

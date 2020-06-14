@@ -31,21 +31,24 @@
 	  },
 
 	  technicians () {
-		let sales = this.$store.getters["Payday/technicianSales"]
-		return sales.map(technician => {
-		  return {
-			fullName: technician.fullName,
-			sales: this.groupBy(technician.sales, "date"),
-		  }
-		})
+		let sales = this.$store.getters["Payday/technicianEarnings"]
+		// return sales.map(technician => {
+		//   return {
+		// 	fullName: technician.fullName,
+		// 	sales: this.groupBy(technician.sales, "date"),
+		//   }
+		// })
+	    return sales;
 	  },
 	},
 	watch: {
 	  selectedPayPeriodId (payPeriodId) {
-
-		this.$store.dispatch("Payday/getTechnicianSales", payPeriodId)
+		this.$store.dispatch("Payday/getTechnicianEarnings", payPeriodId)
 	  },
 	},
+    created(){
+	  this.$store.dispatch("Payday/getTechnicianEarnings", this.selectedPayPeriodId)
+    },
 	methods: {
 	  groupBy (array, key) {
 		const dates = array.reduce((result, currentValue) => {

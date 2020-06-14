@@ -10,7 +10,9 @@ interface PayPeriodInterface
 
     public function getTechnicianSales($payPeriodId, $technicianId);
 
-    public function getTechnicianEarnings($payPeriodId);
+    public function getAllTechnicianEarnings($payPeriodId);
+
+    public function getTechnicianEarning($payPeriodId, $technicianId);
 
 
 

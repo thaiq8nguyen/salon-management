@@ -46,11 +46,19 @@ class PayPeriodController extends BaseController
     }
 
 
-    public function getTechnicianEarnings($payPeriodId)
+    public function getAllTechnicianEarnings($payPeriodId)
     {
-        $technicianEarnings = $this->payPeriod->getTechnicianEarnings($payPeriodId);
+        $technicianEarnings = $this->payPeriod->getAllTechnicianEarnings($payPeriodId);
         return $this->sendResponse(['name' => 'technicianEarnings', 'value' => $technicianEarnings]);
 
     }
+
+    public function getTechnicianEarning($payPeriodId, $technicianId)
+    {
+        $technicianEarning = $this->payPeriod->getTechnicianEarning($payPeriodId, $technicianId);
+
+        return $this->sendResponse((['name' => 'technicianEarning', 'value' => $technicianEarning]));
+    }
+
 
 }

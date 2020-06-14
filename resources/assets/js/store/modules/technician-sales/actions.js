@@ -5,7 +5,11 @@ export default {
     return new Promise((resolve, reject) => {
       return TechnicianSaleServices.getAllTechnicianSales(date)
         .then((response) => {
-          commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
+          commit(
+            "SET_ALL_TECHNICIAN_SALES",
+            response.data.allTechnicianSales.sales
+          );
+          commit("SET_DATE", response.data.allTechnicianSales.date);
           resolve();
         })
         .catch((errors) => {

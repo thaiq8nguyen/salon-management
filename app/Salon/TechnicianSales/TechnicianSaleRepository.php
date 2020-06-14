@@ -7,11 +7,11 @@ use App\Technician;
 use App\TechnicianAccount;
 use App\Transaction;
 use App\TransactionItem;
-
+use Carbon\Carbon;
 
 class TechnicianSaleRepository implements TechnicianSaleInterface
 {
-    public function getTechnicianSales($technicianId = null, $date)
+    public function getAllTechnicianSales($date)
     {
         $technicians = null;
 
@@ -21,13 +21,13 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             }
         ])->get();
 
-        if (!empty($technicianId)) {
-            $technicians = Technician::with([
-                'sales' => function ($query) use ($date) {
-                    $query->where('date', $date);
-                }
-            ])->where('id', $technicianId)->get();
-        }
+//        if (!empty($technicianId)) {
+//            $technicians = Technician::with([
+//                'sales' => function ($query) use ($date) {
+//                    $query->where('date', $date);
+//                }
+//            ])->where('id', $technicianId)->get();
+//        }
 
         $sales = $technicians->map(function ($technician) {
             $sale = $technician->sales->filter(function ($transaction) {
@@ -40,9 +40,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
             return [
                 'technicianId' => $technician->id,
-                'firstName' => $technician->firstName,
-                'lastName' => $technician->lastName,
-                'fullName' => $technician->fullName,
                 'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit] : null,
                 'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit] : null,
 

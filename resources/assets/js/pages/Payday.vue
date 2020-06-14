@@ -11,6 +11,9 @@
 					<v-col cols="3">
 						<technicians></technicians>
 					</v-col>
+					<v-col>
+						<earning-details></earning-details>
+					</v-col>
 				</v-row>
 			</v-container>
 		</v-content>
@@ -19,12 +22,12 @@
 
 <script>
 	import PayPeriodSelect from "Components/Payday/PayPeriodSelect"
-	//import TechnicianSales from "Components/Payday/TechnicianSales"
 	import Technicians from "Components/Payday/Technicians"
+	import EarningDetails from "Components/Payday/EarningDetails"
 
   export default {
 	name: "Payday",
-    components: {  PayPeriodSelect, Technicians  },
+    components: { EarningDetails,  PayPeriodSelect, Technicians  },
 	data () {
 	  return {}
 	},

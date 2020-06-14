@@ -43,7 +43,7 @@ class PayPeriod extends Model
 
     public function getNameAttribute()
     {
-        return $this->attributes['begin_date']. ' - ' .$this->attributes['end_date'];
+        return $this->attributes['begin_date'] . ' - ' . $this->attributes['end_date'];
     }
 
 }

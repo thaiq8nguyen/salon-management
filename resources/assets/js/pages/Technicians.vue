@@ -120,7 +120,7 @@
 
 	},
 	mounted () {
-	  this.$store.dispatch("Technicians/getTechnicians")
+	  // this.$store.dispatch("Technicians/getTechnicians")
 	},
 	methods: {
 	  handleUpdateTechnicianModal(id){

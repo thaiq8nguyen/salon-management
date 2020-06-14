@@ -3,7 +3,7 @@ namespace App\Salon\TechnicianSales;
 
 interface TechnicianSaleInterface
 {
-    public function getTechnicianSales($technicianId = null, $date);
+    public function getAllTechnicianSales($date);
 
     public function addTechnicianSale($date, $transactions);
 

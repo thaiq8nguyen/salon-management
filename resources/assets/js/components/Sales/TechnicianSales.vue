@@ -2,7 +2,7 @@
 	<div id="technician-sales">
 		<v-container fluid>
 			<v-row>
-				<v-col cols="3">
+				<v-col cols="3" v-if="techniciansWithSale.length > 0">
 					<v-list>
 						<v-subheader>Technicians With Sale</v-subheader>
 						<v-list-item v-for="(technician, index) in techniciansWithSale" :key="index">
@@ -15,14 +15,13 @@
 								<v-list-item-action>
 									<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
 								</v-list-item-action>
-
 							</v-list-item>
 						</v-list-item>
 					</v-list>
 				</v-col>
-				<v-col cols="9">
+				<v-col>
 					<v-row>
-						<v-col cols="4" v-for="(technician, index) in stagingSales" :key="index">
+						<v-col cols="3" v-for="(technician, index) in stagingSales" :key="index">
 							<v-card>
 								<v-card-title primary-title class="subtitle-1 grey lighten-2">
 									<span>{{technician.fullName}}</span>
@@ -89,15 +88,15 @@
 		return this.$store.getters["TechnicianSales/date"]
 	  },
 	  allTechnicianSales () {
-		const technicians = this.$store.getters["TechnicianSales/allTechnicianSales"]
-		return technicians.sales
+		return  this.$store.getters["TechnicianSales/allTechnicianSales"]
+
 	  },
 	  techniciansWithSale () {
-		return this.allTechnicianSales.filter(technician => technician.sale !== null)
+		return this.allTechnicianSales.filter(technician => technician.sales !== null)
 	  },
 	  techniciansWithoutSale () {
 		if (this.allTechnicianSales.length) {
-		  return this.allTechnicianSales.filter(technician => technician.sale === null)
+		  return this.allTechnicianSales.filter(technician => technician.sales === null)
 		}
 
 	  },

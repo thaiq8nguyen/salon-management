@@ -1,11 +1,6 @@
 export default {
   payPeriods(state) {
-    return state.payPeriods.map((payPeriod) => {
-      return {
-        id: payPeriod.id,
-        periodName: payPeriod.beginDate + " - " + payPeriod.endDate
-      };
-    });
+    return state.payPeriods;
   },
 
   selectedPayPeriod(state) {
@@ -16,7 +11,21 @@ export default {
     return state.technicianSales;
   },
 
-  technicianEarnings(state) {
-    return state.technicianEarnings;
+  technicianEarnings(state, getters, rootState, rootGetters) {
+    const allTechnicians = rootGetters["Technicians/technicians"];
+
+    return state.technicianEarnings.map((technicianEarning) => {
+      let technicianWithEarning = allTechnicians.find(
+        (technician) =>
+          technician.technicianId === technicianEarning.technicianId
+      );
+
+      return {
+        firstName: technicianWithEarning.firstName,
+        lastName: technicianWithEarning.lastName,
+        fullName: technicianWithEarning.fullName,
+        earning: technicianEarning
+      };
+    });
   }
 };

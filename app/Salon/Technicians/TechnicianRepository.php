@@ -13,9 +13,9 @@ class TechnicianRepository implements TechnicianInterface
 
     public function getTechnicians()
     {
-        $technicians = Technician::where('is_active',1)->get();
+        $technicians = Technician::active()->get();
 
-        return $technicians;
+        return $technicians->makeVisible(['firstName','lastName','fullName'])->toArray();
 
     }
 

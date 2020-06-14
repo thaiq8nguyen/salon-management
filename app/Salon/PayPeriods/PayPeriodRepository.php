@@ -73,14 +73,12 @@ class PayPeriodRepository implements PayPeriodInterface
         ])->whereHas('sales', $dateFilter)->where('id', $technicianId)->first();
 
         return $technician;
-
     }
 
-    public function getTechnicianEarnings($payPeriodId)
+    public function getAllTechnicianEarnings($payPeriodId)
     {
         $technicians = $this->getAllTechnicianSales($payPeriodId);
         $payPeriod = $this->getPayPeriod($payPeriodId);
-
 
         $earnings = ['payPeriodName' => $payPeriod->name, 'payPeriodId' => $payPeriod->id];
 
@@ -107,6 +105,35 @@ class PayPeriodRepository implements PayPeriodInterface
         }
 
         return $earnings;
+    }
+
+    public function getTechnicianEarning($payPeriodId, $technicianId)
+    {
+        $payPeriod = $this->getPayPeriod($payPeriodId);
+        $technician = $this->getTechnicianSales($payPeriodId, $technicianId);
+
+        $earning = [
+            'payPeriodName' => $payPeriod->name,
+            'payPeriodId' => $payPeriod->id,
+            'technicianId' =>
+                $technician->technicianId,
+            'totalSale' => round($technician->sales->where('name', 'technician sales')
+                ->sum('creditAmount'),2),
+            'totalTip' => round($technician->sales->where('name', 'technician tips')
+                ->sum('creditAmount'),2),
+            'rates' => [
+                "commissionRate" => Technician::find($technicianId)->detail->commissionRate,
+                "tipRate" => Technician::find($technicianId)->detail->tipRate
+            ],
+            'saleWage' => round($technician->sales->where('name', 'technician sales')
+                    ->sum('creditAmount') * Technician::find($technicianId)->detail->commissionRate, 2),
+            'tipWage' => round($technician->sales->where('name', 'technician tips')
+                    ->sum('creditAmount') * Technician::find($technicianId)->detail->tipRate, 2)
+        ];
+
+
+        return $earning;
+
     }
 
 
