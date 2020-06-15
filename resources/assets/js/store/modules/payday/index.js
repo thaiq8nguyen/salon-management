@@ -7,6 +7,7 @@ const state = {
   currentPayPeriod: null,
   technicianSales: [],
   technicianEarnings: [],
+  selectedTechnician: {},
   selectedTechnicianId: ""
 };
 

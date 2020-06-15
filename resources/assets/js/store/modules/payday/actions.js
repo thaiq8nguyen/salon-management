@@ -17,13 +17,13 @@ export default {
     });
   },
 
-  getTechnicianSales({ commit }, payPeriodId) {
+  getAllTechnicianSales({ commit }, payPeriodId) {
     return new Promise((resolve, reject) => {
       return PaydayServices.getTechnicianSales(payPeriodId)
         .then((response) => {
           commit(
-            "SET_TECHNICIAN_SALES",
-            response.data.technicianSalesInPayPeriod
+            "SET_ALL_TECHNICIAN_SALES",
+            response.data.technicianSales.technicians
           );
         })
         .catch((errors) => {
@@ -34,7 +34,7 @@ export default {
     });
   },
 
-  getTechnicianEarnings({ commit }, payPeriodId) {
+  getAllTechnicianEarnings({ commit }, payPeriodId) {
     return new Promise((resolve, reject) => {
       return PaydayServices.getTechnicianEarnings(payPeriodId)
         .then((response) => {

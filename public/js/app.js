@@ -2868,12 +2868,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EarningDetails",
   data: function data() {
     return {};
   },
-  computed: {},
+  computed: {
+    technician: function technician() {
+      return this.$store.getters["Payday/selectedTechnician"];
+    },
+    totalWage: function totalWage() {
+      var _this$technician$earn = this.technician.earning,
+          saleWage = _this$technician$earn.saleWage,
+          tipWage = _this$technician$earn.tipWage;
+      return saleWage + tipWage;
+    }
+  },
   methods: {}
 });
 
@@ -2980,23 +3058,22 @@ __webpack_require__.r(__webpack_exports__);
       return payPeriod.id;
     },
     technicians: function technicians() {
-      var sales = this.$store.getters["Payday/technicianEarnings"]; // return sales.map(technician => {
-      //   return {
-      // 	fullName: technician.fullName,
-      // 	sales: this.groupBy(technician.sales, "date"),
-      //   }
-      // })
-
-      return sales;
+      return this.$store.getters["Payday/technicianEarnings"];
     }
   },
   watch: {
     selectedPayPeriodId: function selectedPayPeriodId(payPeriodId) {
-      this.$store.dispatch("Payday/getTechnicianEarnings", payPeriodId);
+      this.$store.dispatch("Payday/getAllTechnicianEarnings", payPeriodId);
+      this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
     }
   },
   created: function created() {
-    this.$store.dispatch("Payday/getTechnicianEarnings", this.selectedPayPeriodId);
+    this.$store.dispatch("Payday/getAllTechnicianEarnings", this.selectedPayPeriodId);
+    this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
+
+    if (this.technicians.length > 0) {
+      this.select(this.technicians[0].technicianId);
+    }
   },
   methods: {
     groupBy: function groupBy(array, key) {
@@ -3020,6 +3097,9 @@ __webpack_require__.r(__webpack_exports__);
           transactions: dates[key]
         };
       });
+    },
+    select: function select(technicianId) {
+      this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", technicianId);
     }
   }
 });
@@ -13889,7 +13969,208 @@ var render = function() {
     [
       _c("p", [_vm._v("Earning Details")]),
       _vm._v(" "),
-      _c("v-card", [_c("v-card-title")], 1)
+      _c(
+        "v-card",
+        [
+          _c("v-card-title"),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "mr-3", attrs: { cols: "6" } },
+                    [
+                      _c("p", { staticClass: "subtitle-2" }, [_vm._v("Sales")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-container",
+                        { attrs: { fluid: "" } },
+                        [
+                          _c(
+                            "v-row",
+                            [
+                              _c(
+                                "v-col",
+                                [
+                                  _c(
+                                    "v-simple-table",
+                                    { attrs: { dense: "" } },
+                                    [
+                                      _c("thead", [
+                                        _c("tr", [
+                                          _c("th", [_vm._v("Date")]),
+                                          _vm._v(" "),
+                                          _c("th", [_vm._v("Sale")]),
+                                          _vm._v(" "),
+                                          _c("th", [_vm._v("Tip")])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "tbody",
+                                        _vm._l(_vm.technician.sales, function(
+                                          sale
+                                        ) {
+                                          return _c(
+                                            "tr",
+                                            [
+                                              _c("td", [
+                                                _vm._v(_vm._s(sale.date))
+                                              ]),
+                                              _vm._v(" "),
+                                              _vm._l(
+                                                sale.transactions,
+                                                function(transaction) {
+                                                  return _c("td", [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        key:
+                                                          transaction.transactionId
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "$" +
+                                                            _vm._s(
+                                                              transaction.amount
+                                                            )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ])
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "4" } },
+                    [
+                      _c("p", { staticClass: "subtitle-2" }, [
+                        _vm._v("Earning")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-container",
+                        { attrs: { fluid: "" } },
+                        [
+                          _c(
+                            "v-row",
+                            [
+                              _c("v-col", [_vm._v("Total Sale: ")]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _vm._v(
+                                  "$" + _vm._s(_vm.technician.earning.totalSale)
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            [
+                              _c("v-col", [_vm._v("Total Tip: ")]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _vm._v(
+                                  "$" + _vm._s(_vm.technician.earning.totalTip)
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            [
+                              _c("v-col", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\tSale Wage:\n\t\t\t\t\t\t\t"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t$" +
+                                    _vm._s(_vm.technician.earning.saleWage) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            [
+                              _c("v-col", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\tTip Wage:\n\t\t\t\t\t\t\t"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t$" +
+                                    _vm._s(_vm.technician.earning.tipWage) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-row",
+                            [
+                              _c("v-col", [_vm._v("Total Wage:")]),
+                              _vm._v(" "),
+                              _c("v-col", [_vm._v("$" + _vm._s(_vm.totalWage))])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-row", [_c("v-col", [_vm._v("Payments")])], 1)
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -14031,9 +14312,18 @@ var render = function() {
                       _c(
                         "v-list-item-action",
                         [
-                          _c("v-btn", { attrs: { small: "" } }, [
-                            _vm._v("Detail")
-                          ])
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { small: "" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.select(technician.technicianId)
+                                }
+                              }
+                            },
+                            [_vm._v("Detail")]
+                          )
                         ],
                         1
                       )
@@ -75125,11 +75415,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  getTechnicianSales: function getTechnicianSales(_ref2, payPeriodId) {
+  getAllTechnicianSales: function getAllTechnicianSales(_ref2, payPeriodId) {
     var commit = _ref2.commit;
     return new Promise(function (resolve, reject) {
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianSales(payPeriodId).then(function (response) {
-        commit("SET_TECHNICIAN_SALES", response.data.technicianSalesInPayPeriod);
+        commit("SET_ALL_TECHNICIAN_SALES", response.data.technicianSales.technicians);
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -75137,7 +75427,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  getTechnicianEarnings: function getTechnicianEarnings(_ref3, payPeriodId) {
+  getAllTechnicianEarnings: function getAllTechnicianEarnings(_ref3, payPeriodId) {
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianEarnings(payPeriodId).then(function (response) {
@@ -75162,6 +75452,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   payPeriods: function payPeriods(state) {
     return state.payPeriods;
@@ -75178,15 +75471,62 @@ __webpack_require__.r(__webpack_exports__);
       var technicianWithEarning = allTechnicians.find(function (technician) {
         return technician.technicianId === technicianEarning.technicianId;
       });
+      var technicianId = technicianEarning.technicianId,
+          rates = technicianEarning.rates,
+          saleWage = technicianEarning.saleWage,
+          tipWage = technicianEarning.tipWage,
+          totalSale = technicianEarning.totalSale,
+          totalTip = technicianEarning.totalTip;
       return {
         firstName: technicianWithEarning.firstName,
         lastName: technicianWithEarning.lastName,
         fullName: technicianWithEarning.fullName,
-        earning: technicianEarning
+        technicianId: technicianId,
+        earning: {
+          rates: rates,
+          saleWage: saleWage,
+          tipWage: tipWage,
+          totalSale: totalSale,
+          totalTip: totalTip
+        }
       };
     });
+  },
+  selectedTechnician: function selectedTechnician(state) {
+    var earning = state.technicianEarnings.find(function (technicianEarning) {
+      return technicianEarning.technicianId === state.selectedTechnicianId;
+    });
+    var sales = state.technicianSales.find(function (technicianSale) {
+      return technicianSale.technicianId === state.selectedTechnicianId;
+    });
+    var formattedSales = groupBy(sales.sales, "date");
+    return {
+      earning: earning,
+      sales: formattedSales
+    };
   }
 });
+
+var groupBy = function groupBy(array, key) {
+  var dates = array.reduce(function (result, currentValue) {
+    if (!result[currentValue[key]]) {
+      result[currentValue[key]] = [];
+    }
+
+    result[currentValue[key]].push({
+      amount: currentValue.creditAmount,
+      name: currentValue.name,
+      transactionId: currentValue.transactionId
+    });
+    return result;
+  }, {});
+  return Object.keys(dates).map(function (key) {
+    return {
+      date: moment__WEBPACK_IMPORTED_MODULE_0___default()(key).format("ddd MM/DD/YYYY"),
+      transactions: dates[key]
+    };
+  });
+};
 
 /***/ }),
 
@@ -75210,6 +75550,7 @@ var state = {
   currentPayPeriod: null,
   technicianSales: [],
   technicianEarnings: [],
+  selectedTechnician: {},
   selectedTechnicianId: ""
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -75252,13 +75593,13 @@ __webpack_require__.r(__webpack_exports__);
       return beginDate.isSameOrBefore(today) && payDate.isSameOrAfter(today);
     })[0];
   },
-  SET_TECHNICIAN_SALES: function SET_TECHNICIAN_SALES(state, technicianSales) {
+  SET_ALL_TECHNICIAN_SALES: function SET_ALL_TECHNICIAN_SALES(state, technicianSales) {
     state.technicianSales = technicianSales;
   },
   SET_ALL_TECHNICIAN_EARNINGS: function SET_ALL_TECHNICIAN_EARNINGS(state, allTechnicianEarnings) {
     state.technicianEarnings = allTechnicianEarnings;
   },
-  SET_SELECTED_TECHNICIAN: function SET_SELECTED_TECHNICIAN(state, technicianId) {
+  SET_SELECTED_TECHNICIAN_ID: function SET_SELECTED_TECHNICIAN_ID(state, technicianId) {
     state.selectedTechnicianId = technicianId;
   }
 });

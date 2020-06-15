@@ -20,7 +20,7 @@ export default {
       return beginDate.isSameOrBefore(today) && payDate.isSameOrAfter(today);
     })[0];
   },
-  SET_TECHNICIAN_SALES(state, technicianSales) {
+  SET_ALL_TECHNICIAN_SALES(state, technicianSales) {
     state.technicianSales = technicianSales;
   },
 
@@ -28,7 +28,7 @@ export default {
     state.technicianEarnings = allTechnicianEarnings;
   },
 
-  SET_SELECTED_TECHNICIAN(state, technicianId) {
+  SET_SELECTED_TECHNICIAN_ID(state, technicianId) {
     state.selectedTechnicianId = technicianId;
   }
 };

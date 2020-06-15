@@ -55,11 +55,11 @@ class PayPeriodRepository implements PayPeriodInterface
             'sales' => $dateFilter
         ])->whereHas('sales', $dateFilter)->get();
 
-        return $technicians;
+        return ['payPeriodId' => $payPeriodId, 'technicians' => $technicians];
 
     }
 
-    public function getTechnicianSales($payPeriodId, $technicianId)
+    public function getTechnicianSale($payPeriodId, $technicianId)
     {
         $payPeriod = $this->getPayPeriod($payPeriodId);
 
@@ -82,7 +82,7 @@ class PayPeriodRepository implements PayPeriodInterface
 
         $earnings = ['payPeriodName' => $payPeriod->name, 'payPeriodId' => $payPeriod->id];
 
-        foreach ($technicians as $technician) {
+        foreach ($technicians['technicians'] as $technician) {
             $technicianId = $technician['technicianId'];
             $result = [
                 'technicianId' => $technician->technicianId,
@@ -110,7 +110,7 @@ class PayPeriodRepository implements PayPeriodInterface
     public function getTechnicianEarning($payPeriodId, $technicianId)
     {
         $payPeriod = $this->getPayPeriod($payPeriodId);
-        $technician = $this->getTechnicianSales($payPeriodId, $technicianId);
+        $technician = $this->getTechnicianSale($payPeriodId, $technicianId);
 
         $earning = [
             'payPeriodName' => $payPeriod->name,

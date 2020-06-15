@@ -9,7 +9,7 @@
 							<v-list-item-title>{{technician.fullName}}</v-list-item-title>
 						</v-list-item-content>
 						<v-list-item-action>
-							<v-btn small>Detail</v-btn>
+							<v-btn small @click="select(technician.technicianId)">Detail</v-btn>
 						</v-list-item-action>
 					</v-list-item>
 				</v-list>
@@ -31,23 +31,22 @@
 	  },
 
 	  technicians () {
-		let sales = this.$store.getters["Payday/technicianEarnings"]
-		// return sales.map(technician => {
-		//   return {
-		// 	fullName: technician.fullName,
-		// 	sales: this.groupBy(technician.sales, "date"),
-		//   }
-		// })
-	    return sales;
+		return this.$store.getters["Payday/technicianEarnings"]
 	  },
 	},
 	watch: {
 	  selectedPayPeriodId (payPeriodId) {
-		this.$store.dispatch("Payday/getTechnicianEarnings", payPeriodId)
+		this.$store.dispatch("Payday/getAllTechnicianEarnings", payPeriodId);
+		this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
+
 	  },
 	},
     created(){
-	  this.$store.dispatch("Payday/getTechnicianEarnings", this.selectedPayPeriodId)
+	  this.$store.dispatch("Payday/getAllTechnicianEarnings", this.selectedPayPeriodId);
+	  this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
+	  if(this.technicians.length > 0){
+	    this.select(this.technicians[0].technicianId)
+	  }
     },
 	methods: {
 	  groupBy (array, key) {
@@ -69,6 +68,10 @@
 		})
 
 	  },
+	  select(technicianId){
+		this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", technicianId);
+	  }
+
 	},
   }
 

@@ -21,14 +21,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             }
         ])->get();
 
-//        if (!empty($technicianId)) {
-//            $technicians = Technician::with([
-//                'sales' => function ($query) use ($date) {
-//                    $query->where('date', $date);
-//                }
-//            ])->where('id', $technicianId)->get();
-//        }
-
         $sales = $technicians->map(function ($technician) {
             $sale = $technician->sales->filter(function ($transaction) {
                 return $transaction->name == 'technician sales';
@@ -101,11 +93,8 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 }
 
             }
-
         }
-
-
-        return $this->getTechnicianSales(null, $date);
+        return $this->getAllTechnicianSales($date);
 
     }
 
@@ -117,7 +106,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
         $technicianAccount = TechnicianAccount::find($transaction->transactionable_id);
 
-        return $this->getTechnicianSales($technicianAccount->technician_id, $transaction->date);
+        return $this->getAllTechnicianSales($transaction->date);
 
     }
 
