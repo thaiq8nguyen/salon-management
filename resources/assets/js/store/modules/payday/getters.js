@@ -12,52 +12,39 @@ export default {
     return state.technicianSales;
   },
 
-  technicianEarnings(state, getters, rootState, rootGetters) {
+  technicians(state, getters, rootState, rootGetters) {
     const allTechnicians = rootGetters["Technicians/technicians"];
 
-    return state.technicianEarnings.map((technicianEarning) => {
-      let technicianWithEarning = allTechnicians.find(
-        (technician) =>
-          technician.technicianId === technicianEarning.technicianId
+    return allTechnicians.filter((technician) => {
+      return state.technicianEarnings.some(
+        (technicianEarning) =>
+          technicianEarning.technicianId === technician.technicianId
       );
-      const {
-        technicianId,
-        rates,
-        saleWage,
-        tipWage,
-        totalSale,
-        totalTip
-      } = technicianEarning;
-      return {
-        firstName: technicianWithEarning.firstName,
-        lastName: technicianWithEarning.lastName,
-        fullName: technicianWithEarning.fullName,
-        technicianId,
-        earning: {
-          rates,
-          saleWage,
-          tipWage,
-          totalSale,
-          totalTip
-        }
-      };
     });
   },
 
   selectedTechnician(state) {
-    const earning = state.technicianEarnings.find(
-      (technicianEarning) =>
-        technicianEarning.technicianId === state.selectedTechnicianId
-    );
+    let technician = null;
 
-    const sales = state.technicianSales.find(
-      (technicianSale) =>
-        technicianSale.technicianId === state.selectedTechnicianId
-    );
+    if (state.selectedTechnicianId) {
+      const earning = state.technicianEarnings.find(
+        (technicianEarning) =>
+          technicianEarning.technicianId === state.selectedTechnicianId
+      );
 
-    const formattedSales = groupBy(sales.sales, "date");
+      const sales = state.technicianSales.find(
+        (technicianSale) =>
+          technicianSale.technicianId === state.selectedTechnicianId
+      );
 
-    return { earning, sales: formattedSales };
+      const formattedSales = groupBy(sales.sales, "date");
+      technician = { earning, sales: formattedSales };
+    }
+    return technician;
+  },
+
+  selectedTechnicianId(state) {
+    return state.selectedTechnicianId;
   }
 };
 

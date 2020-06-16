@@ -2,9 +2,6 @@
 	<div id="earning-details">
 		<p>Earning Details</p>
 		<v-card>
-			<v-card-title>
-
-			</v-card-title>
 			<v-card-text>
 				<v-row>
 					<v-col cols="6" class="mr-3">
@@ -68,7 +65,14 @@
 					</v-col>
 				</v-row>
 				<v-row>
-					<v-col>Payments</v-col>
+					<v-col cols="6">
+						<p class="subtitle-2">Payments</p>
+						<v-container>
+							<v-row>
+								<v-col></v-col>
+							</v-row>
+						</v-container>
+					</v-col>
 				</v-row>
 			</v-card-text>
 		</v-card>
@@ -78,13 +82,12 @@
 <script>
   export default {
 	name: "EarningDetails",
+    props: ["technician"],
 	data () {
 	  return {}
 	},
 	computed: {
-	  technician () {
-		return this.$store.getters["Payday/selectedTechnician"]
-	  },
+
 	  totalWage(){
 	    const {saleWage, tipWage} = this.technician.earning;
 		return saleWage + tipWage;

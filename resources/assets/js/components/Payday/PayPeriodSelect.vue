@@ -5,7 +5,7 @@
 				<v-row align="center">
 					<v-col cols="3">
 						<v-select :items="payPeriods" label="Pay Periods" single-line class = "blue--text"
-						          v-model="selectedPayPeriodId" item-text="name" item-value="id" bottom>
+						          v-model="selectedPayPeriodId" item-text="name" item-value="id" bottom >
 						</v-select>
 					</v-col>
 					<v-col class="d-flex justify-center">
@@ -20,15 +20,14 @@
 <script>
   export default {
 	name: "PayPeriodSelect",
+    props: ['payPeriods'],
 	data () {
 	  return {
 
 	  }
 	},
 	computed: {
-	  payPeriods(){
-	    return this.$store.getters["Payday/payPeriods"]
-	  },
+
 	  selectedPayPeriod(){
 	    return this.$store.getters["Payday/selectedPayPeriod"];
 	  },
@@ -42,16 +41,11 @@
 
 	  }
 	},
-    created(){
-	  this.$store.dispatch("Payday/getPayPeriods");
-    },
     watch:{
 
     },
 	methods: {
-	  setPayPeriod(){
-		//console.log(this.selectedPayPeriodId)
-	  }
+
 	},
   }
 

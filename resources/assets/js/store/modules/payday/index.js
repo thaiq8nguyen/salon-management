@@ -7,8 +7,7 @@ const state = {
   currentPayPeriod: null,
   technicianSales: [],
   technicianEarnings: [],
-  selectedTechnician: {},
-  selectedTechnicianId: ""
+  selectedTechnicianId: null
 };
 
 export default {

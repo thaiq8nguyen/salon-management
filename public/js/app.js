@@ -2936,15 +2936,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EarningDetails",
+  props: ["technician"],
   data: function data() {
     return {};
   },
   computed: {
-    technician: function technician() {
-      return this.$store.getters["Payday/selectedTechnician"];
-    },
     totalWage: function totalWage() {
       var _this$technician$earn = this.technician.earning,
           saleWage = _this$technician$earn.saleWage,
@@ -2987,13 +2989,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PayPeriodSelect",
+  props: ['payPeriods'],
   data: function data() {
     return {};
   },
   computed: {
-    payPeriods: function payPeriods() {
-      return this.$store.getters["Payday/payPeriods"];
-    },
     selectedPayPeriod: function selectedPayPeriod() {
       return this.$store.getters["Payday/selectedPayPeriod"];
     },
@@ -3006,14 +3006,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {
-    this.$store.dispatch("Payday/getPayPeriods");
-  },
   watch: {},
-  methods: {
-    setPayPeriod: function setPayPeriod() {//console.log(this.selectedPayPeriodId)
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -3047,59 +3041,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Technicians",
+  props: ['technicians'],
   data: function data() {
-    return {};
+    return {//selected: "",
+    };
   },
   computed: {
-    selectedPayPeriodId: function selectedPayPeriodId() {
-      var payPeriod = this.$store.getters["Payday/selectedPayPeriod"];
-      return payPeriod.id;
-    },
-    technicians: function technicians() {
-      return this.$store.getters["Payday/technicianEarnings"];
-    }
-  },
-  watch: {
-    selectedPayPeriodId: function selectedPayPeriodId(payPeriodId) {
-      this.$store.dispatch("Payday/getAllTechnicianEarnings", payPeriodId);
-      this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
-    }
-  },
-  created: function created() {
-    this.$store.dispatch("Payday/getAllTechnicianEarnings", this.selectedPayPeriodId);
-    this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
-
-    if (this.technicians.length > 0) {
-      this.select(this.technicians[0].technicianId);
+    selected: function selected() {
+      return this.$store.getters["Payday/selectedTechnicianId"];
     }
   },
   methods: {
-    groupBy: function groupBy(array, key) {
-      var _this = this;
-
-      var dates = array.reduce(function (result, currentValue) {
-        if (!result[currentValue[key]]) {
-          result[currentValue[key]] = [];
-        }
-
-        result[currentValue[key]].push({
-          amount: currentValue.creditAmount,
-          name: currentValue.name,
-          transactionId: currentValue.transactionId
-        });
-        return result;
-      }, {});
-      return Object.keys(dates).map(function (key) {
-        return {
-          date: _this.$moment(key).format("ddd MM/DD/YYYY"),
-          transactions: dates[key]
-        };
-      });
-    },
     select: function select(technicianId) {
-      this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", technicianId);
+      this.$emit("technicianId", technicianId);
     }
   }
 });
@@ -3807,6 +3765,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3820,8 +3787,40 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {},
-  methods: {}
+  computed: {
+    payPeriods: function payPeriods() {
+      return this.$store.getters["Payday/payPeriods"];
+    },
+    selectedPayPeriodId: function selectedPayPeriodId() {
+      var payPeriod = this.$store.getters["Payday/selectedPayPeriod"];
+      return payPeriod.id;
+    },
+    technicians: function technicians() {
+      return this.$store.getters["Payday/technicians"];
+    },
+    technician: function technician() {
+      return this.$store.getters["Payday/selectedTechnician"];
+    }
+  },
+  watch: {
+    selectedPayPeriodId: function selectedPayPeriodId(payPeriodId) {
+      this.init(payPeriodId);
+    }
+  },
+  created: function created() {
+    this.$store.dispatch("Payday/getPayPeriods");
+    this.init(this.selectedPayPeriodId);
+  },
+  methods: {
+    init: function init(payPeriodId) {
+      this.$store.dispatch("Payday/getAllTechnicianEarnings", payPeriodId);
+      this.$store.dispatch("Payday/getAllTechnicianSales", payPeriodId);
+      this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", null);
+    },
+    selectTechnician: function selectTechnician(technicianId) {
+      this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", technicianId);
+    }
+  }
 });
 
 /***/ }),
@@ -13972,8 +13971,6 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c("v-card-title"),
-          _vm._v(" "),
           _c(
             "v-card-text",
             [
@@ -14164,7 +14161,24 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-row", [_c("v-col", [_vm._v("Payments")])], 1)
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("p", { staticClass: "subtitle-2" }, [
+                        _vm._v("Payments")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-container", [_c("v-row", [_c("v-col")], 1)], 1)
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           )
@@ -14302,9 +14316,22 @@ var render = function() {
                       _c(
                         "v-list-item-content",
                         [
-                          _c("v-list-item-title", [
-                            _vm._v(_vm._s(technician.fullName))
-                          ])
+                          _c(
+                            "v-list-item-title",
+                            {
+                              class: {
+                                "red--text":
+                                  technician.technicianId === _vm.selected
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t" +
+                                  _vm._s(technician.fullName) +
+                                  "\n\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
                         ],
                         1
                       ),
@@ -15666,17 +15693,81 @@ var render = function() {
             "v-container",
             { attrs: { fluid: "" } },
             [
-              _c("v-row", [_c("v-col", [_c("pay-period-select")], 1)], 1),
-              _vm._v(" "),
               _c(
                 "v-row",
                 [
-                  _c("v-col", { attrs: { cols: "3" } }, [_c("technicians")], 1),
-                  _vm._v(" "),
-                  _c("v-col", [_c("earning-details")], 1)
+                  _c(
+                    "v-col",
+                    [
+                      _c("pay-period-select", {
+                        attrs: { "pay-periods": _vm.payPeriods }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _vm.technicians.length > 0
+                ? _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "3" } },
+                        [
+                          _c("technicians", {
+                            attrs: { technicians: _vm.technicians },
+                            on: { technicianId: _vm.selectTechnician }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        [
+                          _vm.technician
+                            ? _c("earning-details", {
+                                attrs: { technician: _vm.technician }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-card-text",
+                                { staticClass: "d-flex justify-center" },
+                                [
+                                  _c("p", { staticClass: "subtitle-1" }, [
+                                    _vm._v(
+                                      "There are no technician earnings under this pay period yet"
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
             ],
             1
           )
@@ -75431,7 +75522,8 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianEarnings(payPeriodId).then(function (response) {
-        commit("SET_ALL_TECHNICIAN_EARNINGS", response.data.technicianEarnings.technicians);
+        var technicians = response.data.technicianEarnings.technicians;
+        commit("SET_ALL_TECHNICIAN_EARNINGS", technicians);
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -75465,45 +75557,35 @@ __webpack_require__.r(__webpack_exports__);
   technicianSales: function technicianSales(state) {
     return state.technicianSales;
   },
-  technicianEarnings: function technicianEarnings(state, getters, rootState, rootGetters) {
+  technicians: function technicians(state, getters, rootState, rootGetters) {
     var allTechnicians = rootGetters["Technicians/technicians"];
-    return state.technicianEarnings.map(function (technicianEarning) {
-      var technicianWithEarning = allTechnicians.find(function (technician) {
-        return technician.technicianId === technicianEarning.technicianId;
+    return allTechnicians.filter(function (technician) {
+      return state.technicianEarnings.some(function (technicianEarning) {
+        return technicianEarning.technicianId === technician.technicianId;
       });
-      var technicianId = technicianEarning.technicianId,
-          rates = technicianEarning.rates,
-          saleWage = technicianEarning.saleWage,
-          tipWage = technicianEarning.tipWage,
-          totalSale = technicianEarning.totalSale,
-          totalTip = technicianEarning.totalTip;
-      return {
-        firstName: technicianWithEarning.firstName,
-        lastName: technicianWithEarning.lastName,
-        fullName: technicianWithEarning.fullName,
-        technicianId: technicianId,
-        earning: {
-          rates: rates,
-          saleWage: saleWage,
-          tipWage: tipWage,
-          totalSale: totalSale,
-          totalTip: totalTip
-        }
-      };
     });
   },
   selectedTechnician: function selectedTechnician(state) {
-    var earning = state.technicianEarnings.find(function (technicianEarning) {
-      return technicianEarning.technicianId === state.selectedTechnicianId;
-    });
-    var sales = state.technicianSales.find(function (technicianSale) {
-      return technicianSale.technicianId === state.selectedTechnicianId;
-    });
-    var formattedSales = groupBy(sales.sales, "date");
-    return {
-      earning: earning,
-      sales: formattedSales
-    };
+    var technician = null;
+
+    if (state.selectedTechnicianId) {
+      var earning = state.technicianEarnings.find(function (technicianEarning) {
+        return technicianEarning.technicianId === state.selectedTechnicianId;
+      });
+      var sales = state.technicianSales.find(function (technicianSale) {
+        return technicianSale.technicianId === state.selectedTechnicianId;
+      });
+      var formattedSales = groupBy(sales.sales, "date");
+      technician = {
+        earning: earning,
+        sales: formattedSales
+      };
+    }
+
+    return technician;
+  },
+  selectedTechnicianId: function selectedTechnicianId(state) {
+    return state.selectedTechnicianId;
   }
 });
 
@@ -75550,8 +75632,7 @@ var state = {
   currentPayPeriod: null,
   technicianSales: [],
   technicianEarnings: [],
-  selectedTechnician: {},
-  selectedTechnicianId: ""
+  selectedTechnicianId: null
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,

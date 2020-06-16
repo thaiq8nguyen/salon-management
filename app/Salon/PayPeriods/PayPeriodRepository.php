@@ -80,28 +80,30 @@ class PayPeriodRepository implements PayPeriodInterface
         $technicians = $this->getAllTechnicianSales($payPeriodId);
         $payPeriod = $this->getPayPeriod($payPeriodId);
 
-        $earnings = ['payPeriodName' => $payPeriod->name, 'payPeriodId' => $payPeriod->id];
+        $earnings = ['payPeriodName' => $payPeriod->name, 'payPeriodId' => $payPeriod->id, 'technicians' => []];
+        if ($technicians) {
+            foreach ($technicians['technicians'] as $technician) {
+                $technicianId = $technician['technicianId'];
+                $result = [
+                    'technicianId' => $technician->technicianId,
+                    'totalSale' => $technician->sales->where('name', 'technician sales')
+                        ->sum('creditAmount'),
+                    'totalTip' => $technician->sales->where('name', 'technician tips')
+                        ->sum('creditAmount'),
+                    'rates' => [
+                        "commissionRate" => Technician::find($technicianId)->detail->commissionRate,
+                        "tipRate" => Technician::find($technicianId)->detail->tipRate
+                    ],
+                    'saleWage' => round($technician->sales->where('name', 'technician sales')
+                            ->sum('creditAmount') * Technician::find($technicianId)->detail->commissionRate, 2),
+                    'tipWage' => round($technician->sales->where('name', 'technician tips')
+                            ->sum('creditAmount') * Technician::find($technicianId)->detail->tipRate, 2)
+                ];
 
-        foreach ($technicians['technicians'] as $technician) {
-            $technicianId = $technician['technicianId'];
-            $result = [
-                'technicianId' => $technician->technicianId,
-                'totalSale' => $technician->sales->where('name', 'technician sales')
-                    ->sum('creditAmount'),
-                'totalTip' => $technician->sales->where('name', 'technician tips')
-                    ->sum('creditAmount'),
-                'rates' => [
-                    "commissionRate" => Technician::find($technicianId)->detail->commissionRate,
-                    "tipRate" => Technician::find($technicianId)->detail->tipRate
-                ],
-                'saleWage' => round($technician->sales->where('name', 'technician sales')
-                        ->sum('creditAmount') * Technician::find($technicianId)->detail->commissionRate, 2),
-                'tipWage' => round($technician->sales->where('name', 'technician tips')
-                        ->sum('creditAmount') * Technician::find($technicianId)->detail->tipRate, 2)
-            ];
+                $results[] = $result;
+                $earnings['technicians'] = $results;
+            }
 
-            $results[] = $result;
-            $earnings['technicians'] = $results;
         }
 
         return $earnings;
@@ -118,9 +120,9 @@ class PayPeriodRepository implements PayPeriodInterface
             'technicianId' =>
                 $technician->technicianId,
             'totalSale' => round($technician->sales->where('name', 'technician sales')
-                ->sum('creditAmount'),2),
+                ->sum('creditAmount'), 2),
             'totalTip' => round($technician->sales->where('name', 'technician tips')
-                ->sum('creditAmount'),2),
+                ->sum('creditAmount'), 2),
             'rates' => [
                 "commissionRate" => Technician::find($technicianId)->detail->commissionRate,
                 "tipRate" => Technician::find($technicianId)->detail->tipRate

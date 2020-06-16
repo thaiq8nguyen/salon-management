@@ -6,7 +6,9 @@
 				<v-list>
 					<v-list-item v-for="(technician, index) in technicians" :key="index">
 						<v-list-item-content>
-							<v-list-item-title>{{technician.fullName}}</v-list-item-title>
+							<v-list-item-title :class="{'red--text':technician.technicianId === selected}">
+								{{technician.fullName}}
+							</v-list-item-title>
 						</v-list-item-content>
 						<v-list-item-action>
 							<v-btn small @click="select(technician.technicianId)">Detail</v-btn>
@@ -21,58 +23,33 @@
 <script>
   export default {
 	name: "Technicians",
+    props:['technicians'],
 	data () {
-	  return {}
+	  return {
+		//selected: "",
+	  }
 	},
 	computed: {
-	  selectedPayPeriodId () {
-		const payPeriod = this.$store.getters["Payday/selectedPayPeriod"]
-		return payPeriod.id
-	  },
+		selected(){
+		  return this.$store.getters["Payday/selectedTechnicianId"];
+		}
 
-	  technicians () {
-		return this.$store.getters["Payday/technicianEarnings"]
-	  },
 	},
-	watch: {
-	  selectedPayPeriodId (payPeriodId) {
-		this.$store.dispatch("Payday/getAllTechnicianEarnings", payPeriodId);
-		this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
 
-	  },
-	},
-    created(){
-	  this.$store.dispatch("Payday/getAllTechnicianEarnings", this.selectedPayPeriodId);
-	  this.$store.dispatch("Payday/getAllTechnicianSales", this.selectedPayPeriodId);
-	  if(this.technicians.length > 0){
-	    this.select(this.technicians[0].technicianId)
-	  }
-    },
+
+
+
+
 	methods: {
-	  groupBy (array, key) {
-		const dates = array.reduce((result, currentValue) => {
 
-		  if (!result[currentValue[key]]) {
-			result[currentValue[key]] = []
-		  }
-		  result[currentValue[key]].push({
-			amount: currentValue.creditAmount,
-			name: currentValue.name,
-			transactionId: currentValue.transactionId,
-		  })
-		  return result
+	  select (technicianId) {
 
-		}, {})
-		return Object.keys(dates).map(key => {
-		  return { date: this.$moment(key).format("ddd MM/DD/YYYY"), transactions: dates[key] }
-		})
+		this.$emit("technicianId", technicianId)
 
 	  },
-	  select(technicianId){
-		this.$store.commit("Payday/SET_SELECTED_TECHNICIAN_ID", technicianId);
-	  }
 
-	},
+	}
+	,
   }
 
 </script>

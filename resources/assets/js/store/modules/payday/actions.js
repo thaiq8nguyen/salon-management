@@ -38,10 +38,8 @@ export default {
     return new Promise((resolve, reject) => {
       return PaydayServices.getTechnicianEarnings(payPeriodId)
         .then((response) => {
-          commit(
-            "SET_ALL_TECHNICIAN_EARNINGS",
-            response.data.technicianEarnings.technicians
-          );
+          const technicians = response.data.technicianEarnings.technicians;
+          commit("SET_ALL_TECHNICIAN_EARNINGS", technicians);
         })
         .catch((errors) => {
           if (errors.response) {
