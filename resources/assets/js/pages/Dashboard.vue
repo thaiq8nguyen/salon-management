@@ -21,6 +21,9 @@
 	  return {}
 
 	},
+    created(){
+        this.$store.dispatch("init");
+    },
 
 	methods: {},
 

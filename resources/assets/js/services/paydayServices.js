@@ -16,9 +16,17 @@ const getTechnicianEarnings = (payPeriodId) => {
   return authClient.get(`/pay-periods/${payPeriodId}/technicians/earnings`);
 };
 
+const makePayments = (payPeriodId, payments) => {
+  return authClient.post(
+    `/pay-periods/${payPeriodId}/technicians/payments`,
+    payments
+  );
+};
+
 export default {
   getStandardPayPeriods,
   getCurrentPayPeriod,
   getTechnicianSales,
-  getTechnicianEarnings
+  getTechnicianEarnings,
+  makePayments
 };

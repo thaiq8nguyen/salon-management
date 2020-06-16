@@ -34,11 +34,11 @@
 						<p class="subtitle-2">Earning</p>
 						<v-container fluid>
 							<v-row>
-								<v-col>Total Sale: </v-col>
+								<v-col>Total Sale:</v-col>
 								<v-col>${{technician.earning.totalSale}}</v-col>
 							</v-row>
 							<v-row>
-								<v-col>Total Tip: </v-col>
+								<v-col>Total Tip:</v-col>
 								<v-col>${{technician.earning.totalTip}}</v-col>
 							</v-row>
 							<v-row>
@@ -65,13 +65,29 @@
 					</v-col>
 				</v-row>
 				<v-row>
-					<v-col cols="6">
+					<v-col>
 						<p class="subtitle-2">Payments</p>
-						<v-container>
-							<v-row>
-								<v-col></v-col>
-							</v-row>
-						</v-container>
+						<payment @payment="addPayment" :payment-methods="paymentMethods"></payment>
+					</v-col>
+					<v-col>
+						<p class="subtitle-2">Payment List</p>
+						<v-list dense>
+							<v-list-item v-for="(payment, index) in payments" :key="index" three-line>
+								<v-list-item-content>
+									<v-list-item-title>Payment # {{index + 1}}</v-list-item-title>
+									<v-list-item-subtitle>
+										<v-row>
+											<v-col>Amount: ${{payment.amount}}</v-col>
+											<v-col>By: {{payment.method}}</v-col>
+										</v-row>
+									</v-list-item-subtitle>
+									<v-list-item-subtitle>Ref: {{payment.reference}}</v-list-item-subtitle>
+								</v-list-item-content>
+								<v-list-item-action>
+									<v-btn small @click="deletePayment(index)">Delete</v-btn>
+								</v-list-item-action>
+							</v-list-item>
+						</v-list>
 					</v-col>
 				</v-row>
 			</v-card-text>
@@ -80,20 +96,60 @@
 </template>
 
 <script>
+  import Payment from "./Payment"
+
   export default {
 	name: "EarningDetails",
-    props: ["technician"],
-	data () {
-	  return {}
-	},
-	computed: {
+	props: ["technician"],
+	components: { Payment },
 
-	  totalWage(){
-	    const {saleWage, tipWage} = this.technician.earning;
-		return saleWage + tipWage;
+	data () {
+	  return {
+		numberOfPayments: 2,
+		payments: [],
 	  }
 	},
-	methods: {},
+	computed: {
+	  paymentMethods () {
+		return this.$store.getters["paymentMethods"]
+	  },
+	  payPeriod () {
+		return this.$store.getters["Payday/selectedPayPeriod"]
+	  },
+	  totalWage () {
+		const { saleWage, tipWage } = this.technician.earning
+		return saleWage + tipWage
+	  },
+	},
+	methods: {
+	  addPayment (payment) {
+		this.payments.push(payment)
+	  },
+	  deletePayment (paymentIndex) {
+		this.payments.splice(paymentIndex, 1)
+	  },
+	  pay () {
+		/*
+		{
+			technicianId: 1,
+			payPeriodId: 1.
+			payments: [
+				{
+					amount: 5,
+					methodId: 1,
+					reference: 123
+				}
+			]
+		}
+		 */
+
+		let paymentPackage = {
+		  technicianId: this.technician.earning.technicianId,
+		  payPeriodId: this.payPeriod.id,
+		  payments: this.payments,
+		}
+	  },
+	},
   }
 
 </script>

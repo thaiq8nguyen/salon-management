@@ -47,5 +47,19 @@ export default {
           }
         });
     });
+  },
+  makePayment({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      return new PaydayServices.makePayments(data.payPeriodId, data.payments)
+        .then((response) => {
+          console.log(response.data);
+          resolve();
+        })
+        .catch((errors) => {
+          if (errors.response) {
+            reject(errors);
+          }
+        });
+    });
   }
 };

@@ -2859,6 +2859,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Payment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payment */ "./resources/assets/js/components/Payday/Payment.vue");
 //
 //
 //
@@ -2940,13 +2941,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EarningDetails",
   props: ["technician"],
+  components: {
+    Payment: _Payment__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      numberOfPayments: 2,
+      payments: []
+    };
   },
   computed: {
+    paymentMethods: function paymentMethods() {
+      return this.$store.getters["paymentMethods"];
+    },
+    payPeriod: function payPeriod() {
+      return this.$store.getters["Payday/selectedPayPeriod"];
+    },
     totalWage: function totalWage() {
       var _this$technician$earn = this.technician.earning,
           saleWage = _this$technician$earn.saleWage,
@@ -2954,7 +2984,34 @@ __webpack_require__.r(__webpack_exports__);
       return saleWage + tipWage;
     }
   },
-  methods: {}
+  methods: {
+    addPayment: function addPayment(payment) {
+      this.payments.push(payment);
+    },
+    deletePayment: function deletePayment(paymentIndex) {
+      this.payments.splice(paymentIndex, 1);
+    },
+    pay: function pay() {
+      /*
+      {
+      	technicianId: 1,
+      	payPeriodId: 1.
+      	payments: [
+      		{
+      			amount: 5,
+      			methodId: 1,
+      			reference: 123
+      		}
+      	]
+      }
+       */
+      var paymentPackage = {
+        technicianId: this.technician.earning.technicianId,
+        payPeriodId: this.payPeriod.id,
+        payments: this.payments
+      };
+    }
+  }
 });
 
 /***/ }),
@@ -3008,6 +3065,64 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {},
   methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Payment",
+  props: ["paymentMethods"],
+  data: function data() {
+    return {
+      "default": {
+        amount: "",
+        method: "",
+        reference: ""
+      },
+      payment: {
+        amount: "",
+        method: "",
+        reference: ""
+      }
+    };
+  },
+  computed: {},
+  methods: {
+    addPayment: function addPayment() {
+      this.$emit("payment", this.payment);
+      this.payment = Object.assign({}, this["default"]);
+    }
+  }
 });
 
 /***/ }),
@@ -3631,6 +3746,9 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {};
+  },
+  created: function created() {
+    this.$store.dispatch("init");
   },
   methods: {}
 });
@@ -14077,7 +14195,7 @@ var render = function() {
                           _c(
                             "v-row",
                             [
-                              _c("v-col", [_vm._v("Total Sale: ")]),
+                              _c("v-col", [_vm._v("Total Sale:")]),
                               _vm._v(" "),
                               _c("v-col", [
                                 _vm._v(
@@ -14091,7 +14209,7 @@ var render = function() {
                           _c(
                             "v-row",
                             [
-                              _c("v-col", [_vm._v("Total Tip: ")]),
+                              _c("v-col", [_vm._v("Total Tip:")]),
                               _vm._v(" "),
                               _c("v-col", [
                                 _vm._v(
@@ -14166,13 +14284,97 @@ var render = function() {
                 [
                   _c(
                     "v-col",
-                    { attrs: { cols: "6" } },
                     [
                       _c("p", { staticClass: "subtitle-2" }, [
                         _vm._v("Payments")
                       ]),
                       _vm._v(" "),
-                      _c("v-container", [_c("v-row", [_c("v-col")], 1)], 1)
+                      _c("payment", {
+                        attrs: { "payment-methods": _vm.paymentMethods },
+                        on: { payment: _vm.addPayment }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    [
+                      _c("p", { staticClass: "subtitle-2" }, [
+                        _vm._v("Payment List")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list",
+                        { attrs: { dense: "" } },
+                        _vm._l(_vm.payments, function(payment, index) {
+                          return _c(
+                            "v-list-item",
+                            { key: index, attrs: { "three-line": "" } },
+                            [
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", [
+                                    _vm._v("Payment # " + _vm._s(index + 1))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list-item-subtitle",
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c("v-col", [
+                                            _vm._v(
+                                              "Amount: $" +
+                                                _vm._s(payment.amount)
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-col", [
+                                            _vm._v(
+                                              "By: " + _vm._s(payment.method)
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-list-item-subtitle", [
+                                    _vm._v("Ref: " + _vm._s(payment.reference))
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-action",
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletePayment(index)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
                     ],
                     1
                   )
@@ -14261,6 +14463,110 @@ var render = function() {
                   ])
                 ],
                 1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "payment" } },
+    [
+      _c(
+        "v-row",
+        { attrs: { align: "center" } },
+        [
+          _c(
+            "v-col",
+            [
+              _c("v-text-field", {
+                attrs: { label: "Payment " },
+                model: {
+                  value: _vm.payment.amount,
+                  callback: function($$v) {
+                    _vm.$set(_vm.payment, "amount", _vm._n($$v))
+                  },
+                  expression: "payment.amount"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            [
+              _c("v-select", {
+                attrs: {
+                  items: _vm.paymentMethods,
+                  label: "Method",
+                  "item-text": "name",
+                  "item-value": "id"
+                },
+                model: {
+                  value: _vm.payment.method,
+                  callback: function($$v) {
+                    _vm.$set(_vm.payment, "method", $$v)
+                  },
+                  expression: "payment.method"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            [
+              _c("v-text-field", {
+                attrs: { label: "Ref" },
+                model: {
+                  value: _vm.payment.reference,
+                  callback: function($$v) {
+                    _vm.$set(_vm.payment, "reference", $$v)
+                  },
+                  expression: "payment.reference"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            [
+              _c(
+                "v-btn",
+                { attrs: { small: "" }, on: { click: _vm.addPayment } },
+                [_vm._v("Add Payment")]
               )
             ],
             1
@@ -74280,6 +74586,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Payday/Payment.vue":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/components/Payday/Payment.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payment.vue?vue&type=template&id=c6c7257c&scoped=true& */ "./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true&");
+/* harmony import */ var _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Payment.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "c6c7257c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Payday/Payment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=template&id=c6c7257c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Payday/Payment.vue?vue&type=template&id=c6c7257c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_c6c7257c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Payday/Technicians.vue":
 /*!***************************************************************!*\
   !*** ./resources/assets/js/components/Payday/Technicians.vue ***!
@@ -75175,6 +75550,28 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./resources/assets/js/services/genericServices.js":
+/*!*********************************************************!*\
+  !*** ./resources/assets/js/services/genericServices.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var Services_apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! Services/apiClient */ "./resources/assets/js/services/apiClient.js");
+
+
+var getAllPaymentMethods = function getAllPaymentMethods() {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/payment-methods");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getAllPaymentMethods: getAllPaymentMethods
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/services/paydayServices.js":
 /*!********************************************************!*\
   !*** ./resources/assets/js/services/paydayServices.js ***!
@@ -75203,11 +75600,16 @@ var getTechnicianEarnings = function getTechnicianEarnings(payPeriodId) {
   return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].get("/pay-periods/".concat(payPeriodId, "/technicians/earnings"));
 };
 
+var makePayments = function makePayments(payPeriodId, payments) {
+  return Services_apiClient__WEBPACK_IMPORTED_MODULE_0__["authClient"].post("/pay-periods/".concat(payPeriodId, "/technicians/payments"), payments);
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   getStandardPayPeriods: getStandardPayPeriods,
   getCurrentPayPeriod: getCurrentPayPeriod,
   getTechnicianSales: getTechnicianSales,
-  getTechnicianEarnings: getTechnicianEarnings
+  getTechnicianEarnings: getTechnicianEarnings,
+  makePayments: makePayments
 });
 
 /***/ }),
@@ -75297,7 +75699,53 @@ var deleteTechnician = function deleteTechnician(id) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var Services_genericServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Services/genericServices */ "./resources/assets/js/services/genericServices.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  init: function init(_ref) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var commit, paymentMethods;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return getAllPaymentMethods();
+
+            case 3:
+              paymentMethods = _context.sent;
+              commit("SET_PAYMENT_METHODS", paymentMethods);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+});
+
+function getAllPaymentMethods() {
+  return new Promise(function (resolve, reject) {
+    return Services_genericServices__WEBPACK_IMPORTED_MODULE_1__["default"].getAllPaymentMethods().then(function (response) {
+      resolve(response.data.paymentMethods);
+    })["catch"](function (errors) {
+      if (errors.response) {
+        reject(errors);
+      }
+    });
+  });
+}
 
 /***/ }),
 
@@ -75310,7 +75758,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  paymentMethods: function paymentMethods(state) {
+    return state.paymentMethods;
+  }
+});
 
 /***/ }),
 
@@ -75355,7 +75807,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     TechnicianSales: _modules_technician_sales__WEBPACK_IMPORTED_MODULE_9__["default"],
     Payday: _modules_payday__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  state: {},
+  state: {
+    paymentMethods: []
+  },
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
   actions: _actions__WEBPACK_IMPORTED_MODULE_5__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_6__["default"],
@@ -75524,6 +75978,19 @@ __webpack_require__.r(__webpack_exports__);
       return Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].getTechnicianEarnings(payPeriodId).then(function (response) {
         var technicians = response.data.technicianEarnings.technicians;
         commit("SET_ALL_TECHNICIAN_EARNINGS", technicians);
+      })["catch"](function (errors) {
+        if (errors.response) {
+          reject(errors);
+        }
+      });
+    });
+  },
+  makePayment: function makePayment(_ref4, data) {
+    var commit = _ref4.commit;
+    return new Promise(function (resolve, reject) {
+      return new Services_paydayServices__WEBPACK_IMPORTED_MODULE_0__["default"].makePayments(data.payPeriodId, data.payments).then(function (response) {
+        console.log(response.data);
+        resolve();
       })["catch"](function (errors) {
         if (errors.response) {
           reject(errors);
@@ -76005,7 +76472,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  SET_PAYMENT_METHODS: function SET_PAYMENT_METHODS(state, paymentMethods) {
+    state.paymentMethods = paymentMethods;
+  }
+});
 
 /***/ }),
 

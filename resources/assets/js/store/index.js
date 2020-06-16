@@ -20,7 +20,9 @@ export default new Vuex.Store({
     Payday
   },
 
-  state: {},
+  state: {
+    paymentMethods: []
+  },
 
   getters,
   actions,

@@ -1,1 +1,5 @@
-export default {};
+export default {
+  paymentMethods(state) {
+    return state.paymentMethods;
+  }
+};

@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/pay-periods/{payPeriodId}/technicians/{technicianId}/earnings', 'PayPeriodController@getTechnicianEarning');
     Route::get('/pay-periods/{payPeriodId}/technicians/earnings', 'PayPeriodController@getAllTechnicianEarnings');
 
+    // Payment Method CRUD
+    Route::get('/payment-methods', 'PaymentMethodController@getAllPaymentMethods');
 
 });
 
