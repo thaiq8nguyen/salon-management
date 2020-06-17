@@ -15,6 +15,11 @@ class CreateCompanyAccountsTable extends Migration
     {
         Schema::create('company_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('account_type_id')->unsigned();
+            $table->foreign('account_type_id')->references('id')
+                ->on('account_types')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('name')->unique();
             $table->boolean('is_active')->default(1);
             $table->timestamps();

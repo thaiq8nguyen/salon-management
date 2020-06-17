@@ -27,7 +27,13 @@ class TransactionItemsTableSeeder extends Seeder
                 'name' => 'technician tips',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
+            ],
+            [
+                'name' => 'wage payment',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+
         ]);
     }
 }

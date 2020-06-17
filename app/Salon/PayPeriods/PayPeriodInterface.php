@@ -14,6 +14,8 @@ interface PayPeriodInterface
 
     public function getTechnicianEarning($payPeriodId, $technicianId);
 
+    public function payTechnician($payPeriodId, $payments);
+
 
 
 }

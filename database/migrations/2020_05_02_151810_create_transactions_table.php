@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->morphs('transactionable');
             $table->bigInteger('transaction_item_id')->unsigned();
             $table->foreign('transaction_item_id')->references('id')->on('transaction_items');
+            $table->bigInteger('transaction_method_id')->unsigned()->nullable();
             $table->date('date');
             $table->text('description')->nullable();
             $table->decimal('debit', 10, 2)->default(0.00);

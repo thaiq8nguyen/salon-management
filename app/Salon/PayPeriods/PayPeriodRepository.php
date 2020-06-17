@@ -138,5 +138,10 @@ class PayPeriodRepository implements PayPeriodInterface
 
     }
 
+    public function payTechnician($payPeriodId, $payments)
+    {
+        // TODO: Implement payTechnician() method.
+    }
+
 
 }
