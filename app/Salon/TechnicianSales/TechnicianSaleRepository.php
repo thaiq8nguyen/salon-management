@@ -13,7 +13,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 {
     public function getAllTechnicianSales($date)
     {
-        $technicians = null;
 
         $technicians = Technician::with([
             'sales' => function ($query) use ($date) {
@@ -150,7 +149,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             return false;
         }
 
-        return $this->getAllTechnicianSales($transaction->date);
+        return $this->getTechnicianSale($technicianAccount->technician_id ,$transaction->date);
 
     }
 

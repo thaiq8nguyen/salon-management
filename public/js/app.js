@@ -76331,7 +76331,6 @@ __webpack_require__.r(__webpack_exports__);
     state.allTechnicianSales = allTechnicianSales;
   },
   UPDATE_TECHNICIAN_SALES: function UPDATE_TECHNICIAN_SALES(state, technicianSales) {
-    console.log(technicianSales);
     state.allTechnicianSales = state.allTechnicianSales.map(function (technician) {
       return technician.technicianId === technicianSales.technicianId ? technicianSales : technician;
     });

@@ -4,7 +4,6 @@ export default {
   },
 
   UPDATE_TECHNICIAN_SALES(state, technicianSales) {
-    console.log(technicianSales);
     state.allTechnicianSales = state.allTechnicianSales.map((technician) =>
       technician.technicianId === technicianSales.technicianId
         ? technicianSales
