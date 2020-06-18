@@ -9,8 +9,9 @@
 							<v-list-item three-line>
 								<v-list-item-content>
 									<v-list-item-title>{{technician.fullName}}</v-list-item-title>
-									<v-list-item-subtitle>Sale: $ {{technician.sale.amount}}</v-list-item-subtitle>
-									<v-list-item-subtitle>Tip: $ {{technician.tip ? technician.tip.amount: "None"}}</v-list-item-subtitle>
+									<v-list-item-subtitle>Sale: $ {{technician.sales.sale.amount}}</v-list-item-subtitle>
+									<v-list-item-subtitle v-if="technician.sales.tip">Tip: $ {{technician.sales.tip.amount}}
+									</v-list-item-subtitle>
 								</v-list-item-content>
 								<v-list-item-action>
 									<v-icon @click="setUpdatingSale(index)">mdi-pencil</v-icon>
@@ -76,11 +77,23 @@
 	components: { UpdateTechnicianSaleModal },
 	data () {
 	  return {
-		updatingSale: {},
+		updatingSale: {
+		  firstName: "",
+		  lastName: "",
+		  fullName: "",
+		  sales:{
+		    sale:{
+		      id:"",
+		      amount:""
+		    },
+		    tip:{
+		      id: "",
+		      amount:""
+		    }
+		  }
+		},
 		updateDialog: false,
-		activeSaleEntry: false,
 		stagingSales: [],
-
 	  }
 	},
 	computed: {
@@ -88,20 +101,24 @@
 		return this.$store.getters["TechnicianSales/date"]
 	  },
 	  allTechnicianSales () {
-		return  this.$store.getters["TechnicianSales/allTechnicianSales"]
+		return this.$store.getters["TechnicianSales/allTechnicianSales"]
 
 	  },
 	  techniciansWithSale () {
-		return this.allTechnicianSales.filter(technician => technician.sales !== null)
+	    if(this.allTechnicianSales.length > 0){
+		  return this.allTechnicianSales.filter(technician => technician.sales !== null)
+	    }
 	  },
 	  techniciansWithoutSale () {
-		if (this.allTechnicianSales.length) {
+	    if(this.allTechnicianSales.length > 0){
 		  return this.allTechnicianSales.filter(technician => technician.sales === null)
-		}
 
+	    }
 	  },
 	  haveNewTechnicianSales () {
-		return this.stagingSales.some(technician => technician.saleAmount)
+
+	    return this.stagingSales.some(technician => technician.saleAmount )
+
 	  },
 
 	}
@@ -110,31 +127,34 @@
 	  this.$store.dispatch("TechnicianSales/getAllTechnicianSales", this.date)
 	},
 	watch: {
-	  date(newDate){
+	  date (newDate) {
 		this.$store.dispatch("TechnicianSales/getAllTechnicianSales", newDate)
 	  },
-	  techniciansWithoutSale (technicians) {
-		if (technicians.length > 0) {
-		  this.stagingSales = technicians.map(technician => ({
-			fullName: technician.fullName,
-			technicianId: technician.technicianId,
-			saleAmount: "",
-			tipAmount: "",
-		  }))
-		}
+	  techniciansWithoutSale(technicians){
+		this.stagingSales = technicians.map(technician => ({
+		  fullName: technician.fullName,
+		  technicianId: technician.technicianId,
+		  saleAmount: "",
+		  tipAmount: ""
+		}))
 
-	  },
+	  }
+
+
+
+
 	},
 	methods: {
 	  setUpdatingSale (index) {
-		this.updatingSale = {
-		  technicianId: this.techniciansWithSale[index].technicianId,
-		  saleId: this.techniciansWithSale[index].sale.id,
-		  saleAmount: this.techniciansWithSale[index].sale.amount,
-		  tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null ,
-		  tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
-		  fullName: this.techniciansWithSale[index].fullName
-		}
+		// this.updatingSale = {
+		//   technicianId: this.techniciansWithSale[index].technicianId,
+		//   saleId: this.techniciansWithSale[index].sale.id,
+		//   saleAmount: this.techniciansWithSale[index].sale.amount,
+		//   tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null,
+		//   tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
+		//   fullName: this.techniciansWithSale[index].fullName,
+		// }
+	    this.updatingSale = this.techniciansWithSale[index]
 		this.updateDialog = true
 	  },
 	  submit () {

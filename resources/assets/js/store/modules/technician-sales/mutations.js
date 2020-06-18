@@ -4,12 +4,11 @@ export default {
   },
 
   UPDATE_TECHNICIAN_SALES(state, technicianSales) {
-    const technicianSale = technicianSales.sales[0];
-    state.allTechnicianSales.sales = state.allTechnicianSales.sales.map(
-      (technician) =>
-        technician.technicianId === technicianSale.technicianId
-          ? technicianSale
-          : technician
+    console.log(technicianSales);
+    state.allTechnicianSales = state.allTechnicianSales.map((technician) =>
+      technician.technicianId === technicianSales.technicianId
+        ? technicianSales
+        : technician
     );
   },
 

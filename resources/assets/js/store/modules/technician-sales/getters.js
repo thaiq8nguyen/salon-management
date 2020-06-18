@@ -1,6 +1,7 @@
 export default {
   allTechnicianSales(state, getters, rootState, rootGetters) {
     const allTechnicians = rootGetters["Technicians/technicians"];
+
     return allTechnicians.map((technician) => {
       const technicianSale = state.allTechnicianSales.find(
         (technicianSale) =>
@@ -11,7 +12,7 @@ export default {
         fullName: technician.fullName,
         firstName: technician.firstName,
         lastName: technician.lastName,
-        sales: technician.sale
+        sales: technicianSale.sale
           ? {
               sale: technicianSale.sale,
               tip: technicianSale.tip
@@ -19,8 +20,6 @@ export default {
           : null
       };
     });
-
-    //console.log(state.allTechnicianSales.sales);
   },
   date(state) {
     return state.date;

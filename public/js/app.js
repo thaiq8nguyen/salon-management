@@ -3258,6 +3258,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TechnicianSales",
@@ -3266,9 +3267,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      updatingSale: {},
+      updatingSale: {
+        firstName: "",
+        lastName: "",
+        fullName: "",
+        sales: {
+          sale: {
+            id: "",
+            amount: ""
+          },
+          tip: {
+            id: "",
+            amount: ""
+          }
+        }
+      },
       updateDialog: false,
-      activeSaleEntry: false,
       stagingSales: []
     };
   },
@@ -3280,12 +3294,14 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["TechnicianSales/allTechnicianSales"];
     },
     techniciansWithSale: function techniciansWithSale() {
-      return this.allTechnicianSales.filter(function (technician) {
-        return technician.sales !== null;
-      });
+      if (this.allTechnicianSales.length > 0) {
+        return this.allTechnicianSales.filter(function (technician) {
+          return technician.sales !== null;
+        });
+      }
     },
     techniciansWithoutSale: function techniciansWithoutSale() {
-      if (this.allTechnicianSales.length) {
+      if (this.allTechnicianSales.length > 0) {
         return this.allTechnicianSales.filter(function (technician) {
           return technician.sales === null;
         });
@@ -3305,28 +3321,27 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch("TechnicianSales/getAllTechnicianSales", newDate);
     },
     techniciansWithoutSale: function techniciansWithoutSale(technicians) {
-      if (technicians.length > 0) {
-        this.stagingSales = technicians.map(function (technician) {
-          return {
-            fullName: technician.fullName,
-            technicianId: technician.technicianId,
-            saleAmount: "",
-            tipAmount: ""
-          };
-        });
-      }
+      this.stagingSales = technicians.map(function (technician) {
+        return {
+          fullName: technician.fullName,
+          technicianId: technician.technicianId,
+          saleAmount: "",
+          tipAmount: ""
+        };
+      });
     }
   },
   methods: {
     setUpdatingSale: function setUpdatingSale(index) {
-      this.updatingSale = {
-        technicianId: this.techniciansWithSale[index].technicianId,
-        saleId: this.techniciansWithSale[index].sale.id,
-        saleAmount: this.techniciansWithSale[index].sale.amount,
-        tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null,
-        tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
-        fullName: this.techniciansWithSale[index].fullName
-      };
+      // this.updatingSale = {
+      //   technicianId: this.techniciansWithSale[index].technicianId,
+      //   saleId: this.techniciansWithSale[index].sale.id,
+      //   saleAmount: this.techniciansWithSale[index].sale.amount,
+      //   tipId: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.id : null,
+      //   tipAmount: this.techniciansWithSale[index].tip ? this.techniciansWithSale[index].tip.amount : null,
+      //   fullName: this.techniciansWithSale[index].fullName,
+      // }
+      this.updatingSale = this.techniciansWithSale[index];
       this.updateDialog = true;
     },
     submit: function submit() {
@@ -3447,11 +3462,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UpdateTechnicianSaleModal",
-  //props: ["date", "open", "transaction"],
   props: {
     open: {
       type: Boolean,
@@ -3477,9 +3489,9 @@ __webpack_require__.r(__webpack_exports__);
     updateSaleTransaction: function updateSaleTransaction() {
       var result = null;
 
-      if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
+      if (this.saleAmount > 0 && this.saleAmount !== this.transaction.sales.sale.amount) {
         result = {
-          transactionId: this.transaction.saleId,
+          transactionId: this.transaction.sales.sale.id,
           amount: this.saleAmount
         };
       }
@@ -3489,9 +3501,9 @@ __webpack_require__.r(__webpack_exports__);
     updateTipTransaction: function updateTipTransaction() {
       var result = null;
 
-      if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.tipAmount) {
+      if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.sales.tip.amount) {
         result = {
-          transactionId: this.transaction.tipId,
+          transactionId: this.transaction.sales.tip.id,
           amount: this.updateTipAmount
         };
       }
@@ -3537,8 +3549,9 @@ __webpack_require__.r(__webpack_exports__);
         updateTransaction = this.updateTipTransaction;
       }
 
-      this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(function () {
+      this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(function (response) {
         _this2.updateTipAmount = "";
+        _this2.saleAmount = "";
 
         _this2.$emit("close");
       });
@@ -3546,10 +3559,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteTransaction: function deleteTransaction(transaction) {
       var _this3 = this;
 
-      var deleteTransactionId = this.transaction.saleId;
+      var deleteTransactionId = this.transaction.sales.sale.id;
 
       if (transaction === "tip") {
-        deleteTransactionId = this.transaction.tipId;
+        deleteTransactionId = this.transaction.sales.tip.id;
       }
 
       this.$store.dispatch("TechnicianSales/deleteTechnicianSale", deleteTransactionId).then(function () {
@@ -14741,20 +14754,23 @@ var render = function() {
                                         _c("v-list-item-subtitle", [
                                           _vm._v(
                                             "Sale: $ " +
-                                              _vm._s(technician.sale.amount)
+                                              _vm._s(
+                                                technician.sales.sale.amount
+                                              )
                                           )
                                         ]),
                                         _vm._v(" "),
-                                        _c("v-list-item-subtitle", [
-                                          _vm._v(
-                                            "Tip: $ " +
-                                              _vm._s(
-                                                technician.tip
-                                                  ? technician.tip.amount
-                                                  : "None"
+                                        technician.sales.tip
+                                          ? _c("v-list-item-subtitle", [
+                                              _vm._v(
+                                                "Tip: $ " +
+                                                  _vm._s(
+                                                    technician.sales.tip.amount
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t"
                                               )
-                                          )
-                                        ])
+                                            ])
+                                          : _vm._e()
                                       ],
                                       1
                                     ),
@@ -15087,7 +15103,8 @@ var render = function() {
                               _c("v-col", [
                                 _c("p", [
                                   _vm._v(
-                                    "$ " + _vm._s(_vm.transaction.saleAmount)
+                                    "$ " +
+                                      _vm._s(_vm.transaction.sales.sale.amount)
                                   )
                                 ])
                               ]),
@@ -15114,50 +15131,47 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "v-row",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.transaction.tipId,
-                                  expression: "transaction.tipId"
-                                }
-                              ]
-                            },
-                            [
-                              _c("v-col", [_c("p", [_vm._v("Tip")])]),
-                              _vm._v(" "),
-                              _c("v-col", [
-                                _c("p", [
-                                  _vm._v(
-                                    "$ " + _vm._s(_vm.transaction.tipAmount)
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
+                          _vm.transaction.sales.tip
+                            ? _c(
+                                "v-row",
                                 [
+                                  _c("v-col", [_c("p", [_vm._v("Tip")])]),
+                                  _vm._v(" "),
+                                  _c("v-col", [
+                                    _c("p", [
+                                      _vm._v(
+                                        "$ " +
+                                          _vm._s(
+                                            _vm.transaction.sales.tip.amount
+                                          )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { color: "error", small: "" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteTransaction("tip")
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Delete")]
+                                    "v-col",
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "error", small: "" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteTransaction(
+                                                "tip"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Delete")]
+                                      )
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          )
+                            : _vm._e()
                         ],
                         1
                       ),
@@ -15219,82 +15233,8 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "v-row",
-                            { attrs: { align: "center" } },
-                            [
-                              _c(
-                                "v-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Tip", prefix: "$" },
-                                    model: {
-                                      value: _vm.updateTipAmount,
-                                      callback: function($$v) {
-                                        _vm.updateTipAmount = _vm._n($$v)
-                                      },
-                                      expression: "updateTipAmount"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
-                                {
-                                  staticClass: "d-flex justify-start",
-                                  attrs: { cols: "8" }
-                                },
-                                [
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { color: "primary", small: "" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.updateTransaction("tip")
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Update\n\t\t\t\t\t\t\t\t")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !_vm.transaction.tipId,
-                              expression: "!transaction.tipId"
-                            }
-                          ]
-                        },
-                        [
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _c(
-                            "v-container",
-                            [
-                              _c("p", [
-                                _vm._v(
-                                  "There is no existing tip, you can add it below"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
+                          _vm.transaction.sales.tip
+                            ? _c(
                                 "v-row",
                                 { attrs: { align: "center" } },
                                 [
@@ -15302,41 +15242,15 @@ var render = function() {
                                     "v-col",
                                     { attrs: { cols: "4" } },
                                     [
-                                      _c("ValidationProvider", {
-                                        attrs: {
-                                          name: "Tip amount",
-                                          rules: {
-                                            regex: /^\d*\.?\d*$/,
-                                            min_value: 1
-                                          }
-                                        },
-                                        scopedSlots: _vm._u([
-                                          {
-                                            key: "default",
-                                            fn: function(ref) {
-                                              var errors = ref.errors
-                                              return [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    error: errors.length > 0,
-                                                    "error-messages": errors[0],
-                                                    label: "Tip",
-                                                    prefix: "$"
-                                                  },
-                                                  model: {
-                                                    value: _vm.newTipAmount,
-                                                    callback: function($$v) {
-                                                      _vm.newTipAmount = _vm._n(
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression: "newTipAmount"
-                                                  }
-                                                })
-                                              ]
-                                            }
-                                          }
-                                        ])
+                                      _c("v-text-field", {
+                                        attrs: { label: "Tip", prefix: "$" },
+                                        model: {
+                                          value: _vm.updateTipAmount,
+                                          callback: function($$v) {
+                                            _vm.updateTipAmount = _vm._n($$v)
+                                          },
+                                          expression: "updateTipAmount"
+                                        }
                                       })
                                     ],
                                     1
@@ -15353,12 +15267,126 @@ var render = function() {
                                         "v-btn",
                                         {
                                           attrs: {
-                                            color: "success",
+                                            color: "primary",
                                             small: ""
                                           },
-                                          on: { click: _vm.addTipTransaction }
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.updateTransaction(
+                                                "tip"
+                                              )
+                                            }
+                                          }
                                         },
-                                        [_vm._v("Add")]
+                                        [_vm._v("Update\n\t\t\t\t\t\t\t\t")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      !_vm.transaction.sales.tip
+                        ? _c(
+                            "div",
+                            [
+                              _c("v-divider"),
+                              _vm._v(" "),
+                              _c(
+                                "v-container",
+                                [
+                                  _c("p", [
+                                    _vm._v(
+                                      "There is no existing tip, you can add it below"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-row",
+                                    { attrs: { align: "center" } },
+                                    [
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c("ValidationProvider", {
+                                            attrs: {
+                                              name: "Tip amount",
+                                              rules: {
+                                                regex: /^\d*\.?\d*$/,
+                                                min_value: 1
+                                              }
+                                            },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "default",
+                                                  fn: function(ref) {
+                                                    var errors = ref.errors
+                                                    return [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          error:
+                                                            errors.length > 0,
+                                                          "error-messages":
+                                                            errors[0],
+                                                          label: "Tip",
+                                                          prefix: "$"
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.newTipAmount,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.newTipAmount = _vm._n(
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "newTipAmount"
+                                                        }
+                                                      })
+                                                    ]
+                                                  }
+                                                }
+                                              ],
+                                              null,
+                                              false,
+                                              2678447056
+                                            )
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          staticClass: "d-flex justify-start",
+                                          attrs: { cols: "8" }
+                                        },
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "success",
+                                                small: ""
+                                              },
+                                              on: {
+                                                click: _vm.addTipTransaction
+                                              }
+                                            },
+                                            [_vm._v("Add")]
+                                          )
+                                        ],
+                                        1
                                       )
                                     ],
                                     1
@@ -15369,9 +15397,7 @@ var render = function() {
                             ],
                             1
                           )
-                        ],
-                        1
-                      )
+                        : _vm._e()
                     ],
                     1
                   ),
@@ -76184,7 +76210,7 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref2.commit;
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].addTechnicianSales(sale).then(function (response) {
-        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
+        commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales.sales);
         resolve();
       })["catch"](function (errors) {
         if (errors.response) {
@@ -76197,8 +76223,7 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].updateTechnicianSale(sale.transactionId, sale.amount).then(function (response) {
-        commit("UPDATE_TECHNICIAN_SALES", response.data.updateTechnicianSale);
-        console.log(response.data.updateTechnicianSale);
+        commit("UPDATE_TECHNICIAN_SALES", response.data.updateTechnicianSale.sales);
         resolve();
       })["catch"](function (errors) {
         if (errors.response) {
@@ -76211,8 +76236,7 @@ __webpack_require__.r(__webpack_exports__);
     var commit = _ref4.commit;
     return new Promise(function (resolve, reject) {
       return Services_technicianSaleServices__WEBPACK_IMPORTED_MODULE_0__["default"].deleteTechnicianSale(saleId).then(function (response) {
-        commit("UPDATE_TECHNICIAN_SALES", response.data.deleteTechnicianSale);
-        console.log(response.data);
+        commit("UPDATE_TECHNICIAN_SALES", response.data.deleteTechnicianSale.sales);
         resolve();
       })["catch"](function (errors) {
         if (errors.response) {
@@ -76250,12 +76274,12 @@ __webpack_require__.r(__webpack_exports__);
         fullName: technician.fullName,
         firstName: technician.firstName,
         lastName: technician.lastName,
-        sales: technician.sale ? {
+        sales: technicianSale.sale ? {
           sale: technicianSale.sale,
           tip: technicianSale.tip
         } : null
       };
-    }); //console.log(state.allTechnicianSales.sales);
+    });
   },
   date: function date(state) {
     return state.date;
@@ -76307,9 +76331,9 @@ __webpack_require__.r(__webpack_exports__);
     state.allTechnicianSales = allTechnicianSales;
   },
   UPDATE_TECHNICIAN_SALES: function UPDATE_TECHNICIAN_SALES(state, technicianSales) {
-    var technicianSale = technicianSales.sales[0];
-    state.allTechnicianSales.sales = state.allTechnicianSales.sales.map(function (technician) {
-      return technician.technicianId === technicianSale.technicianId ? technicianSale : technician;
+    console.log(technicianSales);
+    state.allTechnicianSales = state.allTechnicianSales.map(function (technician) {
+      return technician.technicianId === technicianSales.technicianId ? technicianSales : technician;
     });
   },
   SET_DATE: function SET_DATE(state, date) {

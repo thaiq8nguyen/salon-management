@@ -12,18 +12,18 @@
 									<p>Sale</p>
 								</v-col>
 								<v-col>
-									<p>$ {{ transaction.saleAmount }}</p>
+									<p>$ {{ transaction.sales.sale.amount }}</p>
 								</v-col>
 								<v-col>
 									<v-btn color="error" small @click="deleteTransaction('sale')">Delete</v-btn>
 								</v-col>
 							</v-row>
-							<v-row v-show="transaction.tipId">
+							<v-row v-if="transaction.sales.tip">
 								<v-col>
 									<p>Tip</p>
 								</v-col>
 								<v-col>
-									<p>$ {{transaction.tipAmount}}</p>
+									<p>$ {{transaction.sales.tip.amount}}</p>
 								</v-col>
 								<v-col>
 									<v-btn color="error" small @click="deleteTransaction('tip')">Delete</v-btn>
@@ -42,7 +42,7 @@
 									</v-btn>
 								</v-col>
 							</v-row>
-							<v-row align="center">
+							<v-row align="center" v-if="transaction.sales.tip">
 								<v-col cols="4">
 									<v-text-field label="Tip" prefix="$"
 									              v-model.number="updateTipAmount"></v-text-field>
@@ -53,7 +53,7 @@
 								</v-col>
 							</v-row>
 						</v-container>
-						<div v-show="!transaction.tipId">
+						<div v-if="!transaction.sales.tip">
 							<v-divider></v-divider>
 							<v-container>
 								<p>There is no existing tip, you can add it below</p>
@@ -75,8 +75,6 @@
 								</v-row>
 							</v-container>
 						</div>
-
-
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
@@ -92,7 +90,6 @@
 <script>
   export default {
 	name: "UpdateTechnicianSaleModal",
-	//props: ["date", "open", "transaction"],
 	props: {
 	  open:{
 	    type: Boolean,
@@ -121,8 +118,8 @@
 	  },
 	  updateSaleTransaction () {
 		let result = null
-		if (this.saleAmount > 0 && this.saleAmount !== this.transaction.saleAmount) {
-		  result = { transactionId: this.transaction.saleId, amount: this.saleAmount }
+		if (this.saleAmount > 0 && this.saleAmount !== this.transaction.sales.sale.amount) {
+		  result = { transactionId: this.transaction.sales.sale.id, amount: this.saleAmount }
 		}
 
 		return result
@@ -130,8 +127,8 @@
 	  },
 	  updateTipTransaction () {
 		let result = null
-		if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.tipAmount) {
-		  result = { transactionId: this.transaction.tipId, amount: this.updateTipAmount }
+		if (this.updateTipAmount > 0 && this.updateTipAmount !== this.transaction.sales.tip.amount) {
+		  result = { transactionId: this.transaction.sales.tip.id, amount: this.updateTipAmount }
 		}
 
 		return result
@@ -173,17 +170,19 @@
 		  updateTransaction = this.updateTipTransaction
 		}
 
-		this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then(() => {
+		this.$store.dispatch("TechnicianSales/updateTechnicianSale", updateTransaction).then((response) => {
 		  this.updateTipAmount = ""
+		  this.saleAmount = ""
 		  this.$emit("close")
+
 		})
 
 	  },
 
 	  deleteTransaction (transaction) {
-		let deleteTransactionId = this.transaction.saleId
+		let deleteTransactionId = this.transaction.sales.sale.id
 		if (transaction === "tip") {
-		  deleteTransactionId = this.transaction.tipId
+		  deleteTransactionId = this.transaction.sales.tip.id
 		}
 		this.$store.dispatch("TechnicianSales/deleteTechnicianSale", deleteTransactionId).then(() => {
 		  this.$emit("close")

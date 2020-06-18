@@ -24,7 +24,10 @@ export default {
     return new Promise((resolve, reject) => {
       return TechnicianSaleServices.addTechnicianSales(sale)
         .then((response) => {
-          commit("SET_ALL_TECHNICIAN_SALES", response.data.allTechnicianSales);
+          commit(
+            "SET_ALL_TECHNICIAN_SALES",
+            response.data.allTechnicianSales.sales
+          );
           resolve();
         })
         .catch((errors) => {
@@ -42,8 +45,10 @@ export default {
         sale.amount
       )
         .then((response) => {
-          commit("UPDATE_TECHNICIAN_SALES", response.data.updateTechnicianSale);
-          console.log(response.data.updateTechnicianSale);
+          commit(
+            "UPDATE_TECHNICIAN_SALES",
+            response.data.updateTechnicianSale.sales
+          );
           resolve();
         })
         .catch((errors) => {
@@ -58,8 +63,10 @@ export default {
     return new Promise((resolve, reject) => {
       return TechnicianSaleServices.deleteTechnicianSale(saleId)
         .then((response) => {
-          commit("UPDATE_TECHNICIAN_SALES", response.data.deleteTechnicianSale);
-          console.log(response.data);
+          commit(
+            "UPDATE_TECHNICIAN_SALES",
+            response.data.deleteTechnicianSale.sales
+          );
           resolve();
         })
         .catch((errors) => {

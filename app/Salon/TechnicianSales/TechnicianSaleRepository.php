@@ -42,9 +42,37 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
     }
 
+    public function getTechnicianSale($technicianId, $date)
+    {
+        $technician = Technician::with([
+            'sales' => function ($query) use ($date) {
+                $query->where('date', $date);
+            }
+        ])->where('id', $technicianId)->first();
+
+
+            $sale = $technician->sales->filter(function ($transaction) {
+                return $transaction->name == 'technician sales';
+            })->first();
+
+            $tip = $technician->sales->filter(function ($transaction) {
+                return $transaction->name == 'technician tips';
+            })->first();
+
+            $sales = [
+                'technicianId' => $technician->id,
+                'sale' => $sale ? ['id' => $sale->id, 'amount' => $sale->credit] : null,
+                'tip' => $tip ? ['id' => $tip->id, 'amount' => $tip->credit] : null,
+
+            ];
+
+
+        return ['date' => $date, 'sales' => $sales];
+
+    }
+
     public function addTechnicianSale($date, $transactions)
     {
-
         foreach ($transactions as $transaction) {
             if (isset($transaction['saleAmount'])) {
 
@@ -106,7 +134,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
 
         $technicianAccount = TechnicianAccount::find($transaction->transactionable_id);
 
-        return $this->getAllTechnicianSales($transaction->date);
+        return $this->getTechnicianSale($technicianAccount->technician_id ,$transaction->date);
 
     }
 
@@ -122,7 +150,7 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
             return false;
         }
 
-        return $this->getTechnicianSales($technicianAccount->technician_id, $transaction->date);
+        return $this->getAllTechnicianSales($transaction->date);
 
     }
 
