@@ -96,7 +96,6 @@ class TechnicianSaleRepository implements TechnicianSaleInterface
                 }
 
             }
-
             if (isset($transaction['tipAmount'])) {
 
                 $technicianTipAccount = TechnicianAccount::where([

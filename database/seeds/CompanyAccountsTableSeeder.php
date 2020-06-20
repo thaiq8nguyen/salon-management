@@ -37,7 +37,19 @@ class CompanyAccountsTableSeeder extends Seeder
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
-                'name' => 'sales',
+                'name' => 'credit card fee',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'account_type_id' => $expensesAccountType->id,
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'sale commission',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'account_type_id' => $incomeAccountType->id,
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'tip commission',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'account_type_id' => $incomeAccountType->id,
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

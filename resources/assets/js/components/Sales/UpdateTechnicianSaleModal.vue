@@ -141,7 +141,6 @@
 			tipAmount: this.newTipAmount,
 		  }]
 	  },
-
 	},
 	watch: {
 	  open: function () {
